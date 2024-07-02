@@ -1,8 +1,8 @@
 /* Variables */
 :root {
   --body-color: rgb(247, 250, 252);
-  --button-color: rgb(30, 166, 114);
-  --accent-color: #0a721b;
+  --button-color: #0079ff;
+  --accent-color: #0079ff;
   --secondary-color: #ed5f74;
   --link-color: #ffffff;
   --font-color: rgb(105, 115, 134);
@@ -13,28 +13,162 @@
   --form-width: 400px;
 }
 
+.obama {
+  position: absolute;
+  top: 2rem;
+  font-family: Inter;
+  font-size: .85rem;
+  font-weight: 700;
+}
+
+/* Progressbar */
+.progressbar {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  counter-reset: step;
+  margin: 2rem 0 4rem;
+  height: 100%;
+  align-self: center;
+  width: var(--form-width);
+}
+
+.progressbar::before,
+.progress {
+  content: "";
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  height: 4px;
+  width: 100%;
+  background-color: #909090;
+  z-index: -1;
+}
+
+.progress {
+  background-color: var(--primary-color);
+  width: 0%;
+  transition: 0.3s;
+}
+
+.progress-step {
+  width: 2.5rem;
+  height: 2.5rem;
+  background-color: rgb(247, 250, 252);
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: 700;
+  color: #909090;
+  border-style: solid;
+  border-width: .1rem;
+  border-color: #e4e4e4;
+}
+
+.progress-step::before {
+  counter-increment: step;
+  content: counter(step);
+}
+
+.progress-step::after {
+  content: attr(data-title);
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  font-size: 0.85rem;
+  color: #909090;
+}
+
+.progress-step-active {
+  background-color: rgb(247, 250, 252);
+  color: black;
+  border-style: solid;
+  border-width: .2rem;
+  border-color: #00a156;
+  box-shadow: 0px 0px 10px #00a15680;
+}
+
+#submit {
+  margin-top: 2rem;
+}
+
+.subheader {
+  margin-bottom: 2rem;
+}
+
+.card.active {
+  display: block;
+}
+
+h1 {
+  font-size: 1.5rem;
+  font-weight: 700;
+  display: inline-block;
+  margin: 0;
+  line-height: 1.5;
+}
+
+p {
+  line-height: 1.5;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.terms {
+  font-size: .85rem;
+  line-height: 1.5;
+  margin: 0;
+  font-weight: 400;
+  padding-top: 1rem;
+}
+
+.image-2 {
+  height: 1.5rem;
+}
+
+.div-block-2 {
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  max-width: 45rem;
+  padding-top: .75rem;
+  padding-bottom: .75rem;
+  display: flex;
+}
+
+.section-nav {
+  border-bottom: 1px solid #3d3c41;
+  flex-flow: column;
+  justify-content: flex-start;
+  align-items: center;
+  width: 100%;
+  padding-left: 5%;
+  padding-right: 5%;
+  display: flex;
+}
+
 /* Base */
 * {
   box-sizing: border-box;
 }
 body {
+  background-color: #1c1c1e;
   font-family: var(--body-font-family);
-  font-size: 15px;
+  font-size: 1rem;
   -webkit-font-smoothing: antialiased;
 }
 
 /* Layout */
 .sr-root {
+  flex-direction: column;
+  justify-content: flex-start;
   display: flex;
-  flex-direction: row;
   width: 100%;
   max-width: 980px;
-  padding: 48px;
   align-content: center;
-  justify-content: center;
   height: auto;
-  min-height: 100vh;
   margin: 0 auto;
+  margin-top: 2rem;
 }
 .sr-main {
   display: flex;
@@ -42,7 +176,7 @@ body {
   justify-content: center;
   height: 100%;
   align-self: center;
-  padding: 50px 50px 75px 50px;
+  padding: 2rem;
   background: var(--body-color);
   width: var(--form-width);
   border-radius: var(--radius);
@@ -143,7 +277,7 @@ input[type="text"]::placeholder {
   margin: 16px 0;
 }
 label {
-  font-size: 13px;
+  font-size: .85rem;
   font-weight: 500;
   margin-bottom: 8px;
   display: inline-block;
@@ -203,7 +337,7 @@ pre {
 }
 
 /* Responsiveness */
-@media (max-width: 720px) {
+@media (max-width: 479px) {
   .sr-root {
     flex-direction: column;
     justify-content: flex-start;
@@ -225,13 +359,12 @@ pre {
 
   .sr-main {
     width: 100%;
-    height: 305px;
+    height: 100%;
     background: rgb(247, 250, 252);
     box-shadow: 0px 0px 0px 0.5px rgba(50, 50, 93, 0.1),
       0px 2px 5px 0px rgba(50, 50, 93, 0.1),
       0px 1px 1.5px 0px rgba(0, 0, 0, 0.07);
     border-radius: 6px;
-    padding: 20px 20px 75px 20px;
   }
 }
 
