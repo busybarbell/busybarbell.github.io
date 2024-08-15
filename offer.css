@@ -101,6 +101,10 @@
     border-radius: 100%;
 }
 
+.inline_button {
+    display: none;
+}
+
 /* tabs begin */
 
 .tabs {
@@ -174,6 +178,10 @@
     .tabs_menu_image {
         height: 5rem;
         width: 5rem;
+    }
+
+    .inline_button {
+        display: flex;
     }
 }
 
