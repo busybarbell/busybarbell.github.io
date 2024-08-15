@@ -156,13 +156,13 @@
 /* responsive styling begins */
 
 @media (max-width: 991px) {
+    .offer_wrap {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+    }
+
     .split_left {
-        box-sizing: border-box;
-        display: flex;
-        flex-direction: column;
-        justify-content: left;
-        align-items: flex-start;
-        gap: 2rem;
+        gap: 1.5rem;
         padding: 0rem;
         width: 100%;
         border-radius: 0rem;
@@ -188,6 +188,15 @@
 @media (max-width: 767px) {}
 
 @media (max-width: 479px) {
+    .offer_wrap {
+        padding-top: 1rem;
+        padding-bottom: 1rem;
+    }
+
+    .split_left {
+        gap: 1rem;
+    }
+
     .tabs_menu_image {
         height: 4rem;
         width: 4rem;
