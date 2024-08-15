@@ -56,7 +56,8 @@
                                 style="height:100%;left:0;opacity:0;overflow:hidden;position:absolute;top:0;transition:opacity 200ms;width:100%;">
                                 <img src="https://fast.wistia.com/embed/medias/8u2uwuor8m/swatch"
                                     style="filter:blur(5px);height:100%;object-fit:contain;width:100%;" alt=""
-                                    aria-hidden="true" onload="this.parentNode.style.opacity=1;" /></div>
+                                    aria-hidden="true" onload="this.parentNode.style.opacity=1;" />
+                            </div>
                         </div>
                         <img class="tab_image" src="https://i.ibb.co/C91CBzp/Untitled-design-13.png" hidden>
                         <img class="tab_image" src="https://i.ibb.co/C91CBzp/Untitled-design-13.png" hidden>
@@ -98,7 +99,8 @@
                     <div class="point"><img class="point_face" src="https://i.ibb.co/3S3q3mP/face-shot.png" width="24px"
                             height="24px">By Asher Robinson 👑</div>
                 </div>
-                <a class="button inline_button">JOIN NOW</a>
+                <a class="button inline_button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
+                    data-cal-config='{"layout":"month_view"}'>JOIN NOW</a>
                 <p>👋 Join The Skool Masterclass (Free) & learn how to get your first 10 paying Skool clients in 30 days
                     (step by step). Get the framework Max used to win the Alex Hormozi Skool Games and add $40,513/month
                     in 27 days.‍<br>
@@ -121,12 +123,21 @@
                 <div class="cta_wrap">
                     <h2>21-Day Summer Slim Down</h2>
                     <p>Transform your body 💪 with 1-on-1 online fitness coaching.</p>
-                    <a class="button" style="margin-top: 1rem;">JOIN NOW</a>
+                    <a class="button" style="margin-top: 1rem;" data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'>JOIN NOW</a>
                 </div>
             </div>
 
         </div>
     </div>
+
+    <!-- Cal element-click embed code begins -->
+    <script type="text/javascript">
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "30min", { origin: "https://cal.com" });
+
+        Cal.ns["30min"]("ui", { "styles": { "branding": { "brandColor": "#0079ff" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+    </script>
 
 </body>
 
