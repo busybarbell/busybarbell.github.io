@@ -188,15 +188,6 @@
 @media (max-width: 767px) {}
 
 @media (max-width: 479px) {
-    .offer_wrap {
-        padding-top: 1rem;
-        padding-bottom: 1rem;
-    }
-
-    .split_left {
-        gap: 1rem;
-    }
-
     .tabs_menu_image {
         height: 4rem;
         width: 4rem;
