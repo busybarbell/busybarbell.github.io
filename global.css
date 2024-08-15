@@ -125,6 +125,8 @@ p {
 @media (max-width: 767px) {
     h1 {
         font-size: 1.25rem;
+        margin-top: .1875rem;
+        margin-bottom: .1875rem;
     }
 }
 
