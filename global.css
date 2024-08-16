@@ -108,6 +108,7 @@ p {
     line-height: 1;
     color: #fff;
     letter-spacing: .025rem;
+    text-decoration: none;
     cursor: pointer;
 }
 
