@@ -1,0 +1,136 @@
+body {
+    box-sizing: border-box;
+    margin: 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #0f1f25;
+    padding-bottom: 7rem;
+}
+
+/* text begins */
+
+h1 {
+    font-family: system-ui, sans-serif;
+    font-weight: 600;
+    font-size: 1.5rem;
+    line-height: 1.5;
+    color: #fff;
+    margin-top: -.375rem;
+    margin-bottom: -.375rem;
+    cursor: default;
+}
+
+h2 {
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    line-height: 1.5;
+    color: #fff;
+    margin-top: -.1125rem;
+    margin-bottom: -.1125rem;
+    cursor: default;
+}
+
+p {
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: #afafaf;
+    margin-top: -.25rem;
+    margin-bottom: -.25rem;
+    cursor: default;
+}
+
+.alert_text {
+    font-family: system-ui, sans-serif;
+    font-weight: 600;
+    font-size: .85rem;
+    line-height: 1;
+    color: #ffa600;
+    cursor: default;
+}
+
+/* nav begins */
+
+.nav_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #334750;
+}
+
+.nav {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    max-width: 75rem;
+}
+
+.alert_wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+/* button begins */
+
+.button {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+    margin-bottom: 4px;
+    width: 100%;
+    background-color: #006FFA;
+    border-radius: .5rem;
+    box-shadow: 0px 4px #0045b3;
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1.15rem;
+    line-height: 1;
+    color: #fff;
+    letter-spacing: .025rem;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+.button:active {
+    box-shadow: 0px 0px;
+    transform: translateY(4px);
+}
+
+
+/* responsive styling begins */
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 1.25rem;
+        margin-top: -.3125rem;
+        margin-bottom: -.3125rem;
+    }
+}
+
+@media (max-width: 479px) {
+    .nav_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+}
