@@ -144,13 +144,30 @@
     height: 6rem;
     width: 6rem;
     border-radius: 1rem;
+    border: 2px solid transparent;
     cursor: pointer;
 }
 
-.active {
-    border-style: solid;
-    border-width: 2px;
-    border-color: #0079ff;
+.tab_image {
+    display: none;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+/* Show the content for the selected tab */
+#tab1:checked ~ .tab_image #content1,
+#tab2:checked ~ .tab_image #content2,
+#tab3:checked ~ .tab_image #content3,
+#tab4:checked ~ .tab_image #content4,
+#tab4:checked ~ .tab_image #content5,
+#tab4:checked ~ .tab_image #content6 {
+    display: block;
+}
+
+input[type="radio"]:checked + label .tabs_menu_image {
+    border-color: #007bff;
 }
 
 /* responsive styling begins */
