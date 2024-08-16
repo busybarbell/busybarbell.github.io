@@ -12,7 +12,7 @@ body {
 /* text begins */
 
 h1 {
-    font-family: "Inter", sans-serif;
+    font-family: sans-serif;
     font-weight: 600;
     font-size: 1.5rem;
     line-height: 1.5;
@@ -23,7 +23,7 @@ h1 {
 }
 
 h2 {
-    font-family: "Inter", sans-serif;
+    font-family: sans-serif;
     font-weight: 500;
     font-size: 1.15rem;
     line-height: 1.5;
@@ -44,7 +44,7 @@ p {
 }
 
 .alert_text {
-    font-family: "Inter", sans-serif;
+    font-family: sans-serif;
     font-weight: 600;
     font-size: .85rem;
     line-height: 1;
