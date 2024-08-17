@@ -59,6 +59,12 @@
                                 .click_for_sound .tap-text {
                                     display: none;
                                 }
+
+                                /* Additional style to ensure timeline has a larger touchable area */
+                                .timeline_wrap {
+                                    overflow: visible;
+                                    /* Ensure timeline's parent allows overflow for touch events */
+                                }
                             </style>
 
                             <img class="thumbnail_image" style="position: static; display: none; z-index: 10;">
@@ -168,21 +174,23 @@
                                     }
 
                                     // Handle mouse/touch dragging on the timeline
-                                    timelineWrap.addEventListener('mousedown', (event) => {
+                                    function startScrubbing(event) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;  // Check if video was playing before scrubbing
                                         video.pause();  // Pause video during scrubbing
                                         handleScrubbing(event);  // Set video time during the initial click
-                                    });
+                                        event.preventDefault();
+                                    }
 
-                                    timelineWrap.addEventListener('mousemove', (event) => {
+                                    function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event);  // Update video time while dragging
                                             showThumbnail(event);  // Show thumbnail while scrubbing
+                                            event.preventDefault();
                                         }
-                                    });
+                                    }
 
-                                    document.addEventListener('mouseup', () => {
+                                    function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
                                                 video.play();  // Resume video only if it was playing before
@@ -190,34 +198,19 @@
                                             hideThumbnail();  // Hide thumbnail after scrubbing
                                             isDragging = false;
                                         }
-                                    });
+                                    }
 
-                                    // Handle touch dragging on the timeline for mobile
+                                    // Handle mouse/touch dragging
+                                    timelineWrap.addEventListener('mousedown', startScrubbing);
+                                    document.addEventListener('mousemove', continueScrubbing);
+                                    document.addEventListener('mouseup', endScrubbing);
+
                                     timelineWrap.addEventListener('touchstart', (event) => {
-                                        isDragging = true;
-                                        wasPlayingBeforeScrub = !video.paused;  // Check if video was playing before scrubbing
-                                        video.pause();  // Pause video during scrubbing
-                                        handleScrubbing(event, true);  // Set video time during the initial touch
+                                        startScrubbing(event);
                                         event.preventDefault();  // Prevent page from scrolling
                                     });
-
-                                    timelineWrap.addEventListener('touchmove', (event) => {
-                                        if (isDragging) {
-                                            handleScrubbing(event, true);  // Update video time while dragging
-                                            showThumbnail(event, true);  // Show thumbnail while scrubbing
-                                            event.preventDefault();  // Prevent page from scrolling
-                                        }
-                                    });
-
-                                    document.addEventListener('touchend', () => {
-                                        if (isDragging) {
-                                            if (wasPlayingBeforeScrub) {
-                                                video.play();  // Resume video only if it was playing before
-                                            }
-                                            hideThumbnail();  // Hide thumbnail after scrubbing
-                                            isDragging = false;
-                                        }
-                                    });
+                                    document.addEventListener('touchmove', continueScrubbing);
+                                    document.addEventListener('touchend', endScrubbing);
 
                                     timelineWrap.addEventListener('mouseleave', hideThumbnail);
 
@@ -228,6 +221,16 @@
 
                                     // Update the timeline as the video plays
                                     video.addEventListener('timeupdate', updateTimeline);
+
+                                    // Function to handle keypress for mute/unmute
+                                    function handleKeyPress(event) {
+                                        if (event.key === 'm' || event.code === 'Space') { // Mute/unmute on 'm' or spacebar
+                                            event.preventDefault(); // Prevent default action for spacebar
+                                            toggleMute();
+                                        }
+                                    }
+
+                                    document.addEventListener('keydown', handleKeyPress);
                                 });
                             </script>
 
