@@ -327,6 +327,7 @@ input[type="radio"]:checked + label .tabs_menu_image {
     background-color: #334750;
     width: 100%;
     cursor: pointer;
+    z-index: 10;
 }
 
 .timeline {
@@ -341,17 +342,13 @@ input[type="radio"]:checked + label .tabs_menu_image {
     width: 0; /* Width will be dynamically set */
     transition: width 0.1s linear; /* Smooth transition */
     cursor: pointer;
+    transition: height 0.3s ease;
 }
 
+/* Expands the timeline when hovering over the timeline_wrap */
 .timeline_wrap:hover .timeline,
 .timeline_wrap:active .timeline {
-    height: .5rem; /* Height on hover or active touch */
-}
-
-@media (pointer: coarse) {
-    .timeline_wrap:active {
-        height: .5rem; /* Double the height on active for touch devices */
-    }
+    height: 10rem; /* Expanded height on hover or active touch */
 }
 
 /* responsive styling begins */
