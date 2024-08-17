@@ -53,10 +53,10 @@
 
                         <div class="tab_image video_wrap" id="content1" style="display: flex;">
 
-                            <img class="thumbnail_image">
+                            <img class="thumbnail_image" style="position: static; display: none; z-index: 10;">
 
                             <div class="video_controls_wrap">
-                                <div class="timeline_wrap">
+                                <div class="timeline_wrap" style="position: relative;">
                                     <div class="timeline"></div>
                                 </div>
 
@@ -69,8 +69,7 @@
                                     </div>
                                     <button class="click_for_sound">
                                         <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Click for sound"
-                                            height="24px">
-                                        Click for sound
+                                            height="24px">Click for sound
                                     </button>
                                 </div>
                             </div>
@@ -88,27 +87,26 @@
                                     const volumeOn = volumeDiv.querySelector('.volume-on');
                                     const volumeOff = volumeDiv.querySelector('.volume-off');
                                     const timeline = document.querySelector('.timeline');
-                                    const timelineWrap = document.querySelector('.timeline_wrap'); // Wrap element for clicks
+                                    const timelineWrap = document.querySelector('.timeline_wrap');
                                     const videoControlsWrap = document.querySelector('.video_controls_wrap');
+                                    const thumbnailImage = document.querySelector('.thumbnail_image');
                                     let isDragging = false;
+                                    let wasPlayingBeforeScrub = false;
 
                                     // Detect if user is on mobile
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                                     if (isMobile) {
                                         muteBtn.innerHTML = `
-                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Tap for sound" height="24px">
-                                        Tap for sound
-                                    `;
+                <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Tap for sound" height="24px">Tap for sound
+            `;
                                     }
 
                                     // Function to toggle mute/unmute
                                     function toggleMute() {
                                         video.muted = !video.muted;
-
                                         volumeDiv.style.display = 'flex'; // Ensure volume is visible
                                         volumeOn.style.display = video.muted ? 'none' : 'flex';
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
-
                                         muteBtn.style.display = 'none'; // Hide the button permanently after the first click
                                     }
 
@@ -124,7 +122,40 @@
                                         timeline.style.width = `${progress}%`; // Set width of the timeline
                                     }
 
-                                    // Function to handle timeline click and jump to position
+                                    // Capture a thumbnail of the video at a specific time
+                                    function captureThumbnail(time) {
+                                        const canvas = document.createElement('canvas');
+                                        const ctx = canvas.getContext('2d');
+                                        canvas.width = video.videoWidth;
+                                        canvas.height = video.videoHeight;
+
+                                        video.currentTime = time;
+                                        ctx.drawImage(video, 0, 0, canvas.width, canvas.height);
+
+                                        return canvas.toDataURL();
+                                    }
+
+                                    // Function to show thumbnail while scrubbing
+                                    function showThumbnail(event) {
+                                        const timelineRect = timelineWrap.getBoundingClientRect();
+                                        const offsetX = event.clientX - timelineRect.left;
+                                        const timelineWidth = timelineWrap.clientWidth;
+                                        const scrubTime = (offsetX / timelineWidth) * video.duration;
+
+                                        const thumbnailSrc = captureThumbnail(scrubTime);
+
+                                        thumbnailImage.src = thumbnailSrc;
+                                        thumbnailImage.style.display = 'block';
+                                        thumbnailImage.style.left = `${event.clientX - thumbnailImage.width / 2}px`;
+                                        thumbnailImage.style.top = `${timelineRect.top - thumbnailImage.height}px`;
+                                    }
+
+                                    // Function to hide thumbnail
+                                    function hideThumbnail() {
+                                        thumbnailImage.style.display = 'none';
+                                    }
+
+                                    // Function to handle timeline scrubbing and seeking
                                     function handleTimelineClick(event) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = event.clientX - timelineRect.left;
@@ -133,43 +164,40 @@
                                         video.currentTime = newTime;
                                     }
 
-                                    // Function to handle timeline drag
-                                    function handleTimelineMouseMove(event) {
-                                        if (isDragging) {
-                                            handleTimelineClick(event); // Update video time while dragging
-                                        }
-                                    }
-
-                                    // Function to handle timeline drag start
-                                    function handleTimelineMouseDown(event) {
+                                    // Handle dragging on the timeline
+                                    timelineWrap.addEventListener('mousedown', (event) => {
                                         isDragging = true;
-                                        handleTimelineClick(event); // Optional: set video time on drag start
-                                        document.addEventListener('mousemove', handleTimelineMouseMove);
-                                    }
+                                        wasPlayingBeforeScrub = !video.paused;  // Check if video was playing before scrubbing
+                                        video.pause();  // Pause video during scrubbing
+                                        handleTimelineClick(event);  // Set video time during the initial click
+                                    });
 
-                                    // Function to handle timeline drag end
-                                    function handleTimelineMouseUp() {
-                                        isDragging = false;
-                                        document.removeEventListener('mousemove', handleTimelineMouseMove);
-                                    }
+                                    timelineWrap.addEventListener('mousemove', (event) => {
+                                        if (isDragging) {
+                                            handleTimelineClick(event);  // Update video time while dragging
+                                            showThumbnail(event);  // Show thumbnail while scrubbing
+                                        }
+                                    });
+
+                                    document.addEventListener('mouseup', () => {
+                                        if (isDragging) {
+                                            if (wasPlayingBeforeScrub) {
+                                                video.play();  // Resume video only if it was playing before
+                                            }
+                                            hideThumbnail();  // Hide thumbnail after scrubbing
+                                            isDragging = false;
+                                        }
+                                    });
+
+                                    timelineWrap.addEventListener('mouseleave', hideThumbnail);
+
+                                    // Add click event listener to the video_controls_wrap to mute/unmute the video
+                                    videoControlsWrap.addEventListener('click', () => {
+                                        toggleMute();
+                                    });
 
                                     // Update the timeline as the video plays
                                     video.addEventListener('timeupdate', updateTimeline);
-
-                                    // Seek to new time on timeline click
-                                    timelineWrap.addEventListener('click', handleTimelineClick);
-
-                                    // Handle dragging on timeline
-                                    timeline.addEventListener('mousedown', handleTimelineMouseDown);
-                                    document.addEventListener('mouseup', handleTimelineMouseUp);
-
-                                    // Add click event listener to the video_controls_wrap to handle clicks on the entire controls wrapper
-                                    videoControlsWrap.addEventListener('click', (event) => {
-                                        // Check if the click was on the timeline to avoid redundant mute/unmute
-                                        if (!timelineWrap.contains(event.target)) {
-                                            toggleMute();
-                                        }
-                                    });
                                 });
                             </script>
 
