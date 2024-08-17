@@ -59,117 +59,120 @@
                                 <div class="timeline_wrap">
                                     <div class="timeline"></div>
                                 </div>
-                            
+
                                 <div class="controls">
                                     <div class="volume" style="display: none;">
-                                        <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Volume on" height="13.6px">
-                                        <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp" alt="Volume off" height="13.6px">
+                                        <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp"
+                                            alt="Volume on" height="13.6px">
+                                        <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp"
+                                            alt="Volume off" height="13.6px">
                                     </div>
                                     <button class="click_for_sound">
-                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Click for sound" height="24px">
+                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Click for sound"
+                                            height="24px">
                                         Click for sound
                                     </button>
                                 </div>
                             </div>
-                            
+
                             <video id="myVideo" preload="metadata" width="100%" playsinline autoplay muted loop>
                                 <source src="sabri.mp4" type="video/mp4">Your browser does not support the video tag.
                             </video>
-                            
+
                             <script>
-                            document.addEventListener('DOMContentLoaded', () => {
-                                // Select elements
-                                const video = document.getElementById('myVideo');
-                                const muteBtn = document.querySelector('.click_for_sound');
-                                const volumeDiv = document.querySelector('.volume');
-                                const volumeOn = volumeDiv.querySelector('.volume-on');
-                                const volumeOff = volumeDiv.querySelector('.volume-off');
-                                const timeline = document.querySelector('.timeline');
-                                const timelineWrap = document.querySelector('.timeline_wrap'); // Wrap element for clicks
-                                const videoControlsWrap = document.querySelector('.video_controls_wrap');
-                                let isDragging = false;
-                            
-                                // Detect if user is on mobile
-                                const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                                if (isMobile) {
-                                    muteBtn.innerHTML = `
+                                document.addEventListener('DOMContentLoaded', () => {
+                                    // Select elements
+                                    const video = document.getElementById('myVideo');
+                                    const muteBtn = document.querySelector('.click_for_sound');
+                                    const volumeDiv = document.querySelector('.volume');
+                                    const volumeOn = volumeDiv.querySelector('.volume-on');
+                                    const volumeOff = volumeDiv.querySelector('.volume-off');
+                                    const timeline = document.querySelector('.timeline');
+                                    const timelineWrap = document.querySelector('.timeline_wrap'); // Wrap element for clicks
+                                    const videoControlsWrap = document.querySelector('.video_controls_wrap');
+                                    let isDragging = false;
+
+                                    // Detect if user is on mobile
+                                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                                    if (isMobile) {
+                                        muteBtn.innerHTML = `
                                         <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Tap for sound" height="24px">
                                         Tap for sound
                                     `;
-                                }
-                            
-                                // Function to toggle mute/unmute
-                                function toggleMute() {
-                                    video.muted = !video.muted;
-                            
-                                    volumeDiv.style.display = 'flex'; // Ensure volume is visible
-                                    volumeOn.style.display = video.muted ? 'none' : 'flex';
-                                    volumeOff.style.display = video.muted ? 'flex' : 'none';
-                            
-                                    muteBtn.style.display = 'none'; // Hide the button permanently after the first click
-                                }
-                            
-                                // Show the click_for_sound button initially
-                                muteBtn.style.display = 'flex';
-                            
-                                // Add click event listener to the button
-                                muteBtn.addEventListener('click', toggleMute);
-                            
-                                // Function to update the timeline
-                                function updateTimeline() {
-                                    const progress = (video.currentTime / video.duration) * 100;
-                                    timeline.style.width = `${progress}%`; // Set width of the timeline
-                                }
-                            
-                                // Function to handle timeline click and jump to position
-                                function handleTimelineClick(event) {
-                                    const timelineRect = timelineWrap.getBoundingClientRect();
-                                    const offsetX = event.clientX - timelineRect.left;
-                                    const timelineWidth = timelineWrap.clientWidth;
-                                    const newTime = (offsetX / timelineWidth) * video.duration;
-                                    video.currentTime = newTime;
-                                }
-                            
-                                // Function to handle timeline drag
-                                function handleTimelineMouseMove(event) {
-                                    if (isDragging) {
-                                        handleTimelineClick(event); // Update video time while dragging
                                     }
-                                }
-                            
-                                // Function to handle timeline drag start
-                                function handleTimelineMouseDown(event) {
-                                    isDragging = true;
-                                    handleTimelineClick(event); // Optional: set video time on drag start
-                                    document.addEventListener('mousemove', handleTimelineMouseMove);
-                                }
-                            
-                                // Function to handle timeline drag end
-                                function handleTimelineMouseUp() {
-                                    isDragging = false;
-                                    document.removeEventListener('mousemove', handleTimelineMouseMove);
-                                }
-                            
-                                // Update the timeline as the video plays
-                                video.addEventListener('timeupdate', updateTimeline);
-                            
-                                // Seek to new time on timeline click
-                                timelineWrap.addEventListener('click', handleTimelineClick);
-                            
-                                // Handle dragging on timeline
-                                timeline.addEventListener('mousedown', handleTimelineMouseDown);
-                                document.addEventListener('mouseup', handleTimelineMouseUp);
-                            
-                                // Add click event listener to the video_controls_wrap to handle clicks on the entire controls wrapper
-                                videoControlsWrap.addEventListener('click', (event) => {
-                                    // Check if the click was on the timeline to avoid redundant mute/unmute
-                                    if (!timelineWrap.contains(event.target)) {
-                                        toggleMute();
+
+                                    // Function to toggle mute/unmute
+                                    function toggleMute() {
+                                        video.muted = !video.muted;
+
+                                        volumeDiv.style.display = 'flex'; // Ensure volume is visible
+                                        volumeOn.style.display = video.muted ? 'none' : 'flex';
+                                        volumeOff.style.display = video.muted ? 'flex' : 'none';
+
+                                        muteBtn.style.display = 'none'; // Hide the button permanently after the first click
                                     }
+
+                                    // Show the click_for_sound button initially
+                                    muteBtn.style.display = 'flex';
+
+                                    // Add click event listener to the button
+                                    muteBtn.addEventListener('click', toggleMute);
+
+                                    // Function to update the timeline
+                                    function updateTimeline() {
+                                        const progress = (video.currentTime / video.duration) * 100;
+                                        timeline.style.width = `${progress}%`; // Set width of the timeline
+                                    }
+
+                                    // Function to handle timeline click and jump to position
+                                    function handleTimelineClick(event) {
+                                        const timelineRect = timelineWrap.getBoundingClientRect();
+                                        const offsetX = event.clientX - timelineRect.left;
+                                        const timelineWidth = timelineWrap.clientWidth;
+                                        const newTime = (offsetX / timelineWidth) * video.duration;
+                                        video.currentTime = newTime;
+                                    }
+
+                                    // Function to handle timeline drag
+                                    function handleTimelineMouseMove(event) {
+                                        if (isDragging) {
+                                            handleTimelineClick(event); // Update video time while dragging
+                                        }
+                                    }
+
+                                    // Function to handle timeline drag start
+                                    function handleTimelineMouseDown(event) {
+                                        isDragging = true;
+                                        handleTimelineClick(event); // Optional: set video time on drag start
+                                        document.addEventListener('mousemove', handleTimelineMouseMove);
+                                    }
+
+                                    // Function to handle timeline drag end
+                                    function handleTimelineMouseUp() {
+                                        isDragging = false;
+                                        document.removeEventListener('mousemove', handleTimelineMouseMove);
+                                    }
+
+                                    // Update the timeline as the video plays
+                                    video.addEventListener('timeupdate', updateTimeline);
+
+                                    // Seek to new time on timeline click
+                                    timelineWrap.addEventListener('click', handleTimelineClick);
+
+                                    // Handle dragging on timeline
+                                    timeline.addEventListener('mousedown', handleTimelineMouseDown);
+                                    document.addEventListener('mouseup', handleTimelineMouseUp);
+
+                                    // Add click event listener to the video_controls_wrap to handle clicks on the entire controls wrapper
+                                    videoControlsWrap.addEventListener('click', (event) => {
+                                        // Check if the click was on the timeline to avoid redundant mute/unmute
+                                        if (!timelineWrap.contains(event.target)) {
+                                            toggleMute();
+                                        }
+                                    });
                                 });
-                            });
                             </script>
-                            
+
                         </div>
 
                         <div class="tab_image" id="content2">
