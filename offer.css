@@ -277,7 +277,8 @@ input[type="radio"]:checked + label .tabs_menu_image {
     color: #fff;
 
     box-sizing: border-box;
-    background-color: #00000080;
+    background-color: #00000098;
+    backdrop-filter: blur(.25rem);
     border-radius: 100px;
     font-family: system-ui, sans-serif;
     font-size: 1rem;
