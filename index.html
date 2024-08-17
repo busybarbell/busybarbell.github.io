@@ -57,10 +57,7 @@
 
                             <div class="video_controls_wrap">
                                 <div class="timeline_wrap">
-                                    <div class="timeline">
-                                        <img class="preview_image">
-                                        <div class="thumb_indicator"></div>
-                                    </div>
+                                    <div class="timeline"></div>
                                 </div>
 
                                 <div class="controls">
@@ -84,24 +81,24 @@
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
-                                    // Select the video element, button, and volume controls
+                                    // Select elements
                                     const video = document.getElementById('myVideo');
                                     const muteBtn = document.querySelector('.click_for_sound');
                                     const volumeDiv = document.querySelector('.volume');
                                     const volumeOn = volumeDiv.querySelector('.volume-on');
                                     const volumeOff = volumeDiv.querySelector('.volume-off');
+                                    const videoControlsWrap = document.querySelector('.video_controls_wrap');
+                                    const timelineWrap = document.querySelector('.timeline_wrap');
 
                                     // Function to toggle mute/unmute
                                     function toggleMute() {
                                         video.muted = !video.muted;
 
-                                        // Show or hide the volume indicators and update their states
                                         volumeDiv.style.display = 'flex'; // Ensure volume is visible
                                         volumeOn.style.display = video.muted ? 'none' : 'flex';
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
 
-                                        // Hide the click_for_sound button permanently after the first click
-                                        muteBtn.style.display = 'none';
+                                        muteBtn.style.display = 'none'; // Hide the button permanently after the first click
                                     }
 
                                     // Show the click_for_sound button initially
@@ -112,11 +109,36 @@
 
                                     // Add click event listener to the document to handle clicks outside the button
                                     document.addEventListener('click', (event) => {
-                                        // Check if the click was outside the button and if the video is muted
-                                        if (!muteBtn.contains(event.target) && video.muted !== undefined) {
+                                        // Prevent mute toggle if the click is within the video_controls_wrap
+                                        if (videoControlsWrap.contains(event.target)) {
+                                            return;
+                                        }
+
+                                        // Toggle mute only if the click was outside the video_controls_wrap
+                                        if (!muteBtn.contains(event.target) && !timelineWrap.contains(event.target)) {
                                             toggleMute();
                                         }
                                     });
+
+                                    // Function to update the timeline
+                                    function updateTimeline() {
+                                        const progress = (video.currentTime / video.duration) * 100;
+                                        timelineWrap.querySelector('.timeline').style.width = `${progress}%`; // Set width of the timeline
+                                    }
+
+                                    // Function to handle timeline click
+                                    function handleTimelineClick(event) {
+                                        const timelineWidth = timelineWrap.clientWidth;
+                                        const offsetX = event.clientX - timelineWrap.getBoundingClientRect().left;
+                                        const newTime = (offsetX / timelineWidth) * video.duration;
+                                        video.currentTime = newTime;
+                                    }
+
+                                    // Update the timeline as the video plays
+                                    video.addEventListener('timeupdate', updateTimeline);
+
+                                    // Seek to new time on timeline click
+                                    timelineWrap.addEventListener('click', handleTimelineClick);
                                 });
                             </script>
 
