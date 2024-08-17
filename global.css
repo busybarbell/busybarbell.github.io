@@ -91,12 +91,21 @@ p {
 /* button begins */
 
 .button {
+
+    /* buttons styling to unset */
+
+    padding: 1rem;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: #fff;
+
+
     box-sizing: border-box;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 1rem;
     margin-bottom: 4px;
     width: 100%;
     background-color: #006FFA;
@@ -106,7 +115,6 @@ p {
     font-weight: 500;
     font-size: 1.15rem;
     line-height: 1;
-    color: #fff;
     letter-spacing: .025rem;
     text-decoration: none;
     cursor: pointer;
