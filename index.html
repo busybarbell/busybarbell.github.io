@@ -79,12 +79,20 @@
                                     // Select the video element and button
                                     const video = document.getElementById('myVideo');
                                     const muteBtn = document.querySelector('.click_for_sound');
+                                    const controls = document.querySelector('.controls');
 
                                     // Function to toggle mute/unmute
                                     function toggleMute() {
                                         video.muted = !video.muted;
                                         // Update button text based on mute state
                                         muteBtn.textContent = video.muted ? 'Click for sound' : 'Click to mute';
+
+                                        // Hide the controls container when sound is turned on
+                                        if (!video.muted) {
+                                            controls.style.display = 'none';
+                                        } else {
+                                            controls.style.display = 'block';
+                                        }
                                     }
 
                                     // Add click event listener to the button
@@ -96,6 +104,7 @@
                                     });
                                 });
                             </script>
+
 
                         </div>
 
@@ -198,7 +207,7 @@
                     in 27 days.‍<br>
 
                     <br>What's inside Skool Masterclass (Free):<br>
-                    
+
                     <br>‍💰 Skool Masterclass (LITE) ($997 Value)<br>
                     💰 Weekly Q&A Call w/ Max (Normally Sells for $997/mo)<br>
                     💰 1-1 Skool Onboarding Call (Normally Sells for $497)<br>
