@@ -325,15 +325,19 @@ input[type="radio"]:checked + label .tabs_menu_image {
         padding-right: 4%;
     }
 
-    .tabs_menu_image {
-        height: 4rem;
-        width: 4rem;
+    .tabs_menu {
+        justify-content: center;
     }
-}
 
-/* mobile styling begins*/
+    .tabs_menu_image {
+        height: 2px;
+        width: 2px;
+    }
 
-.mobile .tabs_content {
-    width: 100vw;
-    aspect-ratio: 16/9;
+    .tabs_content {
+        width: 100vw;
+        aspect-ratio: 16/9;
+        align-self: center;
+        border-radius: 0rem;
+    }
 }
