@@ -298,6 +298,12 @@ input[type="radio"]:checked + label .tabs_menu_image {
     gap: .5rem;
 }
 
+/* Hide text elements by default */
+.click_for_sound .click-text,
+.click_for_sound .tap-text {
+    display: none;
+}
+
 .volume {
     box-sizing: border-box;
     position: absolute;
@@ -417,5 +423,11 @@ input[type="radio"]:checked + label .tabs_menu_image {
         aspect-ratio: 16/9;
         align-self: center;
         border-radius: 0rem;
+    }
+}
+
+@supports (-webkit-touch-callout: none) {
+    .click_for_sound {
+        padding: .5rem;
     }
 }
