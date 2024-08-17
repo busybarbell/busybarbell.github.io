@@ -107,18 +107,21 @@
                                     // Add click event listener to the button
                                     muteBtn.addEventListener('click', toggleMute);
 
-                                    // Add click event listener to the document to handle clicks outside the button
-                                    document.addEventListener('click', (event) => {
-                                        // Prevent mute toggle if the click is within the video_controls_wrap
+                                    // Add click and touchstart event listener to the document to handle clicks/taps outside the button
+                                    function handleClickOrTouch(event) {
+                                        // Prevent mute toggle if the click/touch is within the video_controls_wrap
                                         if (videoControlsWrap.contains(event.target)) {
                                             return;
                                         }
 
-                                        // Toggle mute only if the click was outside the video_controls_wrap
+                                        // Toggle mute only if the click/touch was outside the video_controls_wrap
                                         if (!muteBtn.contains(event.target) && !timelineWrap.contains(event.target)) {
                                             toggleMute();
                                         }
-                                    });
+                                    }
+
+                                    document.addEventListener('click', handleClickOrTouch);
+                                    document.addEventListener('touchstart', handleClickOrTouch);
 
                                     // Function to update the timeline
                                     function updateTimeline() {
@@ -139,6 +142,7 @@
 
                                     // Seek to new time on timeline click
                                     timelineWrap.addEventListener('click', handleTimelineClick);
+                                    timelineWrap.addEventListener('touchstart', handleTimelineClick); // Add touch event for mobile
                                 });
                             </script>
 
