@@ -64,7 +64,11 @@
                                 </div>
 
                                 <div class="controls">
-                                    <button class="click_for_sound">Click for sound</button>
+                                    <button class="click_for_sound">
+                                        Click for sound
+                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available"
+                                            height="24px">
+                                    </button>
                                 </div>
                             </div>
 
@@ -88,10 +92,10 @@
                                     // Function to toggle mute/unmute
                                     function toggleMute() {
                                         video.muted = !video.muted;
-                                        // Update button text based on mute state
-                                        muteBtn.textContent = video.muted
-                                            ? (isMobile() ? 'Tap for sound' : 'Click for sound')
-                                            : (isMobile() ? 'Tap to mute' : 'Click to mute');
+                                        // Update button content based on mute state
+                                        muteBtn.innerHTML = video.muted
+                                            ? (isMobile() ? 'Tap for sound <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available" height="24px">' : 'Click for sound <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available" height="24px">')
+                                            : (isMobile() ? 'Tap to mute <img src="https://i.postimg.cc/sg1SRYCQ/sound-muted.webp" alt="image not available" height="24px">' : 'Click to mute <img src="https://i.postimg.cc/sg1SRYCQ/sound-muted.webp" alt="image not available" height="24px">');
 
                                         // Hide the controls container when sound is turned on
                                         if (!video.muted) {
@@ -101,8 +105,8 @@
                                         }
                                     }
 
-                                    // Set initial button text based on device type
-                                    muteBtn.textContent = isMobile() ? 'Tap for sound' : 'Click for sound';
+                                    // Set initial button content based on device type
+                                    muteBtn.innerHTML = isMobile() ? 'Tap for sound <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available" height="24px">' : 'Click for sound <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available" height="24px">';
 
                                     // Add click event listener to the button
                                     muteBtn.addEventListener('click', toggleMute);
@@ -113,6 +117,7 @@
                                     });
                                 });
                             </script>
+
 
                         </div>
 
