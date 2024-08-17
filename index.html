@@ -73,14 +73,8 @@
                             </div>
 
                             <video id="myVideo" preload="metadata" width="100%" playsinline autoplay muted loop>
-                                <source src="sabri.mp4" type="video/mp4">
-                                <track
-                                label="English"
-                                kind="captions"
-                                srclang="en"
-                                src="sabri.vtt"
-                                default />
-                                Your browser does not support the video tag.
+                                <source src="sabri.mp4" type="video/mp4">Your browser does not support the video tag.
+                                <track label="English" kind="captions" srclang="en" src="sabri.vtt" default>
                             </video>
 
                             <script>
@@ -117,12 +111,21 @@
                                     // Add click event listener to the button
                                     muteBtn.addEventListener('click', toggleMute);
 
+                                    // Add click event listener to the document
+                                    document.addEventListener('click', (event) => {
+                                        // Check if the click was outside the button
+                                        if (!muteBtn.contains(event.target)) {
+                                            toggleMute();
+                                        }
+                                    });
+
                                     // Optionally, you can handle volume change if needed
                                     video.addEventListener('volumechange', () => {
                                         console.log('Volume changed, muted:', video.muted);
                                     });
                                 });
                             </script>
+
 
                         </div>
 
