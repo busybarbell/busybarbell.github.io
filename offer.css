@@ -428,6 +428,9 @@ input[type="radio"]:checked + label .tabs_menu_image {
 
 @supports (-webkit-touch-callout: none) {
     .click_for_sound {
-        padding: .5rem;
+        padding-top: .5rem;
+        padding-bottom: .5rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
