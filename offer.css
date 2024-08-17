@@ -277,6 +277,10 @@ input[type="radio"]:checked + label .tabs_menu_image {
     color: #fff;
 
     box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
     background-color: #00000098;
     backdrop-filter: blur(.25rem);
     border-radius: 100px;
@@ -284,6 +288,7 @@ input[type="radio"]:checked + label .tabs_menu_image {
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
+    gap: .5rem;
 }
 
 .timeline_wrap {
