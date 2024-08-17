@@ -347,7 +347,7 @@ input[type="radio"]:checked + label .tabs_menu_image {
         height: .35rem;
         width: .35rem;
         border-radius: 100%;
-        background-color: #334750;
+        background-color: #afafaf;
     }
 
     .tabs_content {
