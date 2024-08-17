@@ -263,7 +263,7 @@ input[type="radio"]:checked + label .tabs_menu_image {
 }
 
 .click_for_sound {
-    
+
     /* buttons styling to unset */
 
     padding: 1rem;
@@ -329,4 +329,11 @@ input[type="radio"]:checked + label .tabs_menu_image {
         height: 4rem;
         width: 4rem;
     }
+}
+
+/* mobile styling begins*/
+
+.mobile .tabs_content {
+    width: 100vw;
+    aspect-ratio: 16/9;
 }
