@@ -19,6 +19,7 @@
 
     <!-- video preload begins -->
 
+    <link rel="preload" fetchpriority="high" as="image" href="https://i.postimg.cc/Hkj3Nt8h/thumbnail.webp">
     <link rel="preload" fetchpriority="high" as="video" href="pauldaley.mp4">
 
 </head>
@@ -54,35 +55,10 @@
 
                         <div class="tab_image" id="content1" style="display: flex;">
 
-                            <video id="video" preload="metadata" width="100%" muted controls>
+                            <video preload="metadata" poster="https://i.postimg.cc/Hkj3Nt8h/thumbnail.webp" width="100%" controls>
                                 <source src="pauldaley.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-                        
-                            <script>
-                                const video = document.getElementById('video');
-                        
-                                // Function to handle the looping effect
-                                function loopVideo() {
-                                    if (video.currentTime >= 5) {
-                                        video.currentTime = 0;
-                                    }
-                                    requestAnimationFrame(loopVideo);
-                                }
-                        
-                                // Play the video and start looping the first 5 seconds
-                                video.addEventListener('loadeddata', () => {
-                                    video.play();
-                                    loopVideo();
-                                });
-                        
-                                // Ensure the video starts at the beginning when paused or reset
-                                video.addEventListener('pause', () => {
-                                    video.currentTime = 0;
-                                    video.play();
-                                });
-                            </script>
-
                         </div>
 
                         <div class="tab_image" id="content2">
