@@ -282,7 +282,7 @@ input[type="radio"]:checked + label .tabs_menu_image {
     justify-content: center;
     align-items: center;
     background-color: #00000098;
-    backdrop-filter: blur(.25rem);
+    backdrop-filter: blur(.5rem);
     border-radius: 100px;
     font-family: system-ui, sans-serif;
     font-size: 1rem;
