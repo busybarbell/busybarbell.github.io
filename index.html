@@ -64,8 +64,14 @@
                                 </div>
 
                                 <div class="controls">
+                                    <div class="volume" style="display: none;">
+                                        <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp"
+                                            alt="Volume on" height="13.6px">
+                                        <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp"
+                                            alt="Volume off" height="13.6px">
+                                    </div>
                                     <button class="click_for_sound">
-                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="sound icon"
+                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Click for sound"
                                             height="24px">
                                         Click for sound
                                     </button>
@@ -74,58 +80,45 @@
 
                             <video id="myVideo" preload="metadata" width="100%" playsinline autoplay muted loop>
                                 <source src="sabri.mp4" type="video/mp4">Your browser does not support the video tag.
-                                <track label="English" kind="captions" srclang="en" src="sabri.vtt" default>
                             </video>
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
-                                    // Select the video element and button
+                                    // Select the video element, button, and volume controls
                                     const video = document.getElementById('myVideo');
                                     const muteBtn = document.querySelector('.click_for_sound');
-                                    const controls = document.querySelector('.controls');
-
-                                    // Function to detect if the device is mobile
-                                    function isMobile() {
-                                        return /Mobi|Android/i.test(navigator.userAgent);
-                                    }
+                                    const volumeDiv = document.querySelector('.volume');
+                                    const volumeOn = volumeDiv.querySelector('.volume-on');
+                                    const volumeOff = volumeDiv.querySelector('.volume-off');
 
                                     // Function to toggle mute/unmute
                                     function toggleMute() {
                                         video.muted = !video.muted;
-                                        // Update button content based on mute state
-                                        muteBtn.innerHTML = video.muted
-                                            ? (isMobile() ? '<img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="sound icon" height="24px"> Tap for sound' : '<img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="sound icon" height="24px"> Click for sound')
-                                            : (isMobile() ? '<img src="https://i.postimg.cc/sg1SRYCQ/sound-muted.webp" alt="sound icon" height="24px"> Tap to mute' : '<img src="https://i.postimg.cc/sg1SRYCQ/sound-muted.webp" alt="sound icon" height="24px"> Click to mute');
 
-                                        // Hide the controls container when sound is turned on
-                                        if (!video.muted) {
-                                            controls.style.display = 'none';
-                                        } else {
-                                            controls.style.display = 'block';
-                                        }
+                                        // Show or hide the volume indicators and update their states
+                                        volumeDiv.style.display = 'flex'; // Ensure volume is visible
+                                        volumeOn.style.display = video.muted ? 'none' : 'flex';
+                                        volumeOff.style.display = video.muted ? 'flex' : 'none';
+
+                                        // Hide the click_for_sound button permanently after the first click
+                                        muteBtn.style.display = 'none';
                                     }
 
-                                    // Set initial button content based on device type
-                                    muteBtn.innerHTML = isMobile() ? '<img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="sound icon" height="24px"> Tap for sound' : '<img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="sound icon" height="24px"> Click for sound';
+                                    // Show the click_for_sound button initially
+                                    muteBtn.style.display = 'flex';
 
                                     // Add click event listener to the button
                                     muteBtn.addEventListener('click', toggleMute);
 
-                                    // Add click event listener to the document
+                                    // Add click event listener to the document to handle clicks outside the button
                                     document.addEventListener('click', (event) => {
-                                        // Check if the click was outside the button
-                                        if (!muteBtn.contains(event.target)) {
+                                        // Check if the click was outside the button and if the video is muted
+                                        if (!muteBtn.contains(event.target) && video.muted !== undefined) {
                                             toggleMute();
                                         }
                                     });
-
-                                    // Optionally, you can handle volume change if needed
-                                    video.addEventListener('volumechange', () => {
-                                        console.log('Volume changed, muted:', video.muted);
-                                    });
                                 });
                             </script>
-
 
                         </div>
 
