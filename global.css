@@ -52,6 +52,16 @@ p {
     cursor: default;
 }
 
+.fine_print {
+    font-family: system-ui, sans-serif;
+    font-size: .85rem;
+    line-height: 1.5;
+    color: #afafaf;
+    margin-top: -.2125rem;
+    margin-bottom: -.2125rem;
+    cursor: default;
+}
+
 /* nav begins */
 
 .nav_wrap {
