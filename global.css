@@ -158,7 +158,7 @@ p {
     .alert_text {
         font-family: system-ui, sans-serif;
         font-weight: 500;
-        font-size: .85rem;
+        font-size: 1rem;
         line-height: 1;
         color: #ffa600;
         cursor: default;
@@ -166,11 +166,11 @@ p {
     
     .fine_print {
         font-family: system-ui, sans-serif;
-        font-size: .85rem;
+        font-size: 1rem;
         line-height: 1.5;
         color: #afafaf;
-        margin-top: -.2125rem;
-        margin-bottom: -.2125rem;
+        margin-top: -.25rem;
+        margin-bottom: -.25rem;
         cursor: default;
     }
 }
