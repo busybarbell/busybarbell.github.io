@@ -242,6 +242,21 @@
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
                                     }, 4000);
+
+                                    // Intersection Observer to pause/play video based on visibility
+                                    const observer = new IntersectionObserver((entries) => {
+                                        entries.forEach(entry => {
+                                            if (entry.isIntersecting) {
+                                                video.play();
+                                            } else {
+                                                video.pause();
+                                            }
+                                        });
+                                    }, {
+                                        threshold: 0.5 // Adjust this threshold as needed
+                                    });
+
+                                    observer.observe(video);
                                 });
                             </script>
 
