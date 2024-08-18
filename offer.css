@@ -1,3 +1,7 @@
+.h1_mobile {
+    display: none;
+}
+
 .offer_wrap {
     box-sizing: border-box;
     display: flex;
@@ -451,5 +455,9 @@ input[type="radio"]:checked + label .tabs_menu_image {
 
     .carousel_page {
         display: flex;
+    }
+
+    .h2_mobile {
+        display: block;
     }
 }
