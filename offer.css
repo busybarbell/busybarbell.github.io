@@ -162,6 +162,7 @@
 
 .tab_image {
     width: 100%;
+    aspect-ratio: 16/9;
 }
 
 .tabs_menu_image {
