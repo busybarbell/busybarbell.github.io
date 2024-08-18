@@ -1,3 +1,19 @@
+.mobile_button {
+    box-sizing: border-box;
+    display: none;
+    padding: 1rem;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #0f1f25;
+    border-top-width: 1px;
+    border-top-color: #334750;
+    border-top-style: solid;
+    padding-bottom: 2rem;
+    z-index: 200;
+}
+
 .line_break {
     box-sizing: border-box;
     background-color: #007bff;
@@ -113,10 +129,6 @@
     border-radius: 100%;
 }
 
-.inline_button {
-    display: none;
-}
-
 /* tabs begin */
 
 .tabs {
@@ -173,16 +185,16 @@ input[type="radio"] {
 }
 
 /* Show the content for the selected tab */
-#tab1:checked ~ .tab_image #content1,
-#tab2:checked ~ .tab_image #content2,
-#tab3:checked ~ .tab_image #content3,
-#tab4:checked ~ .tab_image #content4,
-#tab4:checked ~ .tab_image #content5,
-#tab4:checked ~ .tab_image #content6 {
+#tab1:checked~.tab_image #content1,
+#tab2:checked~.tab_image #content2,
+#tab3:checked~.tab_image #content3,
+#tab4:checked~.tab_image #content4,
+#tab4:checked~.tab_image #content5,
+#tab4:checked~.tab_image #content6 {
     display: block;
 }
 
-input[type="radio"]:checked + label .tabs_menu_image {
+input[type="radio"]:checked+label .tabs_menu_image {
     border-color: #007bff;
 }
 
@@ -373,16 +385,20 @@ input[type="radio"]:checked + label .tabs_menu_image {
     top: 0;
     left: 0;
     height: 100%;
-    background-color: #afafaf; /* Background color of the timeline */
-    width: 0; /* Width will be dynamically set */
-    transition: width 0.1s linear; /* Smooth transition */
+    background-color: #afafaf;
+    /* Background color of the timeline */
+    width: 0;
+    /* Width will be dynamically set */
+    transition: width 0.1s linear;
+    /* Smooth transition */
     cursor: pointer;
     transition: height 0.3s ease;
 }
 
 .timeline_wrap:hover .timeline,
 .timeline_wrap:active .timeline {
-    height: 10rem; /* Expanded height on hover or active touch */
+    height: 10rem;
+    /* Expanded height on hover or active touch */
 }
 
 /* responsive styling begins */
@@ -412,9 +428,10 @@ input[type="radio"]:checked + label .tabs_menu_image {
         width: 5rem;
     }
 
-    .inline_button {
-        display: flex;
+    .mobile_button {
+        display: block;
     }
+
 }
 
 @media (max-width: 767px) {}
@@ -466,6 +483,6 @@ input[type="radio"]:checked + label .tabs_menu_image {
     }
 
     .h1_mobile {
-        display: block;
+        display: flex;
     }
 }
