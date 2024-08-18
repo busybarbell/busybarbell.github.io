@@ -316,9 +316,6 @@ input[type="radio"]:checked + label .tabs_menu_image {
     background-color: rgba(0, 0, 0, 0.8);
     backdrop-filter: blur(.5rem);
     border-radius: 100px;
-    font-family: system-ui, sans-serif;
-    font-size: 1rem;
-    line-height: 1;
     cursor: pointer;
     gap: .5rem;
     padding: .5rem;
@@ -337,7 +334,7 @@ input[type="radio"]:checked + label .tabs_menu_image {
     backdrop-filter: blur(.5rem);
     border-radius: 100px;
     font-family: system-ui, sans-serif;
-    font-size: 1rem;
+    font-size: .85rem;
     line-height: 1;
     cursor: default;
     gap: .5rem;
