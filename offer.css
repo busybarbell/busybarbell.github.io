@@ -11,10 +11,6 @@
     width: 100%;
 }
 
-.title {
-    display: block;
-}
-
 .offer_split {
     display: flex;
     flex-direction: row;
