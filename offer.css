@@ -281,7 +281,7 @@ input[type="radio"]:checked + label .tabs_menu_image {
     color: #fff;
 
     position: absolute;
-    right: 1rem;
+    left: 1rem;
     top: 1rem;
     box-sizing: border-box;
     display: flex;
@@ -304,19 +304,11 @@ input[type="radio"]:checked + label .tabs_menu_image {
     display: none;
 }
 
-.small_controls {
-    position: absolute;
-    right: 1rem;
-    bottom: 1rem;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    gap: .5rem;
-}
-
 .volume {
     box-sizing: border-box;
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -334,6 +326,9 @@ input[type="radio"]:checked + label .tabs_menu_image {
 
 .carousel_page {
     box-sizing: border-box;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
     display: none;
     flex-direction: row;
     justify-content: center;
