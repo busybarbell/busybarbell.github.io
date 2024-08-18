@@ -139,9 +139,39 @@ p {
 
 @media (max-width: 767px) {
     h1 {
+        font-size: 1.5rem;
+        line-height: 1.5;
+        margin-top: -.375rem;
+        margin-bottom: -.375rem;
+    }
+
+    p {
+        font-family: system-ui, sans-serif;
         font-size: 1.25rem;
+        line-height: 1.5;
+        color: #fff;
         margin-top: -.3125rem;
         margin-bottom: -.3125rem;
+        cursor: default;
+    }
+    
+    .alert_text {
+        font-family: system-ui, sans-serif;
+        font-weight: 500;
+        font-size: .85rem;
+        line-height: 1;
+        color: #ffa600;
+        cursor: default;
+    }
+    
+    .fine_print {
+        font-family: system-ui, sans-serif;
+        font-size: .85rem;
+        line-height: 1.5;
+        color: #afafaf;
+        margin-top: -.2125rem;
+        margin-bottom: -.2125rem;
+        cursor: default;
     }
 }
 
