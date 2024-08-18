@@ -102,7 +102,6 @@
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
-                                    // Select elements
                                     const video = document.getElementById('myVideo');
                                     const videoSource = document.getElementById('videoSource');
                                     const muteBtn = document.querySelector('.click_for_sound');
@@ -119,10 +118,8 @@
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
 
-                                    // Detect if user is on mobile
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-                                    // Show the correct button text based on device type
                                     if (isMobile) {
                                         clickText.style.display = 'none';
                                         tapText.style.display = 'inline';
@@ -131,28 +128,22 @@
                                         tapText.style.display = 'none';
                                     }
 
-                                    // Function to toggle mute/unmute
                                     function toggleMute() {
                                         video.muted = !video.muted;
-                                        volumeDiv.style.display = 'flex'; // Ensure volume is visible
+                                        volumeDiv.style.display = 'flex';
                                         volumeOn.style.display = video.muted ? 'none' : 'flex';
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
-                                        muteBtn.style.display = 'none'; // Hide the button permanently after the first click
+                                        muteBtn.style.display = 'none';
                                     }
 
-                                    // Show the click_for_sound button initially
                                     muteBtn.style.display = 'flex';
-
-                                    // Add click event listener to the button
                                     muteBtn.addEventListener('click', toggleMute);
 
-                                    // Function to update the timeline
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
-                                        timeline.style.width = `${progress}%`; // Set width of the timeline
+                                        timeline.style.width = `${progress}%`;
                                     }
 
-                                    // Function to handle scrubbing
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
@@ -161,13 +152,11 @@
                                         video.currentTime = newTime;
                                     }
 
-                                    // Function to show thumbnail while scrubbing
                                     function showThumbnail(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
                                         const timelineWidth = timelineWrap.clientWidth;
                                         const scrubTime = (offsetX / timelineWidth) * video.duration;
-
                                         const thumbnailSrc = captureThumbnail(scrubTime);
 
                                         thumbnailImage.src = thumbnailSrc;
@@ -176,24 +165,22 @@
                                         thumbnailImage.style.top = `${timelineRect.top - thumbnailImage.height}px`;
                                     }
 
-                                    // Function to hide thumbnail
                                     function hideThumbnail() {
                                         thumbnailImage.style.display = 'none';
                                     }
 
-                                    // Handle mouse/touch dragging on the timeline
                                     function startScrubbing(event) {
                                         isDragging = true;
-                                        wasPlayingBeforeScrub = !video.paused;  // Check if video was playing before scrubbing
-                                        video.pause();  // Pause video during scrubbing
-                                        handleScrubbing(event);  // Set video time during the initial click
+                                        wasPlayingBeforeScrub = !video.paused;
+                                        video.pause();
+                                        handleScrubbing(event);
                                         event.preventDefault();
                                     }
 
                                     function continueScrubbing(event) {
                                         if (isDragging) {
-                                            handleScrubbing(event);  // Update video time while dragging
-                                            showThumbnail(event);  // Show thumbnail while scrubbing
+                                            handleScrubbing(event);
+                                            showThumbnail(event);
                                             event.preventDefault();
                                         }
                                     }
@@ -201,46 +188,41 @@
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
-                                                video.play();  // Resume video only if it was playing before
+                                                video.play();
                                             }
-                                            hideThumbnail();  // Hide thumbnail after scrubbing
+                                            hideThumbnail();
                                             isDragging = false;
                                         }
                                     }
 
-                                    // Handle mouse/touch dragging
                                     timelineWrap.addEventListener('mousedown', startScrubbing);
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
 
                                     timelineWrap.addEventListener('touchstart', (event) => {
                                         startScrubbing(event);
-                                        event.preventDefault();  // Prevent page from scrolling
+                                        event.preventDefault();
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
 
                                     timelineWrap.addEventListener('mouseleave', hideThumbnail);
 
-                                    // Add click event listener to the video_controls_wrap to mute/unmute the video
                                     videoControlsWrap.addEventListener('click', () => {
                                         toggleMute();
                                     });
 
-                                    // Update the timeline as the video plays
                                     video.addEventListener('timeupdate', updateTimeline);
 
-                                    // Function to handle keypress for mute/unmute
                                     function handleKeyPress(event) {
-                                        if (event.key === 'm' || event.code === 'Space') { // Mute/unmute on 'm' or spacebar
-                                            event.preventDefault(); // Prevent default action for spacebar
+                                        if (event.key === 'm' || event.code === 'Space') {
+                                            event.preventDefault();
                                             toggleMute();
                                         }
                                     }
 
                                     document.addEventListener('keydown', handleKeyPress);
 
-                                    // Function to set the correct video source based on screen width
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
 
@@ -250,17 +232,12 @@
                                             videoSource.src = 'sabri.mp4';
                                         }
 
-                                        // Reload video with the new source
                                         video.load();
                                     }
 
-                                    // Set the correct video source on page load
                                     setVideoSource();
-
-                                    // Update the video source on window resize
                                     window.addEventListener('resize', setVideoSource);
 
-                                    // Fade out the carousel_page after 4 seconds
                                     setTimeout(() => {
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
