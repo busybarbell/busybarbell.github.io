@@ -431,11 +431,7 @@ input[type="radio"]:checked+label .tabs_menu_image {
     }
 
     .mobile_button {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-between;
-        gap: 1rem;
+        display: block;
     }
 
 }
