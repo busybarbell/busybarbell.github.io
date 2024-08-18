@@ -127,7 +127,6 @@
     align-items: center;
     width: 100%;
     border-radius: 1rem;
-    aspect-ratio: 16/9;
     overflow-x: auto;
 }
 
@@ -440,7 +439,6 @@ input[type="radio"]:checked + label .tabs_menu_image {
 
     .tabs_content {
         width: 100vw;
-        aspect-ratio: 1/1;
         align-self: center;
         border-radius: 0rem;
     }
