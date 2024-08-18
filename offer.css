@@ -1,3 +1,11 @@
+.line_break {
+    box-sizing: border-box;
+    background-color: #007bff;
+    height: 2px;
+    width: 6rem;
+    border-radius: 100px;
+}
+
 .h1_mobile {
     display: none;
 }
