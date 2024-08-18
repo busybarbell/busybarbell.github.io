@@ -351,7 +351,6 @@ input[type="radio"]:checked + label .tabs_menu_image {
     transition: height 0.3s ease;
 }
 
-/* Expands the timeline when hovering over the timeline_wrap */
 .timeline_wrap:hover .timeline,
 .timeline_wrap:active .timeline {
     height: 10rem; /* Expanded height on hover or active touch */
