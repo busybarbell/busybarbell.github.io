@@ -1,6 +1,7 @@
 .copy_width {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     width: 100%;
     max-width: 40rem;
     gap: 2rem;
