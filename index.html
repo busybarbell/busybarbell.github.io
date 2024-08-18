@@ -19,6 +19,7 @@
 
     <!-- video preload begins -->
 
+    <link rel="preload" fetchpriority="high" as="video" href="sabri_mobile.mp4">
     <link rel="preload" fetchpriority="high" as="video" href="sabri.mp4">
 
 </head>
@@ -91,13 +92,15 @@
                             </div>
 
                             <video id="myVideo" preload="metadata" width="100%" playsinline autoplay muted loop>
-                                <source src="sabri.mp4" type="video/mp4">Your browser does not support the video tag.
+                                <source id="videoSource" src="sabri.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
                             </video>
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
                                     // Select elements
                                     const video = document.getElementById('myVideo');
+                                    const videoSource = document.getElementById('videoSource');
                                     const muteBtn = document.querySelector('.click_for_sound');
                                     const volumeDiv = document.querySelector('.volume');
                                     const volumeOn = volumeDiv.querySelector('.volume-on');
@@ -231,6 +234,26 @@
                                     }
 
                                     document.addEventListener('keydown', handleKeyPress);
+
+                                    // Function to set the correct video source based on screen width
+                                    function setVideoSource() {
+                                        const screenWidth = window.innerWidth;
+
+                                        if (screenWidth <= 479) {
+                                            videoSource.src = 'sabri_mobile.mp4';
+                                        } else {
+                                            videoSource.src = 'sabri.mp4';
+                                        }
+
+                                        // Reload video with the new source
+                                        video.load();
+                                    }
+
+                                    // Set the correct video source on page load
+                                    setVideoSource();
+
+                                    // Update the video source on window resize
+                                    window.addEventListener('resize', setVideoSource);
                                 });
                             </script>
 
