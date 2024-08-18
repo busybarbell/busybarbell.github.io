@@ -12,9 +12,9 @@ body {
 
 h1 {
     font-family: system-ui, sans-serif;
-    font-weight: 600;
-    font-size: 1.5rem;
-    line-height: 1.5;
+    font-weight: 800;
+    font-size: 3rem;
+    line-height: 1.25;
     color: #fff;
     margin-top: -.375rem;
     margin-bottom: -.375rem;
@@ -34,11 +34,11 @@ h2 {
 
 p {
     font-family: system-ui, sans-serif;
-    font-size: 1rem;
+    font-size: 1.5rem;
     line-height: 1.5;
     color: #fff;
-    margin-top: -.25rem;
-    margin-bottom: -.25rem;
+    margin-top: -.375rem;
+    margin-bottom: -.375rem;
     cursor: default;
 }
 
@@ -86,7 +86,7 @@ p {
     padding-top: 1rem;
     padding-bottom: 1rem;
     width: 100%;
-    max-width: 75rem;
+    max-width: 60rem;
 }
 
 .alert_wrap {
@@ -127,6 +127,7 @@ p {
     letter-spacing: .025rem;
     text-decoration: none;
     cursor: pointer;
+    max-width: 60rem;
 }
 
 .button:active {
