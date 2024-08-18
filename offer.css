@@ -304,11 +304,19 @@ input[type="radio"]:checked + label .tabs_menu_image {
     display: none;
 }
 
-.volume {
-    box-sizing: border-box;
+.small_controls {
     position: absolute;
     right: 1rem;
     bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    gap: .5rem;
+}
+
+.volume {
+    box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: center;
@@ -320,6 +328,23 @@ input[type="radio"]:checked + label .tabs_menu_image {
     font-size: 1rem;
     line-height: 1;
     cursor: pointer;
+    gap: .5rem;
+    padding: .5rem;
+}
+
+.carousel_page {
+    box-sizing: border-box;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(.5rem);
+    border-radius: 100px;
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: default;
     gap: .5rem;
     padding: .5rem;
 }
@@ -430,5 +455,9 @@ input[type="radio"]:checked + label .tabs_menu_image {
 
     .offer_wrap {
         padding-top: 0rem;
+    }
+
+    .carousel_page {
+        display: flex;
     }
 }
