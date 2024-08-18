@@ -423,4 +423,12 @@ input[type="radio"]:checked + label .tabs_menu_image {
         align-self: center;
         border-radius: 0rem;
     }
+
+    .title {
+        display: none;
+    }
+
+    .offer_wrap {
+        padding-top: 0rem;
+    }
 }
