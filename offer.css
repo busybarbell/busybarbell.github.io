@@ -127,6 +127,7 @@
     align-items: center;
     width: 100%;
     border-radius: 1rem;
+    aspect-ratio: 16/9;
     overflow-x: auto;
 }
 
@@ -458,9 +459,5 @@ input[type="radio"]:checked + label .tabs_menu_image {
 
     .h1_mobile {
         display: block;
-    }
-
-    .video_controls_wrap {
-        aspect-ratio: 1/1;
     }
 }
