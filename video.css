@@ -88,6 +88,7 @@
 }
 
 .acknowledge_wrap {
+    z-index: 501;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
