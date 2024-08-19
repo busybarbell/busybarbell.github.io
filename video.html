@@ -301,15 +301,18 @@
     </div>
 
     <div class="acknowledge_background">
-        <div class="acknowledge_wrap"><div class="appointment_time">
-            <div class="alert_text_white">💰 Monday, July 29, 2024 (10:45 - 11:15 am)<br>
+        <div class="acknowledge_wrap">
+            <div class="appointment_time">
+                <div class="alert_text_white">💰 Monday, July 29, 2024 (10:45 - 11:15 am)<br>
 
-                <br>🔑 30 mins<br>
+                    <br>🔑 30 mins<br>
 
-                <br>⭐️ Google Meet<br>
+                    <br>⭐️ Google Meet<br>
 
-                <br>💵 America/New_York<br>
-            </div><button id="acknowledgeButton" class="button" aria-label="Book your free onboarding meeting">ACKNOWLEDGE</button></div>
+                    <br>💵 America/New_York<br>
+                </div><button id="acknowledgeButton" class="button"
+                    aria-label="Book your free onboarding meeting">ACKNOWLEDGE</button>
+            </div>
         </div>
     </div>
 
@@ -318,14 +321,29 @@
             const acknowledgeButton = document.getElementById('acknowledgeButton');
             const acknowledgeBackground = document.querySelector('.acknowledge_background');
             const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
-    
-            acknowledgeButton.addEventListener('click', () => {
+
+            // Function to show the acknowledgment background and disable scrolling
+            function showAcknowledgeBackground() {
+                acknowledgeBackground.style.display = 'block';
+                acknowledgeWrap.style.display = 'flex';
+                document.body.style.overflow = 'hidden'; // Disable scrolling
+            }
+
+            // Function to hide the acknowledgment background and enable scrolling
+            function hideAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'none';
                 acknowledgeWrap.style.display = 'none';
-            });
+                document.body.style.overflow = ''; // Enable scrolling
+            }
+
+            // Show the acknowledgment background when the page loads
+            showAcknowledgeBackground();
+
+            // Add event listener to the button to hide the acknowledgment
+            acknowledgeButton.addEventListener('click', hideAcknowledgeBackground);
         });
     </script>
-    
+
 
 </body>
 
