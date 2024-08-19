@@ -163,6 +163,34 @@
     width: 100%;
     aspect-ratio: 16/9;
     position: relative;
+
+
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-behavior: smooth;
+
+
+}
+
+.tabs_menu input[type="radio"] {
+    display: none;
+}
+
+.tabs_menu label {
+    cursor: pointer;
+}
+
+.tab_dot {
+    width: 10px;
+    height: 10px;
+    background-color: grey;
+    border-radius: 50%;
+    margin: 0 5px;
+    transition: background-color 0.3s;
+}
+
+input[type="radio"]:checked + label .tab_dot {
+    background-color: #afafaf;
 }
 
 .theater_mode {
@@ -186,6 +214,11 @@
 .tab_image {
     width: 100%;
     aspect-ratio: 16/9;
+
+    scroll-snap-align: center;
+    flex: 0 0 100%;
+    /* Each tab takes up the full width of the viewport */
+
 }
 
 .tabs_menu_image {
@@ -394,7 +427,8 @@ input[type="radio"]:checked+label .tabs_menu_image {
 .timeline_wrap {
     position: relative;
     display: flex;
-    justify-content: start; /* Or other alignment */
+    justify-content: start;
+    /* Or other alignment */
     align-items: flex-end;
     left: 0;
     bottom: 0;
