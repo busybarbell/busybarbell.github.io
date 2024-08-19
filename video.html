@@ -309,15 +309,16 @@
     </div>
 
     <div class="acknowledge_background">
-        <div class="acknowledge_wrap">
-            <div class="appointment_time">
-                <div class="alert_text_white">💰 Monday, July 29, 2024 (10:45 - 11:15 am)<br>
-                    <br>🔑 30 mins<br>
-                    <br>⭐️ Google Meet<br>
-                    <br>💵 America/New_York<br>
-                </div>
-                <button class="button" aria-label="Book your free onboarding meeting">ACKNOWLEDGE</button>
+    </div>
+
+    <div class="acknowledge_wrap">
+        <div class="appointment_time">
+            <div class="alert_text_white">💰 Monday, July 29, 2024 (10:45 - 11:15 am)<br>
+                <br>🔑 30 mins<br>
+                <br>⭐️ Google Meet<br>
+                <br>💵 America/New_York<br>
             </div>
+            <button class="button" aria-label="Book your free onboarding meeting">ACKNOWLEDGE</button>
         </div>
     </div>
 
@@ -334,9 +335,9 @@
             const motivation = document.querySelector('.motivation'); // Reference to the .motivation element
             const soundEffect = document.getElementById('soundEffect');
             const innerBar = document.querySelector('.inner_bar'); // Reference to the .inner_bar element
-
+    
             let hasSoundPlayed = false; // Flag to ensure sound plays only once
-
+    
             // Function to show the acknowledgment background and disable scrolling
             function showAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'block';
@@ -344,35 +345,42 @@
                 motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
                 document.body.style.overflow = 'hidden'; // Disable scrolling
             }
-
+    
             // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width
             function hideAcknowledgeBackground() {
+                // Hide the acknowledgment background immediately
+                acknowledgeBackground.style.display = 'none';
+    
                 // Start animation for the wrap
                 acknowledgeWrap.classList.add('animate-out');
-
-                // Wait for the animation to complete before hiding
+    
+                // Use requestAnimationFrame to ensure bar width animation starts after background is hidden
+                requestAnimationFrame(() => {
+                    requestAnimationFrame(() => {
+                        // Show motivation and start expanding the inner_bar
+                        motivation.style.display = 'block';
+                        innerBar.style.width = '75%';
+    
+                        // Play sound effect only when expanding starts
+                        if (!hasSoundPlayed) {
+                            soundEffect.pause();
+                            soundEffect.currentTime = 0;
+                            soundEffect.play();
+                            hasSoundPlayed = true; // Ensure sound is played only once
+                        }
+                    });
+                });
+    
+                // Wait for the animation to complete before hiding the wrap
                 setTimeout(() => {
-                    acknowledgeBackground.style.display = 'none';
                     acknowledgeWrap.style.display = 'none';
                     document.body.style.overflow = ''; // Enable scrolling
-                    motivation.style.display = 'block'; // Show motivation after acknowledgment is hidden
-
-                    // Start expanding the inner_bar and play sound effect
-                    innerBar.style.width = '75%';
-
-                    // Play sound effect only when expanding starts
-                    if (!hasSoundPlayed) {
-                        soundEffect.pause();
-                        soundEffect.currentTime = 0;
-                        soundEffect.play();
-                        hasSoundPlayed = true; // Ensure sound is played only once
-                    }
                 }, 500); // Match this duration with your CSS transition time
             }
-
+    
             // Show the acknowledgment background when the page loads
             showAcknowledgeBackground();
-
+    
             // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
             acknowledgeButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -381,6 +389,7 @@
             });
         });
     </script>
+    
 
 </body>
 
