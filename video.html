@@ -280,10 +280,6 @@
 
                 </div>
 
-                <button class="button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}'
-                    aria-label="Book your free onboarding meeting">NEXT</button>
-
                 <div class="fine_print">Here's exactly what's next.</div>
 
                 <div class="line_break"></div>
@@ -325,6 +321,11 @@
         </div>
     </div>
 
+    <div class="button_wrap">
+        <button class="button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
+            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">NEXT</button>
+    </div>
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const acknowledgeButtons = document.querySelectorAll('.button');
@@ -332,45 +333,51 @@
             const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
             const soundEffect = document.getElementById('soundEffect');
             const innerBar = document.querySelector('.inner_bar'); // Reference to the .inner_bar element
-            const motivation = document.querySelector('.motivation'); // Reference to the .motivation element
-    
+
+            let hasSoundPlayed = false; // Flag to ensure sound plays only once
+
             // Function to show the acknowledgment background and disable scrolling
             function showAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'block';
                 acknowledgeWrap.style.display = 'flex';
-                motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
                 document.body.style.overflow = 'hidden'; // Disable scrolling
             }
-    
-            // Function to hide the acknowledgment background, enable scrolling, adjust the bar width, and show motivation
+
+            // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width
             function hideAcknowledgeBackground() {
-                acknowledgeBackground.style.display = 'none';
-                acknowledgeWrap.style.display = 'none';
-                document.body.style.overflow = ''; // Enable scrolling
-    
-                // Adjust the width of the inner_bar from 50% to 75%
-                innerBar.style.width = '75%';
-    
-                // Show the motivation element
-                motivation.style.display = 'block';
+                // Start animation for the wrap
+                acknowledgeWrap.classList.add('animate-out');
+
+                // Wait for the animation to complete before hiding
+                setTimeout(() => {
+                    acknowledgeBackground.style.display = 'none';
+                    acknowledgeWrap.style.display = 'none';
+                    document.body.style.overflow = ''; // Enable scrolling
+
+                    // Start expanding the inner_bar and play sound effect
+                    innerBar.style.width = '75%';
+
+                    // Play sound effect only when expanding starts
+                    if (!hasSoundPlayed) {
+                        soundEffect.pause();
+                        soundEffect.currentTime = 0;
+                        soundEffect.play();
+                        hasSoundPlayed = true; // Ensure sound is played only once
+                    }
+                }, 500); // Match this duration with your CSS transition time
             }
-    
+
             // Show the acknowledgment background when the page loads
             showAcknowledgeBackground();
-    
-            // Add event listener to all buttons with the class "button" to hide the acknowledgment, adjust the bar width, show motivation, and play the sound
+
+            // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
             acknowledgeButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     hideAcknowledgeBackground();
-                    // Restart the sound effect
-                    soundEffect.pause();
-                    soundEffect.currentTime = 0;
-                    soundEffect.play();
                 });
             });
         });
     </script>
-       
 
 </body>
 
