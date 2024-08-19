@@ -1,3 +1,25 @@
+.button_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    position: sticky;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    background-color: #0f1f25;
+    border-top-style: solid;
+    border-top-color: #334750;
+    border-top-width: 1px;
+    z-index: 499;
+}
+
 .motivation {
     position: absolute;
     bottom: 1.5rem;
@@ -81,7 +103,15 @@
     padding-right: 5%;
     width: 100%;
     background-color: #334750;
+    transition: 0.2s cubic-bezier(0.42, 0, 0.58, 1); /* Only animate transform */
+    transform: translateY(0);
 }
+
+.acknowledge_wrap.animate-out {
+    transform: translateY(100%); /* Move it off-screen */
+}
+
+
 
 .appointment_time {
     width: 100%;
@@ -166,7 +196,7 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-bottom: 7rem;
+    padding-bottom: 2rem;
     padding-left: 5%;
     padding-right: 5%;
     width: 100%;
@@ -572,6 +602,11 @@ input[type="radio"]:checked+label .tabs_menu_image {
     }
 
     .acknowledge_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .button_wrap {
         padding-left: 4%;
         padding-right: 4%;
     }
