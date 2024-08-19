@@ -47,6 +47,7 @@
             <img src="https://i.postimg.cc/zf4qvbtf/back.webp" alt="image not available" height="24px">
             <div class="bar">
                 <div class="inner_bar">
+                    <div class="alert_text_green motivation">Almost finished!</div>
                     <div class="bar_accent"></div>
                 </div>
             </div>
@@ -330,25 +331,34 @@
             const acknowledgeBackground = document.querySelector('.acknowledge_background');
             const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
             const soundEffect = document.getElementById('soundEffect');
-
+            const innerBar = document.querySelector('.inner_bar'); // Reference to the .inner_bar element
+            const motivation = document.querySelector('.motivation'); // Reference to the .motivation element
+    
             // Function to show the acknowledgment background and disable scrolling
             function showAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'block';
                 acknowledgeWrap.style.display = 'flex';
+                motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
                 document.body.style.overflow = 'hidden'; // Disable scrolling
             }
-
-            // Function to hide the acknowledgment background and enable scrolling
+    
+            // Function to hide the acknowledgment background, enable scrolling, adjust the bar width, and show motivation
             function hideAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'none';
                 acknowledgeWrap.style.display = 'none';
                 document.body.style.overflow = ''; // Enable scrolling
+    
+                // Adjust the width of the inner_bar from 50% to 75%
+                innerBar.style.width = '75%';
+    
+                // Show the motivation element
+                motivation.style.display = 'block';
             }
-
+    
             // Show the acknowledgment background when the page loads
             showAcknowledgeBackground();
-
-            // Add event listener to all buttons with the class "button" to hide the acknowledgment and play the sound
+    
+            // Add event listener to all buttons with the class "button" to hide the acknowledgment, adjust the bar width, show motivation, and play the sound
             acknowledgeButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     hideAcknowledgeBackground();
@@ -360,6 +370,7 @@
             });
         });
     </script>
+       
 
 </body>
 
