@@ -109,16 +109,14 @@
                                     const volumeOff = volumeDiv.querySelector('.volume-off');
                                     const timeline = document.querySelector('.timeline');
                                     const timelineWrap = document.querySelector('.timeline_wrap');
-                                    const videoControlsWrap = document.querySelector('.video_controls_wrap');
-                                    const thumbnailImage = document.querySelector('.thumbnail_image');
                                     const clickText = muteBtn.querySelector('.click-text');
                                     const tapText = muteBtn.querySelector('.tap-text');
                                     const carouselPage = document.querySelector('.carousel_page');
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
-
+                            
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+                            
                                     if (isMobile) {
                                         clickText.style.display = 'none';
                                         tapText.style.display = 'inline';
@@ -126,7 +124,7 @@
                                         clickText.style.display = 'inline';
                                         tapText.style.display = 'none';
                                     }
-
+                            
                                     function toggleMute() {
                                         video.muted = !video.muted;
                                         volumeDiv.style.display = 'flex';
@@ -134,15 +132,15 @@
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
                                         muteBtn.style.display = 'none';
                                     }
-
+                            
                                     muteBtn.style.display = 'flex';
                                     muteBtn.addEventListener('click', toggleMute);
-
+                            
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
                                     }
-
+                            
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
@@ -151,7 +149,7 @@
                                         video.currentTime = newTime;
                                         updateTimeline(); // Ensure timeline stays accurate
                                     }
-
+                            
                                     function startScrubbing(event, isTouch = false) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;
@@ -159,14 +157,14 @@
                                         handleScrubbing(event, isTouch);
                                         event.preventDefault();
                                     }
-
+                            
                                     function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event, event.type.includes('touch'));
                                             event.preventDefault();
                                         }
                                     }
-
+                            
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
@@ -175,41 +173,59 @@
                                             isDragging = false;
                                         }
                                     }
-
+                            
                                     timelineWrap.addEventListener('mousedown', (event) => {
                                         startScrubbing(event);
                                     });
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
-
+                            
                                     timelineWrap.addEventListener('touchstart', (event) => {
                                         startScrubbing(event, true);
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
-
+                            
                                     video.addEventListener('timeupdate', updateTimeline);
-
+                            
+                                    // Tap anywhere on the video area to mute/unmute
+                                    video.addEventListener('click', (event) => {
+                                        // Prevent click event from propagating to the parent elements
+                                        event.stopPropagation();
+                                        toggleMute();
+                                    });
+                            
+                                    // Keyboard shortcuts for mute/unmute and spacebar handling
+                                    document.addEventListener('keydown', (event) => {
+                                        if (event.key === 'm') {
+                                            toggleMute();
+                                        } else if (event.code === 'Space') {
+                                            event.preventDefault(); // Prevent scrolling down
+                                            toggleMute(); // Spacebar mutes/unmutes just like "m"
+                                        }
+                                    });
+                            
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
-
+                            
                                         if (screenWidth <= 479) {
                                             videoSource.src = 'sabri_mobile.mp4';
                                         } else {
                                             videoSource.src = 'sabri.mp4';
                                         }
-
+                            
                                         video.load();
                                     }
-
+                            
                                     setVideoSource();
                                     window.addEventListener('resize', setVideoSource);
-
+                            
                                     setTimeout(() => {
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
                                     }, 4000);
-
+                            
+                                    // Intersection Observer to pause/play video based on visibility
                                     const observer = new IntersectionObserver((entries) => {
                                         entries.forEach(entry => {
                                             if (entry.isIntersecting) {
@@ -221,10 +237,10 @@
                                     }, {
                                         threshold: 0.5
                                     });
-
+                            
                                     observer.observe(video);
                                 });
-                            </script>
+                            </script>                            
 
                         </div>
 
@@ -489,7 +505,7 @@
                         <br><img src="https://i.postimg.cc/9f2K9xBK/signature.webp" alt="image not available"
                             height="32px"><br>
 
-                        <br><span style="background-color: rgba(0,121,255, 0.5);"><b>P.S.</b></span> Nothing changes if
+                        <br><span style="background-color: rgba(0,121,255, 0.5);">P.S.</span> Nothing changes if
                         nothing changes... and there's no better time than now.<br>
 
                     </p>
