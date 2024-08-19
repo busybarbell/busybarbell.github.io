@@ -1,3 +1,8 @@
+.motivation {
+    position: absolute;
+    bottom: 1.5rem;
+}
+
 .progress_wrap {
     box-sizing: border-box;
     display: flex;
@@ -24,18 +29,20 @@
 }
 
 .inner_bar {
+    position: relative;
     box-sizing: border-box;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-items: flex-start;
     height: 1rem;
-    width: 50%;
+    width: 50%; /* Initial width */
     padding-top: .25rem;
     padding-left: .5rem;
     padding-right: .5rem;
     background-color: #5dc900;
     border-radius: 100px;
+    transition: width 0.4s cubic-bezier(0.42, 0, 0.58, 1); /* Smooth transition for width change */
 }
 
 .bar_accent {
