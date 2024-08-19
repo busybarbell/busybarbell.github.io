@@ -315,7 +315,6 @@ input[type="radio"]:checked+label .tabs_menu_image {
     left: 0;
     right: 0;
     color: white;
-    z-index: 100;
 }
 
 .click_for_sound {
@@ -344,6 +343,7 @@ input[type="radio"]:checked+label .tabs_menu_image {
     line-height: 1;
     cursor: pointer;
     gap: .5rem;
+    z-index: 11;
 }
 
 /* Hide text elements by default */
@@ -367,6 +367,7 @@ input[type="radio"]:checked+label .tabs_menu_image {
     cursor: pointer;
     gap: .5rem;
     padding: .5rem;
+    z-index: 11;
 }
 
 .carousel_page {
@@ -387,6 +388,7 @@ input[type="radio"]:checked+label .tabs_menu_image {
     cursor: default;
     gap: .5rem;
     padding: .5rem;
+    z-index: 11;
 }
 
 .timeline_wrap {
@@ -402,6 +404,10 @@ input[type="radio"]:checked+label .tabs_menu_image {
     width: 100%;
     cursor: pointer;
     z-index: 10;
+}
+
+#myVideo {
+    z-index: 9;
 }
 
 .timeline {
