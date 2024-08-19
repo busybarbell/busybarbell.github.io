@@ -115,11 +115,18 @@
                                     const carouselPage = document.querySelector('.carousel_page');
                                     const soundEffect = document.getElementById('soundEffect'); // Sound effect element
                                     const acknowledgeButtons = document.querySelectorAll('.button'); // Targeting "button" class
+                                    const tabsContent = document.querySelector('.tabs_content');
+                                    const tabsMenu = document.querySelectorAll('.tabs_menu input[type="radio"]');
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
-                                    
+                                    let startPosition = 0;
+                                    let currentTranslate = 0;
+                                    let previousTranslate = 0;
+                                    let animationID;
+                                    let currentIndex = 0;
+
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                            
+
                                     if (isMobile) {
                                         clickText.style.display = 'none';
                                         tapText.style.display = 'inline';
@@ -127,7 +134,7 @@
                                         clickText.style.display = 'inline';
                                         tapText.style.display = 'none';
                                     }
-                            
+
                                     // Warm up the audio context to prevent delay in playing sound
                                     let audioContext;
                                     if (window.AudioContext || window.webkitAudioContext) {
@@ -137,23 +144,23 @@
                                         emptySource.connect(audioContext.destination);
                                         emptySource.start(0);
                                     }
-                            
+
                                     function playSoundEffect() {
                                         // Ensure the audio context is resumed before playing the sound
                                         if (audioContext && audioContext.state === 'suspended') {
                                             audioContext.resume();
                                         }
-                            
+
                                         soundEffect.pause();
                                         soundEffect.currentTime = 0;
                                         soundEffect.play();
                                     }
-                            
+
                                     // Play the sound effect when any button with the class "button" is clicked
                                     acknowledgeButtons.forEach(button => {
                                         button.addEventListener('click', playSoundEffect);
                                     });
-                            
+
                                     function toggleMute() {
                                         video.muted = !video.muted;
                                         volumeDiv.style.display = 'flex';
@@ -161,15 +168,15 @@
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
                                         muteBtn.style.display = 'none';
                                     }
-                            
+
                                     muteBtn.style.display = 'flex';
                                     muteBtn.addEventListener('click', toggleMute);
-                            
+
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
                                     }
-                            
+
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
@@ -178,7 +185,7 @@
                                         video.currentTime = newTime;
                                         updateTimeline(); // Ensure timeline stays accurate
                                     }
-                            
+
                                     function startScrubbing(event, isTouch = false) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;
@@ -186,14 +193,14 @@
                                         handleScrubbing(event, isTouch);
                                         event.preventDefault();
                                     }
-                            
+
                                     function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event, event.type.includes('touch'));
                                             event.preventDefault();
                                         }
                                     }
-                            
+
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
@@ -202,28 +209,28 @@
                                             isDragging = false;
                                         }
                                     }
-                            
+
                                     timelineWrap.addEventListener('mousedown', (event) => {
                                         startScrubbing(event);
                                     });
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
-                            
+
                                     timelineWrap.addEventListener('touchstart', (event) => {
                                         startScrubbing(event, true);
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
-                            
+
                                     video.addEventListener('timeupdate', updateTimeline);
-                            
+
                                     // Tap anywhere on the video area to mute/unmute
                                     video.addEventListener('click', (event) => {
                                         // Prevent click event from propagating to the parent elements
                                         event.stopPropagation();
                                         toggleMute();
                                     });
-                            
+
                                     // Keyboard shortcuts for mute/unmute and spacebar handling
                                     document.addEventListener('keydown', (event) => {
                                         if (event.key === 'm') {
@@ -233,27 +240,27 @@
                                             toggleMute(); // Spacebar mutes/unmutes just like "m"
                                         }
                                     });
-                            
+
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
-                            
+
                                         if (screenWidth <= 479) {
                                             videoSource.src = 'sabri_mobile.mp4';
                                         } else {
                                             videoSource.src = 'sabri.mp4';
                                         }
-                            
+
                                         video.load();
                                     }
-                            
+
                                     setVideoSource();
                                     window.addEventListener('resize', setVideoSource);
-                            
+
                                     setTimeout(() => {
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
                                     }, 4000);
-                            
+
                                     // Intersection Observer to pause/play video based on visibility
                                     const observer = new IntersectionObserver((entries) => {
                                         entries.forEach(entry => {
@@ -266,10 +273,82 @@
                                     }, {
                                         threshold: 0.5
                                     });
-                            
+
                                     observer.observe(video);
+
+                                    // Swipe and Drag Functionality for Tabs
+                                    function startDrag(event) {
+                                        isDragging = true;
+                                        startPosition = getPositionX(event);
+                                        animationID = requestAnimationFrame(animation);
+                                        tabsContent.style.cursor = 'grabbing';
+                                    }
+
+                                    function endDrag() {
+                                        isDragging = false;
+                                        cancelAnimationFrame(animationID);
+
+                                        const movedBy = currentTranslate - previousTranslate;
+
+                                        if (movedBy < -100 && currentIndex < tabsMenu.length - 1) {
+                                            currentIndex += 1;
+                                        }
+
+                                        if (movedBy > 100 && currentIndex > 0) {
+                                            currentIndex -= 1;
+                                        }
+
+                                        setPositionByIndex();
+                                        tabsContent.style.cursor = 'grab';
+                                    }
+
+                                    function dragging(event) {
+                                        if (isDragging) {
+                                            const currentPosition = getPositionX(event);
+                                            currentTranslate = previousTranslate + currentPosition - startPosition;
+                                        }
+                                    }
+
+                                    function getPositionX(event) {
+                                        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
+                                    }
+
+                                    function animation() {
+                                        setSliderPosition();
+                                        if (isDragging) requestAnimationFrame(animation);
+                                    }
+
+                                    function setSliderPosition() {
+                                        tabsContent.style.transform = `translateX(${currentTranslate}px)`;
+                                    }
+
+                                    function setPositionByIndex() {
+                                        currentTranslate = currentIndex * -window.innerWidth;
+                                        previousTranslate = currentTranslate;
+                                        setSliderPosition();
+
+                                        tabsMenu[currentIndex].checked = true;
+                                    }
+
+                                    tabsMenu.forEach((tab, index) => {
+                                        tab.addEventListener('change', () => {
+                                            currentIndex = index;
+                                            setPositionByIndex();
+                                        });
+                                    });
+
+                                    tabsContent.addEventListener('mousedown', startDrag);
+                                    tabsContent.addEventListener('touchstart', startDrag);
+                                    tabsContent.addEventListener('mouseup', endDrag);
+                                    tabsContent.addEventListener('touchend', endDrag);
+                                    tabsContent.addEventListener('mousemove', dragging);
+                                    tabsContent.addEventListener('touchmove', dragging);
+
+                                    // Set initial position
+                                    setPositionByIndex();
                                 });
-                            </script>                                                                               
+
+                            </script>
 
                         </div>
 
