@@ -300,6 +300,33 @@
         </div>
     </div>
 
+    <div class="acknowledge_background">
+        <div class="acknowledge_wrap"><div class="appointment_time">
+            <div class="alert_text_white">💰 Monday, July 29, 2024 (10:45 - 11:15 am)<br>
+
+                <br>🔑 30 mins<br>
+
+                <br>⭐️ Google Meet<br>
+
+                <br>💵 America/New_York<br>
+            </div><button id="acknowledgeButton" class="button" aria-label="Book your free onboarding meeting">ACKNOWLEDGE</button></div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const acknowledgeButton = document.getElementById('acknowledgeButton');
+            const acknowledgeBackground = document.querySelector('.acknowledge_background');
+            const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
+    
+            acknowledgeButton.addEventListener('click', () => {
+                acknowledgeBackground.style.display = 'none';
+                acknowledgeWrap.style.display = 'none';
+            });
+        });
+    </script>
+    
+
 </body>
 
 </html>
