@@ -21,6 +21,7 @@
 
     <link rel="preload" fetchpriority="high" as="video" href="sabri_mobile.mp4">
     <link rel="preload" fetchpriority="high" as="video" href="sabri.mp4">
+    <audio id="soundEffect" src="button_sound.mp3" preload="auto"></audio>
 
 </head>
 
@@ -112,9 +113,11 @@
                                     const clickText = muteBtn.querySelector('.click-text');
                                     const tapText = muteBtn.querySelector('.tap-text');
                                     const carouselPage = document.querySelector('.carousel_page');
+                                    const soundEffect = document.getElementById('soundEffect'); // Sound effect element
+                                    const acknowledgeButtons = document.querySelectorAll('.button'); // Targeting "button" class
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
-                            
+                                    
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                             
                                     if (isMobile) {
@@ -124,6 +127,32 @@
                                         clickText.style.display = 'inline';
                                         tapText.style.display = 'none';
                                     }
+                            
+                                    // Warm up the audio context to prevent delay in playing sound
+                                    let audioContext;
+                                    if (window.AudioContext || window.webkitAudioContext) {
+                                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+                                        const emptySource = audioContext.createBufferSource();
+                                        emptySource.buffer = audioContext.createBuffer(1, 1, 22050);
+                                        emptySource.connect(audioContext.destination);
+                                        emptySource.start(0);
+                                    }
+                            
+                                    function playSoundEffect() {
+                                        // Ensure the audio context is resumed before playing the sound
+                                        if (audioContext && audioContext.state === 'suspended') {
+                                            audioContext.resume();
+                                        }
+                            
+                                        soundEffect.pause();
+                                        soundEffect.currentTime = 0;
+                                        soundEffect.play();
+                                    }
+                            
+                                    // Play the sound effect when any button with the class "button" is clicked
+                                    acknowledgeButtons.forEach(button => {
+                                        button.addEventListener('click', playSoundEffect);
+                                    });
                             
                                     function toggleMute() {
                                         video.muted = !video.muted;
@@ -240,7 +269,7 @@
                             
                                     observer.observe(video);
                                 });
-                            </script>                            
+                            </script>                                                                               
 
                         </div>
 
