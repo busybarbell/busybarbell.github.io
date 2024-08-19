@@ -331,6 +331,7 @@
             const acknowledgeButtons = document.querySelectorAll('.button');
             const acknowledgeBackground = document.querySelector('.acknowledge_background');
             const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
+            const motivation = document.querySelector('.motivation'); // Reference to the .motivation element
             const soundEffect = document.getElementById('soundEffect');
             const innerBar = document.querySelector('.inner_bar'); // Reference to the .inner_bar element
 
@@ -340,6 +341,7 @@
             function showAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'block';
                 acknowledgeWrap.style.display = 'flex';
+                motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
                 document.body.style.overflow = 'hidden'; // Disable scrolling
             }
 
@@ -353,6 +355,7 @@
                     acknowledgeBackground.style.display = 'none';
                     acknowledgeWrap.style.display = 'none';
                     document.body.style.overflow = ''; // Enable scrolling
+                    motivation.style.display = 'block'; // Show motivation after acknowledgment is hidden
 
                     // Start expanding the inner_bar and play sound effect
                     innerBar.style.width = '75%';
