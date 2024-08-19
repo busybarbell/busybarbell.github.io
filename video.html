@@ -274,6 +274,8 @@
 
                 </div>
 
+                <button class="button" aria-label="Book your free onboarding meeting" data-pressed="false">NEXT</button>
+
                 <p><span style="background-color: rgba(0,121,255, 0.5);">Summary:</span><br>
 
                     <br>💰 7.8b in sales generated<br>
@@ -359,7 +361,6 @@
             acknowledgeButtons.forEach(button => {
                 button.addEventListener('click', () => {
                     if (button.dataset.pressed === 'false') {
-                        button.textContent = 'NEXT'; // Change text to NEXT
                         button.dataset.pressed = 'true'; // Update data attribute
                     }
                     hideAcknowledgeBackground(button);
@@ -369,7 +370,6 @@
     </script>
     
 
-<div class="button_wrap">
     <div class="acknowledge_wrap">
         <div class="appointment_time">
             <div class="alert_text_white">
@@ -378,10 +378,9 @@
                 <br>⭐️ Google Meet<br>
                 <br>💵 America/New_York<br>
             </div>
+            <button class="button sticky_button" aria-label="Book your free onboarding meeting" data-pressed="false">ACKNOWLEDGE</button>
         </div>
     </div>
-    <button class="button sticky_button" aria-label="Book your free onboarding meeting" data-pressed="false">ACKNOWLEDGE</button>
-</div>
 
 
 
@@ -436,12 +435,7 @@
 
         </div>
     </div>
-
-<div class="button_wrap">
-    <button class="button sticky_button" aria-label="Book your free onboarding meeting" data-pressed="false">COMPLETE PROFILE</button>
-</div>
-
-
+    
 </body>
 
 </html>
