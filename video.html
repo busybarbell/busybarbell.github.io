@@ -114,9 +114,9 @@
                                     const carouselPage = document.querySelector('.carousel_page');
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
-                            
+
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                            
+
                                     if (isMobile) {
                                         clickText.style.display = 'none';
                                         tapText.style.display = 'inline';
@@ -124,7 +124,7 @@
                                         clickText.style.display = 'inline';
                                         tapText.style.display = 'none';
                                     }
-                            
+
                                     function toggleMute() {
                                         video.muted = !video.muted;
                                         volumeDiv.style.display = 'flex';
@@ -132,15 +132,15 @@
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
                                         muteBtn.style.display = 'none';
                                     }
-                            
+
                                     muteBtn.style.display = 'flex';
                                     muteBtn.addEventListener('click', toggleMute);
-                            
+
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
                                     }
-                            
+
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
@@ -149,7 +149,7 @@
                                         video.currentTime = newTime;
                                         updateTimeline(); // Ensure timeline stays accurate
                                     }
-                            
+
                                     function startScrubbing(event, isTouch = false) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;
@@ -157,14 +157,14 @@
                                         handleScrubbing(event, isTouch);
                                         event.preventDefault();
                                     }
-                            
+
                                     function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event, event.type.includes('touch'));
                                             event.preventDefault();
                                         }
                                     }
-                            
+
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
@@ -173,28 +173,28 @@
                                             isDragging = false;
                                         }
                                     }
-                            
+
                                     timelineWrap.addEventListener('mousedown', (event) => {
                                         startScrubbing(event);
                                     });
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
-                            
+
                                     timelineWrap.addEventListener('touchstart', (event) => {
                                         startScrubbing(event, true);
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
-                            
+
                                     video.addEventListener('timeupdate', updateTimeline);
-                            
+
                                     // Tap anywhere on the video area to mute/unmute
                                     video.addEventListener('click', (event) => {
                                         // Prevent click event from propagating to the parent elements
                                         event.stopPropagation();
                                         toggleMute();
                                     });
-                            
+
                                     // Keyboard shortcuts for mute/unmute and spacebar handling
                                     document.addEventListener('keydown', (event) => {
                                         if (event.key === 'm') {
@@ -204,27 +204,27 @@
                                             toggleMute(); // Spacebar mutes/unmutes just like "m"
                                         }
                                     });
-                            
+
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
-                            
+
                                         if (screenWidth <= 479) {
                                             videoSource.src = 'sabri_mobile.mp4';
                                         } else {
                                             videoSource.src = 'sabri.mp4';
                                         }
-                            
+
                                         video.load();
                                     }
-                            
+
                                     setVideoSource();
                                     window.addEventListener('resize', setVideoSource);
-                            
+
                                     setTimeout(() => {
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
                                     }, 4000);
-                            
+
                                     // Intersection Observer to pause/play video based on visibility
                                     const observer = new IntersectionObserver((entries) => {
                                         entries.forEach(entry => {
@@ -237,10 +237,10 @@
                                     }, {
                                         threshold: 0.5
                                     });
-                            
+
                                     observer.observe(video);
                                 });
-                            </script>                            
+                            </script>
 
                         </div>
 
@@ -269,7 +269,23 @@
                 </div>
 
                 <button class="button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">NEXT</button>
+                    data-cal-config='{"layout":"month_view"}'
+                    aria-label="Book your free onboarding meeting">NEXT</button>
+
+                <div class="fine_print">Here's exactly what's next. 👇</div>
+
+                <div class="line_break"></div>
+
+                <p>Here’s the stats:<br>
+                    
+                    <br>💰 7.8b in sales generated
+                    <br>💵 73 millionaires created
+                    <br>🤑 6x 8 figure clients created
+                    <br>🚀 #1 fastest-growing agency
+                    <br>⭐️ 6,000+ reviews (4.7 stars)<br>
+                    
+                    <br>Anyhoo.
+                </p>
 
             </div>
 
