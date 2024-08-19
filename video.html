@@ -1,386 +1,618 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Busy Barbell</title>
-    <meta name="description"
-        content="Busy Barbell's 21-Day Summer Slim Down. Transform your body 💪 with 1-on-1 online fitness coaching.">
-
-    <!-- stylsheets begin -->
-
-    <link rel="stylesheet" href="global.css">
-    <link rel="stylesheet" href="video.css">
-
-    <!-- video preload begins -->
-
-    <link rel="preload" fetchpriority="high" as="video" href="next_sabri.mp4">
-    <link rel="preload" fetchpriority="high" as="video" href="sabri.mp4">
-    <audio id="soundEffect" src="button_sound.mp3" preload="auto"></audio>
-
-</head>
-
-<body>
-
-    <!-- offer begins -->
-
-    <div class="offer_wrap">
-
-        <div class="progress_wrap">
-            <img src="https://i.postimg.cc/zf4qvbtf/back.webp" alt="image not available" height="24px">
-            <div class="bar">
-                <div class="inner_bar">
-                    <div class="alert_text_green motivation">Almost finished!</div>
-                    <div class="bar_accent"></div>
-                </div>
-            </div>
-        </div>
-
-        <div class="offer_split">
-
-            <div class="split_left">
-
-                <!-- tabs begin -->
-
-                <div class="tabs">
-
-                    <div class="tabs_content">
-                        <div class="theater_mode"></div>
-
-                        <div class="tab_image video_wrap" id="content1" style="display: flex;">
-
-                            <style>
-                                /* Hide text elements by default */
-                                .click_for_sound .click-text,
-                                .click_for_sound .tap-text {
-                                    display: none;
-                                }
-
-                                /* Additional style to ensure timeline has a larger touchable area */
-                                .timeline_wrap {
-                                    overflow: visible;
-                                    /* Ensure timeline's parent allows overflow for touch events */
-                                }
-                            </style>
-
-                            <img class="thumbnail_image" style="position: static; display: none; z-index: 10;">
-
-                            <div class="video_controls_wrap">
-                                <div class="timeline_wrap" style="position: relative;">
-                                    <div class="timeline"></div>
-                                </div>
-
-                                <div class="controls">
-                                    <div class="volume" style="display: none;">
-                                        <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp"
-                                            alt="Volume on" height="13.6px">
-                                        <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp"
-                                            alt="Volume off" height="13.6px">
-                                    </div>
-
-                                    <div class="carousel_page">1/5</div>
-
-                                    <button class="click_for_sound">
-                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available"
-                                            height="24px">
-                                        <span class="click-text">Click for sound</span>
-                                        <span class="tap-text">Tap for sound</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <video id="myVideo" preload="metadata" width="100%" playsinline autoplay muted loop>
-                                <source id="videoSource" src="sabri.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-
-                            <script>
-                                document.addEventListener('DOMContentLoaded', () => {
-                                    const video = document.getElementById('myVideo');
-                                    const videoSource = document.getElementById('videoSource');
-                                    const muteBtn = document.querySelector('.click_for_sound');
-                                    const volumeDiv = document.querySelector('.volume');
-                                    const volumeOn = volumeDiv.querySelector('.volume-on');
-                                    const volumeOff = volumeDiv.querySelector('.volume-off');
-                                    const timeline = document.querySelector('.timeline');
-                                    const timelineWrap = document.querySelector('.timeline_wrap');
-                                    const clickText = muteBtn.querySelector('.click-text');
-                                    const tapText = muteBtn.querySelector('.tap-text');
-                                    const carouselPage = document.querySelector('.carousel_page');
-                                    let isDragging = false;
-                                    let wasPlayingBeforeScrub = false;
-
-                                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-                                    if (isMobile) {
-                                        clickText.style.display = 'none';
-                                        tapText.style.display = 'inline';
-                                    } else {
-                                        clickText.style.display = 'inline';
-                                        tapText.style.display = 'none';
-                                    }
-
-                                    function toggleMute() {
-                                        video.muted = !video.muted;
-                                        volumeDiv.style.display = 'flex';
-                                        volumeOn.style.display = video.muted ? 'none' : 'flex';
-                                        volumeOff.style.display = video.muted ? 'flex' : 'none';
-                                        muteBtn.style.display = 'none';
-                                    }
-
-                                    muteBtn.style.display = 'flex';
-                                    muteBtn.addEventListener('click', toggleMute);
-
-                                    function updateTimeline() {
-                                        const progress = (video.currentTime / video.duration) * 100;
-                                        timeline.style.width = `${progress}%`;
-                                    }
-
-                                    function handleScrubbing(event, isTouch = false) {
-                                        const timelineRect = timelineWrap.getBoundingClientRect();
-                                        const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
-                                        const timelineWidth = timelineWrap.clientWidth;
-                                        const newTime = (offsetX / timelineWidth) * video.duration;
-                                        video.currentTime = newTime;
-                                        updateTimeline(); // Ensure timeline stays accurate
-                                    }
-
-                                    function startScrubbing(event, isTouch = false) {
-                                        isDragging = true;
-                                        wasPlayingBeforeScrub = !video.paused;
-                                        video.pause();
-                                        handleScrubbing(event, isTouch);
-                                        event.preventDefault();
-                                    }
-
-                                    function continueScrubbing(event) {
-                                        if (isDragging) {
-                                            handleScrubbing(event, event.type.includes('touch'));
-                                            event.preventDefault();
-                                        }
-                                    }
-
-                                    function endScrubbing() {
-                                        if (isDragging) {
-                                            if (wasPlayingBeforeScrub) {
-                                                video.play();
-                                            }
-                                            isDragging = false;
-                                        }
-                                    }
-
-                                    timelineWrap.addEventListener('mousedown', (event) => {
-                                        startScrubbing(event);
-                                    });
-                                    document.addEventListener('mousemove', continueScrubbing);
-                                    document.addEventListener('mouseup', endScrubbing);
-
-                                    timelineWrap.addEventListener('touchstart', (event) => {
-                                        startScrubbing(event, true);
-                                    });
-                                    document.addEventListener('touchmove', continueScrubbing);
-                                    document.addEventListener('touchend', endScrubbing);
-
-                                    video.addEventListener('timeupdate', updateTimeline);
-
-                                    // Tap anywhere on the video area to mute/unmute
-                                    video.addEventListener('click', (event) => {
-                                        // Prevent click event from propagating to the parent elements
-                                        event.stopPropagation();
-                                        toggleMute();
-                                    });
-
-                                    // Keyboard shortcuts for mute/unmute and spacebar handling
-                                    document.addEventListener('keydown', (event) => {
-                                        if (event.key === 'm') {
-                                            toggleMute();
-                                        } else if (event.code === 'Space') {
-                                            event.preventDefault(); // Prevent scrolling down
-                                            toggleMute(); // Spacebar mutes/unmutes just like "m"
-                                        }
-                                    });
-
-                                    function setVideoSource() {
-                                        const screenWidth = window.innerWidth;
-
-                                        if (screenWidth <= 479) {
-                                            videoSource.src = 'next_sabri.mp4';
-                                        } else {
-                                            videoSource.src = 'sabri.mp4';
-                                        }
-
-                                        video.load();
-                                    }
-
-                                    setVideoSource();
-                                    window.addEventListener('resize', setVideoSource);
-
-                                    setTimeout(() => {
-                                        carouselPage.style.transition = 'opacity .2s';
-                                        carouselPage.style.opacity = 0;
-                                    }, 4000);
-
-                                    // Intersection Observer to pause/play video based on visibility
-                                    const observer = new IntersectionObserver((entries) => {
-                                        entries.forEach(entry => {
-                                            if (entry.isIntersecting) {
-                                                video.play();
-                                            } else {
-                                                video.pause();
-                                            }
-                                        });
-                                    }, {
-                                        threshold: 0.5
-                                    });
-
-                                    observer.observe(video);
-                                });
-                            </script>
-
-                        </div>
-
-                        <div class="tab_image" id="content2">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content3">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content4">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content5">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content6">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="fine_print">Here's exactly what's next.</div>
-
-                <div class="line_break"></div>
-
-                <p><span style="background-color: rgba(0,121,255, 0.5);">Here’s the stats:</span><br>
-
-                    <br>💰 7.8b in sales generated<br>
-
-                    <br>🔑 1067 different industries and niches.<br>
-
-                    <br>⭐️ 3,000+ reviews (average of 4.7 stars)<br>
-
-                    <br>💵 58 millionaires created<br>
-
-                    <br>🤑 6x 8 figure clients created<br>
-
-                    <br>😤 #17 fastest-growing company in Australia (ranked by the AFR)<br>
-
-                    <br>🚀 #1 fastest-growing agency (3 years in a row)<br>
-
-                    <br>Anyhoo.
-                </p>
-
-            </div>
-
-        </div>
-    </div>
-
-    <div class="acknowledge_background">
-    </div>
-    
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const acknowledgeButtons = document.querySelectorAll('.button');
-            const acknowledgeBackground = document.querySelector('.acknowledge_background');
-            const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
-            const motivation = document.querySelector('.motivation'); // Reference to the .motivation element
-            const soundEffect = document.getElementById('soundEffect');
-            const innerBar = document.querySelector('.inner_bar'); // Reference to the .inner_bar element
-    
-            let hasSoundPlayed = false; // Flag to ensure sound plays only once
-    
-            // Function to show the acknowledgment background and disable scrolling
-            function showAcknowledgeBackground() {
-                acknowledgeBackground.style.display = 'block';
-                acknowledgeWrap.style.display = 'flex';
-                motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
-                document.body.style.overflow = 'hidden'; // Disable scrolling
-            }
-    
-            // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width
-            function hideAcknowledgeBackground(button) {
-                // Hide the acknowledgment background immediately
-                acknowledgeBackground.style.display = 'none';
-    
-                // Start animation for the wrap
-                acknowledgeWrap.classList.add('animate-out');
-    
-                // Use requestAnimationFrame to ensure bar width animation starts after background is hidden
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        // Show motivation and start expanding the inner_bar
-                        motivation.style.display = 'block';
-                        innerBar.style.width = '75%';
-    
-                        // Play sound effect only when expanding starts
-                        if (!hasSoundPlayed) {
-                            soundEffect.pause();
-                            soundEffect.currentTime = 0;
-                            soundEffect.play();
-                            hasSoundPlayed = true; // Ensure sound is played only once
-                        }
-                    });
-                });
-    
-                // Wait for the animation to complete before hiding the wrap
-                setTimeout(() => {
-                    acknowledgeWrap.style.display = 'none';
-                    document.body.style.overflow = ''; // Enable scrolling
-                }, 500); // Match this duration with your CSS transition time
-            }
-    
-            // Show the acknowledgment background when the page loads
-            showAcknowledgeBackground();
-    
-            // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
-            acknowledgeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    if (button.dataset.pressed === 'false') {
-                        button.textContent = 'NEXT'; // Change text to NEXT
-                        button.dataset.pressed = 'true'; // Update data attribute
-                    }
-                    hideAcknowledgeBackground(button);
-                });
-            });
-        });
-    </script>
-    
-
-<div class="button_wrap">
-    <div class="acknowledge_wrap">
-        <div class="appointment_time">
-            <div class="alert_text_white">
-                💰 Monday, July 29, 2024 (10:45 - 11:15 am)<br>
-                <br>🔑 30 mins<br>
-                <br>⭐️ Google Meet<br>
-                <br>💵 America/New_York<br>
-            </div>
-        </div>
-    </div>
-    <button class="button sticky_button" aria-label="Book your free onboarding meeting" data-pressed="false">ACKNOWLEDGE</button>
-</div>
-
-</body>
-
-</html>
+.sticky_button {
+    z-index: 502;
+}
+
+.button_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    position: sticky;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    background-color: #0f1f25;
+    border-top-style: solid;
+    border-top-color: #334750;
+    border-top-width: 1px;
+    z-index: 502;
+}
+
+.motivation {
+    position: absolute;
+    bottom: 1.25rem;
+}
+
+.progress_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    max-width: 60rem;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    gap: 1rem;
+}
+
+.bar {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    height: 1rem;
+    width: 100%;
+    background-color: #334750;
+    border-radius: 100px;
+}
+
+.inner_bar {
+    position: relative;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    height: 1rem;
+    width: 50%; /* Initial width */
+    padding-top: .25rem;
+    padding-left: .5rem;
+    padding-right: .5rem;
+    background-color: #5dc900;
+    border-radius: 100px;
+    transition: width 0.4s cubic-bezier(0.42, 0, 0.58, 1); /* Smooth transition for width change */
+}
+
+.bar_accent {
+    height: .2rem;
+    width: 100%;
+    background-color: #affea3;
+    border-radius: 100px;
+}
+
+.acknowledge_background {
+    display: block;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 500;
+    background-color: rgba(0, 0, 0, 0.4);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+}
+
+.acknowledge_wrap {
+    z-index: 501;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    justify-content: center;
+    position: fixed;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding-top: 2rem;
+    padding-bottom: 7.25rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    background-color: #334750;
+    transition: 0.2s cubic-bezier(0.42, 0, 0.58, 1); /* Only animate transform */
+    transform: translateY(0);
+}
+
+.acknowledge_wrap.animate-out {
+    transform: translateY(100%); /* Move it off-screen */
+}
+
+
+
+.appointment_time {
+    width: 100%;
+    max-width: 60rem;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.alert_text_green {
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1;
+    color: #5dc900;
+    cursor: default;
+}
+
+.alert_text_white {
+    font-family: system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 1rem;
+    line-height: 1;
+    color: #fff;
+    cursor: default;
+}
+
+.copy_width {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    width: 100%;
+    max-width: 40rem;
+    gap: 2rem;
+    align-self: center;
+}
+
+.mobile_button {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    position: sticky;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background-color: #0f1f25;
+    border-top-width: 1px;
+    border-top-color: #334750;
+    border-top-style: solid;
+    padding-bottom: 2rem;
+    z-index: 200;
+    width: 100%;
+}
+
+.line_break {
+    box-sizing: border-box;
+    background-color: #007bff;
+    height: 2px;
+    width: 6rem;
+    border-radius: 100px;
+}
+
+.line_break_large {
+    box-sizing: border-box;
+    background-color: #334750;
+    height: 1px;
+    width: 100%;
+    border-radius: 100px;
+}
+
+.h1_mobile {
+    display: block;
+}
+
+.offer_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding-bottom: 2rem;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+}
+
+.offer_split {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 2rem;
+    width: 100%;
+    max-width: 60rem;
+}
+
+.split_left {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    gap: 2rem;
+    width: 100%;
+}
+
+.split_right {
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
+    align-items: flex-start;
+    width: 30%;
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #334750;
+    overflow: hidden;
+}
+
+.cta_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: stretch;
+    margin: 1rem;
+    gap: 1rem;
+}
+
+.cta_image {
+    width: 100%;
+}
+
+.points_wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    gap: .5rem;
+}
+
+.point {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    padding-left: .5rem;
+    padding-right: .75rem;
+    background-color: #334750;
+    border-radius: 100px;
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+    cursor: default;
+}
+
+.orange {
+    background-color: #ffa60020;
+    color: #ffa600;
+}
+
+.point_face {
+    border-radius: 100%;
+}
+
+/* tabs begin */
+
+.tabs {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    width: 100%;
+    gap: 6px;
+}
+
+.tabs_content {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    aspect-ratio: 16/9;
+    position: relative;
+}
+
+.theater_mode {
+    position: absolute;
+    width: 100vw;
+    height: 100%;
+    background-color: black;
+    top: 0;
+    bottom: 0;
+    align-self: center;
+}
+
+.tabs_menu {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+    gap: 6px;
+}
+
+.tab_image {
+    width: 100%;
+    aspect-ratio: 16/9;
+}
+
+.tabs_menu_image {
+    height: 4rem;
+    width: 4rem;
+    border-radius: 1rem;
+    border: 2px solid transparent;
+    cursor: pointer;
+}
+
+.tab_dot {
+    display: none;
+}
+
+.tab_image {
+    display: none;
+}
+
+input[type="radio"] {
+    display: none;
+}
+
+/* Show the content for the selected tab */
+#tab1:checked~.tab_image #content1,
+#tab2:checked~.tab_image #content2,
+#tab3:checked~.tab_image #content3,
+#tab4:checked~.tab_image #content4,
+#tab4:checked~.tab_image #content5,
+#tab4:checked~.tab_image #content6 {
+    display: block;
+}
+
+input[type="radio"]:checked+label .tabs_menu_image {
+    border-color: #007bff;
+}
+
+/* urgency begins */
+
+.urgency_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: stretch;
+    padding: 1rem;
+    margin-top: 1rem;
+    gap: 1rem;
+    border-radius: 1rem;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #334750;
+}
+
+.bar_wrap {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: left;
+    width: 100%;
+    font-family: system-ui, sans-serif;
+    font-size: .85rem;
+    font-weight: 500;
+    line-height: 1;
+    color: #fff;
+}
+
+.bar_text {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.bar_text_right {
+    color: #afafaf;
+    font-weight: 400;
+}
+
+/* video controls begin */
+
+.video_wrap {
+    position: relative;
+}
+
+.video_controls_wrap {
+    box-sizing: border-box;
+    position: absolute;
+    display: flex;
+    align-items: flex-end;
+    justify-content: stretch;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    color: white;
+}
+
+.click_for_sound {
+
+    /* buttons styling to unset */
+
+    padding: 1rem;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: #fff;
+
+    position: absolute;
+    left: 1rem;
+    top: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(.5rem);
+    border-radius: 100px;
+    font-family: system-ui, sans-serif;
+    font-size: 1rem;
+    line-height: 1;
+    cursor: pointer;
+    gap: .5rem;
+    z-index: 11;
+}
+
+/* Hide text elements by default */
+.click_for_sound .click-text,
+.click_for_sound .tap-text {
+    display: none;
+}
+
+.volume {
+    box-sizing: border-box;
+    position: absolute;
+    right: 1rem;
+    bottom: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(.5rem);
+    border-radius: 100px;
+    cursor: pointer;
+    gap: .5rem;
+    padding: .5rem;
+    z-index: 11;
+}
+
+.carousel_page {
+    box-sizing: border-box;
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    display: none;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(.5rem);
+    border-radius: 100px;
+    font-family: system-ui, sans-serif;
+    font-size: .85rem;
+    line-height: 1;
+    cursor: default;
+    gap: .5rem;
+    padding: .5rem;
+    z-index: 11;
+}
+
+.timeline_wrap {
+    position: relative;
+    display: flex;
+    justify-content: start; /* Or other alignment */
+    align-items: flex-end;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    height: auto;
+    background-color: #334750;
+    width: 100%;
+    cursor: pointer;
+    z-index: 10;
+}
+
+#myVideo {
+    z-index: 9;
+}
+
+.timeline {
+    display: flex;
+    flex-direction: row;
+    align-items: right;
+    justify-content: center;
+    top: 0;
+    left: 0;
+    height: .25rem;
+    background-color: #afafaf;
+    /* Background color of the timeline */
+    width: 0;
+    /* Width will be dynamically set */
+    transition: width 0.1s linear;
+    /* Smooth transition */
+    cursor: pointer;
+    transition: height 0.3s ease;
+}
+
+.timeline_wrap:hover .timeline,
+.timeline_wrap:active .timeline {
+    height: .5rem;
+    /* Expanded height on hover or active touch */
+}
+
+/* responsive styling begins */
+
+@media (max-width: 991px) {
+
+    .tabs_menu_image {
+        height: 3rem;
+        width: 3rem;
+    }
+
+}
+
+@media (max-width: 767px) {
+
+    .tabs_content {
+        width: 100vw;
+        align-self: center;
+    }
+
+}
+
+@media (max-width: 479px) {
+
+    .offer_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .tabs {
+        gap: .5rem;
+    }
+
+    .tabs_menu {
+        justify-content: center;
+    }
+
+    .tabs_menu_image {
+        display: none;
+    }
+
+    .tab_dot {
+        display: flex;
+        height: .35rem;
+        width: .35rem;
+        border-radius: 100%;
+        background-color: #334750;
+    }
+
+    .carousel_page {
+        display: flex;
+    }
+
+    .tabs_content {
+        aspect-ratio: 1/1;
+    }
+
+    .tab_image {
+        aspect-ratio: 1/1;
+    }
+
+    .acknowledge_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .button_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+}
