@@ -309,15 +309,14 @@
                     <br>⭐️ Google Meet<br>
                     <br>💵 America/New_York<br>
                 </div>
-                <button id="acknowledgeButton" class="button" aria-label="Book your free onboarding meeting">ACKNOWLEDGE</button>
+                <button class="button" aria-label="Book your free onboarding meeting">ACKNOWLEDGE</button>
             </div>
         </div>
     </div>
-    
-    
+        
     <script>
         document.addEventListener('DOMContentLoaded', () => {
-            const acknowledgeButton = document.getElementById('acknowledgeButton');
+            const acknowledgeButtons = document.querySelectorAll('.button');
             const acknowledgeBackground = document.querySelector('.acknowledge_background');
             const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
             const soundEffect = document.getElementById('soundEffect');
@@ -339,13 +338,19 @@
             // Show the acknowledgment background when the page loads
             showAcknowledgeBackground();
     
-            // Add event listener to the button to hide the acknowledgment and play the sound
-            acknowledgeButton.addEventListener('click', () => {
-                hideAcknowledgeBackground();
-                soundEffect.play();
+            // Add event listener to all buttons with the class "button" to hide the acknowledgment and play the sound
+            acknowledgeButtons.forEach(button => {
+                button.addEventListener('click', () => {
+                    hideAcknowledgeBackground();
+                    // Restart the sound effect
+                    soundEffect.pause();
+                    soundEffect.currentTime = 0;
+                    soundEffect.play();
+                });
             });
         });
     </script>
+    
     
 
 
