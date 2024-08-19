@@ -12,7 +12,7 @@
     left: 0;
     right: 0;
     bottom: 0;
-    padding-top: 2rem;
+    padding-top: 1rem;
     padding-bottom: 2rem;
     padding-left: 5%;
     padding-right: 5%;
@@ -38,8 +38,11 @@
     align-items: center;
     justify-content: space-between;
     padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 1rem;
     gap: 1rem;
+    border-bottom-style: solid;
+    border-bottom-color: #334750;
+    border-bottom-width: 1px;
 }
 
 .bar {
@@ -72,7 +75,7 @@
 }
 
 .bar_accent {
-    height: .2rem;
+    height: .25rem;
     width: 100%;
     background-color: #affea3;
     border-radius: 100px;
