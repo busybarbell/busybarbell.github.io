@@ -31,18 +31,25 @@
 
 .progress_wrap {
     box-sizing: border-box;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
     display: flex;
     flex-direction: row;
     width: 100%;
-    max-width: 60rem;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     padding-top: 2rem;
     padding-bottom: 1rem;
     gap: 1rem;
     border-bottom-style: solid;
     border-bottom-color: #334750;
     border-bottom-width: 1px;
+    padding-left: 5%;
+    padding-right: 5%;
+    z-index: 400;
+    background-color: #0f1f25;
 }
 
 .bar {
@@ -51,6 +58,7 @@
     flex-direction: row;
     justify-content: flex-start;
     align-items: center;
+    max-width: 60rem;
     height: 1rem;
     width: 100%;
     background-color: #334750;
@@ -615,6 +623,11 @@ input[type="radio"]:checked+label .tabs_menu_image {
     }
 
     .button_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .progress_wrap {
         padding-left: 4%;
         padding-right: 4%;
     }
