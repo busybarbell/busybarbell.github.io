@@ -51,30 +51,30 @@
 
                     <div class="tabs_content">
                         <div class="theater_mode"></div>
-                    
+
                         <div class="tab_image video_wrap" id="content1" style="display: flex;">
-                    
+
                             <style>
                                 /* Hide text elements by default */
                                 .click_for_sound .click-text,
                                 .click_for_sound .tap-text {
                                     display: none;
                                 }
-                    
+
                                 /* Additional style to ensure timeline has a larger touchable area */
                                 .timeline_wrap {
                                     overflow: visible;
                                     /* Ensure timeline's parent allows overflow for touch events */
                                 }
                             </style>
-                    
+
                             <img class="thumbnail_image" style="position: static; display: none; z-index: 10;">
-                    
+
                             <div class="video_controls_wrap">
                                 <div class="timeline_wrap" style="position: relative;">
                                     <div class="timeline"></div>
                                 </div>
-                    
+
                                 <div class="controls">
                                     <div class="volume" style="display: none;">
                                         <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp"
@@ -82,23 +82,23 @@
                                         <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp"
                                             alt="Volume off" height="13.6px">
                                     </div>
-                    
+
                                     <div class="carousel_page">1/5</div>
-                    
+
                                     <button class="click_for_sound">
-                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp"
-                                            alt="image not available" height="24px">
+                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available"
+                                            height="24px">
                                         <span class="click-text">Click for sound</span>
                                         <span class="tap-text">Tap for sound</span>
                                     </button>
                                 </div>
                             </div>
-                    
+
                             <video id="myVideo" preload="metadata" width="100%" playsinline autoplay muted loop>
                                 <source id="videoSource" src="sabri.mp4" type="video/mp4">
                                 Your browser does not support the video tag.
                             </video>
-                    
+
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
                                     const video = document.getElementById('myVideo');
@@ -116,9 +116,9 @@
                                     const carouselPage = document.querySelector('.carousel_page');
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
-                    
+
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                    
+
                                     if (isMobile) {
                                         clickText.style.display = 'none';
                                         tapText.style.display = 'inline';
@@ -126,7 +126,7 @@
                                         clickText.style.display = 'inline';
                                         tapText.style.display = 'none';
                                     }
-                    
+
                                     function toggleMute() {
                                         video.muted = !video.muted;
                                         volumeDiv.style.display = 'flex';
@@ -134,15 +134,15 @@
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
                                         muteBtn.style.display = 'none';
                                     }
-                    
+
                                     muteBtn.style.display = 'flex';
                                     muteBtn.addEventListener('click', toggleMute);
-                    
+
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
                                     }
-                    
+
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
@@ -151,7 +151,7 @@
                                         video.currentTime = newTime;
                                         updateTimeline(); // Ensure timeline stays accurate
                                     }
-                    
+
                                     function startScrubbing(event, isTouch = false) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;
@@ -159,14 +159,14 @@
                                         handleScrubbing(event, isTouch);
                                         event.preventDefault();
                                     }
-                    
+
                                     function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event, event.type.includes('touch'));
                                             event.preventDefault();
                                         }
                                     }
-                    
+
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
@@ -175,41 +175,41 @@
                                             isDragging = false;
                                         }
                                     }
-                    
+
                                     timelineWrap.addEventListener('mousedown', (event) => {
                                         startScrubbing(event);
                                     });
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
-                    
+
                                     timelineWrap.addEventListener('touchstart', (event) => {
                                         startScrubbing(event, true);
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
-                    
+
                                     video.addEventListener('timeupdate', updateTimeline);
-                    
+
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
-                    
+
                                         if (screenWidth <= 479) {
                                             videoSource.src = 'sabri_mobile.mp4';
                                         } else {
                                             videoSource.src = 'sabri.mp4';
                                         }
-                    
+
                                         video.load();
                                     }
-                    
+
                                     setVideoSource();
                                     window.addEventListener('resize', setVideoSource);
-                    
+
                                     setTimeout(() => {
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
                                     }, 4000);
-                    
+
                                     const observer = new IntersectionObserver((entries) => {
                                         entries.forEach(entry => {
                                             if (entry.isIntersecting) {
@@ -221,11 +221,10 @@
                                     }, {
                                         threshold: 0.5
                                     });
-                    
+
                                     observer.observe(video);
                                 });
                             </script>
-                  
 
                         </div>
 
