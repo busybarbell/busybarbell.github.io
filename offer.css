@@ -1,8 +1,3 @@
-.square_video {
-    display: hidden;
-}
-
-
 .copy_width {
     display: flex;
     flex-direction: column;
@@ -490,13 +485,5 @@ input[type="radio"]:checked+label .tabs_menu_image {
 
     .tab_image {
         aspect-ratio: 1/1;
-    }
-
-    .square_video {
-        display: block;
-    }
-
-    .big_video{
-        display: hidden;
     }
 }
