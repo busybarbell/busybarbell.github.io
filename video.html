@@ -100,150 +100,150 @@
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
-    const video = document.getElementById('myVideo');
-    const videoSource = document.getElementById('videoSource');
-    const muteBtn = document.querySelector('.click_for_sound');
-    const volumeDiv = document.querySelector('.volume');
-    const volumeOn = volumeDiv.querySelector('.volume-on');
-    const volumeOff = volumeDiv.querySelector('.volume-off');
-    const timeline = document.querySelector('.timeline');
-    const timelineWrap = document.querySelector('.timeline_wrap');
-    const clickText = muteBtn.querySelector('.click-text');
-    const tapText = muteBtn.querySelector('.tap-text');
-    const carouselPage = document.querySelector('.carousel_page');
-    const acknowledgeBackground = document.querySelector('.acknowledge_background');
-    let isDragging = false;
-    let wasPlayingBeforeScrub = false;
+                                    const video = document.getElementById('myVideo');
+                                    const videoSource = document.getElementById('videoSource');
+                                    const muteBtn = document.querySelector('.click_for_sound');
+                                    const volumeDiv = document.querySelector('.volume');
+                                    const volumeOn = volumeDiv.querySelector('.volume-on');
+                                    const volumeOff = volumeDiv.querySelector('.volume-off');
+                                    const timeline = document.querySelector('.timeline');
+                                    const timelineWrap = document.querySelector('.timeline_wrap');
+                                    const clickText = muteBtn.querySelector('.click-text');
+                                    const tapText = muteBtn.querySelector('.tap-text');
+                                    const carouselPage = document.querySelector('.carousel_page');
+                                    const acknowledgeBackground = document.querySelector('.acknowledge_background');
+                                    let isDragging = false;
+                                    let wasPlayingBeforeScrub = false;
 
-    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+                                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
-    if (isMobile) {
-        clickText.style.display = 'none';
-        tapText.style.display = 'inline';
-    } else {
-        clickText.style.display = 'inline';
-        tapText.style.display = 'none';
-    }
+                                    if (isMobile) {
+                                        clickText.style.display = 'none';
+                                        tapText.style.display = 'inline';
+                                    } else {
+                                        clickText.style.display = 'inline';
+                                        tapText.style.display = 'none';
+                                    }
 
-    function toggleMute(muted) {
-        video.muted = muted;
-        volumeDiv.style.display = 'flex';
-        volumeOn.style.display = muted ? 'none' : 'flex';
-        volumeOff.style.display = muted ? 'flex' : 'none';
-        muteBtn.style.display = 'none';
-    }
+                                    function toggleMute(muted) {
+                                        video.muted = muted;
+                                        volumeDiv.style.display = 'flex';
+                                        volumeOn.style.display = muted ? 'none' : 'flex';
+                                        volumeOff.style.display = muted ? 'flex' : 'none';
+                                        muteBtn.style.display = 'none';
+                                    }
 
-    function updateTimeline() {
-        const progress = (video.currentTime / video.duration) * 100;
-        timeline.style.width = `${progress}%`;
-    }
+                                    function updateTimeline() {
+                                        const progress = (video.currentTime / video.duration) * 100;
+                                        timeline.style.width = `${progress}%`;
+                                    }
 
-    function handleScrubbing(event, isTouch = false) {
-        const timelineRect = timelineWrap.getBoundingClientRect();
-        const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
-        const timelineWidth = timelineWrap.clientWidth;
-        const newTime = (offsetX / timelineWidth) * video.duration;
-        video.currentTime = newTime;
-        updateTimeline(); // Ensure timeline stays accurate
-    }
+                                    function handleScrubbing(event, isTouch = false) {
+                                        const timelineRect = timelineWrap.getBoundingClientRect();
+                                        const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
+                                        const timelineWidth = timelineWrap.clientWidth;
+                                        const newTime = (offsetX / timelineWidth) * video.duration;
+                                        video.currentTime = newTime;
+                                        updateTimeline(); // Ensure timeline stays accurate
+                                    }
 
-    function startScrubbing(event, isTouch = false) {
-        isDragging = true;
-        wasPlayingBeforeScrub = !video.paused;
-        video.pause();
-        handleScrubbing(event, isTouch);
-        event.preventDefault();
-    }
+                                    function startScrubbing(event, isTouch = false) {
+                                        isDragging = true;
+                                        wasPlayingBeforeScrub = !video.paused;
+                                        video.pause();
+                                        handleScrubbing(event, isTouch);
+                                        event.preventDefault();
+                                    }
 
-    function continueScrubbing(event) {
-        if (isDragging) {
-            handleScrubbing(event, event.type.includes('touch'));
-            event.preventDefault();
-        }
-    }
+                                    function continueScrubbing(event) {
+                                        if (isDragging) {
+                                            handleScrubbing(event, event.type.includes('touch'));
+                                            event.preventDefault();
+                                        }
+                                    }
 
-    function endScrubbing() {
-        if (isDragging) {
-            if (wasPlayingBeforeScrub) {
-                video.play();
-            }
-            isDragging = false;
-        }
-    }
+                                    function endScrubbing() {
+                                        if (isDragging) {
+                                            if (wasPlayingBeforeScrub) {
+                                                video.play();
+                                            }
+                                            isDragging = false;
+                                        }
+                                    }
 
-    timelineWrap.addEventListener('mousedown', (event) => {
-        startScrubbing(event);
-    });
-    document.addEventListener('mousemove', continueScrubbing);
-    document.addEventListener('mouseup', endScrubbing);
+                                    timelineWrap.addEventListener('mousedown', (event) => {
+                                        startScrubbing(event);
+                                    });
+                                    document.addEventListener('mousemove', continueScrubbing);
+                                    document.addEventListener('mouseup', endScrubbing);
 
-    timelineWrap.addEventListener('touchstart', (event) => {
-        startScrubbing(event, true);
-    });
-    document.addEventListener('touchmove', continueScrubbing);
-    document.addEventListener('touchend', endScrubbing);
+                                    timelineWrap.addEventListener('touchstart', (event) => {
+                                        startScrubbing(event, true);
+                                    });
+                                    document.addEventListener('touchmove', continueScrubbing);
+                                    document.addEventListener('touchend', endScrubbing);
 
-    video.addEventListener('timeupdate', updateTimeline);
+                                    video.addEventListener('timeupdate', updateTimeline);
 
-    // Removed the click-to-mute/unmute functionality for the video area itself
-    // video.removeEventListener('click', toggleMute);
+                                    // Removed the click-to-mute/unmute functionality for the video area itself
+                                    // video.removeEventListener('click', toggleMute);
 
-    // Keyboard shortcuts for mute/unmute and spacebar handling
-    document.addEventListener('keydown', (event) => {
-        if (event.key === 'm') {
-            toggleMute(!video.muted);
-        } else if (event.code === 'Space') {
-            event.preventDefault(); // Prevent scrolling down
-            toggleMute(!video.muted); // Spacebar mutes/unmutes just like "m"
-        }
-    });
+                                    // Keyboard shortcuts for mute/unmute and spacebar handling
+                                    document.addEventListener('keydown', (event) => {
+                                        if (event.key === 'm') {
+                                            toggleMute(!video.muted);
+                                        } else if (event.code === 'Space') {
+                                            event.preventDefault(); // Prevent scrolling down
+                                            toggleMute(!video.muted); // Spacebar mutes/unmutes just like "m"
+                                        }
+                                    });
 
-    function setVideoSource() {
-        const screenWidth = window.innerWidth;
+                                    function setVideoSource() {
+                                        const screenWidth = window.innerWidth;
 
-        if (screenWidth <= 479) {
-            videoSource.src = 'next_sabri.mp4';
-        } else {
-            videoSource.src = 'sabri.mp4';
-        }
+                                        if (screenWidth <= 479) {
+                                            videoSource.src = 'next_sabri.mp4';
+                                        } else {
+                                            videoSource.src = 'sabri.mp4';
+                                        }
 
-        video.load();
-    }
+                                        video.load();
+                                    }
 
-    setVideoSource();
-    window.addEventListener('resize', setVideoSource);
+                                    setVideoSource();
+                                    window.addEventListener('resize', setVideoSource);
 
-    setTimeout(() => {
-        carouselPage.style.transition = 'opacity .2s';
-        carouselPage.style.opacity = 0;
-    }, 4000);
+                                    setTimeout(() => {
+                                        carouselPage.style.transition = 'opacity .2s';
+                                        carouselPage.style.opacity = 0;
+                                    }, 4000);
 
-    // Intersection Observer to pause/play video based on visibility
-    const observer = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                video.play();
-            } else {
-                video.pause();
-            }
-        });
-    }, {
-        threshold: 0.5
-    });
+                                    // Intersection Observer to pause/play video based on visibility
+                                    const observer = new IntersectionObserver((entries) => {
+                                        entries.forEach(entry => {
+                                            if (entry.isIntersecting) {
+                                                video.play();
+                                            } else {
+                                                video.pause();
+                                            }
+                                        });
+                                    }, {
+                                        threshold: 0.5
+                                    });
 
-    observer.observe(video);
+                                    observer.observe(video);
 
-    // Play the video and unmute it when the acknowledge background is hidden
-    const acknowledgeObserver = new MutationObserver(() => {
-        const isHidden = window.getComputedStyle(acknowledgeBackground).display === 'none';
-        if (isHidden) {
-            toggleMute(false); // Unmute the video
-            video.play(); // Play the video
-        }
-    });
+                                    // Play the video and unmute it when the acknowledge background is hidden
+                                    const acknowledgeObserver = new MutationObserver(() => {
+                                        const isHidden = window.getComputedStyle(acknowledgeBackground).display === 'none';
+                                        if (isHidden) {
+                                            toggleMute(false); // Unmute the video
+                                            video.play(); // Play the video
+                                        }
+                                    });
 
-    acknowledgeObserver.observe(acknowledgeBackground, { attributes: true, attributeFilter: ['style'] });
-});
+                                    acknowledgeObserver.observe(acknowledgeBackground, { attributes: true, attributeFilter: ['style'] });
+                                });
 
 
                             </script>
@@ -274,7 +274,8 @@
 
                 </div>
 
-                <button class="button" aria-label="Book your free onboarding meeting" data-pressed="false">NEXT</button>
+                <button class="button" aria-label="Book your free onboarding meeting"
+                    data-pressed="false">CONTINUE</button>
 
                 <p><span style="background-color: rgba(0,121,255, 0.5);">Summary:</span><br>
 
@@ -302,7 +303,7 @@
 
     <div class="acknowledge_background">
     </div>
-    
+
     <script>
         document.addEventListener('DOMContentLoaded', () => {
             const acknowledgeButtons = document.querySelectorAll('.button');
@@ -311,9 +312,9 @@
             const motivation = document.querySelector('.motivation'); // Reference to the .motivation element
             const soundEffect = document.getElementById('soundEffect');
             const innerBar = document.querySelector('.inner_bar'); // Reference to the .inner_bar element
-    
+
             let hasSoundPlayed = false; // Flag to ensure sound plays only once
-    
+
             // Function to show the acknowledgment background and disable scrolling
             function showAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'block';
@@ -321,22 +322,22 @@
                 motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
                 document.body.style.overflow = 'hidden'; // Disable scrolling
             }
-    
+
             // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width
             function hideAcknowledgeBackground(button) {
                 // Hide the acknowledgment background immediately
                 acknowledgeBackground.style.display = 'none';
-    
+
                 // Start animation for the wrap
                 acknowledgeWrap.classList.add('animate-out');
-    
+
                 // Use requestAnimationFrame to ensure bar width animation starts after background is hidden
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
                         // Show motivation and start expanding the inner_bar
                         motivation.style.display = 'block';
                         innerBar.style.width = '75%';
-    
+
                         // Play sound effect only when expanding starts
                         if (!hasSoundPlayed) {
                             soundEffect.pause();
@@ -346,17 +347,17 @@
                         }
                     });
                 });
-    
+
                 // Wait for the animation to complete before hiding the wrap
                 setTimeout(() => {
                     acknowledgeWrap.style.display = 'none';
                     document.body.style.overflow = ''; // Enable scrolling
                 }, 500); // Match this duration with your CSS transition time
             }
-    
+
             // Show the acknowledgment background when the page loads
             showAcknowledgeBackground();
-    
+
             // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
             acknowledgeButtons.forEach(button => {
                 button.addEventListener('click', () => {
@@ -368,7 +369,7 @@
             });
         });
     </script>
-    
+
 
     <div class="acknowledge_wrap">
         <div class="appointment_time">
@@ -378,7 +379,8 @@
                 <br>⭐️ Google Meet<br>
                 <br>💵 America/New_York<br>
             </div>
-            <button class="button sticky_button" aria-label="Book your free onboarding meeting" data-pressed="false">ACKNOWLEDGE</button>
+            <button class="button sticky_button" aria-label="Book your free onboarding meeting"
+                data-pressed="false">ACKNOWLEDGE</button>
         </div>
     </div>
 
@@ -404,38 +406,19 @@
                 <form class="profile_wrap">
 
                     <div class="form_input">
-                        <label class="fine_print for="fname">First name:</label><br>
-                        <input type="text" id="fname" name="fname"><br>
+                        <label class="fine_print" for="fname">First name:</label><br>
+                        <input class="input" type="text" id="fname" name="fname"><br>
                         <label class="fine_print" for="lname">Last name:</label><br>
-                        <input type="text" id="lname" name="lname">
+                        <input class="input" type="text" id="lname" name="lname">
                     </div>
 
-                <p><span style="background-color: rgba(0,121,255, 0.5);">Here’s the stats:</span><br>
-
-                    <br>💰 7.8b in sales generated<br>
-
-                    <br>🔑 1067 different industries and niches.<br>
-
-                    <br>⭐️ 3,000+ reviews (average of 4.7 stars)<br>
-
-                    <br>💵 58 millionaires created<br>
-
-                    <br>🤑 6x 8 figure clients created<br>
-
-                    <br>😤 #17 fastest-growing company in Australia (ranked by the AFR)<br>
-
-                    <br>🚀 #1 fastest-growing agency (3 years in a row)<br>
-
-                    <br>Anyhoo.
-                </p>
-                
                 </form>
 
             </div>
 
         </div>
     </div>
-    
+
 </body>
 
 </html>
