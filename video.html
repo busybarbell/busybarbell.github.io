@@ -86,6 +86,7 @@
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
                                     // References for acknowledgment background and wrap
+                                    const continueButtons = document.querySelectorAll('.continue_button');
                                     const acknowledgeButtons = document.querySelectorAll('.button');
                                     const acknowledgeBackground = document.querySelector('.acknowledge_background');
                                     const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
@@ -122,6 +123,7 @@
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
+                                        checkButtonState(); // Check button state each time the timeline updates
                                     }
                             
                                     function handleScrubbing(event, isTouch = false) {
@@ -329,9 +331,30 @@
                                             hideAcknowledgeBackground(button);
                                         });
                                     });
+                            
+                                    // Function to check and update the continue button state and text
+                                    function checkButtonState() {
+                                        const progress = video.currentTime / video.duration;
+                                        const isReady = progress >= 0.8; // Check if video progress is at least 80%
+                            
+                                        continueButtons.forEach(button => {
+                                            if (isReady) {
+                                                button.classList.remove('disabled');
+                                                button.textContent = 'CONTINUE'; // Change text when video reaches 80%
+                                            } else {
+                                                button.classList.add('disabled');
+                                                button.textContent = 'WATCH VIDEO'; // Default text
+                                            }
+                                        });
+                                    }
+                            
+                                    // Initial check to ensure button state and text are correct on page load
+                                    checkButtonState();
                                 });
                             </script>
                             
+                            
+
 
 
 
@@ -363,7 +386,7 @@
 
                 </div>
 
-                <button class="button" aria-label="Book your free onboarding meeting"
+                <button class="continue_button" aria-label="Book your free onboarding meeting"
                     data-pressed="false">CONTINUE</button>
 
                 <p><span style="background-color: rgba(0,121,255, 0.5);">Summary:</span><br>
@@ -417,6 +440,44 @@
             </div>
             <button class="button sticky_button" aria-label="Book your free onboarding meeting"
                 data-pressed="false">ACKNOWLEDGE</button>
+        </div>
+    </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <!-- complete profile begins -->
+
+    <div class="offer_wrap">
+        <div class="offer_split">
+
+            <div class="split_left">
+
+                <form class="profile_wrap">
+
+                    <div class="form_input">
+                        <label class="fine_print" for="fname">First name</label>
+                        <input class="input" type="text" id="fname" name="fname">
+                    </div>
+
+                    <div class="form_input">
+                        <label class="fine_print" for="lname">Last name</label>
+                        <input class="input" type="text" id="lname" name="lname">
+                    </div>
+
+                </form>
+
+            </div>
+
         </div>
     </div>
 
