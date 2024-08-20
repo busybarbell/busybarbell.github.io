@@ -54,12 +54,6 @@
                         <div class="tab_image video_wrap" id="content1" style="display: flex;">
 
                             <style>
-                                /* Hide text elements by default */
-                                .click_for_sound .click-text,
-                                .click_for_sound .tap-text {
-                                    display: none;
-                                }
-
                                 /* Additional style to ensure timeline has a larger touchable area */
                                 .timeline_wrap {
                                     overflow: visible;
@@ -81,15 +75,6 @@
                                         <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp"
                                             alt="Volume off" height="13.6px">
                                     </div>
-
-                                    <div class="carousel_page">1/5</div>
-
-                                    <button class="click_for_sound">
-                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available"
-                                            height="24px">
-                                        <span class="click-text">Click for sound</span>
-                                        <span class="tap-text">Tap for sound</span>
-                                    </button>
                                 </div>
                             </div>
 
@@ -100,44 +85,44 @@
 
                             <script>
                                 document.addEventListener('DOMContentLoaded', () => {
+                                    // References for acknowledgment background and wrap
+                                    const acknowledgeButtons = document.querySelectorAll('.button');
+                                    const acknowledgeBackground = document.querySelector('.acknowledge_background');
+                                    const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
+                                    const motivation = document.querySelector('.motivation');
+                                    const soundEffect = document.getElementById('soundEffect');
+                                    const innerBar = document.querySelector('.inner_bar');
+                            
+                                    // References for video controls
                                     const video = document.getElementById('myVideo');
                                     const videoSource = document.getElementById('videoSource');
-                                    const muteBtn = document.querySelector('.click_for_sound');
                                     const volumeDiv = document.querySelector('.volume');
                                     const volumeOn = volumeDiv.querySelector('.volume-on');
                                     const volumeOff = volumeDiv.querySelector('.volume-off');
                                     const timeline = document.querySelector('.timeline');
                                     const timelineWrap = document.querySelector('.timeline_wrap');
-                                    const clickText = muteBtn.querySelector('.click-text');
-                                    const tapText = muteBtn.querySelector('.tap-text');
-                                    const carouselPage = document.querySelector('.carousel_page');
-                                    const acknowledgeBackground = document.querySelector('.acknowledge_background');
+                            
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
-
+                                    let hasSoundPlayed = false;
+                            
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-                                    if (isMobile) {
-                                        clickText.style.display = 'none';
-                                        tapText.style.display = 'inline';
-                                    } else {
-                                        clickText.style.display = 'inline';
-                                        tapText.style.display = 'none';
+                            
+                                    function updateVolumeUI() {
+                                        if (video.muted) {
+                                            volumeOn.style.display = 'none';
+                                            volumeOff.style.display = 'flex';
+                                        } else {
+                                            volumeOn.style.display = 'flex';
+                                            volumeOff.style.display = 'none';
+                                        }
                                     }
-
-                                    function toggleMute(muted) {
-                                        video.muted = muted;
-                                        volumeDiv.style.display = 'flex';
-                                        volumeOn.style.display = muted ? 'none' : 'flex';
-                                        volumeOff.style.display = muted ? 'flex' : 'none';
-                                        muteBtn.style.display = 'none';
-                                    }
-
+                            
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
                                     }
-
+                            
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
@@ -146,7 +131,7 @@
                                         video.currentTime = newTime;
                                         updateTimeline(); // Ensure timeline stays accurate
                                     }
-
+                            
                                     function startScrubbing(event, isTouch = false) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;
@@ -154,14 +139,14 @@
                                         handleScrubbing(event, isTouch);
                                         event.preventDefault();
                                     }
-
+                            
                                     function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event, event.type.includes('touch'));
                                             event.preventDefault();
                                         }
                                     }
-
+                            
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
@@ -170,83 +155,161 @@
                                             isDragging = false;
                                         }
                                     }
-
+                            
                                     timelineWrap.addEventListener('mousedown', (event) => {
                                         startScrubbing(event);
                                     });
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
-
+                            
                                     timelineWrap.addEventListener('touchstart', (event) => {
                                         startScrubbing(event, true);
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
-
+                            
                                     video.addEventListener('timeupdate', updateTimeline);
-
-                                    // Removed the click-to-mute/unmute functionality for the video area itself
-                                    // video.removeEventListener('click', toggleMute);
-
-                                    // Keyboard shortcuts for mute/unmute and spacebar handling
+                            
+                                    // Toggle mute/unmute on video click or tap
+                                    video.addEventListener('click', () => {
+                                        video.muted = !video.muted;
+                                        updateVolumeUI();
+                                    });
+                            
+                                    // Toggle mute/unmute when pressing 'm' or spacebar
                                     document.addEventListener('keydown', (event) => {
                                         if (event.key === 'm') {
-                                            toggleMute(!video.muted);
+                                            video.muted = !video.muted;
+                                            updateVolumeUI();
                                         } else if (event.code === 'Space') {
                                             event.preventDefault(); // Prevent scrolling down
-                                            toggleMute(!video.muted); // Spacebar mutes/unmutes just like "m"
+                                            video.muted = !video.muted;
+                                            updateVolumeUI(); // Spacebar mutes/unmutes
                                         }
                                     });
-
+                            
+                                    // Toggle mute/unmute when clicking the volume div
+                                    volumeDiv.addEventListener('click', () => {
+                                        video.muted = !video.muted;
+                                        updateVolumeUI();
+                                    });
+                            
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
-
+                            
                                         if (screenWidth <= 479) {
                                             videoSource.src = 'next_sabri.mp4';
                                         } else {
                                             videoSource.src = 'sabri.mp4';
                                         }
-
+                            
                                         video.load();
                                     }
-
+                            
                                     setVideoSource();
                                     window.addEventListener('resize', setVideoSource);
-
-                                    setTimeout(() => {
-                                        carouselPage.style.transition = 'opacity .2s';
-                                        carouselPage.style.opacity = 0;
-                                    }, 4000);
-
-                                    // Intersection Observer to pause/play video based on visibility
-                                    const observer = new IntersectionObserver((entries) => {
-                                        entries.forEach(entry => {
-                                            if (entry.isIntersecting) {
-                                                video.play();
-                                            } else {
-                                                video.pause();
-                                            }
-                                        });
-                                    }, {
-                                        threshold: 0.5
-                                    });
-
-                                    observer.observe(video);
-
-                                    // Play the video and unmute it when the acknowledge background is hidden
+                            
+                                    // Show or hide volume div based on video playback state
+                                    function handleVideoPlayback() {
+                                        if (video.paused) {
+                                            volumeDiv.style.display = 'none';
+                                        } else {
+                                            volumeDiv.style.display = 'flex';
+                                            updateVolumeUI();
+                                        }
+                                    }
+                            
+                                    // Initial setup for volume div
+                                    volumeDiv.style.display = 'none';
+                            
+                                    // Handle video play/pause
+                                    video.addEventListener('play', handleVideoPlayback);
+                                    video.addEventListener('pause', handleVideoPlayback);
+                            
+                                    // Mutation Observer to play the video and unmute it when the acknowledge background is hidden
                                     const acknowledgeObserver = new MutationObserver(() => {
                                         const isHidden = window.getComputedStyle(acknowledgeBackground).display === 'none';
                                         if (isHidden) {
-                                            toggleMute(false); // Unmute the video
+                                            video.muted = false; // Unmute the video
                                             video.play(); // Play the video
                                         }
                                     });
-
+                            
                                     acknowledgeObserver.observe(acknowledgeBackground, { attributes: true, attributeFilter: ['style'] });
+                            
+                                    // Function to show the acknowledgment background and disable scrolling with animation
+                                    function showAcknowledgeBackground() {
+                                        acknowledgeBackground.style.display = 'block';
+                            
+                                        // Trigger the background transition
+                                        requestAnimationFrame(() => {
+                                            acknowledgeBackground.classList.add('visible');
+                                        });
+                            
+                                        // Delay the wrap animation until the background transition completes
+                                        setTimeout(() => {
+                                            acknowledgeWrap.style.display = 'flex';
+                                            acknowledgeWrap.classList.add('animate-in');
+                                        }, 500); // Match this with the background transition time
+                            
+                                        motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
+                                        document.body.style.overflow = 'hidden'; // Disable scrolling
+                                    }
+                            
+                                    // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width with animation
+                                    function hideAcknowledgeBackground(button) {
+                                        // Start animation for the wrap
+                                        acknowledgeWrap.classList.remove('animate-in');
+                                        acknowledgeWrap.classList.add('animate-out');
+                            
+                                        // Wait for the wrap animation to complete before hiding the background
+                                        acknowledgeWrap.addEventListener('transitionend', () => {
+                                            if (acknowledgeWrap.classList.contains('animate-out')) {
+                                                acknowledgeWrap.style.display = 'none';
+                                                acknowledgeBackground.classList.remove('visible');
+                                                setTimeout(() => {
+                                                    acknowledgeBackground.style.display = 'none';
+                                                }, 500); // Match this with the background transition time
+                            
+                                                document.body.style.overflow = ''; // Enable scrolling
+                                            }
+                                        }, { once: true });
+                            
+                                        // Start bar width expansion
+                                        requestAnimationFrame(() => {
+                                            requestAnimationFrame(() => {
+                                                motivation.style.display = 'block';
+                                                innerBar.style.width = '75%';
+                            
+                                                // Play sound effect only when expanding starts
+                                                if (!hasSoundPlayed) {
+                                                    soundEffect.pause();
+                                                    soundEffect.currentTime = 0;
+                                                    soundEffect.play();
+                                                    hasSoundPlayed = true; // Ensure sound is played only once
+                                                }
+                                            });
+                                        });
+                                    }
+                            
+                                    // Show the acknowledgment background with animation when the page loads
+                                    showAcknowledgeBackground();
+                            
+                                    // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
+                                    acknowledgeButtons.forEach(button => {
+                                        button.addEventListener('click', () => {
+                                            if (button.dataset.pressed === 'false') {
+                                                button.dataset.pressed = 'true'; // Update data attribute
+                                            }
+                                            hideAcknowledgeBackground(button);
+                                        });
+                                    });
                                 });
-
-
                             </script>
+                            
+                            
+                            
+                            
 
                         </div>
 
@@ -304,87 +367,6 @@
     <div class="acknowledge_background">
     </div>
 
-    <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            const acknowledgeButtons = document.querySelectorAll('.button');
-            const acknowledgeBackground = document.querySelector('.acknowledge_background');
-            const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
-            const motivation = document.querySelector('.motivation');
-            const soundEffect = document.getElementById('soundEffect');
-            const innerBar = document.querySelector('.inner_bar');
-
-            let hasSoundPlayed = false;
-
-            // Function to show the acknowledgment background and disable scrolling with animation
-            function showAcknowledgeBackground() {
-                acknowledgeBackground.style.display = 'block';
-
-                // Trigger the background transition
-                requestAnimationFrame(() => {
-                    acknowledgeBackground.classList.add('visible');
-                });
-
-                // Delay the wrap animation until the background transition completes
-                setTimeout(() => {
-                    acknowledgeWrap.style.display = 'flex';
-                    acknowledgeWrap.classList.add('animate-in');
-                }, 500); // Match this with the background transition time
-
-                motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
-                document.body.style.overflow = 'hidden'; // Disable scrolling
-            }
-
-            // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width with animation
-            function hideAcknowledgeBackground(button) {
-                // Start animation for the wrap
-                acknowledgeWrap.classList.remove('animate-in');
-                acknowledgeWrap.classList.add('animate-out');
-
-                // Wait for the wrap animation to complete before hiding the background
-                acknowledgeWrap.addEventListener('transitionend', () => {
-                    if (acknowledgeWrap.classList.contains('animate-out')) {
-                        acknowledgeWrap.style.display = 'none';
-                        acknowledgeBackground.classList.remove('visible');
-                        setTimeout(() => {
-                            acknowledgeBackground.style.display = 'none';
-                        }, 500); // Match this with the background transition time
-
-                        document.body.style.overflow = ''; // Enable scrolling
-                    }
-                }, { once: true });
-
-                // Start bar width expansion
-                requestAnimationFrame(() => {
-                    requestAnimationFrame(() => {
-                        motivation.style.display = 'block';
-                        innerBar.style.width = '75%';
-
-                        // Play sound effect only when expanding starts
-                        if (!hasSoundPlayed) {
-                            soundEffect.pause();
-                            soundEffect.currentTime = 0;
-                            soundEffect.play();
-                            hasSoundPlayed = true; // Ensure sound is played only once
-                        }
-                    });
-                });
-            }
-
-            // Show the acknowledgment background with animation when the page loads
-            showAcknowledgeBackground();
-
-            // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
-            acknowledgeButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    if (button.dataset.pressed === 'false') {
-                        button.dataset.pressed = 'true'; // Update data attribute
-                    }
-                    hideAcknowledgeBackground(button);
-                });
-            });
-        });
-
-    </script>
 
 
 
