@@ -539,8 +539,8 @@ input[type="radio"]:checked+label .tabs_menu_image {
 
     .tab_dot {
         display: flex;
-        height: .35rem;
-        width: .35rem;
+        height: .5rem;
+        width: .5rem;
         border-radius: 100%;
         background-color: #334750;
     }
