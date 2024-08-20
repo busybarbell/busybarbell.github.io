@@ -545,26 +545,6 @@ input[type="radio"]:checked+label .tabs_menu_image {
         background-color: #334750;
     }
 
-    .small_dot {
-        display: flex;
-        height: .3rem;
-        width: .3rem;
-        margin-left: .2rem;
-        margin-right: .2rem;
-        border-radius: 100%;
-        background-color: #334750;
-    }
-
-    .smaller_dot {
-        display: flex;
-        height: .15rem;
-        width: .15rem;
-        margin-left: .35rem;
-        margin-right: .35rem;
-        border-radius: 100%;
-        background-color: #334750;
-    }
-
     .carousel_page {
         display: flex;
     }
