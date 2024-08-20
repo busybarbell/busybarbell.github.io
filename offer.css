@@ -547,10 +547,10 @@ input[type="radio"]:checked+label .tabs_menu_image {
 
     .small_dot {
         display: flex;
-        height: .35rem;
-        width: .35rem;
-        margin-left: .15rem;
-        margin-right: .15rem;
+        height: .3rem;
+        width: .3rem;
+        margin-left: .2rem;
+        margin-right: .2rem;
         border-radius: 100%;
         background-color: #334750;
     }
