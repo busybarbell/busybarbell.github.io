@@ -105,6 +105,7 @@
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
                                     let hasSoundPlayed = false;
+                                    let volumeHideTimeout;
                             
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
                             
@@ -174,6 +175,7 @@
                                     video.addEventListener('click', () => {
                                         video.muted = !video.muted;
                                         updateVolumeUI();
+                                        showVolumeDiv();
                                     });
                             
                                     // Toggle mute/unmute when pressing 'm' or spacebar
@@ -181,10 +183,12 @@
                                         if (event.key === 'm') {
                                             video.muted = !video.muted;
                                             updateVolumeUI();
+                                            showVolumeDiv();
                                         } else if (event.code === 'Space') {
                                             event.preventDefault(); // Prevent scrolling down
                                             video.muted = !video.muted;
                                             updateVolumeUI(); // Spacebar mutes/unmutes
+                                            showVolumeDiv();
                                         }
                                     });
                             
@@ -192,6 +196,7 @@
                                     volumeDiv.addEventListener('click', () => {
                                         video.muted = !video.muted;
                                         updateVolumeUI();
+                                        showVolumeDiv();
                                     });
                             
                                     function setVideoSource() {
@@ -213,10 +218,30 @@
                                     function handleVideoPlayback() {
                                         if (video.paused) {
                                             volumeDiv.style.display = 'none';
+                                            clearTimeout(volumeHideTimeout); // Clear any existing timeout
                                         } else {
                                             volumeDiv.style.display = 'flex';
                                             updateVolumeUI();
+                                            showVolumeDiv(); // Ensure volume div is visible when video plays
                                         }
+                                    }
+                            
+                                    function showVolumeDiv() {
+                                        // Clear any existing timeout
+                                        clearTimeout(volumeHideTimeout);
+                            
+                                        // Show volume div and reset its opacity
+                                        volumeDiv.style.display = 'flex';
+                                        volumeDiv.style.opacity = 1;
+                            
+                                        // Start timeout to hide volume div after 4 seconds
+                                        volumeHideTimeout = setTimeout(() => {
+                                            volumeDiv.style.transition = 'opacity .2s';
+                                            volumeDiv.style.opacity = 0;
+                                            setTimeout(() => {
+                                                volumeDiv.style.display = 'none';
+                                            }, 200); // Match this with opacity transition time
+                                        }, 4000);
                                     }
                             
                                     // Initial setup for volume div
@@ -307,9 +332,10 @@
                                 });
                             </script>
                             
-                            
-                            
-                            
+
+
+
+
 
                         </div>
 
@@ -408,27 +434,7 @@
 
     <!-- complete profile begins -->
 
-    <div class="offer_wrap">
-        <div class="offer_split">
-
-            <div class="split_left">
-
-                <form class="profile_wrap">
-
-                    <div class="form_input">
-                        <label class="fine_print" for="fname">First name:</label><br>
-                        <input class="input" type="text" id="fname" name="fname"><br>
-                        <label class="fine_print" for="lname">Last name:</label><br>
-                        <input class="input" type="text" id="lname" name="lname">
-                    </div>
-
-                </form>
-
-            </div>
-
-        </div>
-    </div>
-
+   
 </body>
 
 </html>
