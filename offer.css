@@ -8,6 +8,38 @@
     align-self: center;
 }
 
+.video-background-wrapper {
+    box-sizing: border-box;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    align-self: center;
+    padding-left: 4%;
+    padding-right: 4%;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    background-color: rgba(0, 0, 0);
+}
+
+#backgroundVideo {
+    position: absolute;
+    align-self: center;
+    top: 0;
+    object-fit: cover;
+    filter: blur(32px);/* Adjust blur level as needed */
+    z-index: -1; /* Ensure video is behind the text */
+    opacity: 80%;
+}
+
+.mobile_hook {
+    display: none;
+    position: relative;
+    z-index: 1; /* Ensure text is above the video */
+    color: white; /* Adjust text color for visibility */
+    /* Additional styling for your text */
+}
+
+
 .mobile_button {
     box-sizing: border-box;
     display: flex;
@@ -32,14 +64,6 @@
     background-color: #007bff;
     height: 2px;
     width: 6rem;
-    border-radius: 100px;
-}
-
-.line_break_large {
-    box-sizing: border-box;
-    background-color: #334750;
-    height: 1px;
-    width: 100%;
     border-radius: 100px;
 }
 
@@ -525,5 +549,13 @@ input[type="radio"]:checked+label .tabs_menu_image {
 
     .tab_image {
         aspect-ratio: 1/1;
+    }
+
+    .mobile_hook {
+        display: block;
+    }
+
+    .nav_wrap {
+        display: none;
     }
 }
