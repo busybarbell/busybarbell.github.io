@@ -39,12 +39,22 @@
         </div>
     </div>
 
+    <div class="video-background-wrapper">
+        <video id="backgroundVideo" autoplay muted loop playsinline>
+            <source src="sabri_mobile.mp4" type="video/mp4">
+            Your browser does not support the video tag.
+        </video>
+        <h1 class="mobile_hook">Advertising Madman’s Confessional Bombshell...</h1>
+        <!-- Other content here -->
+    </div>
+
     <!-- offer begins -->
 
     <div class="offer_wrap">
         <div class="offer_split">
 
             <div class="split_left">
+                
 
                 <!-- tabs begin -->
 
@@ -113,10 +123,11 @@
                                     const clickText = muteBtn.querySelector('.click-text');
                                     const tapText = muteBtn.querySelector('.tap-text');
                                     const carouselPage = document.querySelector('.carousel_page');
-                                    const soundEffect = document.getElementById('soundEffect'); // Sound effect element
-                                    const acknowledgeButtons = document.querySelectorAll('.button'); // Targeting "button" class
+                                    const soundEffect = document.getElementById('soundEffect');
+                                    const acknowledgeButtons = document.querySelectorAll('.button');
                                     const tabsContent = document.querySelector('.tabs_content');
                                     const tabsMenu = document.querySelectorAll('.tabs_menu input[type="radio"]');
+                                    const videoWrapper = document.querySelector('.video-background-wrapper'); // For background update
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
                                     let startPosition = 0;
@@ -124,9 +135,10 @@
                                     let previousTranslate = 0;
                                     let animationID;
                                     let currentIndex = 0;
-
+                                    let isSwiping = false;
+                            
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
+                            
                                     if (isMobile) {
                                         clickText.style.display = 'none';
                                         tapText.style.display = 'inline';
@@ -134,8 +146,7 @@
                                         clickText.style.display = 'inline';
                                         tapText.style.display = 'none';
                                     }
-
-                                    // Warm up the audio context to prevent delay in playing sound
+                            
                                     let audioContext;
                                     if (window.AudioContext || window.webkitAudioContext) {
                                         audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -144,23 +155,20 @@
                                         emptySource.connect(audioContext.destination);
                                         emptySource.start(0);
                                     }
-
+                            
                                     function playSoundEffect() {
-                                        // Ensure the audio context is resumed before playing the sound
                                         if (audioContext && audioContext.state === 'suspended') {
                                             audioContext.resume();
                                         }
-
                                         soundEffect.pause();
                                         soundEffect.currentTime = 0;
                                         soundEffect.play();
                                     }
-
-                                    // Play the sound effect when any button with the class "button" is clicked
+                            
                                     acknowledgeButtons.forEach(button => {
                                         button.addEventListener('click', playSoundEffect);
                                     });
-
+                            
                                     function toggleMute() {
                                         video.muted = !video.muted;
                                         volumeDiv.style.display = 'flex';
@@ -168,24 +176,24 @@
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
                                         muteBtn.style.display = 'none';
                                     }
-
+                            
                                     muteBtn.style.display = 'flex';
                                     muteBtn.addEventListener('click', toggleMute);
-
+                            
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
                                     }
-
+                            
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
                                         const timelineWidth = timelineWrap.clientWidth;
                                         const newTime = (offsetX / timelineWidth) * video.duration;
                                         video.currentTime = newTime;
-                                        updateTimeline(); // Ensure timeline stays accurate
+                                        updateTimeline();
                                     }
-
+                            
                                     function startScrubbing(event, isTouch = false) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;
@@ -193,14 +201,14 @@
                                         handleScrubbing(event, isTouch);
                                         event.preventDefault();
                                     }
-
+                            
                                     function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event, event.type.includes('touch'));
                                             event.preventDefault();
                                         }
                                     }
-
+                            
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
@@ -209,145 +217,183 @@
                                             isDragging = false;
                                         }
                                     }
-
+                            
                                     timelineWrap.addEventListener('mousedown', (event) => {
                                         startScrubbing(event);
                                     });
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
-
+                            
                                     timelineWrap.addEventListener('touchstart', (event) => {
+                                        event.stopPropagation(); // Prevent swipe interference
                                         startScrubbing(event, true);
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
-
+                            
                                     video.addEventListener('timeupdate', updateTimeline);
-
-                                    // Tap anywhere on the video area to mute/unmute
+                            
                                     video.addEventListener('click', (event) => {
-                                        // Prevent click event from propagating to the parent elements
                                         event.stopPropagation();
                                         toggleMute();
                                     });
-
-                                    // Keyboard shortcuts for mute/unmute and spacebar handling
+                            
                                     document.addEventListener('keydown', (event) => {
                                         if (event.key === 'm') {
                                             toggleMute();
                                         } else if (event.code === 'Space') {
-                                            event.preventDefault(); // Prevent scrolling down
-                                            toggleMute(); // Spacebar mutes/unmutes just like "m"
+                                            event.preventDefault();
+                                            toggleMute();
                                         }
                                     });
-
+                            
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
-
                                         if (screenWidth <= 479) {
                                             videoSource.src = 'sabri_mobile.mp4';
                                         } else {
                                             videoSource.src = 'sabri.mp4';
                                         }
-
                                         video.load();
                                     }
-
+                            
                                     setVideoSource();
                                     window.addEventListener('resize', setVideoSource);
-
+                            
                                     setTimeout(() => {
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
                                     }, 4000);
-
-                                    // Intersection Observer to pause/play video based on visibility
+                            
                                     const observer = new IntersectionObserver((entries) => {
                                         entries.forEach(entry => {
-                                            if (entry.isIntersecting) {
-                                                video.play();
-                                            } else {
-                                                video.pause();
+                                            if (!isSwiping) { // Only pause/play if not swiping
+                                                if (entry.isIntersecting) {
+                                                    video.play();
+                                                } else {
+                                                    video.pause();
+                                                }
                                             }
                                         });
                                     }, {
                                         threshold: 0.5
                                     });
-
+                            
                                     observer.observe(video);
-
-                                    // Swipe and Drag Functionality for Tabs
+                            
                                     function startDrag(event) {
+                                        isSwiping = true; // Set swiping flag
                                         isDragging = true;
                                         startPosition = getPositionX(event);
                                         animationID = requestAnimationFrame(animation);
                                         tabsContent.style.cursor = 'grabbing';
                                     }
-
+                            
                                     function endDrag() {
+                                        isSwiping = false; // Reset swiping flag
                                         isDragging = false;
                                         cancelAnimationFrame(animationID);
-
+                            
                                         const movedBy = currentTranslate - previousTranslate;
-
+                            
                                         if (movedBy < -100 && currentIndex < tabsMenu.length - 1) {
                                             currentIndex += 1;
                                         }
-
+                            
                                         if (movedBy > 100 && currentIndex > 0) {
                                             currentIndex -= 1;
                                         }
-
+                            
                                         setPositionByIndex();
                                         tabsContent.style.cursor = 'grab';
                                     }
-
+                            
                                     function dragging(event) {
                                         if (isDragging) {
                                             const currentPosition = getPositionX(event);
                                             currentTranslate = previousTranslate + currentPosition - startPosition;
                                         }
                                     }
-
+                            
                                     function getPositionX(event) {
                                         return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
                                     }
-
+                            
                                     function animation() {
                                         setSliderPosition();
                                         if (isDragging) requestAnimationFrame(animation);
                                     }
-
+                            
                                     function setSliderPosition() {
                                         tabsContent.style.transform = `translateX(${currentTranslate}px)`;
                                     }
-
+                            
                                     function setPositionByIndex() {
                                         currentTranslate = currentIndex * -window.innerWidth;
                                         previousTranslate = currentTranslate;
                                         setSliderPosition();
-
                                         tabsMenu[currentIndex].checked = true;
                                     }
-
+                            
                                     tabsMenu.forEach((tab, index) => {
                                         tab.addEventListener('change', () => {
                                             currentIndex = index;
                                             setPositionByIndex();
                                         });
                                     });
-
+                            
                                     tabsContent.addEventListener('mousedown', startDrag);
                                     tabsContent.addEventListener('touchstart', startDrag);
                                     tabsContent.addEventListener('mouseup', endDrag);
                                     tabsContent.addEventListener('touchend', endDrag);
                                     tabsContent.addEventListener('mousemove', dragging);
                                     tabsContent.addEventListener('touchmove', dragging);
-
-                                    // Set initial position
+                            
                                     setPositionByIndex();
+                            
+                                    // Update video background based on play/pause state
+                                    function updateBackground() {
+                                        if (video.paused) {
+                                            // Capture a static frame and set it as background
+                                            const canvas = document.createElement('canvas');
+                                            const context = canvas.getContext('2d');
+                                            canvas.width = video.videoWidth;
+                                            canvas.height = video.videoHeight;
+                                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
+                            
+                                            // Get current time position in the video
+                                            const currentTime = video.currentTime;
+                                            const totalDuration = video.duration;
+                                            const progress = currentTime / totalDuration;
+                            
+                                            // Update background size and position based on the video aspect ratio
+                                            const videoAspectRatio = video.videoWidth / video.videoHeight;
+                                            const wrapperAspectRatio = videoWrapper.clientWidth / videoWrapper.clientHeight;
+                                            let backgroundSize, backgroundPosition;
+                            
+                                            if (videoAspectRatio > wrapperAspectRatio) {
+                                                backgroundSize = `auto 100%`;
+                                                backgroundPosition = `${progress * 100}% center`;
+                                            } else {
+                                                backgroundSize = `100% auto`;
+                                                backgroundPosition = `center ${progress * 100}%`;
+                                            }
+                            
+                                            videoWrapper.style.backgroundImage = `url(${canvas.toDataURL()})`;
+                                            videoWrapper.style.backgroundSize = backgroundSize;
+                                            videoWrapper.style.backgroundPosition = backgroundPosition;
+                                            videoWrapper.style.backgroundColor = 'transparent'; // Ensure background color is transparent
+                                        } else {
+                                            // If video is playing, remove the static background image
+                                            videoWrapper.style.backgroundImage = 'none';
+                                        }
+                                    }
+                            
+                                    // Attach event listeners
+                                    video.addEventListener('play', updateBackground);
+                                    video.addEventListener('pause', updateBackground);
+                                    video.addEventListener('timeupdate', updateBackground); // Update as the video plays
                                 });
-
                             </script>
 
                         </div>
