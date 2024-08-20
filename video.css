@@ -1,8 +1,8 @@
 .drag_line {
     box-sizing: border-box;
-    background-color: #afafaf;
+    background-color: #334750;
     height: 5px;
-    width: 3rem;
+    width: 2.5rem;
     border-radius: 100px;
     align-self: center;
     margin-top: -1.5rem;
@@ -139,7 +139,7 @@
     right: 0;
     bottom: 0;
     padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-bottom: 3rem;
     padding-left: 5%;
     padding-right: 5%;
     width: 100%;
@@ -164,7 +164,7 @@
     flex-direction: column;
     align-items: left;
     justify-content: space-between;
-    gap: 2rem;
+    gap: 3rem;
 }
 
 .alert_text_green {
