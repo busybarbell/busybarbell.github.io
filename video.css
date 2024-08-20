@@ -1,11 +1,11 @@
 .drag_line {
     box-sizing: border-box;
-    background-color: #334750;
-    height: 4px;
-    width: 2rem;
+    background-color: #afafaf;
+    height: 5px;
+    width: 3rem;
     border-radius: 100px;
     align-self: center;
-    margin-top: -1.75rem;
+    margin-top: -1.5rem;
     margin-bottom: 2rem;
 }
 
@@ -149,6 +149,7 @@
     transform: translateY(0);
     border-top-left-radius: 1rem;
     border-top-right-radius: 1rem;
+    overflow: hidden;
 }
 
 .acknowledge_wrap.animate-out {
@@ -656,6 +657,11 @@ input[type="radio"]:checked+label .tabs_menu_image {
     }
 
     .progress_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .drag_wrap {
         padding-left: 4%;
         padding-right: 4%;
     }
