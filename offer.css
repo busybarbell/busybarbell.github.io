@@ -9,6 +9,7 @@
 }
 
 .video-background-wrapper {
+    display: none;
     box-sizing: border-box;
     position: relative;
     width: 100%;
@@ -26,17 +27,21 @@
     align-self: center;
     top: 0;
     object-fit: cover;
-    filter: blur(32px);/* Adjust blur level as needed */
+    filter: blur(8px);/* Adjust blur level as needed */
     z-index: -1; /* Ensure video is behind the text */
-    opacity: 80%;
 }
 
 .mobile_hook {
-    display: none;
     position: relative;
     z-index: 1; /* Ensure text is above the video */
-    color: white; /* Adjust text color for visibility */
+    color: black; /* Adjust text color for visibility */
     /* Additional styling for your text */
+    background-color: white;
+    border-radius: 1rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: .5rem;
+    padding-bottom: .5rem;
 }
 
 
@@ -551,7 +556,7 @@ input[type="radio"]:checked+label .tabs_menu_image {
         aspect-ratio: 1/1;
     }
 
-    .mobile_hook {
+    .video-background-wrapper {
         display: block;
     }
 
