@@ -309,32 +309,53 @@
             const acknowledgeButtons = document.querySelectorAll('.button');
             const acknowledgeBackground = document.querySelector('.acknowledge_background');
             const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
-            const motivation = document.querySelector('.motivation'); // Reference to the .motivation element
+            const motivation = document.querySelector('.motivation');
             const soundEffect = document.getElementById('soundEffect');
-            const innerBar = document.querySelector('.inner_bar'); // Reference to the .inner_bar element
+            const innerBar = document.querySelector('.inner_bar');
 
-            let hasSoundPlayed = false; // Flag to ensure sound plays only once
+            let hasSoundPlayed = false;
 
-            // Function to show the acknowledgment background and disable scrolling
+            // Function to show the acknowledgment background and disable scrolling with animation
             function showAcknowledgeBackground() {
                 acknowledgeBackground.style.display = 'block';
-                acknowledgeWrap.style.display = 'flex';
+
+                // Trigger the background transition
+                requestAnimationFrame(() => {
+                    acknowledgeBackground.classList.add('visible');
+                });
+
+                // Delay the wrap animation until the background transition completes
+                setTimeout(() => {
+                    acknowledgeWrap.style.display = 'flex';
+                    acknowledgeWrap.classList.add('animate-in');
+                }, 500); // Match this with the background transition time
+
                 motivation.style.display = 'none'; // Hide motivation when acknowledgment is visible
                 document.body.style.overflow = 'hidden'; // Disable scrolling
             }
 
-            // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width
+            // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width with animation
             function hideAcknowledgeBackground(button) {
-                // Hide the acknowledgment background immediately
-                acknowledgeBackground.style.display = 'none';
-
                 // Start animation for the wrap
+                acknowledgeWrap.classList.remove('animate-in');
                 acknowledgeWrap.classList.add('animate-out');
 
-                // Use requestAnimationFrame to ensure bar width animation starts after background is hidden
+                // Wait for the wrap animation to complete before hiding the background
+                acknowledgeWrap.addEventListener('transitionend', () => {
+                    if (acknowledgeWrap.classList.contains('animate-out')) {
+                        acknowledgeWrap.style.display = 'none';
+                        acknowledgeBackground.classList.remove('visible');
+                        setTimeout(() => {
+                            acknowledgeBackground.style.display = 'none';
+                        }, 500); // Match this with the background transition time
+
+                        document.body.style.overflow = ''; // Enable scrolling
+                    }
+                }, { once: true });
+
+                // Start bar width expansion
                 requestAnimationFrame(() => {
                     requestAnimationFrame(() => {
-                        // Show motivation and start expanding the inner_bar
                         motivation.style.display = 'block';
                         innerBar.style.width = '75%';
 
@@ -347,15 +368,9 @@
                         }
                     });
                 });
-
-                // Wait for the animation to complete before hiding the wrap
-                setTimeout(() => {
-                    acknowledgeWrap.style.display = 'none';
-                    document.body.style.overflow = ''; // Enable scrolling
-                }, 500); // Match this duration with your CSS transition time
             }
 
-            // Show the acknowledgment background when the page loads
+            // Show the acknowledgment background with animation when the page loads
             showAcknowledgeBackground();
 
             // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
@@ -368,7 +383,10 @@
                 });
             });
         });
+
     </script>
+
+
 
 
     <div class="acknowledge_wrap">
@@ -377,11 +395,11 @@
             <p>Onboarding meeting (Tristan Reynolds)</p>
             <div class="alert_text_white">
                 <span style="display: flex; flex-direction: row; align-items: center; gap: 1rem;"><img
-                    src="https://i.postimg.cc/y6FnWFDJ/calendar.webp" alt="image not available"
-                    height="16px">Monday, July 29, 2024 (10:45 - 11:15 am)</span>
+                        src="https://i.postimg.cc/y6FnWFDJ/calendar.webp" alt="image not available"
+                        height="16px">Monday, July 29, 2024 (10:45 - 11:15 am)</span>
                 <br><span style="display: flex; flex-direction: row; align-items: center; gap: 1rem;"><img
-                    src="https://i.postimg.cc/Zn0gznLP/time.webp" alt="image not available"
-                    height="16px">30 Minutes</span>
+                        src="https://i.postimg.cc/Zn0gznLP/time.webp" alt="image not available" height="16px">30
+                    Minutes</span>
                 <br><span style="display: flex; flex-direction: row; align-items: center; gap: 1rem;"><img
                         src="https://i.postimg.cc/mD4B4YcY/google-meet.webp" alt="image not available"
                         height="16px">Google Meet</span>
