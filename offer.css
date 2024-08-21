@@ -1,3 +1,33 @@
+.inline_button {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden; /* Ensure the pseudo-element stays within the border radius */
+}
+
+.inline_button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 111, 250, 1) 100%);
+    backdrop-filter: blur(32px); /* Adjust the blur intensity as needed */
+    z-index: -1; /* Place the blurred background behind the content */
+    border-radius: inherit; /* Match the border radius of the parent */
+}
+
+.character {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    max-width: 50%;
+    max-height: 90%;
+}
+
+
 .faq {
     box-sizing: border-box;
     width: 100%;
