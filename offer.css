@@ -1,3 +1,29 @@
+.faq {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 1rem;
+    border-width: 1px;
+    border-style: solid;
+    border-color: #334750;
+}
+
+.faq_item {
+    width: 100%;
+}
+
+.faq_question {
+    box-sizing: border-box;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.faq_answer {
+    box-sizing: border-box;
+    padding: 1rem;
+    display: none;
+}
+
+
 .copy_width {
     display: flex;
     flex-direction: column;
@@ -30,14 +56,18 @@
     align-self: center;
     top: 0;
     object-fit: cover;
-    filter: blur(8px);/* Adjust blur level as needed */
-    z-index: -1; /* Ensure video is behind the text */
+    filter: blur(8px);
+    /* Adjust blur level as needed */
+    z-index: -1;
+    /* Ensure video is behind the text */
 }
 
 .mobile_hook {
     position: static;
-    z-index: 1; /* Ensure text is above the video */
-    color: black; /* Adjust text color for visibility */
+    z-index: 1;
+    /* Ensure text is above the video */
+    color: black;
+    /* Adjust text color for visibility */
     /* Additional styling for your text */
     background-color: white;
     border-radius: 1rem;
@@ -69,11 +99,9 @@
 }
 
 .line_break {
-    box-sizing: border-box;
-    background-color: #007bff;
-    height: 2px;
-    width: 6rem;
-    border-radius: 100px;
+    background-color: #334750;
+    height: 1px;
+    width: 100%;
 }
 
 .h1_mobile {
@@ -219,7 +247,7 @@
     transition: background-color 0.3s;
 }
 
-input[type="radio"]:checked + label .tab_dot {
+input[type="radio"]:checked+label .tab_dot {
     background-color: #afafaf;
 }
 
