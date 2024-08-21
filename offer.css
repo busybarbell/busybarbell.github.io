@@ -619,8 +619,4 @@ input[type="radio"]:checked+label .tabs_menu_image {
     .video-background-wrapper {
         display: block;
     }
-
-    .nav_wrap {
-        display: none;
-    }
 }
