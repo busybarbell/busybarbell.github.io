@@ -138,12 +138,12 @@ p {
 .copy_button {
 
     /* buttons styling to unset */
-
+    margin-top: 1rem;
     padding: 1rem;
     border: none;
     outline: none;
     font: inherit;
-    color: #fff;
+    color: #000;
 
 
     box-sizing: border-box;
@@ -152,9 +152,9 @@ p {
     justify-content: center;
     align-items: center;
     margin-bottom: 4px;
-    background-color: #006FFA;
+    background-color: #fff;
     border-radius: .5rem;
-    box-shadow: 0px 4px #0045b3;
+    box-shadow: 0px 4px #afafaf;
     font-family: system-ui, sans-serif;
     font-weight: 600;
     font-size: 1.25rem;
