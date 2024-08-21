@@ -44,7 +44,9 @@
             <source src="sabri_mobile.mp4" type="video/mp4">
             Your browser does not support the video tag.
         </video>
-        <div style="display: flex; align-items: left; justify-content: center;"><h1 class="mobile_hook">(Watch Carefully. Then Click.)</h1></div>
+        <div style="display: flex; align-items: left; justify-content: center;">
+            <h1 class="mobile_hook">(Watch Carefully. Then Click.)</h1>
+        </div>
 
         <!-- Other content here -->
     </div>
@@ -55,7 +57,7 @@
         <div class="offer_split">
 
             <div class="split_left">
-                
+
 
                 <!-- tabs begin -->
 
@@ -137,9 +139,9 @@
                                     let animationID;
                                     let currentIndex = 0;
                                     let isSwiping = false;
-                            
+
                                     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-                            
+
                                     if (isMobile) {
                                         clickText.style.display = 'none';
                                         tapText.style.display = 'inline';
@@ -147,7 +149,7 @@
                                         clickText.style.display = 'inline';
                                         tapText.style.display = 'none';
                                     }
-                            
+
                                     let audioContext;
                                     if (window.AudioContext || window.webkitAudioContext) {
                                         audioContext = new (window.AudioContext || window.webkitAudioContext)();
@@ -156,7 +158,7 @@
                                         emptySource.connect(audioContext.destination);
                                         emptySource.start(0);
                                     }
-                            
+
                                     function playSoundEffect() {
                                         if (audioContext && audioContext.state === 'suspended') {
                                             audioContext.resume();
@@ -165,11 +167,11 @@
                                         soundEffect.currentTime = 0;
                                         soundEffect.play();
                                     }
-                            
+
                                     acknowledgeButtons.forEach(button => {
                                         button.addEventListener('click', playSoundEffect);
                                     });
-                            
+
                                     function toggleMute() {
                                         video.muted = !video.muted;
                                         volumeDiv.style.display = 'flex';
@@ -177,15 +179,15 @@
                                         volumeOff.style.display = video.muted ? 'flex' : 'none';
                                         muteBtn.style.display = 'none';
                                     }
-                            
+
                                     muteBtn.style.display = 'flex';
                                     muteBtn.addEventListener('click', toggleMute);
-                            
+
                                     function updateTimeline() {
                                         const progress = (video.currentTime / video.duration) * 100;
                                         timeline.style.width = `${progress}%`;
                                     }
-                            
+
                                     function handleScrubbing(event, isTouch = false) {
                                         const timelineRect = timelineWrap.getBoundingClientRect();
                                         const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
@@ -194,7 +196,7 @@
                                         video.currentTime = newTime;
                                         updateTimeline();
                                     }
-                            
+
                                     function startScrubbing(event, isTouch = false) {
                                         isDragging = true;
                                         wasPlayingBeforeScrub = !video.paused;
@@ -202,14 +204,14 @@
                                         handleScrubbing(event, isTouch);
                                         event.preventDefault();
                                     }
-                            
+
                                     function continueScrubbing(event) {
                                         if (isDragging) {
                                             handleScrubbing(event, event.type.includes('touch'));
                                             event.preventDefault();
                                         }
                                     }
-                            
+
                                     function endScrubbing() {
                                         if (isDragging) {
                                             if (wasPlayingBeforeScrub) {
@@ -218,27 +220,27 @@
                                             isDragging = false;
                                         }
                                     }
-                            
+
                                     timelineWrap.addEventListener('mousedown', (event) => {
                                         startScrubbing(event);
                                     });
                                     document.addEventListener('mousemove', continueScrubbing);
                                     document.addEventListener('mouseup', endScrubbing);
-                            
+
                                     timelineWrap.addEventListener('touchstart', (event) => {
                                         event.stopPropagation(); // Prevent swipe interference
                                         startScrubbing(event, true);
                                     });
                                     document.addEventListener('touchmove', continueScrubbing);
                                     document.addEventListener('touchend', endScrubbing);
-                            
+
                                     video.addEventListener('timeupdate', updateTimeline);
-                            
+
                                     video.addEventListener('click', (event) => {
                                         event.stopPropagation();
                                         toggleMute();
                                     });
-                            
+
                                     document.addEventListener('keydown', (event) => {
                                         if (event.key === 'm') {
                                             toggleMute();
@@ -247,7 +249,7 @@
                                             toggleMute();
                                         }
                                     });
-                            
+
                                     function setVideoSource() {
                                         const screenWidth = window.innerWidth;
                                         if (screenWidth <= 479) {
@@ -257,15 +259,15 @@
                                         }
                                         video.load();
                                     }
-                            
+
                                     setVideoSource();
                                     window.addEventListener('resize', setVideoSource);
-                            
+
                                     setTimeout(() => {
                                         carouselPage.style.transition = 'opacity .2s';
                                         carouselPage.style.opacity = 0;
                                     }, 4000);
-                            
+
                                     const observer = new IntersectionObserver((entries) => {
                                         entries.forEach(entry => {
                                             if (!isSwiping) { // Only pause/play if not swiping
@@ -279,9 +281,9 @@
                                     }, {
                                         threshold: 0.5
                                     });
-                            
+
                                     observer.observe(video);
-                            
+
                                     function startDrag(event) {
                                         isSwiping = true; // Set swiping flag
                                         isDragging = true;
@@ -289,69 +291,69 @@
                                         animationID = requestAnimationFrame(animation);
                                         tabsContent.style.cursor = 'grabbing';
                                     }
-                            
+
                                     function endDrag() {
                                         isSwiping = false; // Reset swiping flag
                                         isDragging = false;
                                         cancelAnimationFrame(animationID);
-                            
+
                                         const movedBy = currentTranslate - previousTranslate;
-                            
+
                                         if (movedBy < -100 && currentIndex < tabsMenu.length - 1) {
                                             currentIndex += 1;
                                         }
-                            
+
                                         if (movedBy > 100 && currentIndex > 0) {
                                             currentIndex -= 1;
                                         }
-                            
+
                                         setPositionByIndex();
                                         tabsContent.style.cursor = 'grab';
                                     }
-                            
+
                                     function dragging(event) {
                                         if (isDragging) {
                                             const currentPosition = getPositionX(event);
                                             currentTranslate = previousTranslate + currentPosition - startPosition;
                                         }
                                     }
-                            
+
                                     function getPositionX(event) {
                                         return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
                                     }
-                            
+
                                     function animation() {
                                         setSliderPosition();
                                         if (isDragging) requestAnimationFrame(animation);
                                     }
-                            
+
                                     function setSliderPosition() {
                                         tabsContent.style.transform = `translateX(${currentTranslate}px)`;
                                     }
-                            
+
                                     function setPositionByIndex() {
                                         currentTranslate = currentIndex * -window.innerWidth;
                                         previousTranslate = currentTranslate;
                                         setSliderPosition();
                                         tabsMenu[currentIndex].checked = true;
                                     }
-                            
+
                                     tabsMenu.forEach((tab, index) => {
                                         tab.addEventListener('change', () => {
                                             currentIndex = index;
                                             setPositionByIndex();
                                         });
                                     });
-                            
+
                                     tabsContent.addEventListener('mousedown', startDrag);
                                     tabsContent.addEventListener('touchstart', startDrag);
                                     tabsContent.addEventListener('mouseup', endDrag);
                                     tabsContent.addEventListener('touchend', endDrag);
                                     tabsContent.addEventListener('mousemove', dragging);
                                     tabsContent.addEventListener('touchmove', dragging);
-                            
+
                                     setPositionByIndex();
-                            
+
                                     // Update video background based on play/pause state
                                     function updateBackground() {
                                         if (video.paused) {
@@ -361,17 +363,17 @@
                                             canvas.width = video.videoWidth;
                                             canvas.height = video.videoHeight;
                                             context.drawImage(video, 0, 0, canvas.width, canvas.height);
-                            
+
                                             // Get current time position in the video
                                             const currentTime = video.currentTime;
                                             const totalDuration = video.duration;
                                             const progress = currentTime / totalDuration;
-                            
+
                                             // Update background size and position based on the video aspect ratio
                                             const videoAspectRatio = video.videoWidth / video.videoHeight;
                                             const wrapperAspectRatio = videoWrapper.clientWidth / videoWrapper.clientHeight;
                                             let backgroundSize, backgroundPosition;
-                            
+
                                             if (videoAspectRatio > wrapperAspectRatio) {
                                                 backgroundSize = `auto 100%`;
                                                 backgroundPosition = `${progress * 100}% center`;
@@ -379,7 +381,7 @@
                                                 backgroundSize = `100% auto`;
                                                 backgroundPosition = `center ${progress * 100}%`;
                                             }
-                            
+
                                             videoWrapper.style.backgroundImage = `url(${canvas.toDataURL()})`;
                                             videoWrapper.style.backgroundSize = backgroundSize;
                                             videoWrapper.style.backgroundPosition = backgroundPosition;
@@ -389,7 +391,7 @@
                                             videoWrapper.style.backgroundImage = 'none';
                                         }
                                     }
-                            
+
                                     // Attach event listeners
                                     video.addEventListener('play', updateBackground);
                                     video.addEventListener('pause', updateBackground);
@@ -517,7 +519,10 @@
 
                         <br>Here’s why:<br>
 
-                        <br>My name is Sabri Suby and five short years ago I was dead broke.<br>
+                        <br>My name is Sabri Suby and five short years ago I was <u data-cal-link="busy-barbell/30min"
+                            data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                            aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                        -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">dead broke.</u><br>
 
                         <br>I had just started my business from a rented bedroom…<br>
 
@@ -526,8 +531,11 @@
                         <br>I was desperately searching for clients and practically <b>“begging”</b> people just to
                         speak with me.<br>
 
-                        <br>I would wake up early every morning before the sun rose, and make 150 cold-calls per
-                        day.<br>
+                        <br>I would wake up early every morning before the sun rose, and make <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">150 cold-calls per
+                        day.</u><br>
 
                         <br>Mostly to people that would simply tell me to “f*ck off” or hang up on me.<br>
 
@@ -539,7 +547,10 @@
 
                         <br>That allowed me to take my sales pitch and ‘automate’ it.<br>
 
-                        <br>So instead of calling on 150 businesses per day…<br>
+                        <br>So instead of calling on <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">150 businesses per day…</u><br>
 
                         <br>I could write a sales message that would call on…<br>
 
@@ -552,7 +563,10 @@
 
                         <br>An old friend even called me a “dreamer”.<br>
 
-                        <br>But I couldn’t give two shits...<br>
+                        <br>But I couldn’t give <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">two shits...</u><br>
 
                         <br>Because I had nothing to lose and everything to gain.<br>
 
@@ -562,7 +576,10 @@
 
                         <br>And everything changed for me.<br>
 
-                        <br>Instead of cold-calling strangers to get new clients.<br>
+                        <br>Instead of <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">cold-calling strangers</u> to get new clients.<br>
 
                         <br><span style="background-color: rgba(0,121,255, 0.5);">I had more clients than I could
                             possibly
@@ -573,7 +590,10 @@
 
                         <br>And the 17th fastest growing company in the country (across all industries)...<br>
 
-                        <br>As ranked by the Australian Financial Review in 5 years flat!...<br>
+                        <br><u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">As ranked by the Australian Financial Review</u> in 5 years flat!...<br>
 
                         <br>But it’s not just me!<br>
 
@@ -589,7 +609,10 @@
 
                         <br>To generate over <b>$7.8 billion</b> in reported client revenue for me and my clients…<br>
 
-                        <br>And listen, a part of this system’s success is that it tracks EVERYTHING!<br>
+                        <br>And listen, a part of this system’s success is that it tracks <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">EVERYTHING!</u><br>
 
                         <br>And this $7.8 billion in sales, is just in reported client revenue.<br>
 
@@ -606,8 +629,11 @@
                             a wildly successful business with $2 million in annual sales in 14 months.</b><br>
 
                         <br>💰 <b>Launch a mattress start-up from $0 to $13 million in revenue</b> in their first 12
-                        months… (Literally
-                        selling out warehouses full of stock and the manufacturer couldn’t keep up!)<br>
+                        months… <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">(Literally
+                        selling out warehouses full of stock and the manufacturer couldn’t keep up!)</u><br>
 
                         <br>💰 Take a small father and son building business from <b>$3 million to $50 million in sales
                             in just 18
@@ -621,7 +647,10 @@
                         was for a client in
                         a super-niche property market and took him from zero to hero within two months)<br>
 
-                        <br>And so on….Look, I could easily fill up an entire book with hundreds of success stories like
+                        <br>And so on….Look, I could easily fill up an entire book with <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">hundreds of success stories</u> like
                         this…<br>
 
                         <br>Because I’ve used this ‘selling system’ in over 1067 different niches!<br>
@@ -631,7 +660,10 @@
 
                         <br><b>To create a torrential downpour of customers that flood their business!</b><br>
 
-                        <br>And this is just one of the reasons I’ve been questioned by reporters about the “legality”
+                        <br>And this is just one of the <u data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting" style="cursor: pointer;
+                    -webkit-text-decoration-color: #0079ff; text-decoration-color: #0079ff;">reasons I’ve been questioned by reporters</u> about the “legality”
                         of this
                         ‘selling system’...<br>
 
