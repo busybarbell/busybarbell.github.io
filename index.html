@@ -39,6 +39,15 @@
         </div>
     </div>
 
+    <div class="fixed_nav_wrap">
+        <div class="nav">
+            <img src="https://i.postimg.cc/gj46Pbbv/logo.webp" alt="image not available" width="88px" height="24px" />
+            <button class="nav_button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
+                data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">BOOK
+                MEETING</button>
+        </div>
+    </div>
+
     <div class="video-background-wrapper">
         <video id="backgroundVideo" autoplay muted loop playsinline>
             <source src="sabri_mobile.mp4" type="video/mp4">
@@ -131,6 +140,8 @@
                                     const tabsContent = document.querySelector('.tabs_content');
                                     const tabsMenu = document.querySelectorAll('.tabs_menu input[type="radio"]');
                                     const videoWrapper = document.querySelector('.video-background-wrapper'); // For background update
+                                    const fixedNav = document.querySelector('.fixed_nav_wrap');
+                                    const tabs = document.querySelector('.tabs');
                                     let isDragging = false;
                                     let wasPlayingBeforeScrub = false;
                                     let startPosition = 0;
@@ -396,6 +407,21 @@
                                     video.addEventListener('play', updateBackground);
                                     video.addEventListener('pause', updateBackground);
                                     video.addEventListener('timeupdate', updateBackground); // Update as the video plays
+
+                                    // Intersection Observer for the fixed navigation
+                                    const navObserver = new IntersectionObserver((entries) => {
+                                        entries.forEach(entry => {
+                                            if (entry.isIntersecting) {
+                                                fixedNav.style.transform = 'translateY(-100%)'; // Slide down the fixed navigation
+                                            } else {
+                                                fixedNav.style.transform = 'translateY(0)'; // Move off-screen
+                                            }
+                                        });
+                                    }, { threshold: 0 });
+
+                                    if (tabs) {
+                                        navObserver.observe(tabs);
+                                    }
                                 });
                             </script>
 
