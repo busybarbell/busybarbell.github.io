@@ -679,7 +679,8 @@
                     <div class="faq_item">
                         <p class="faq_question"><b>What is Skool?</b></p>
                         <div class="faq_answer">
-                            <p>Skool is a community platform that lets you start, grow, and manage an online business.<br>
+                            <p>Skool is a community platform that lets you start, grow, and manage an online
+                                business.<br>
 
                                 <br>With Skool, you can:<br>
                                 <br>· Build your own community, courses, and events
@@ -689,7 +690,8 @@
                                 <br>Skool is simple, you can set it up in less than 30-minutes, and because it's an
                                 all-in-one platform, you don't need to integrate any tools for it to work. This gives
                                 you the flexibility to access and run your business from almost anywhere, including your
-                                mobile device.</p>
+                                mobile device.
+                            </p>
                         </div>
                     </div>
 
@@ -741,10 +743,26 @@
                 <script>
                     document.querySelectorAll('.faq_question').forEach(question => {
                         question.addEventListener('click', () => {
+                            // Close all other answers
+                            document.querySelectorAll('.faq_answer').forEach(answer => {
+                                if (answer !== question.nextElementSibling) {
+                                    answer.style.display = 'none';
+                                }
+                            });
+
+                            // Toggle the clicked answer
                             const answer = question.nextElementSibling;
                             answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
                         });
                     });
+
+                    // Close the FAQ when the answer itself is clicked
+                    document.querySelectorAll('.faq_answer').forEach(answer => {
+                        answer.addEventListener('click', () => {
+                            answer.style.display = 'none';
+                        });
+                    });
+
                 </script>
 
 
