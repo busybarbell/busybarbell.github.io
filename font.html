@@ -1,816 +1,264 @@
-<!DOCTYPE html>
-
-<html lang="en">
-
-<head>
-
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1" name="viewport" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-
-    <title>Busy Barbell</title>
-    <meta name="description"
-        content="Busy Barbell's 21-Day Summer Slim Down. Transform your body 💪 with 1-on-1 online fitness coaching.">
-
-    <!-- stylsheets begin -->
-
-    <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="offer.css">
-
-    <!-- video preload begins -->
-
-    <link rel="preload" fetchpriority="high" as="video" href="sabri_mobile.mp4">
-    <link rel="preload" fetchpriority="high" as="video" href="sabri.mp4">
-    <audio id="soundEffect" src="button_sound.mp3" preload="auto"></audio>
-
-</head>
-
-<body>
-
-    <!-- nav begins -->
-
-    <div class="nav_wrap">
-        <div class="nav">
-            <img src="https://i.postimg.cc/gj46Pbbv/logo.webp" alt="image not available" width="88px" height="24px" />
-            <div class="alert_wrap">
-                <img src="https://i.ibb.co/nbZ3DT0/fire-icon.webp" alt="image not available" height="24px" />
-                <div class="alert_text">5 spots left</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="fixed_nav_wrap">
-        <div class="nav">
-            <img src="https://i.postimg.cc/gj46Pbbv/logo.webp" alt="image not available" width="88px" height="24px" />
-            <button class="nav_button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">BOOK
-                MEETING</button>
-        </div>
-    </div>
-
-    <div class="video-background-wrapper">
-        <video id="backgroundVideo" autoplay muted loop playsinline>
-            <source src="sabri_mobile.mp4" type="video/mp4">
-            Your browser does not support the video tag.
-        </video>
-        <div style="display: flex; align-items: left; justify-content: center;">
-            <h1 class="mobile_hook">(Watch Carefully. Then Click.)</h1>
-        </div>
-
-        <!-- Other content here -->
-    </div>
-
-    <!-- offer begins -->
-
-    <div class="offer_wrap">
-        <div class="offer_split">
-
-            <div class="split_left">
-
-
-                <!-- tabs begin -->
-
-                <div class="tabs">
-
-                    <div class="tabs_content">
-                        <div class="theater_mode"></div>
-
-                        <div class="tab_image video_wrap" id="content1" style="display: flex;">
-
-                            <style>
-                                /* Hide text elements by default */
-                                .click_for_sound .click-text,
-                                .click_for_sound .tap-text {
-                                    display: none;
-                                }
-
-                                /* Additional style to ensure timeline has a larger touchable area */
-                                .timeline_wrap {
-                                    overflow: visible;
-                                    /* Ensure timeline's parent allows overflow for touch events */
-                                }
-                            </style>
-
-                            <img class="thumbnail_image" style="position: static; display: none; z-index: 10;">
-
-                            <div class="video_controls_wrap">
-                                <div class="timeline_wrap" style="position: relative;">
-                                    <div class="timeline"></div>
-                                </div>
-
-                                <div class="controls">
-                                    <div class="volume" style="display: none;">
-                                        <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp"
-                                            alt="Volume on" height="13.6px">
-                                        <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp"
-                                            alt="Volume off" height="13.6px">
-                                    </div>
-
-                                    <div class="carousel_page">1/5</div>
-
-                                    <button class="click_for_sound">
-                                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available"
-                                            height="24px">
-                                        <span class="click-text">Click for sound</span>
-                                        <span class="tap-text">Tap for sound</span>
-                                    </button>
-                                </div>
-                            </div>
-
-                            <video id="myVideo" preload="metadata" width="100%" playsinline autoplay muted loop>
-                                <source id="videoSource" src="sabri.mp4" type="video/mp4">
-                                Your browser does not support the video tag.
-                            </video>
-
-                            <script>
-                                document.addEventListener('DOMContentLoaded', () => {
-                                    const video = document.getElementById('myVideo');
-                                    const videoSource = document.getElementById('videoSource');
-                                    const muteBtn = document.querySelector('.click_for_sound');
-                                    const volumeDiv = document.querySelector('.volume');
-                                    const volumeOn = volumeDiv.querySelector('.volume-on');
-                                    const volumeOff = volumeDiv.querySelector('.volume-off');
-                                    const timeline = document.querySelector('.timeline');
-                                    const timelineWrap = document.querySelector('.timeline_wrap');
-                                    const clickText = muteBtn.querySelector('.click-text');
-                                    const tapText = muteBtn.querySelector('.tap-text');
-                                    const carouselPage = document.querySelector('.carousel_page');
-                                    const soundEffect = document.getElementById('soundEffect');
-                                    const acknowledgeButtons = document.querySelectorAll('.button');
-                                    const tabsContent = document.querySelector('.tabs_content');
-                                    const tabsMenu = document.querySelectorAll('.tabs_menu input[type="radio"]');
-                                    const videoWrapper = document.querySelector('.video-background-wrapper'); // For background update
-                                    const fixedNav = document.querySelector('.fixed_nav_wrap');
-                                    const tabs = document.querySelector('.tabs');
-                                    let isDragging = false;
-                                    let wasPlayingBeforeScrub = false;
-                                    let startPosition = 0;
-                                    let currentTranslate = 0;
-                                    let previousTranslate = 0;
-                                    let animationID;
-                                    let currentIndex = 0;
-                                    let isSwiping = false;
-
-                                    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
-
-                                    if (isMobile) {
-                                        clickText.style.display = 'none';
-                                        tapText.style.display = 'inline';
-                                    } else {
-                                        clickText.style.display = 'inline';
-                                        tapText.style.display = 'none';
-                                    }
-
-                                    let audioContext;
-                                    if (window.AudioContext || window.webkitAudioContext) {
-                                        audioContext = new (window.AudioContext || window.webkitAudioContext)();
-                                        const emptySource = audioContext.createBufferSource();
-                                        emptySource.buffer = audioContext.createBuffer(1, 1, 22050);
-                                        emptySource.connect(audioContext.destination);
-                                        emptySource.start(0);
-                                    }
-
-                                    function playSoundEffect() {
-                                        if (audioContext && audioContext.state === 'suspended') {
-                                            audioContext.resume();
-                                        }
-                                        soundEffect.pause();
-                                        soundEffect.currentTime = 0;
-                                        soundEffect.play();
-                                    }
-
-                                    acknowledgeButtons.forEach(button => {
-                                        button.addEventListener('click', playSoundEffect);
-                                    });
-
-                                    function toggleMute() {
-                                        video.muted = !video.muted;
-                                        volumeDiv.style.display = 'flex';
-                                        volumeOn.style.display = video.muted ? 'none' : 'flex';
-                                        volumeOff.style.display = video.muted ? 'flex' : 'none';
-                                        muteBtn.style.display = 'none';
-                                    }
-
-                                    muteBtn.style.display = 'flex';
-                                    muteBtn.addEventListener('click', toggleMute);
-
-                                    function updateTimeline() {
-                                        const progress = (video.currentTime / video.duration) * 100;
-                                        timeline.style.width = `${progress}%`;
-                                    }
-
-                                    function handleScrubbing(event, isTouch = false) {
-                                        const timelineRect = timelineWrap.getBoundingClientRect();
-                                        const offsetX = isTouch ? event.touches[0].clientX - timelineRect.left : event.clientX - timelineRect.left;
-                                        const timelineWidth = timelineWrap.clientWidth;
-                                        const newTime = (offsetX / timelineWidth) * video.duration;
-                                        video.currentTime = newTime;
-                                        updateTimeline();
-                                    }
-
-                                    function startScrubbing(event, isTouch = false) {
-                                        isDragging = true;
-                                        wasPlayingBeforeScrub = !video.paused;
-                                        video.pause();
-                                        handleScrubbing(event, isTouch);
-                                        event.preventDefault();
-                                    }
-
-                                    function continueScrubbing(event) {
-                                        if (isDragging) {
-                                            handleScrubbing(event, event.type.includes('touch'));
-                                            event.preventDefault();
-                                        }
-                                    }
-
-                                    function endScrubbing() {
-                                        if (isDragging) {
-                                            if (wasPlayingBeforeScrub) {
-                                                video.play();
-                                            }
-                                            isDragging = false;
-                                        }
-                                    }
-
-                                    timelineWrap.addEventListener('mousedown', (event) => {
-                                        startScrubbing(event);
-                                    });
-                                    document.addEventListener('mousemove', continueScrubbing);
-                                    document.addEventListener('mouseup', endScrubbing);
-
-                                    timelineWrap.addEventListener('touchstart', (event) => {
-                                        event.stopPropagation(); // Prevent swipe interference
-                                        startScrubbing(event, true);
-                                    });
-                                    document.addEventListener('touchmove', continueScrubbing);
-                                    document.addEventListener('touchend', endScrubbing);
-
-                                    video.addEventListener('timeupdate', updateTimeline);
-
-                                    video.addEventListener('click', (event) => {
-                                        event.stopPropagation();
-                                        toggleMute();
-                                    });
-
-                                    document.addEventListener('keydown', (event) => {
-                                        if (event.key === 'm') {
-                                            toggleMute();
-                                        } else if (event.code === 'Space') {
-                                            event.preventDefault();
-                                            toggleMute();
-                                        }
-                                    });
-
-                                    function setVideoSource() {
-                                        const screenWidth = window.innerWidth;
-                                        if (screenWidth <= 479) {
-                                            videoSource.src = 'sabri_mobile.mp4';
-                                        } else {
-                                            videoSource.src = 'sabri.mp4';
-                                        }
-                                        video.load();
-                                    }
-
-                                    setVideoSource();
-                                    window.addEventListener('resize', setVideoSource);
-
-                                    setTimeout(() => {
-                                        carouselPage.style.transition = 'opacity .2s';
-                                        carouselPage.style.opacity = 0;
-                                    }, 4000);
-
-                                    const observer = new IntersectionObserver((entries) => {
-                                        entries.forEach(entry => {
-                                            if (!isSwiping) { // Only pause/play if not swiping
-                                                if (entry.isIntersecting) {
-                                                    video.play();
-                                                } else {
-                                                    video.pause();
-                                                }
-                                            }
-                                        });
-                                    }, {
-                                        threshold: 0.5
-                                    });
-
-                                    observer.observe(video);
-
-                                    function startDrag(event) {
-                                        isSwiping = true; // Set swiping flag
-                                        isDragging = true;
-                                        startPosition = getPositionX(event);
-                                        animationID = requestAnimationFrame(animation);
-                                        tabsContent.style.cursor = 'grabbing';
-                                    }
-
-                                    function endDrag() {
-                                        isSwiping = false; // Reset swiping flag
-                                        isDragging = false;
-                                        cancelAnimationFrame(animationID);
-
-                                        const movedBy = currentTranslate - previousTranslate;
-
-                                        if (movedBy < -100 && currentIndex < tabsMenu.length - 1) {
-                                            currentIndex += 1;
-                                        }
-
-                                        if (movedBy > 100 && currentIndex > 0) {
-                                            currentIndex -= 1;
-                                        }
-
-                                        setPositionByIndex();
-                                        tabsContent.style.cursor = 'grab';
-                                    }
-
-                                    function dragging(event) {
-                                        if (isDragging) {
-                                            const currentPosition = getPositionX(event);
-                                            currentTranslate = previousTranslate + currentPosition - startPosition;
-                                        }
-                                    }
-
-                                    function getPositionX(event) {
-                                        return event.type.includes('mouse') ? event.pageX : event.touches[0].clientX;
-                                    }
-
-                                    function animation() {
-                                        setSliderPosition();
-                                        if (isDragging) requestAnimationFrame(animation);
-                                    }
-
-                                    function setSliderPosition() {
-                                        tabsContent.style.transform = `translateX(${currentTranslate}px)`;
-                                    }
-
-                                    function setPositionByIndex() {
-                                        currentTranslate = currentIndex * -window.innerWidth;
-                                        previousTranslate = currentTranslate;
-                                        setSliderPosition();
-                                        tabsMenu[currentIndex].checked = true;
-                                    }
-
-                                    tabsMenu.forEach((tab, index) => {
-                                        tab.addEventListener('change', () => {
-                                            currentIndex = index;
-                                            setPositionByIndex();
-                                        });
-                                    });
-
-                                    tabsContent.addEventListener('mousedown', startDrag);
-                                    tabsContent.addEventListener('touchstart', startDrag);
-                                    tabsContent.addEventListener('mouseup', endDrag);
-                                    tabsContent.addEventListener('touchend', endDrag);
-                                    tabsContent.addEventListener('mousemove', dragging);
-                                    tabsContent.addEventListener('touchmove', dragging);
-
-                                    setPositionByIndex();
-
-                                    // Update video background based on play/pause state
-                                    function updateBackground() {
-                                        if (video.paused) {
-                                            // Capture a static frame and set it as background
-                                            const canvas = document.createElement('canvas');
-                                            const context = canvas.getContext('2d');
-                                            canvas.width = video.videoWidth;
-                                            canvas.height = video.videoHeight;
-                                            context.drawImage(video, 0, 0, canvas.width, canvas.height);
-
-                                            // Get current time position in the video
-                                            const currentTime = video.currentTime;
-                                            const totalDuration = video.duration;
-                                            const progress = currentTime / totalDuration;
-
-                                            // Update background size and position based on the video aspect ratio
-                                            const videoAspectRatio = video.videoWidth / video.videoHeight;
-                                            const wrapperAspectRatio = videoWrapper.clientWidth / videoWrapper.clientHeight;
-                                            let backgroundSize, backgroundPosition;
-
-                                            if (videoAspectRatio > wrapperAspectRatio) {
-                                                backgroundSize = `auto 100%`;
-                                                backgroundPosition = `${progress * 100}% center`;
-                                            } else {
-                                                backgroundSize = `100% auto`;
-                                                backgroundPosition = `center ${progress * 100}%`;
-                                            }
-
-                                            videoWrapper.style.backgroundImage = `url(${canvas.toDataURL()})`;
-                                            videoWrapper.style.backgroundSize = backgroundSize;
-                                            videoWrapper.style.backgroundPosition = backgroundPosition;
-                                            videoWrapper.style.backgroundColor = 'transparent'; // Ensure background color is transparent
-                                        } else {
-                                            // If video is playing, remove the static background image
-                                            videoWrapper.style.backgroundImage = 'none';
-                                        }
-                                    }
-
-                                    // Attach event listeners
-                                    video.addEventListener('play', updateBackground);
-                                    video.addEventListener('pause', updateBackground);
-                                    video.addEventListener('timeupdate', updateBackground); // Update as the video plays
-
-                                    // Intersection Observer for the fixed navigation
-                                    const navObserver = new IntersectionObserver((entries) => {
-                                        entries.forEach(entry => {
-                                            if (entry.isIntersecting) {
-                                                fixedNav.style.transform = 'translateY(-100%)'; // Slide down the fixed navigation
-                                            } else {
-                                                fixedNav.style.transform = 'translateY(0)'; // Move off-screen
-                                            }
-                                        });
-                                    }, { threshold: 0 });
-
-                                    if (tabs) {
-                                        navObserver.observe(tabs);
-                                    }
-                                });
-                            </script>
-
-                        </div>
-
-                        <div class="tab_image" id="content2">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content3">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content4">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content5">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                        <div class="tab_image" id="content6">
-                            <img src="https://i.postimg.cc/k58sPG1K/test-image.webp" alt="image not available">
-                        </div>
-
-                    </div>
-
-                    <div class="tabs_menu">
-
-                        <input type="radio" name="tabs" id="tab1" checked>
-                        <label for="tab1">
-                            <div class="tab_dot"></div>
-                            <img class="tabs_menu_image" alt="image not available"
-                                src="https://i.postimg.cc/Vk95yc95/menu-test-image.webp">
-                        </label>
-
-                        <input type="radio" name="tabs" id="tab2">
-                        <label for="tab2">
-                            <div class="tab_dot"></div>
-                            <img class="tabs_menu_image" alt="image not available"
-                                src="https://i.postimg.cc/Vk95yc95/menu-test-image.webp">
-                        </label>
-
-                        <input type="radio" name="tabs" id="tab3">
-                        <label for="tab3">
-                            <div class="tab_dot"></div>
-                            <img class="tabs_menu_image" alt="image not available"
-                                src="https://i.postimg.cc/Vk95yc95/menu-test-image.webp">
-                        </label>
-
-                        <input type="radio" name="tabs" id="tab4">
-                        <label for="tab4">
-                            <div class="tab_dot"></div>
-                            <img class="tabs_menu_image" alt="image not available"
-                                src="https://i.postimg.cc/Vk95yc95/menu-test-image.webp">
-                        </label>
-
-                        <input type="radio" name="tabs" id="tab5">
-                        <label for="tab5">
-                            <div class="tab_dot"></div>
-                            <img class="tabs_menu_image" alt="image not available"
-                                src="https://i.postimg.cc/Vk95yc95/menu-test-image.webp">
-                        </label>
-
-                        <input type="radio" name="tabs" id="tab6">
-                        <label for="tab6">
-                            <div class="tab_dot"></div>
-                            <img class="tabs_menu_image" alt="image not available"
-                                src="https://i.postimg.cc/Vk95yc95/menu-test-image.webp">
-                        </label>
-
-                    </div>
-
-                </div>
-
-                <button class="button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">BOOK
-                    MEETING</button>
-
-                <div class="points_wrap">
-                    <div class="point">
-                        <svg height="1.5rem" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                            <path
-                                d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"
-                                fill="currentColor"></path>
-                        </svg>Private coaching
-                    </div>
-                    <div class="point">
-                        <svg aria-hidden="true" role="img" class="iconify iconify--ic" height="1.5rem"
-                            preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
-                            <path fill="currentColor" fill-rule="evenodd"
-                                d="M16.67 13.13C18.04 14.06 19 15.32 19 17v3h3c.55 0 1-.45 1-1v-2c0-2.18-3.57-3.47-6.33-3.87z">
-                            </path>
-                            <circle cx="9" cy="8" r="4" fill="currentColor" fill-rule="evenodd"></circle>
-                            <path fill="currentColor" fill-rule="evenodd"
-                                d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4c-.47 0-.91.1-1.33.24a5.98 5.98 0 0 1 0 7.52c.42.14.86.24 1.33.24zm-6 1c-2.67 0-8 1.34-8 4v2c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-2c0-2.66-5.33-4-8-4z">
-                            </path>
-                        </svg>27 participants
-                    </div>
-                    <div class="point orange"><img src="https://i.ibb.co/nbZ3DT0/fire-icon.webp"
-                            alt="image not available" height="24px" />5 spots
-                        left</div>
-                    <div class="point"><img class="point_face" src="https://i.postimg.cc/WbKrT56R/hormozi-face.webp"
-                            alt="image not available" width="24px" height="24px">By Asher Robinson 👑</div>
-                </div>
-
-                <div class="line_break" style="width: 100vw; align-self: center;"></div>
-
-
-                <h1 class="h1_mobile">“Possibly the Most Controversial Marketing and Sales Book for the General Public
-                    Ever Written…”</h1>
-
-                <div class="copy_width">
-
-                    <p>Dear Business Builder,<br>
-
-                        <br>Everyone thought I was a fool, and that there was no way this could possibly work…<br>
-
-                        <br>An old friend even called me a “dreamer”.<br>
-
-                        <br>But I couldn’t give <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">two shits...</u><br>
-
-                        <br>Because I had nothing to lose and everything to gain.<br>
-
-                        <br>So, after a lot of late nights, early mornings and a tonne of trial and error…<br>
-
-                        <br><b>I finally discovered a ‘secret selling system’.</b><br>
-
-                        <br>And everything changed for me.<br>
-
-                        <br>Instead of <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">cold-calling strangers</u>
-                        to get new clients.<br>
-
-                        <br><img style="width: 100%;" src="https://i.postimg.cc/76RR0Skj/AVATARSh-1000x.webp"
-                            alt="image not available"></br>
-
-                        <br><span style="background-color: rgba(0,121,255, 0.5);">I had more clients than I could
-                            possibly
-                            handle!</span><br>
-
-                        <br>And I used this “selling system” to quickly catapult me into building the #1 fastest growing
-                        digital marketing agency in Australia (several years in a row).<br>
-
-                        <br>And the 17th fastest growing company in the country (across all industries)...<br>
-
-                        <br><u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">As ranked by the
-                            Australian Financial Review</u> in 5 years flat!...<br>
-
-                        <br>But it’s not just me!
-                    </p>
-
-                    <div class="inline_button"
-                        style="box-sizing: border-box; padding: 1rem; gap: 1rem; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
-                        <image src="https://i.postimg.cc/sXMSQhKB/super.webp" alt="image not available" height="24px">
-                            <p style="max-width: 50%;">Hurry! 5 spots left as of August 21st.</p><button
-                                class="copy_button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                                data-cal-config='{"layout":"month_view"}'
-                                aria-label="Book your free onboarding meeting">BOOK MEETING</button>
-                            <image src="https://i.postimg.cc/L6KzsS0m/rocket.webp" alt="image not available"
-                                class="character" style="z-index: -1;">
-                    </div>
-
-                    <p>I’ve also deployed this selling system in over 1067 different industries…<br>
-
-                        <br>To generate over <b>$7.8 billion</b> in reported client revenue for me and my clients…<br>
-
-                        <br>And listen, a part of this system’s success is that it tracks <u
-                            data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">EVERYTHING!</u><br>
-
-                        <br>And this $7.8 billion in sales, is just in reported client revenue.
-                    </p>
-
-                    <img style="width: 100%;" src="https://i.postimg.cc/d3SdxfgW/emoji-pixie.webp"
-                        alt="image not available">
-
-                    <h1>The real number is well north of this!</h1>
-
-                    <p>I’ve also used this selling system to…<br>
-
-                        <br>💰 <b>Take a home building start-up from $0 to $7 million in 8 months flat…</b> they hit
-                        their building
-                        insurance and couldn’t take on any more clients!<br>
-
-                        <br>💰 Transform a Pilates instructor training business, from barely breaking even at $200k in
-                        revenue… <b>to
-                            a wildly successful business with $2 million in annual sales in 14 months.</b><br>
-
-                        <br>💰 <b>Launch a mattress start-up from $0 to $13 million in revenue</b> in their first 12
-                        months… <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">(Literally
-                            selling out warehouses full of stock and the manufacturer couldn’t keep up!)</u><br>
-
-                        <br>💰 Take a small father and son building business from <b>$3 million to $50 million in sales
-                            in just 18
-                            MONTHS!</b><br>
-
-                        <br>💰 Skyrocketing the sales of an Aged Care provider <b>from $4 million to $25 million in
-                            sales in 12 months
-                            flat!</b> (This was all done with a basic 2-step funnel and one traffic source!)<br>
-
-                        <br>💰 <b>Sell $51 million dollars’ worth of property in 8 WEEKS</b> through one funnel! (This
-                        was for a client in
-                        a super-niche property market and took him from zero to hero within two months)<br>
-
-                        <br>And so on….Look, I could easily fill up an entire book with <u
-                            data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">hundreds of success
-                            stories</u> like
-                        this…<br>
-
-                        <br>Because I’ve used this ‘selling system’ in over 1067 different niches!<br>
-
-                        <br>Small businesses, all the way up to multi-billion dollar brands have used this selling
-                        system...<br>
-
-                        <br><b>To create a torrential downpour of customers that flood their business!</b><br>
-
-                        <br>And this is just one of the <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">reasons I’ve been
-                            questioned by reporters</u> about the “legality”
-                        of this
-                        ‘selling system’...<br>
-
-                        <br>But I’ll get to that in just a moment.<br>
-
-                        <br>Lemme first show you some more proof!…
-                    </p>
-
-                    <div class="inline_button"
-                        style="box-sizing: border-box; padding: 1rem; gap: 1rem; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
-                        <image src="https://i.postimg.cc/sXMSQhKB/super.webp" alt="image not available" height="24px">
-                            <p>Only 30-minutes.</p><button class="copy_button" data-cal-link="busy-barbell/30min"
-                                data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
-                                aria-label="Book your free onboarding meeting">BOOK MEETING</button>
-                            <image src="https://i.postimg.cc/Jh43WQYJ/clock.webp" alt="image not available"
-                                class="character" style="z-index: -1;">
-                    </div>
-
-                    <p>Thanks for taking the time to read this page and I look forward to hearing from you
-                        soon!<br>
-
-                        <br><b>- Asher Robinson</b><br>
-
-                        <br><img src="https://i.postimg.cc/9f2K9xBK/signature.webp" alt="image not available"
-                            height="32px"><br>
-
-                        <br><span style="background-color: rgba(0,121,255, 0.5);">P.S.</span> Nothing changes if
-                        nothing changes... and <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                            data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting"
-                            style="cursor: pointer;
-                    -webkit-text-decoration-color: #006FFA; text-decoration-color: #006FFA;">there's no better time
-                            than now.</u><br>
-
-                    </p>
-
-                </div>
-
-                <div class="line_break" style="width: 100vw; align-self: center;"></div>
-
-                <h1 class="h1_mobile">FAQ</h1>
-
-                <div class="faq">
-                    <div class="faq_item">
-                        <p class="faq_question"><b>What is Skool?</b></p>
-                        <div class="faq_answer">
-                            <p>Skool is a community platform that lets you start, grow, and manage an online
-                                business.<br>
-
-                                <br>With Skool, you can:<br>
-                                <br>· Build your own community, courses, and events
-                                <br>· Charge subscription memberships or 1-time course purchases
-                                <br>· Make money online doing what you love with one simple platform<br>
-
-                                <br>Skool is simple, you can set it up in less than 30-minutes, and because it's an
-                                all-in-one platform, you don't need to integrate any tools for it to work. This gives
-                                you the flexibility to access and run your business from almost anywhere, including your
-                                mobile device.
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="line_break"></div>
-
-                    <div class="faq_item">
-                        <p class="faq_question"><b>How can I create an account?</b></p>
-                        <div class="faq_answer">
-                            <p>To create an account, click on the "Sign Up" button at the top right of the page and fill
-                                in your details.</p>
-                        </div>
-                    </div>
-
-                    <div class="line_break"></div>
-
-                    <div class="faq_item">
-                        <p class="faq_question"><b>What are the available features?</b></p>
-                        <div class="faq_answer">
-                            <p>We offer a variety of features including tutorials, forums, and personalized learning
-                                paths to help you succeed.</p>
-                        </div>
-                    </div>
-
-                    <div class="line_break"></div>
-
-                    <div class="faq_item">
-                        <p class="faq_question"><b>How can I contact support?</b></p>
-                        <div class="faq_answer">
-                            <p>You can contact support by clicking on the "Contact Us" link at the bottom of the page
-                                and filling out the form.</p>
-                        </div>
-                    </div>
-
-                    <div class="line_break"></div>
-
-                    <div class="faq_item">
-                        <p class="faq_question"><b>What is the Skool Games?</b></p>
-                        <div class="faq_answer">
-                            <p>You can contact support by clicking on the "Contact Us" link at the bottom of the page
-                                and filling out the form.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <button class="button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">BOOK
-                    MEETING</button>
-
-                <script>
-                    document.querySelectorAll('.faq_question').forEach(question => {
-                        question.addEventListener('click', () => {
-                            // Close all other answers
-                            document.querySelectorAll('.faq_answer').forEach(answer => {
-                                if (answer !== question.nextElementSibling) {
-                                    answer.style.display = 'none';
-                                }
-                            });
-
-                            // Toggle the clicked answer
-                            const answer = question.nextElementSibling;
-                            answer.style.display = answer.style.display === 'block' ? 'none' : 'block';
-                        });
-                    });
-
-                    // Close the FAQ when the answer itself is clicked
-                    document.querySelectorAll('.faq_answer').forEach(answer => {
-                        answer.addEventListener('click', () => {
-                            answer.style.display = 'none';
-                        });
-                    });
-
-                </script>
-
-
-
-            </div>
-
-        </div>
-    </div>
-
-    <!-- cal.com embed begins -->
-
-    <script type="text/javascript">
-        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
-        Cal("init", "30min", { origin: "https://cal.com" });
-
-        Cal.ns["30min"]("ui", { "styles": { "branding": { "brandColor": "#006FFA" } }, "hideEventTypeDetails": false, "layout": "month_view" });
-    </script>
-
-    <!-- Start of Async ProveSource Code -->
-    <script>!function (o, i) { window.provesrc && window.console && console.error && console.error("ProveSource is included twice in this page."), provesrc = window.provesrc = { dq: [], display: function () { this.dq.push(arguments) } }, o._provesrcAsyncInit = function () { provesrc.init({ apiKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2NjRmYzNmYTFkOWYyMTZhNGRlZmQyZTciLCJpYXQiOjE3MTY1MDM1NDZ9.jRcGK4FkASOl5Ta_8ksIt4mc7OpbW39_Pg_YRjP_tpU", v: "0.0.4" }) }; var r = i.createElement("script"); r.type = "text/javascript", r.async = !0, r["ch" + "ar" + "set"] = "UTF-8", r.src = "https://cdn.provesrc.com/provesrc.js"; var e = i.getElementsByTagName("script")[0]; e.parentNode.insertBefore(r, e) }(window, document);</script>
-    <!-- End of Async ProveSource Code -->
-
-</body>
-
-</html>
+@font-face {
+    font-family: 'Nunito';
+    src: url('Nunito-VariableFont_wght.ttf') format('truetype');
+    font-weight: 100 900;
+    font-style: normal;
+}
+
+body {
+    box-sizing: border-box;
+    margin: 0rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    background-color: #0f1f25;
+}
+
+/* text begins */
+
+h1 {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 800;
+    font-size: 32px;
+    line-height: 1.25;
+    color: #fff;
+    margin-top: -4px;
+    margin-bottom: -4px;
+    cursor: default;
+}
+
+h2 {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 24px;
+    line-height: 1.5;
+    color: #fff;
+    margin-top: -6px;
+    margin-bottom: -6px;
+    cursor: default;
+}
+
+p {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #fff;
+    margin-top: -4.5px;
+    margin-bottom: -4.5px;
+    cursor: default;
+}
+
+.alert_text {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 500;
+    font-size: 18px;
+    line-height: 1;
+    color: #ffa600;
+    cursor: default;
+}
+
+.fine_print {
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-size: 18px;
+    line-height: 1.5;
+    color: #afafaf;
+    margin-top: -4.5px;
+    margin-bottom: -4.5px;
+    cursor: default;
+}
+
+/* nav begins */
+
+.nav_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #334750;
+}
+
+.fixed_nav_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    border-bottom-style: solid;
+    border-bottom-width: 1px;
+    border-bottom-color: #334750;
+    z-index: 1100;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    transform: translateY(-100%);
+    background-color: #0f1f25;
+    transition: transform 0.1s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+.nav {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 1rem;
+    padding-bottom: 1rem;
+    width: 100%;
+    max-width: 60rem;
+}
+
+.alert_wrap {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+/* button begins */
+
+.button {
+
+    /* buttons styling to unset */
+
+    padding: 16px;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: #fff;
+
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+    width: 100%;
+    background-color: #006FFA;
+    border-radius: .5rem;
+    box-shadow: 0px 4px #0045b3;
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: .025rem;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 60rem;
+}
+
+.button:active {
+    box-shadow: 0px 0px;
+    transform: translateY(4px);
+}
+
+.nav_button {
+
+    /* buttons styling to unset */
+
+    padding: 16px;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: #fff;
+
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+    background-color: #006FFA;
+    border-radius: .5rem;
+    box-shadow: 0px 4px #0045b3;
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: .025rem;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 60rem;
+}
+
+.nav_button:active {
+    box-shadow: 0px 0px;
+    transform: translateY(4px);
+}
+
+.button:active {
+    box-shadow: 0px 0px;
+    transform: translateY(4px);
+}
+
+.copy_button {
+
+    /* buttons styling to unset */
+    margin-top: 1rem;
+    padding: 16px;
+    border: none;
+    outline: none;
+    font: inherit;
+    color: #000;
+
+
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 4px;
+    background-color: #fff;
+    border-radius: .5rem;
+    box-shadow: 0px 4px #afafaf;
+    font-family: 'Nunito', system-ui, sans-serif;
+    font-weight: 700;
+    font-size: 18px;
+    line-height: 1;
+    letter-spacing: .025rem;
+    text-decoration: none;
+    cursor: pointer;
+    max-width: 60rem;
+}
+
+.copy_button:active {
+    box-shadow: 0px 0px;
+    transform: translateY(4px);
+}
+
+/* responsive styling begins */
+
+@media (max-width: 767px) {
+    h1 {
+        font-size: 1.5rem;
+        line-height: 1.5;
+        margin-top: -.375rem;
+        margin-bottom: -.375rem;
+    }
+}
+
+@media (max-width: 479px) {
+    .nav_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+    .fixed_nav_wrap {
+        padding-left: 4%;
+        padding-right: 4%;
+    }
+
+}
