@@ -59,8 +59,27 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     };
 
+    const applyMobileStyles = () => {
+        const isMobile = /Mobi/.test(navigator.userAgent);
+
+        if (isMobile) {
+            menuTabs.forEach(tab => {
+                tab.classList.add('mobile-menu-tab');
+            });
+        } else {
+            menuTabs.forEach(tab => {
+                tab.classList.remove('mobile-menu-tab');
+            });
+        }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', updateVideoSource);
+    window.addEventListener('resize', () => {
+        updateVideoSource();
+        applyMobileStyles();
+    });
+
     handleScroll();
     updateVideoSource();
+    applyMobileStyles();
 });
