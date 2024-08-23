@@ -185,6 +185,7 @@ p {
     text-decoration: none;
     cursor: pointer;
     max-width: 60rem;
+    width: 100%;
 }
 
 .button:active {
