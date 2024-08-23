@@ -1,23 +1,3 @@
-.inline_button {
-    box-sizing: border-box;
-    width: 100%;
-    border-radius: 1rem;
-    position: relative;
-    overflow: hidden; /* Ensure the pseudo-element stays within the border radius */
-}
-
-.inline_button::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 111, 250, 1) 100%);
-    backdrop-filter: blur(32px); /* Adjust the blur intensity as needed */
-    z-index: -1; /* Place the blurred background behind the content */
-    border-radius: inherit; /* Match the border radius of the parent */
-}
 
 .character {
     position: absolute;
@@ -35,7 +15,8 @@
     border-width: 1px;
     border-style: solid;
     border-color: #334750;
-    background-color: rgba(255, 255, 255, 0.05)
+    background-color: rgba(255, 255, 255, 0.05);
+    max-width: 40rem;
 }
 
 .faq_item {
@@ -145,10 +126,82 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    padding-bottom: 7rem;
+    padding-bottom: 2rem;
     padding-left: 5%;
     padding-right: 5%;
     width: 100%;
+}
+
+.inline_wrap {
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 2rem 0;
+    padding-left: 5%;
+    padding-right: 5%;
+    width: 100%;
+    background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 111, 250, 1) 100%);
+    backdrop-filter: blur(32px); /* Adjust the blur intensity as needed */
+    z-index: -1; /* Place the blurred background behind the content */
+}
+
+.inline_hello {
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden; /* Ensure the pseudo-element stays within the border radius */
+    gap: 1rem;
+    max-width: 40rem;
+    padding: 1rem;
+    border-radius: 1rem;
+    background-color: rgba(255, 255, 255, 0.1)
+}
+
+.inline_button {
+    box-sizing: border-box;
+    width: 100%;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden; /* Ensure the pseudo-element stays within the border radius */
+}
+
+.inline_button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 111, 250, 1) 100%);
+    backdrop-filter: blur(32px); /* Adjust the blur intensity as needed */
+    z-index: -1; /* Place the blurred background behind the content */
+    border-radius: inherit; /* Match the border radius of the parent */
+}
+
+.inline_button_last {
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 60rem;
+    border-radius: 1rem;
+    position: relative;
+    overflow: hidden; /* Ensure the pseudo-element stays within the border radius */
+}
+
+.inline_button_last::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(255, 255, 255, 0.1);
+
+    z-index: -1; /* Place the blurred background behind the content */
+    border-radius: inherit; /* Match the border radius of the parent */
 }
 
 .offer_split {
@@ -245,6 +298,7 @@
     align-items: left;
     width: 100%;
     gap: 6px;
+    background-color: black;
 }
 
 .tabs_content {
@@ -253,15 +307,11 @@
     justify-content: center;
     align-items: center;
     width: 100%;
-    aspect-ratio: 16/9;
     position: relative;
-
-
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     scroll-behavior: smooth;
-
-
+    background-color: black;
 }
 
 .tabs_menu input[type="radio"] {
@@ -423,6 +473,8 @@ input[type="radio"]:checked+label .tabs_menu_image {
 /* video controls begin */
 
 .video_wrap {
+    background-color: black;
+    width: 100%;
     position: relative;
 }
 
