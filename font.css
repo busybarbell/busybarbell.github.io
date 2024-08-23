@@ -234,6 +234,18 @@ button:active {
     background: rgba(0,121,255, 0.5);
 }
 
+.mobile-menu-tab {
+    height: .5rem;
+    width: .5rem;
+    border-radius: 100%;
+    background-color: #334750;
+    cursor: pointer;
+}
+
+.mobile-menu-tab.active {
+    background-color: #afafaf;
+}
+
 @media (max-width: 991px) {
     .menu {
         margin: 0 1rem;
