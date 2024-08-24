@@ -226,7 +226,7 @@ button:active {
     flex-direction: column;
     padding: 2rem 0;
     margin: auto;
-    gap: 1rem;
+    gap: .5rem;
 }
 
 .faq_item {
