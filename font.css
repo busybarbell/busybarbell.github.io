@@ -125,6 +125,7 @@ button {
     margin-bottom: 4px;
     color: inherit;
     font-weight: 600;
+    font-size: 1.25rem;
 }
 
 button:active {
