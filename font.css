@@ -100,6 +100,24 @@ nav {
     padding: 0 5%;
 }
 
+.locked-styled {
+    position: relative;
+    height: 20rem;
+    overflow: hidden;
+}
+
+.locked-styled::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #0f1f25, transparent);
+    backdrop-filter: blur(8px); /* Adjust the blur value as needed */
+    z-index: 1;
+}
+
 #final-cta {
     padding: 2rem 5%;
     background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 71, 158) 100%);
