@@ -115,6 +115,7 @@ nav {
 .inline_button {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     border-radius: 1rem;
     background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgb(0, 71, 158) 100%);
     backdrop-filter: blur(32px);
@@ -126,6 +127,7 @@ nav {
 .inline_button_last {
     display: flex;
     flex-direction: column;
+    align-items: flex-start;
     max-width: 40rem;
     border-radius: 1rem;
     margin: auto;
@@ -183,6 +185,7 @@ button:active {
     color: #0f1f25;
     font-weight: 600;
     font-size: 1.25rem;
+    width: 100%;
 }
 
 .copy_button:active {
