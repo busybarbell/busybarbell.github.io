@@ -50,7 +50,7 @@ header {
     flex-direction: column;
     padding: 0 5%;
     width: 100%;
-    border-bottom: 1px solid #334750;
+    border-bottom: 2px solid #334750;
 }
 
 nav {
@@ -88,12 +88,12 @@ nav {
 }
 
 #cta {
-    border-bottom: 1px solid #334750;
+    border-bottom: 2px solid #334750;
     padding: 0 5%;
 }
 
 #copy {
-    border-bottom: 1px solid #334750;
+    border-bottom: 2px solid #334750;
     padding: 0 5%;
 }
 
