@@ -50,7 +50,7 @@ p {
 header {
     display: flex;
     flex-direction: column;
-    padding: 0 2rem;
+    padding: 0 5%;
     width: 100%;
     border-bottom: 1px solid #334750;
 }
@@ -88,12 +88,12 @@ nav {
 
 #cta {
     border-bottom: 1px solid #334750;
-    padding: 0 2rem;
+    padding: 0 5%;
 }
 
 #copy {
     border-bottom: 1px solid #334750;
-    padding: 0 2rem;
+    padding: 0 5%;
 }
 
 .copy-wrap {
