@@ -5,11 +5,14 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
     <title>Busy Barbell</title>
+
     <meta name="description"
         content="Busy Barbell's 21-Day Summer Slim Down. Transform your body 💪 with 1-on-1 online fitness coaching.">
-    <link rel="stylesheet" href="font.css">
-    <link rel="stylesheet" href="video-controls.css">
+
+    <link rel="stylesheet" href="styles.css">
+
     <link rel="preload" as="video" href="sabri-mobile.mp4">
     <link rel="preload" as="video" href="sabri.mp4">
 </head>
@@ -22,162 +25,176 @@
                 <img src="https://i.ibb.co/nbZ3DT0/fire-icon.webp" alt="Fire icon" height="24">
                 <p>5 spots left</p>
             </div>
-            <button id="nav-button">BOOK MEETING</button>
         </nav>
     </header>
 
     <main>
-        <section id="vsl">
-            <div class="tabs-wrap">
-                <video class="tab" id="myVideo" preload="metadata" playsinline autoplay muted loop>
-                    <source id="videoSource" src="sabri.mp4" type="video/mp4">
+        <section id="video">
+            <div class="video-wrap">
+                <video id="myVideo" preload="metadata" playsinline autoplay muted loop>
+                    <source src="sabri.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-                <img class="tab" src="https://i.postimg.cc/pV1fpy47/thumbnail-2.webp" alt="">
-                <img class="tab" src="https://i.postimg.cc/CL3bsXFs/thumbnail-3.webp" alt="">
-                <img class="tab" src="https://i.postimg.cc/8CHWDCLZ/thumbnail-4.webp" alt="">
-                <img class="tab" src="https://i.postimg.cc/ryb4q3t2/thumbnail-5.webp" alt="">
-                <img class="tab" src="https://i.postimg.cc/2SNBZWwH/thumbnail-6.webp" alt="">
-            </div>
-            <div class="menu">
-                <div class="menu-tab active">
-                    <img class="arrow" src="https://i.postimg.cc/T1XpDMjK/arrow.webp" alt="Arrow">
-                    <img class="tab-image" alt="Thumbnail" src="https://i.postimg.cc/pV1fpy47/thumbnail-1.webp">
-                    <p class="tab-text">Exploring New Horizons: An Adventure Awaits</p>
-                </div>
-                <div class="menu-tab">
-                    <img class="arrow" src="https://i.postimg.cc/T1XpDMjK/arrow.webp" alt="Arrow">
-                    <img class="tab-image" alt="Thumbnail" src="https://i.postimg.cc/CL3bsXFs/thumbnail-2.webp">
-                    <p class="tab-text">Mastering the Basics: A Beginner’s Guide</p>
-                </div>
-                <div class="menu-tab">
-                    <img class="arrow" src="https://i.postimg.cc/T1XpDMjK/arrow.webp" alt="Arrow">
-                    <img class="tab-image" alt="Thumbnail" src="https://i.postimg.cc/8CHWDCLZ/thumbnail-3.webp">
-                    <p class="tab-text">Top Tips for a Healthier Lifestyle</p>
-                </div>
-                <div class="menu-tab">
-                    <img class="arrow" src="https://i.postimg.cc/T1XpDMjK/arrow.webp" alt="Arrow">
-                    <img class="tab-image" alt="Thumbnail" src="https://i.postimg.cc/HnJ7Q4RN/thumbnail-4.webp">
-                    <p class="tab-text">Creative Solutions for Everyday Problems</p>
-                </div>
-                <div class="menu-tab">
-                    <img class="arrow" src="https://i.postimg.cc/T1XpDMjK/arrow.webp" alt="Arrow">
-                    <img class="tab-image" alt="Thumbnail" src="https://i.postimg.cc/ryb4q3t2/thumbnail-5.webp">
-                    <p class="tab-text">Uncovering Hidden Gems: A Travel Journey</p>
-                </div>
-                <div class="menu-tab">
-                    <img class="arrow" src="https://i.postimg.cc/T1XpDMjK/arrow.webp" alt="Arrow">
-                    <img class="tab-image" alt="Thumbnail" src="https://i.postimg.cc/2SNBZWwH/thumbnail-6.webp">
-                    <p class="tab-text">Essential Skills for Personal Growth</p>
-                </div>
             </div>
         </section>
-        <section id="first-cta">
-            <button id="first-button">BOOK MEETING</button>
+        <section id="cta">
+            <div class="cta-wrap">
+                <button id="first-button">BOOK MEETING</button>
+                <div class="points_wrap">
+                    <div class="point">
+                        <svg height="1.5rem" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                            <path
+                                d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"
+                                fill="currentColor"></path>
+                        </svg>Private coaching
+                    </div>
+                    <div class="point">
+                        <svg aria-hidden="true" role="img" class="iconify iconify--ic" height="1.5rem"
+                            preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M16.67 13.13C18.04 14.06 19 15.32 19 17v3h3c.55 0 1-.45 1-1v-2c0-2.18-3.57-3.47-6.33-3.87z">
+                            </path>
+                            <circle cx="9" cy="8" r="4" fill="currentColor" fill-rule="evenodd"></circle>
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4c-.47 0-.91.1-1.33.24a5.98 5.98 0 0 1 0 7.52c.42.14.86.24 1.33.24zm-6 1c-2.67 0-8 1.34-8 4v2c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-2c0-2.66-5.33-4-8-4z">
+                            </path>
+                        </svg>27 participants
+                    </div>
+                    <div class="point orange"><img src="https://i.ibb.co/nbZ3DT0/fire-icon.webp"
+                            alt="image not available" height="24px" />5 spots
+                        left</div>
+                    <div class="point"><img class="point_face" src="https://i.postimg.cc/WbKrT56R/hormozi-face.webp"
+                            alt="image not available" width="24px" height="24px">By Asher Robinson 👑</div>
+                </div>
+            </div>
         </section>
         <section id="copy">
-            <h1 class="h1_mobile">“Possibly the Most Controversial Marketing and Sales Book for the General Public Ever
-                Written…”</h1>
-            <p>
-                Dear Business Builder,<br><br>
-                Everyone thought I was a fool, and that there was no way this could possibly work…<br><br>
-                An old friend even called me a “dreamer”.<br><br>
-                But I couldn’t give <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">two
-                    shits...</u><br><br>
-                Because I had nothing to lose and everything to gain.<br><br>
-                So, after a lot of late nights, early mornings and a tonne of trial and error…<br><br>
-                <b>I finally discovered a ‘secret selling system’.</b><br><br>
-                And everything changed for me.<br><br>
-                Instead of <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}'
-                    aria-label="Book your free onboarding meeting">cold-calling strangers</u> to get new
-                clients.<br><br>
-                <img src="https://i.postimg.cc/76RR0Skj/AVATARSh-1000x.webp" alt="image not available"
-                    style="width: 100%;"><br><br>
-                <span class="highlight">I had more clients than I could possibly handle!</span><br><br>
-                And I used this “selling system” to quickly catapult me into building the #1 fastest growing digital
-                marketing agency in Australia (several years in a row).<br><br>
-                And the 17th fastest growing company in the country (across all industries)...<br><br>
-                <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">As ranked
-                    by the Australian Financial Review</u> in 5 years flat!...<br><br>
-                But it’s not just me!
-            </p>
-            <div class="inline_button">
-                <img src="https://i.postimg.cc/sXMSQhKB/super.webp" alt="image not available" height="24px">
-                <p>Hurry! 5 spots left as of August 21st.</p>
-                <button class="copy_button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">BOOK
-                    MEETING</button>
-                <img src="https://i.postimg.cc/L6KzsS0m/rocket.webp" alt="image not available" class="character"
-                    style="z-index: -1;">
+            <div class="copy-wrap">
+                    <h1 class="h1_mobile">THIS Gets 90-480+ Booked Sales Calls p/m</h1>
+                    <img src="https://i.postimg.cc/CKsM8dNk/ezgif-3-ef6ab5e680.webp" alt="Image not available"
+                        width="100%">
+                    <p>“If I have to send ONE MORE cold DM I’mma pull out my eyelashes”...<br><br>
+
+                        Most folks are sweating their sales ballz off tryna sell with FB groups.<br><br>
+
+                        Chatbots.<br><br>
+
+                        Webinars.<br><br>
+
+                        Challenges.<br><br>
+
+                        Events…<br><br>
+
+                        And 50-piece Franken-Funnels…<br><br>
+
+                        Trynna figure out how to turn leads into calls on their calendar.<br><br>
+
+                        In a predictable, reliable, and repeatable way.<br><br>
+
+                        But their calendars are still almost empty.<br><br>
+
+                        1-2 calls per day on average.<br><br>
+
+                        3-4 if they’re "lucky".<br><br>
+
+                        Low calls = low sales = nervous diarrhea.<br><br>
+
+                        But THIS new funnel changes everything.<br><br>
+
+                        It combines AI, viral hooks and...<br><br>
+
+                        A ‘secret blend’ of 11 herbs and spices...<br><br>
+
+                        That convert like CRAZY!<br><br>
+
+                        Now, if you wanna:<br><br>
+
+                        🌶️ Get 90-480+ highly-qualified leads/month.<br>
+                        🔥 Land 5-50 “dream clients’ (semi-automated)<br>
+                        💰 Cruise past 100k/month (like clockwork)<br>
+                        🐻 Sleep like a Siberian brown bear at night.<br><br>
+
+                        We’ve used this selling system to generate 7.8B and counting...<br><br>
+
+                        And that's why, in my wildly biased, but accurate, opinion...<br><br>
+
+                        This is the fastest, easiest and SINGLE BEST way.<br><br>
+
+                        To generate HUNDREDS of highly-qualified leads...<br><br>
+
+                        Every single month on autopilot.<br><br>
+
+                        Or, hey…you could keep slidin’ into the DMs.<br><br>
+
+                        And posting content every 5 minutes.<br><br>
+
+                        To an imaginary audience...<br><br>
+
+                        That gets 11 likes and no leads...<br><br>
+
+                        I’d rather have my soul carried away by an eagle demon.<br><br>
+
+                        And cast into a pit of venomous vipers than do that.<br><br>
+
+                        Anyhoo.<br><br>
+
+                        Watch this free 24 min video.<br><br>
+
+                        And if it floats ya boat.<br><br>
+
+                        Click the link and book a call.</p>
+
+                    <div class="inline_button"
+                        style="box-sizing: border-box; padding: 1rem; gap: 1rem; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
+                        <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+                            <h2>Listen</h2>
+                            <image src="https://i.postimg.cc/sXMSQhKB/super.webp" alt="image not available"
+                                height="24px">
+                        </div>
+                        <p>Hurry! 5 spots left as of August 21st.</p><button class="copy_button"
+                            data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
+                            data-cal-config='{"layout":"month_view"}'
+                            aria-label="Book your free onboarding meeting">BOOK MEETING</button>
+                    </div>
+
+                    <p>And we’ll give you a free “test run” of how it works.<br><br>
+
+                        P.S. We’re not like the gurus flooding your feed... making outlandish “we guarantee you XYZ"
+                        blah blah claims.<br><br>
+
+                        We’ve been doing this for 10 years.<br><br>
+
+                        We'll let our numbers do the talkin’...<br><br>
+
+                        💰 7.8b in sales generated *raises pinky*<br>
+                        🔑 1067 different industries and niches.<br>
+                        ⭐️ 5,000+ reviews (average of 4.7 stars)<br>
+                        💵 75 millionaires created<br>
+                        🤑 6x 8 figure clients created<br><br>
+
+                        This isn't theory.<br><br>
+
+                        This is what we know works.<br><br>
+
+                        Over and over and over.<br><br>
+
+                        Alright.<br><br>
+
+                        Watch. Click. Then scale. 🚀</p>
+
+                    <div class="inline_button"
+                        style="box-sizing: border-box; padding: 1rem; gap: 1rem; display: flex; flex-direction: column; justify-content: flex-start; align-items: flex-start;">
+                        <div style="display: flex; width: 100%; justify-content: space-between; align-items: center;">
+                            <h2>Listen</h2>
+                            <image src="https://i.postimg.cc/sXMSQhKB/super.webp" alt="image not available"
+                                height="24px">
+                        </div>
+                        <p>Hurry! 5 spots left as of August 21st.</p><button class="copy_button"
+                            data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
+                            data-cal-config='{"layout":"month_view"}'
+                            aria-label="Book your free onboarding meeting">BOOK MEETING</button>
+                    </div>
             </div>
-            <p>
-                I’ve also deployed this selling system in over 1067 different industries…<br><br>
-                To generate over <b>$7.8 billion</b> in reported client revenue for me and my clients…<br><br>
-                And listen, a part of this system’s success is that it tracks <u data-cal-link="busy-barbell/30min"
-                    data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
-                    aria-label="Book your free onboarding meeting">EVERYTHING!</u><br><br>
-                And this $7.8 billion in sales, is just in reported client revenue.
-            </p>
-            <img src="https://i.postimg.cc/d3SdxfgW/emoji-pixie.webp" alt="image not available" style="width: 100%;">
-            <h1>The real number is well north of this!</h1>
-            <p>
-                I’ve also used this selling system to…<br><br>
-                💰 <b>Take a home building start-up from $0 to $7 million in 8 months flat…</b> they hit their building
-                insurance and couldn’t take on any more clients!<br><br>
-                💰 Transform a Pilates instructor training business, from barely breaking even at $200k in revenue…
-                <b>to a wildly successful business with $2 million in annual sales in 14 months.</b><br><br>
-                💰 <b>Launch a mattress start-up from $0 to $13 million in revenue</b> in their first 12 months… <u
-                    data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">(Literally
-                    selling out warehouses full of stock and the manufacturer couldn’t keep up!)</u><br><br>
-                💰 Take a small father and son building business from <b>$3 million to $50 million in sales in just 18
-                    MONTHS!</b><br><br>
-                💰 Skyrocketing the sales of an Aged Care provider <b>from $4 million to $25 million in sales in 12
-                    months flat!</b> (This was all done with a basic 2-step funnel and one traffic source!)<br><br>
-                💰 <b>Sell $51 million dollars’ worth of property in 8 WEEKS</b> through one funnel! (This was for a
-                client in a super-niche property market and took him from zero to hero within two months)<br><br>
-                And so on….Look, I could easily fill up an entire book with <u data-cal-link="busy-barbell/30min"
-                    data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
-                    aria-label="Book your free onboarding meeting">hundreds of success stories</u> like this…<br><br>
-                Because I’ve used this ‘selling system’ in over 1067 different niches!<br><br>
-                Small businesses, all the way up to multi-billion dollar brands have used this selling system...<br><br>
-                <b>To create a torrential downpour of customers that flood their business!</b><br><br>
-                And this is just one of the <u data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">reasons
-                    I’ve been questioned by reporters</u> about the “legality” of this ‘selling system’...<br><br>
-                But I’ll get to that in just a moment.<br><br>
-                Lemme first show you some more proof!…
-            </p>
-            <div class="inline_button">
-                <img src="https://i.postimg.cc/sXMSQhKB/super.webp" alt="image not available" height="24px">
-                <p>Only 30-minutes.</p>
-                <button class="copy_button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">BOOK
-                    MEETING</button>
-                <img src="https://i.postimg.cc/Jh43WQYJ/clock.webp" alt="image not available" class="character"
-                    style="z-index: -1;">
-            </div>
-            <p>
-                Thanks for taking the time to read this page and I look forward to hearing from you soon!<br><br>
-                <b>- Asher Robinson</b><br><br>
-                <img src="https://i.postimg.cc/9f2K9xBK/signature.webp" alt="image not available" height="32px"><br><br>
-                <span class="highlight">P.S.</span> Nothing changes if nothing changes... and <u
-                    data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
-                    data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">there's no
-                    better time than now.</u>
-            </p>
         </section>
-        <section id="testimonials"></section>
-        <section id="faq"></section>
-        <section id="cta"></section>
     </main>
-
-    <footer></footer>
-
-    <script src="script.js" defer></script>
 </body>
-
-</html>
