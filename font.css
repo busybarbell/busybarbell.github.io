@@ -31,13 +31,15 @@ h1 {
     line-height: 1.6;
     margin: -.75rem 0;
     cursor: default;
+    font-weight: 800;
 }
 
 h2 {
-    font-size: 2rem;
+    font-size: 1.5rem;
     line-height: 1.6;
-    margin: -.6rem 0;
+    margin: -.45rem 0;
     cursor: default;
+    font-weight: 600;
 }
 
 p {
@@ -60,6 +62,9 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+    max-width: 60rem;
+    width: 100%;
+    margin: auto;
 }
 
 .alert {
@@ -96,6 +101,39 @@ nav {
     padding: 0 5%;
 }
 
+#faq {
+    padding: 0 5%;
+}
+
+#final-cta {
+    padding: 2rem 5%;
+    background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgba(0, 71, 158) 100%);
+    backdrop-filter: blur(32px);
+    z-index: -1;
+}
+
+.inline_button {
+    display: flex;
+    flex-direction: column;
+    border-radius: 1rem;
+    background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgb(0, 71, 158) 100%);
+    backdrop-filter: blur(32px);
+    z-index: -1;
+    padding: 1rem;
+    gap: 1rem;
+}
+
+.inline_button_last {
+    display: flex;
+    flex-direction: column;
+    max-width: 40rem;
+    border-radius: 1rem;
+    margin: auto;
+    background-color: rgba(255, 255, 255, 0.15);
+    padding: 1rem;
+    gap: 1rem;
+}
+
 .copy-wrap {
     max-width: 40rem;
     display: flex;
@@ -129,6 +167,25 @@ button {
 }
 
 button:active {
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+.copy_button {
+    padding: 1rem;
+    border: none;
+    background-color: #fff;
+    border-radius: 0.5rem;
+    box-shadow: 0 4px 0 #afafaf;
+    letter-spacing: 0.025rem;
+    cursor: pointer;
+    margin-bottom: 4px;
+    color: #0f1f25;
+    font-weight: 600;
+    font-size: 1.25rem;
+}
+
+.copy_button:active {
     box-shadow: none;
     transform: translateY(4px);
 }
@@ -170,4 +227,40 @@ button:active {
 
 .point_face {
     border-radius: 100%;
+}
+
+.faq {
+    max-width: 40rem;
+    display: flex;
+    flex-direction: column;
+    padding: 2rem 0;
+    margin: auto;
+    gap: 1rem;
+}
+
+.faq_item {
+    padding: 1rem;
+    box-sizing: border-box;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    margin-bottom: 4px;
+    border-radius: .5rem;
+    box-shadow: 0px 4px #334750;
+    cursor: pointer;
+    max-width: 60rem;
+    width: 100%;
+    border: 1px solid #334750;
+}
+
+.faq_question {
+    box-sizing: border-box;
+    padding: 1rem;
+    cursor: pointer;
+}
+
+.faq_answer {
+    box-sizing: border-box;
+    padding: 1rem;
+    display: none;
 }
