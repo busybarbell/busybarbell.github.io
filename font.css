@@ -50,7 +50,6 @@ header {
     flex-direction: column;
     padding: 0 5%;
     width: 100%;
-    border-bottom: 2px solid #334750;
 }
 
 nav {
