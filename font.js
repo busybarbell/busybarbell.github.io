@@ -25,4 +25,30 @@ document.addEventListener('DOMContentLoaded', () => {
             firstButton.classList.remove('button-changed');
         }
     });
+
+    const faqItems = document.querySelectorAll('.faq_item');
+
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.nextElementSibling;
+
+            if (answer && answer.classList.contains('faq_answer')) {
+                const isVisible = answer.style.display === 'block';
+
+                document.querySelectorAll('.faq_answer').forEach(otherAnswer => {
+                    if (otherAnswer !== answer) {
+                        otherAnswer.style.display = 'none';
+                    }
+                });
+
+                answer.style.display = isVisible ? 'none' : 'block';
+            }
+        });
+    });
+
+    document.querySelectorAll('.faq_answer').forEach(answer => {
+        answer.addEventListener('click', () => {
+            answer.style.display = 'none';
+        });
+    });
 });
