@@ -95,7 +95,6 @@ nav {
 #myVideo {
     max-width: 60rem;
     width: 100%;
-    aspect-ratio: 16/9;
 }
 
 #video {
@@ -206,7 +205,7 @@ nav {
     margin-bottom: 4px;
     transform: translateY(4px);
     color: #afafaf;
-    cursor: not-allowed;
+    pointer-events: none;
 }
 
 button {
