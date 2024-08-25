@@ -73,7 +73,7 @@ nav {
 #title {
     padding: 1rem 5%;
     align-items: center;
-    display: flex;
+    display: none;
 }
 
 .title {
@@ -321,6 +321,16 @@ button:active {
 .faq_answer {
     padding: 1rem;
     display: none;
+}
+
+@media (max-width: 60rem) {
+    .theater_title {
+        display: none;
+    }
+
+    #title {
+        display: flex;
+    }
 }
 
 @media (min-width: 1440px) {
