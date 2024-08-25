@@ -50,6 +50,7 @@ header {
     flex-direction: column;
     padding: 0 5%;
     width: 100%;
+    border-bottom: 2px solid #334750;
 }
 
 nav {
@@ -69,6 +70,22 @@ nav {
     color: #ffa600;
 }
 
+#title {
+    padding: 1rem 5%;
+    align-items: center;
+    display: flex;
+}
+
+.title {
+    background-color: white;
+    color: black;
+    border-radius: 1rem;
+    padding: 1rem;
+    max-width: 60rem;
+    margin: auto;
+    text-align: center;
+}
+
 .video-wrap {
     display: flex;
     justify-content: center;
@@ -78,6 +95,7 @@ nav {
 #myVideo {
     max-width: 60rem;
     width: 100%;
+    aspect-ratio: 16/9;
 }
 
 #video {
@@ -178,6 +196,17 @@ nav {
     gap: 2rem;
     padding: 2rem 0;
     margin: auto;
+}
+
+.button-changed {
+    background-color: #334750;
+    box-shadow: 0 0 0;
+    letter-spacing: 0.025rem;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transform: translateY(4px);
+    color: #afafaf;
+    cursor: not-allowed;
 }
 
 button {
