@@ -50,7 +50,6 @@ header {
     flex-direction: column;
     padding: 0 5%;
     width: 100%;
-    border-bottom: 2px solid #334750;
 }
 
 nav {
@@ -79,7 +78,7 @@ nav {
 .title {
     background-color: white;
     color: black;
-    border-radius: 1rem;
+    border-radius: .75rem;
     padding: 1rem;
     max-width: 60rem;
     margin: auto;
@@ -178,7 +177,7 @@ footer {
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    border-radius: 1rem;
+    border-radius: .75rem;
     background: linear-gradient(355deg, rgb(4, 0, 68) 0%, rgba(9, 9, 121, 1) 35%, rgb(0, 71, 158) 100%);
     backdrop-filter: blur(32px);
     z-index: -1;
@@ -191,7 +190,7 @@ footer {
     flex-direction: column;
     align-items: flex-start;
     max-width: 40rem;
-    border-radius: 1rem;
+    border-radius: .75rem;
     margin: auto;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 1rem;
@@ -230,7 +229,7 @@ footer {
 button {
     padding: 1rem;
     background-color: #006FFA;
-    border-radius: 1rem;
+    border-radius: .75rem;
     box-shadow: 0 4px 0 #0045b3;
     letter-spacing: 0.025rem;
     cursor: pointer;
@@ -248,7 +247,7 @@ button:active {
     padding: 1rem;
     border: none;
     background-color: #fff;
-    border-radius: 1rem;
+    border-radius: .75rem;
     box-shadow: 0 4px 0 #afafaf;
     letter-spacing: 0.025rem;
     cursor: pointer;
@@ -315,7 +314,7 @@ button:active {
     justify-content: flex-start;
     align-items: center;
     margin-bottom: 2px;
-    border-radius: 1rem;
+    border-radius: .75rem;
     box-shadow: 0px 2px #334750;
     cursor: pointer;
     max-width: 60rem;
@@ -350,6 +349,10 @@ button:active {
 
     #title {
         display: flex;
+    }
+
+    header {
+        border-bottom: 2px solid #334750;
     }
 }
 
