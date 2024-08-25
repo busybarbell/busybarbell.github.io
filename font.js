@@ -10,6 +10,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const tapText = muteBtn.querySelector('.tap-text');
     const playButton = document.querySelector('.play');
     const controls = document.querySelector('.controls');
+    const fullscreenButton = document.getElementById('fullscreenButton');
+    const fullscreenIcon = fullscreenButton.querySelector('.fullscreen');
+    const exitFullscreenIcon = fullscreenButton.querySelector('.exit-fullscreen');
 
     // Check for video and locked elements
     if (video) {
@@ -28,8 +31,8 @@ document.addEventListener('DOMContentLoaded', () => {
     video.addEventListener('timeupdate', () => {
         console.log(`Current time: ${video.currentTime} seconds`);
 
-        if (video.currentTime >= 10) {
-            console.log('10 seconds reached');
+        if (video.currentTime >= 60) {
+            console.log('60 seconds reached');
             lockedElement.style.cssText = '';
             lockedElement.classList.remove('locked-styled');
             firstButton.classList.remove('button-changed');
@@ -59,17 +62,11 @@ document.addEventListener('DOMContentLoaded', () => {
     function playVideoWithSound() {
         video.muted = false;
         video.play();
-        volumeDiv.style.display = 'flex';
-        volumeOn.style.display = 'flex';
-        volumeOff.style.display = 'none';
+        fullscreenButton.style.display = 'flex';
+        fullscreenIcon.style.display = 'flex';
+        exitFullscreenIcon.style.display = 'none';
         muteBtn.style.display = 'none';
         playButton.style.display = 'none';
-    }
-
-    function toggleMute() {
-        video.muted = !video.muted;
-        volumeOn.style.display = video.muted ? 'none' : 'flex';
-        volumeOff.style.display = video.muted ? 'flex' : 'none';
     }
 
     function togglePlayPause() {
@@ -99,6 +96,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Toggle mute when clicking on the volume div
     volumeDiv.addEventListener('click', toggleMute);
+
+    // Fullscreen functionality
+    function toggleFullscreen() {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) { // Firefox
+            video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { // IE/Edge
+            video.msRequestFullscreen();
+        }
+    }
+
+    fullscreenButton.addEventListener('click', () => {
+        if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            toggleFullscreen();
+        }
+    });
+
+    // Optional: Handle fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('mozfullscreenchange', () => {
+        if (document.mozFullScreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('webkitfullscreenchange', () => {
+        if (document.webkitFullscreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('msfullscreenchange', () => {
+        if (document.msFullscreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
 
     // FAQ functionality
     const faqItems = document.querySelectorAll('.faq_item');
