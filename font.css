@@ -280,6 +280,13 @@ footer {
     backdrop-filter: blur(32px);
     z-index: -1;
     padding: 1rem;
+    gap: 2rem;
+}
+
+.inline_header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     gap: 1rem;
 }
 
@@ -292,7 +299,7 @@ footer {
     margin: auto;
     background-color: rgba(255, 255, 255, 0.15);
     padding: 1rem;
-    gap: 1rem;
+    gap: 2rem;
 }
 
 .copy-wrap {
