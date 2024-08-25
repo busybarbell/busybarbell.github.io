@@ -62,11 +62,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function playVideoWithSound() {
         video.muted = false;
         video.play();
-        fullscreenButton.style.display = 'flex';
-        fullscreenIcon.style.display = 'flex';
-        exitFullscreenIcon.style.display = 'none';
+        volumeDiv.style.display = 'flex';
+        volumeOn.style.display = 'flex';
+        volumeOff.style.display = 'none';
         muteBtn.style.display = 'none';
         playButton.style.display = 'none';
+    }
+
+    function toggleMute() {
+        video.muted = !video.muted;
+        volumeOn.style.display = video.muted ? 'none' : 'flex';
+        volumeOff.style.display = video.muted ? 'flex' : 'none';
     }
 
     function togglePlayPause() {
