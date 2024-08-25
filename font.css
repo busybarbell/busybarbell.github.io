@@ -565,6 +565,34 @@ button:active {
         left: .5rem;
         top: .5rem;
     }
+
+    header {
+        padding: 0 4%;
+    }
+
+    #title {
+        padding: 1rem 4%;
+    }
+
+    #cta {
+        padding: 0 4%;
+    }
+    
+    #copy {
+        padding: 0 4%;
+    }
+    
+    #faq {
+        padding: 0 4%;
+    }
+    
+    footer {
+        padding: 2rem 4%;
+    }
+
+    #final-cta {
+        padding: 2rem 4%;
+    }
 }
 
 @media (max-width: 479px) {
@@ -594,5 +622,33 @@ button:active {
     .click_for_sound {
         left: .5rem;
         top: .5rem;
+    }
+
+    header {
+        padding: 0 4%;
+    }
+
+    #title {
+        padding: 1rem 4%;
+    }
+
+    #cta {
+        padding: 0 4%;
+    }
+    
+    #copy {
+        padding: 0 4%;
+    }
+    
+    #faq {
+        padding: 0 4%;
+    }
+    
+    footer {
+        padding: 2rem 4%;
+    }
+
+    #final-cta {
+        padding: 2rem 4%;
     }
 }
