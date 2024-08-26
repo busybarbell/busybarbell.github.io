@@ -260,6 +260,7 @@ footer {
 .fine-print {
     font-size: .85rem;
     margin: -0.255rem 0;
+    line-height: 1.6;
 }
 
 .fade-in {
