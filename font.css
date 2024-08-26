@@ -69,6 +69,12 @@ nav {
     color: #ffa600;
 }
 
+.proof {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 #title {
     padding: 1rem 5%;
     align-items: center;
