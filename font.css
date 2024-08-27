@@ -213,6 +213,7 @@ nav {
 }
 
 #copy {
+    border-bottom: 2px solid #334750;
     padding: 0 5%;
 }
 
@@ -239,10 +240,20 @@ footer {
     padding-bottom: 2rem;
 }
 
+.testimonial-pictures {
+    display: flex;
+    justify-content: center;
+    max-width: 40rem;
+    aspect-ratio: 1/1;
+    overflow: auto;
+    margin: auto;
+}
+
 .dots-wrap {
     display: flex;
     gap: .5rem;
     margin: auto;
+    padding-top: 1rem;;
 }
 
 .dots {
@@ -257,13 +268,12 @@ footer {
 }
 
 .testimonial-sliders {
-    max-width: 40rem;
     width: 100%;
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    gap: 1rem;
     margin: auto;
+    overflow: hidden;
 }
 
 .locked-styled {
@@ -339,6 +349,23 @@ footer {
     justify-content: center;
     align-items: center;
     gap: .5rem;
+}
+
+.insta_profile {
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+}
+
+.insta {
+    display: flex;
+    margin: auto;
+    max-width: 40rem;
+    width: 100%;
+    justify-content: flex-start;
 }
 
 .inline_image {
