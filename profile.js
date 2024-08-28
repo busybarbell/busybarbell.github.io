@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullscreenButton = document.getElementById('fullscreenButton');
     const fullscreenIcon = fullscreenButton.querySelector('.fullscreen');
     const exitFullscreenIcon = fullscreenButton.querySelector('.exit-fullscreen');
+    const header = document.querySelector('header'); // Reference to the header element
 
     // Check for video and locked elements
     if (video) {
@@ -191,4 +192,18 @@ document.addEventListener('DOMContentLoaded', () => {
             answer.style.display = 'none';
         });
     });
+
+    // Function to handle scroll event and update header class
+    function handleScroll() {
+        if (window.scrollY > 50) { // Adjust the scroll threshold as needed
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Initial check in case the page is loaded with some scroll position
+    handleScroll();
 });
