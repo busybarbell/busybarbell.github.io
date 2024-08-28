@@ -248,7 +248,7 @@ nav {
 #cta {
     border-top: 2px solid #334750;
     padding: 0 2%;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     right: 0;
