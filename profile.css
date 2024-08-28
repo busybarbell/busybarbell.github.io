@@ -57,7 +57,7 @@ header {
     padding: 1rem 2%;
     gap: 1rem;
     background-color: #0f1f25;
-    z-index: 9999;
+    z-index: 450;
 }
 
 header.scrolled {
@@ -80,7 +80,7 @@ header.scrolled {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 50%;
+    width: 25%;
     height: 1rem;
     padding: 0.25rem 0.5rem;
     background-color: #006ffa;
@@ -257,7 +257,7 @@ nav {
     left: 0;
     right: 0;
     background-color: #0f1f25;
-    z-index: 9999;
+    z-index: 451;
 }
 
 #copy {
