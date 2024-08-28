@@ -13,7 +13,21 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullscreenButton = document.getElementById('fullscreenButton');
     const fullscreenIcon = fullscreenButton.querySelector('.fullscreen');
     const exitFullscreenIcon = fullscreenButton.querySelector('.exit-fullscreen');
-    const header = document.querySelector('header'); // Reference to the header element
+
+    // References for acknowledgment background and wrap
+    const continueButtons = document.querySelectorAll('.continue_button');
+    const acknowledgeButtons = document.querySelectorAll('.button');
+    const acknowledgeBackground = document.querySelector('.acknowledge_background');
+    const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
+    const innerBar = document.querySelector('.inner_bar');
+
+    // Button with class "button-changed" in the CTA section
+    const ctaButton = document.querySelector('#cta .button-changed');
+
+    let hasSoundPlayed = false;
+    let isDragging = false;
+    let wasPlayingBeforeScrub = false;
+    let volumeHideTimeout;
 
     // Check for video and locked elements
     if (video) {
@@ -38,6 +52,9 @@ document.addEventListener('DOMContentLoaded', () => {
             lockedElement.classList.remove('locked-styled');
             firstButton.classList.remove('button-changed');
         }
+
+        // Check and update the continue button state and text
+        checkButtonState();
     });
 
     // Handling click for sound/mute button
@@ -84,7 +101,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Apply the same functionality to all relevant elements
     function setupPlayAndSound() {
         playVideoWithSound();
         playButton.style.display = 'none';
@@ -193,17 +209,93 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // Function to handle scroll event and update header class
-    function handleScroll() {
-        if (window.scrollY > 50) { // Adjust the scroll threshold as needed
-            header.classList.add('scrolled');
-        } else {
-            header.classList.remove('scrolled');
-        }
+    // Function to show the acknowledgment background and disable scrolling with animation
+    function showAcknowledgeBackground() {
+        acknowledgeBackground.style.display = 'block';
+
+        // Trigger the background transition
+        requestAnimationFrame(() => {
+            acknowledgeBackground.classList.add('visible');
+        });
+
+        // Delay the wrap animation until the background transition completes
+        setTimeout(() => {
+            acknowledgeWrap.style.display = 'flex';
+            acknowledgeWrap.classList.add('animate-in');
+        }, 500); // Match this with the background transition time
+
+        document.body.style.overflow = 'hidden'; // Disable scrolling
     }
 
-    window.addEventListener('scroll', handleScroll);
+    // Function to hide the acknowledgment background, enable scrolling, and adjust the bar width with animation
+    function hideAcknowledgeBackground(button) {
+        // Start animation for the wrap
+        acknowledgeWrap.classList.remove('animate-in');
+        acknowledgeWrap.classList.add('animate-out');
 
-    // Initial check in case the page is loaded with some scroll position
-    handleScroll();
+        // Wait for the wrap animation to complete before hiding the background
+        acknowledgeWrap.addEventListener('transitionend', () => {
+            if (acknowledgeWrap.classList.contains('animate-out')) {
+                acknowledgeWrap.style.display = 'none';
+                acknowledgeBackground.classList.remove('visible');
+                setTimeout(() => {
+                    acknowledgeBackground.style.display = 'none';
+                }, 500); // Match this with the background transition time
+
+                document.body.style.overflow = ''; // Enable scrolling
+            }
+        }, { once: true });
+
+        // Start bar width expansion
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                innerBar.style.width = '50%';
+
+                // Play sound effect only when expanding starts
+                if (!hasSoundPlayed) {
+                    hasSoundPlayed = true; // Ensure sound is played only once
+                }
+            });
+        });
+
+        // Play the video
+        playVideoWithSound();
+    }
+
+    // Show the acknowledgment background with animation when the page loads
+    showAcknowledgeBackground();
+
+    // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
+    acknowledgeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.dataset.pressed === 'false') {
+                button.dataset.pressed = 'true'; // Update data attribute
+            }
+            hideAcknowledgeBackground(button);
+        });
+    });
+
+    // Function to check and update the continue button state and text
+    function checkButtonState() {
+        const progress = video.currentTime / video.duration;
+        const isReady = progress >= 0.8; // Check if video progress is at least 80%
+
+        continueButtons.forEach(button => {
+            if (isReady) {
+                button.classList.remove('disabled');
+            } else {
+                button.classList.add('disabled');
+            }
+        });
+    }
+
+    // Add event listener to change button class when video ends
+    video.addEventListener('ended', () => {
+        console.log('Video has ended');
+        if (ctaButton) {
+            ctaButton.classList.remove('button-changed');
+            ctaButton.classList.add('button');
+            ctaButton.style.pointerEvents = 'auto'; // Ensure the button is clickable
+        }
+    });
 });
