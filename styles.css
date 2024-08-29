@@ -1,0 +1,172 @@
+*,
+*::before,
+*::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+button,
+input,
+textarea,
+select {
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+}
+
+html {
+    font-size: 100%;
+}
+
+body {
+    background-color: #0f1f25;
+    font-family: system-ui, sans-serif;
+    color: #fff;
+}
+
+h1 {
+    font-family: system-ui, sans-serif;
+    line-height: 1.2;
+    cursor: default;
+    letter-spacing: .0625;
+}
+
+h2 {
+    line-height: 1.6;
+    cursor: default;
+    font-weight: 600;
+    letter-spacing: .03125rem;
+}
+
+p {
+    line-height: 1.6;
+    cursor: default;
+}
+
+header {
+    display: flex;
+    flex-direction: column;
+    padding: 0 2%;
+    width: 100%;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem 0;
+    width: 100%;
+    margin: auto;
+}
+
+.alert {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    color: #ffa600;
+}
+
+#header {
+    padding: 2rem 2%;
+}
+
+#header-text {
+    max-width: 60rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    text-align: center;
+}
+
+#call-out {
+    background-color: #ff4b4b;
+    padding: .5rem 1rem;
+    font-weight: 600;
+    line-height: 1;
+    border-radius: 100px;
+}
+
+#video {
+    display: flex;
+    justify-content: center;
+}
+
+#video-div {
+    width: 100%;
+    max-width: 60rem;
+    position: relative;
+}
+
+#cta {
+    padding: 2rem 2%;
+}
+
+#cta-div {
+    max-width: 60rem;
+    gap: 2rem;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    margin: auto;
+}
+
+button {
+    padding: 1rem 2rem;
+    background-color: #006FFA;
+    border-radius: .75rem;
+    box-shadow: 0 4px 0 #0045b3;
+    letter-spacing: 0.025rem;
+    cursor: pointer;
+    margin-bottom: 4px;
+    color: inherit;
+    font-weight: 600;
+}
+
+button:active {
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+#proof {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+#points-wrap {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: left;
+    align-items: center;
+    gap: .5rem;
+}
+
+.point {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: .5rem;
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    padding-left: .5rem;
+    padding-right: .75rem;
+    background-color: #334750;
+    border-radius: 100px;
+    cursor: default;
+    min-height: 2rem;
+}
+
+.orange {
+    background-color: #ffa60020;
+    color: #ffa600;
+}
+
+#point-face {
+    border-radius: 100%;
+}
