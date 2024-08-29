@@ -74,22 +74,6 @@ nav {
     gap: 0.5rem;
 }
 
-#title {
-    padding: 1rem 2%;
-    align-items: center;
-    display: none;
-}
-
-.title {
-    background-color: white;
-    color: black;
-    border-radius: .75rem;
-    padding: 1rem;
-    max-width: 60rem;
-    margin: auto;
-    text-align: center;
-}
-
 .video-wrap {
     display: flex;
     justify-content: center;
@@ -209,6 +193,18 @@ nav {
 #cta {
     border-bottom: 2px solid #334750;
     padding: 0 2%;
+}
+
+#phone-number {
+    padding: 0 2%;
+    background-color: #ffc800;
+}
+
+.phone {
+    color: black;
+    max-width: 60rem;
+    padding: 1rem 0;
+    margin: auto;
 }
 
 #copy {
@@ -432,7 +428,7 @@ footer {
 }
 
 button {
-    padding: 1rem;
+    padding: 1rem 2rem;
     background-color: #006FFA;
     border-radius: .75rem;
     box-shadow: 0 4px 0 #0045b3;
@@ -449,7 +445,7 @@ button:active {
 }
 
 .copy_button {
-    padding: 1rem;
+    padding: 1rem 2rem;
     border: none;
     background-color: #fff;
     border-radius: .75rem;
@@ -676,6 +672,10 @@ button:active {
     #final-cta {
         padding: 2rem 4%;
     }
+
+    #phone-number {
+        padding: 0 4%;
+    }
 }
 
 @media (max-width: 479px) {
@@ -733,5 +733,9 @@ button:active {
 
     #final-cta {
         padding: 2rem 4%;
+    }
+
+    #phone-number {
+        padding: 0 4%;
     }
 }
