@@ -131,7 +131,7 @@ button {
     border-radius: .75rem;
     box-shadow: 0 4px 0 #0045b3;
     letter-spacing: 0.025rem;
-    cursor: pointer;
+    pointer-events: auto;
     margin-bottom: 4px;
     color: inherit;
     font-weight: 600;
