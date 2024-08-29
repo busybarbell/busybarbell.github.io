@@ -1,3 +1,10 @@
+@font-face {
+    font-family: 'Lato';
+    src: url('Lato-BlackItalic.ttf') format('truetype');
+    font-weight: bold;
+    font-style: italic;
+}
+
 *,
 *::before,
 *::after {
@@ -27,17 +34,18 @@ body {
 }
 
 h1 {
-    font-family: system-ui, sans-serif;
+    font-family: 'Lato', system-ui, sans-serif;
     line-height: 1.2;
     cursor: default;
     letter-spacing: .0625;
+    text-transform: uppercase;
 }
 
 h2 {
     line-height: 1.6;
     cursor: default;
-    font-weight: 600;
     letter-spacing: .03125rem;
+    font-weight: 400;
 }
 
 p {
