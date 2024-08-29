@@ -298,6 +298,11 @@ footer {
     line-height: 1.6;
 }
 
+a {
+    color: inherit;
+    font-weight: 700;
+}
+
 .fade-in {
     background-color: transparent;
     /* Final background color */
