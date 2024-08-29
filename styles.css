@@ -7,6 +7,11 @@
     font-style: italic;
 }
 
+.lato-black-italic {
+  font-family: "Lato", sans-serif;
+  font-weight: 900;
+  font-style: italic;
+}
 
 *,
 *::before,
@@ -137,9 +142,11 @@ button {
     font-weight: 600;
 }
 
-button:active {
+button:active,
+button:focus {
     box-shadow: none;
     transform: translateY(4px);
+    outline: none;
 }
 
 #proof {
