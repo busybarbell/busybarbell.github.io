@@ -207,6 +207,29 @@ nav {
     margin: auto;
 }
 
+#header {
+    padding: 1rem 2%;
+}
+
+.headline {
+    max-width: 60rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
+.call-out {
+    background-color: rgba(0, 0, 0, 0.8);
+    padding-top: .25rem;
+    padding-bottom: .25rem;
+    padding-left: .5rem;
+    padding-right: .75rem;
+    border-radius: 100px;
+}
+
 #copy {
     padding: 0 2%;
 }
@@ -681,6 +704,10 @@ button:active {
     #phone-number {
         padding: 0 4%;
     }
+
+    #header {
+        padding: 1rem 4%;
+    }
 }
 
 @media (max-width: 479px) {
@@ -742,5 +769,9 @@ button:active {
 
     #phone-number {
         padding: 0 4%;
+    }
+
+    #header {
+        padding: 1rem 4%;
     }
 }
