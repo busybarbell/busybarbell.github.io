@@ -209,6 +209,7 @@ nav {
 
 #header {
     padding: 1rem 2%;
+    text-align: center;
 }
 
 .headline {
@@ -217,7 +218,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -228,6 +229,10 @@ nav {
     padding-left: .5rem;
     padding-right: .75rem;
     border-radius: 100px;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    gap: .5rem;
 }
 
 #copy {
