@@ -321,6 +321,14 @@ footer {
     display: none;
 }
 
+
+.fine-print3 {
+    font-size: .85rem;
+    margin: -0.255rem 0;
+    line-height: 1.6;
+    font-weight: 500;
+}
+
 .fine-print2 {
     font-size: .85rem;
     margin: -0.255rem 0;
