@@ -8,30 +8,55 @@
 
     <title>Busy Barbell</title>
 
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+
+    <!-- Android Chrome Icons -->
+    <link rel="icon" sizes="192x192" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <link rel="icon" sizes="512x512" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+
+    <!-- Microsoft Tile Icon -->
+    <meta name="msapplication-TileImage" content="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <meta name="msapplication-TileColor" content="#ffffff">
+
+    <!-- Social Media Icons (if needed) -->
+    <link rel="icon" type="image/webp" href="https://i.postimg.cc/VLSnyzZc/icon.webp" sizes="32x32">
+    <link rel="icon" type="image/webp" href="https://i.postimg.cc/VLSnyzZc/icon.webp" sizes="32x32">
+
+    <link rel="icon" href="https://i.postimg.cc/NM1Ck1Tp/favicon.webp" type="image/x-icon">
     <meta name="description"
         content="Busy Barbell's 21-Day Summer Slim Down. Transform your body 💪 with 1-on-1 online fitness coaching.">
 
-    <link rel="stylesheet" href="profile.css">
-    <script src="profile.js"></script>
+    <link rel="stylesheet" href="styles.css">
+    <script src="script.js"></script>
 
-    <link rel="preload" as="video" href="sabri2.mp4">
+    <link rel="preload" as="video" href="sabri.mp4">
 </head>
 
 <body>
-
     <header>
-        <div class="bar">
-            <div class="inner_bar">
-                <div class="bar_accent"></div>
+        <nav>
+            <img src="https://i.postimg.cc/gj46Pbbv/logo.webp" alt="Busy Barbell logo" height="24" width="auto">
+            <div class="alert">
+                <img src="https://i.postimg.cc/jjK8cz9g/fire.webp" alt="Fire icon" height="24" width="auto">
+                <p>5 spots left</p>
             </div>
-        </div>
+        </nav>
     </header>
 
     <main>
+        <section id="header">
+            <div class="headline">
+                <h1>If You’re Watching This on Aug 30th, You Could <span class="highlight">Lose 5-15+ Pounds</span> of Fat by Oct 11th</h1>
+                <p>Without Giving up Your Favorite Foods, or Spending More Than 3 Hours per Week in the Gym</p>
+            </div>
+        </section>
         <section id="video">
             <div class="video-wrap">
                 <video id="myVideo" preload="metadata" playsinline>
-                    <source src="sabri2.mp4" type="video/mp4">
+                    <source src="sabri.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
                 <div class="video_controls_wrap">
@@ -66,63 +91,160 @@
                 </div>
             </div>
         </section>
+        <section id="phone-number">
+            <div class="phone">
+                <img src="https://i.postimg.cc/y6gLqLXJ/play.webp" alt="play" height="16px" width="auto">(Watch Carefully. Then
+                Click)
+            </div>
+        </section>
+        <section id="cta">
+            <div class="cta-wrap">
+                <div class="button-under">
+                    <button id="first-button" class="button-changed" data-cal-link="busy-barbell/30min"
+                        data-cal-namespace="30min" data-cal-config='{"layout":"month_view"}'
+                        aria-label="Book your free onboarding meeting">BOOK FREE STRATEGY SESSION</button>
+                    <div class="fine-print2" style="color: #afafaf;"><img
+                            src="https://i.postimg.cc/TYMdXHmh/verified.webp" alt="check" height="16px" width="auto">No hard
+                        sell. No BS. No shenanigans.</div>
+                </div>
+                <div class="proof">
+                    <img src="https://i.postimg.cc/0jk7SjK4/AVATARSh-1000x.webp" alt="Proof" height="48" width="auto">
+                    <div class="fine-print">Currently <b>27/32 spots</b> taken. Only <b>5 spots left</b> as of April
+                        26th.</div>
+                </div>
+                <div class="points_wrap">
+                    <div class="point">
+                        <svg height="1.5rem" width="auto" preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                            <path
+                                d="M20 12c0-1.103-.897-2-2-2h-1V7c0-2.757-2.243-5-5-5S7 4.243 7 7v3H6c-1.103 0-2 .897-2 2v8c0 1.103.897 2 2 2h12c1.103 0 2-.897 2-2v-8zM9 7c0-1.654 1.346-3 3-3s3 1.346 3 3v3H9V7z"
+                                fill="currentColor"></path>
+                        </svg>Private coaching
+                    </div>
+                    <div class="point">
+                        <svg aria-hidden="true" role="img" class="iconify iconify--ic" height="1.5rem" width="auto"
+                            preserveAspectRatio="xMidYMid meet" viewBox="0 0 24 24">
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M16.67 13.13C18.04 14.06 19 15.32 19 17v3h3c.55 0 1-.45 1-1v-2c0-2.18-3.57-3.47-6.33-3.87z">
+                            </path>
+                            <circle cx="9" cy="8" r="4" fill="currentColor" fill-rule="evenodd"></circle>
+                            <path fill="currentColor" fill-rule="evenodd"
+                                d="M15 12c2.21 0 4-1.79 4-4s-1.79-4-4-4c-.47 0-.91.1-1.33.24a5.98 5.98 0 0 1 0 7.52c.42.14.86.24 1.33.24zm-6 1c-2.67 0-8 1.34-8 4v2c0 .55.45 1 1 1h14c.55 0 1-.45 1-1v-2c0-2.66-5.33-4-8-4z">
+                            </path>
+                        </svg>27 participants
+                    </div>
+                    <div class="point orange"><img src="https://i.postimg.cc/jjK8cz9g/fire.webp"
+                            alt="image not available" height="24px" width="auto"/>5 spots
+                        left</div>
+                    <div class="point"><img class="point_face" src="https://i.postimg.cc/WbKrT56R/hormozi-face.webp"
+                            alt="image not available" width="24px" height="24px" width="auto">By Asher Robinson 👑</div>
+                </div>
+            </div>
+        </section>
+        <div id="locked" class="locked-styled">
+            <section id="testimonials">
+                <div class="testimonial-sliders">
+                    <div class="insta">
+                        <div class="insta_profile">
+                            <image class="inline_image" src="https://i.postimg.cc/WbKrT56R/hormozi-face.webp"
+                                alt="image not available" height="36px" width="auto">
+                                <div>
+
+                                    <div class="fine-print"><b>Mike Thurston</b> (-21lbs)<br>"Good stuff. Thumbs up. 👍"
+                                    </div>
+                                </div>
+                        </div>
+                    </div>
+                    <div class="testimonial-pictures">
+                        <img src="https://i.postimg.cc/SNzxrqL1/Celebrities-Weight-Loss-and-Transformations-Before-and-After-Pictures-2.webp"
+                            alt="testimonials" width="100%">
+
+                    </div>
+                    <div class="dots-wrap">
+                        <div class="dots active"></div>
+                        <div class="dots"></div>
+                        <div class="dots"></div>
+                        <div class="dots"></div>
+                        <div class="dots"></div>
+                    </div>
+                </div>
+            </section>
+            <section id="copy">
+                <div class="copy-wrap">
+                    <img src="https://i.postimg.cc/G3FMsTVX/new-proof.webp" alt="Testimonials">
+                </div>
+            </section>
+
+            <section id="faq">
+                <div class="faq">
+                    <h1 class="faq-title">FAQ</h1>
+                    <div class="faq_item">
+                        <p class="faq-text">What is Skool?</p>
+                    </div>
+                    <p class="faq_answer">Skool is a community platform that lets you start, grow, and manage an online
+                        business.
+                    </p>
+                    <div class="faq_item">
+                        <p class="faq-text">How can I create an account?</p>
+                    </div>
+                    <p class="faq_answer">To create an account, click on the "Sign Up" button at the top right of the
+                        page and fill
+                        in your details.</p>
+                    <div class="faq_item">
+                        <p class="faq-text">What are the available features?</p>
+                    </div>
+                    <p class="faq_answer">We offer a variety of features including tutorials, forums, and personalized
+                        learning
+                        paths to help you succeed.</p>
+                    <div class="faq_item">
+                        <p class="faq-text">How can I contact support?</p>
+                    </div>
+                    <p class="faq_answer">You can contact support by clicking on the "Contact Us" link at the bottom of
+                        the page
+                        and filling out the form.</p>
+                    <div class="faq_item">
+                        <p class="faq-text">What is the Skool Games?</p>
+                    </div>
+                    <p class="faq_answer">You can contact support by clicking on the "Contact Us" link at the bottom of
+                        the page
+                        and filling out the form.</p>
+                </div>
+            </section>
+            <section id="final-cta">
+                <div class="inline_button_last">
+                    <div class="inline_header">
+                        <div class="inline_profile">
+                            <image class="inline_image" src="https://i.postimg.cc/WbKrT56R/hormozi-face.webp"
+                                alt="image not available" height="36px" width="auto">
+                                <p>"Last chance!"</p>
+                        </div>
+                        <h2>I guess what I'm trying to say is that you should hit the damn button!</h2>
+                    </div>
+
+                    <button class="copy_button" data-cal-link="busy-barbell/30min" data-cal-namespace="30min"
+                        data-cal-config='{"layout":"month_view"}' aria-label="Book your free onboarding meeting">BOOK
+                        MEETING</button>
+                </div>
+            </section>
+            <footer>
+                <div class="footer">
+                    <img src="https://i.postimg.cc/gj46Pbbv/logo.webp" alt="Busy Barbell logo" height="24" width="auto">
+                    <p class="fine-print">The most ruthlessly effective platform for rapidly scaling businesses on
+                        planet earth.<br><br>
+                        Copyright © Busy Barbell 2024. All Rights Reserved. Protected like a secret
+                        weapon. Steal our stuff, and we'll track you down with a vengeance.</p>
+                </div>
+        </div>
+
+        </footer>
+        </div>
     </main>
 
-    <section id="copy">
-        <div class="copy-wrap">
-            <p>More info:<br><br>
+    <script type="text/javascript">
+        (function (C, A, L) { let p = function (a, ar) { a.q.push(ar); }; let d = C.document; C.Cal = C.Cal || function () { let cal = C.Cal; let ar = arguments; if (!cal.loaded) { cal.ns = {}; cal.q = cal.q || []; d.head.appendChild(d.createElement("script")).src = A; cal.loaded = true; } if (ar[0] === L) { const api = function () { p(api, arguments); }; const namespace = ar[1]; api.q = api.q || []; if (typeof namespace === "string") { cal.ns[namespace] = cal.ns[namespace] || api; p(cal.ns[namespace], ar); p(cal, ["initNamespace", namespace]); } else p(cal, ar); return; } p(cal, ar); }; })(window, "https://app.cal.com/embed/embed.js", "init");
+        Cal("init", "30min", { origin: "https://cal.com" });
 
-                💰 7.8b in sales generated<br>
+        Cal.ns["30min"]("ui", { "styles": { "branding": { "brandColor": "#006FFA" } }, "hideEventTypeDetails": false, "layout": "month_view" });
+    </script>
 
-                <br>🔑 1067 different industries and niches.<br>
-
-                <br>⭐️ 3,000+ reviews (average of 4.7 stars)<br>
-
-                <br>💵 58 millionaires created<br>
-
-                <br>🤑 6x 8 figure clients created<br>
-
-                <br>😤 #17 fastest-growing company in Australia (ranked by the AFR)<br>
-
-                <br>🚀 #1 fastest-growing agency (3 years in a row)<br>
-
-                <br>Anyhoo.
-            </p>
-        </div>
-    </section>
-
-    <div class="acknowledge_background"></div>
-
-    <section class="acknowledge_wrap">
-        <div class="appointment_time">
-            <div class="drag_line"></div>
-            <p>Onboarding meeting (Tristan Reynolds)</p>
-            <div class="alert_text_white">
-                <span style="display: flex; flex-direction: row; align-items: center; gap: 1rem;"><img
-                        src="https://i.postimg.cc/3wqYqkmh/calendar-month.webp" alt="image not available"
-                        height="16px" width="auto">Monday, July 29, 2024 (10:45 - 11:15 am)</span>
-                <br><span style="display: flex; flex-direction: row; align-items: center; gap: 1rem;"><img
-                        src="https://i.postimg.cc/65Z2fXsT/schedule.webp" alt="image not available" height="16px" width="auto">30
-                    Minutes</span>
-                <br><span style="display: flex; flex-direction: row; align-items: center; gap: 1rem;"><img
-                        src="https://i.postimg.cc/mD4B4YcY/google-meet.webp" alt="image not available"
-                        height="16px" width="auto">Google Meet</span>
-                <br><span style="display: flex; flex-direction: row; align-items: center; gap: 1rem;"><img
-                        src="https://i.postimg.cc/h4kWR8Hf/time-zone.webp" alt="image not available"
-                        height="16px" width="auto">America/New_York</span>
-            </div>
-            <button class="button sticky_button" aria-label="Book your free onboarding meeting"
-                data-pressed="false">ACKNOWLEDGE</button>
-        </div>
-    </section>
-
-    <section id="cta">
-        <div class="cta-wrap">
-            <button class="button-changed" aria-label="Book your free onboarding meeting"
-                data-pressed="false">CONTINUE</button>
-        </div>
-    </section>
-
+    <script>!function (o, i) { window.provesrc && window.console && console.error && console.error("ProveSource is included twice in this page."), provesrc = window.provesrc = { dq: [], display: function () { this.dq.push(arguments) } }, o._provesrcAsyncInit = function () { provesrc.init({ apiKey: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhY2NvdW50SWQiOiI2NjRmYzNmYTFkOWYyMTZhNGRlZmQyZTciLCJpYXQiOjE3MTY1MDM1NDZ9.jRcGK4FkASOl5Ta_8ksIt4mc7OpbW39_Pg_YRjP_tpU", v: "0.0.4" }) }; var r = i.createElement("script"); r.type = "text/javascript", r.async = !0, r["ch" + "ar" + "set"] = "UTF-8", r.src = "https://cdn.provesrc.com/provesrc.js"; var e = i.getElementsByTagName("script")[0]; e.parentNode.insertBefore(r, e) }(window, document);</script>
 </body>
-
-</html>
