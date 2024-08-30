@@ -315,7 +315,7 @@ footer {
     right: 0;
     width: 120%;
     height: 120%;
-    background: linear-gradient(to top, #0f1f25 10%, transparent);
+    background: linear-gradient(to top, #0f1f25 20%, transparent);
     filter: blur(4px);
     -webkit-filter: blur(4px);
     -webkit-backdrop-filter: blur(4px);
