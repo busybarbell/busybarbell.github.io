@@ -311,8 +311,6 @@ footer {
     content: '';
     position: absolute;
     top: 0;
-    left: 0;
-    right: 0;
     width: 120%;
     height: 120%;
     background: linear-gradient(to top, #0f1f25 20%, transparent);
