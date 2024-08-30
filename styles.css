@@ -203,6 +203,9 @@ nav {
     max-width: 60rem;
     padding: 1rem 0;
     margin: auto;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
 }
 
 #header {
