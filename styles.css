@@ -217,6 +217,10 @@ nav {
     gap: .5rem;
 }
 
+#red {
+    color: #ff0000;
+}
+
 #header {
     padding: 2rem 2%;
 }
