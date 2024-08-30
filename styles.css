@@ -35,6 +35,7 @@ h1 {
     font-family: 'Bebas', system-ui, sans-serif;
     cursor: default;
     letter-spacing: .0625;
+    line-height: 0.9;
 }
 
 h2 {
