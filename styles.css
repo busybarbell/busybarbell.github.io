@@ -49,6 +49,16 @@ header {
     flex-direction: column;
     padding: 0 2%;
     width: 100%;
+    position: sticky;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: #0f1f25;
+    z-index: 450;
+}
+
+header.scrolled {
+    border-bottom: 2px solid #334750;
 }
 
 nav {
