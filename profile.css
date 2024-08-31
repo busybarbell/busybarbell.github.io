@@ -45,6 +45,20 @@ p {
     cursor: default;
 }
 
+#header {
+    padding: 2rem 2%;
+}
+
+.headline {
+    max-width: 60rem;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
 header {
     position: sticky;
     top: 0;
@@ -464,6 +478,21 @@ footer {
     margin: auto;
 }
 
+#phone-number {
+    padding: 0 2%;
+    background-color: #ffc800;
+}
+
+.phone {
+    color: black;
+    max-width: 60rem;
+    padding: 1rem 0;
+    margin: auto;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
 .cta-wrap {
     max-width: 60rem;
     display: flex;
@@ -804,6 +833,14 @@ button:active {
     #final-cta {
         padding: 2rem 4%;
     }
+
+    #phone-number {
+        padding: 0 4%;
+    }
+
+    #header {
+        padding: 2rem 4%;
+    }
 }
 
 @media (max-width: 479px) {
@@ -866,5 +903,13 @@ button:active {
     .cta-wrap {
         display: flex;
         flex-direction: column;
+    }
+
+    #phone-number {
+        padding: 0 4%;
+    }
+
+    #header {
+        padding: 2rem 4%;
     }
 }
