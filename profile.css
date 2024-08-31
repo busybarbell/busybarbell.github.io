@@ -135,6 +135,14 @@ nav {
     background-color: rgba(0,111,250,.8);
 }
 
+.highlight-green {
+    background-color: rgba(88, 204, 2, .8);
+}
+
+.highlight-red {
+    background-color: rgba(255, 75, 75, .8);
+}
+
 #title {
     padding: 1rem 2%;
     align-items: center;
