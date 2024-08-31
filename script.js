@@ -13,6 +13,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullscreenButton = document.getElementById('fullscreenButton');
     const fullscreenIcon = fullscreenButton.querySelector('.fullscreen');
     const exitFullscreenIcon = fullscreenButton.querySelector('.exit-fullscreen');
+    const header = document.querySelector('header');
+
+    function handleScroll() {
+        if (window.scrollY > 1) { // Change 50 to the desired scroll position threshold
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Initial check in case the page is loaded with some scroll position
+    handleScroll();
 
     // Check for video and locked elements
     if (video) {
