@@ -131,6 +131,10 @@ nav {
     gap: 0.5rem;
 }
 
+.highlight {
+    background-color: rgba(0,111,250,.8);
+}
+
 #title {
     padding: 1rem 2%;
     align-items: center;
