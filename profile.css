@@ -85,8 +85,29 @@ header.scrolled {
     width: 100%;
     max-width: 60rem;
     height: 1rem;
+    margin: .25rem 0;
     background-color: #334750;
     border-radius: 100px;
+    position: relative;
+}
+
+.steps {
+    position: absolute;
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.step {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #006FFA;
+    border: 2px solid #0045b3;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 550;
 }
 
 .inner_bar {
@@ -94,7 +115,7 @@ header.scrolled {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 25%;
+    width: 0%;
     height: 1rem;
     padding: 0.25rem 0.5rem;
     background-color: #006ffa;
