@@ -525,6 +525,16 @@ button:active {
     row-gap: .5rem;
 }
 
+@keyframes blink {
+    0% { opacity: 1; }
+    50% { opacity: 0; }
+    100% { opacity: 1; }
+}
+
+#scarcity-check {
+    animation: blink 1s infinite;
+}
+
 .scarcity-item {
     height: 1rem;
     width: 1rem;
