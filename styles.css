@@ -421,7 +421,7 @@ a {
 }
 
 .highlight-green {
-    background-color: rgba(88, 204, 2, .8);
+    background-color: rgba(67, 192, 0, .8);
 }
 
 .highlight-red {
@@ -516,6 +516,35 @@ button {
 button:active {
     box-shadow: none;
     transform: translateY(4px);
+}
+
+.scarcity {
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-template-rows: repeat(2);
+    row-gap: .5rem;
+}
+
+.scarcity-item {
+    height: 1rem;
+    width: 1rem;
+    background-color: #334750;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 550;
+}
+
+.scarcity-item-green {
+    height: 1rem;
+    width: 1rem;
+    background-color: #58cc02;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 550;
 }
 
 .copy_button {
