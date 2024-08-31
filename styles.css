@@ -410,6 +410,14 @@ a {
     background-color: rgba(0,111,250,.8);
 }
 
+.highlight-green {
+    background-color: rgba(88, 204, 2, .8);
+}
+
+.highlight-red {
+    background-color: rgba(255, 75, 75, .8);
+}
+
 .insta {
     position: relative;
     display: flex;
@@ -523,7 +531,7 @@ button:active {
     display: flex;
     flex-direction: row;
     flex-wrap: wrap;
-    justify-content: left;
+    justify-content: flex-start;
     align-items: center;
     gap: .5rem;
 }
