@@ -947,6 +947,10 @@ button:active {
     #header {
         padding: 2rem 4%;
     }
+
+    .acknowledge_wrap {
+        padding: 2rem 4%;
+    }
 }
 
 @media (max-width: 479px) {
@@ -1011,6 +1015,10 @@ button:active {
     }
 
     #header {
+        padding: 2rem 4%;
+    }
+
+    .acknowledge_wrap {
         padding: 2rem 4%;
     }
 }
