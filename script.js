@@ -15,6 +15,85 @@ document.addEventListener('DOMContentLoaded', () => {
     const exitFullscreenIcon = fullscreenButton.querySelector('.exit-fullscreen');
     const header = document.querySelector('header');
 
+    const acknowledgeButtons = document.querySelectorAll('.keep-watching');
+    const closeDiv = document.getElementById('close');
+    const acknowledgeBackground = document.querySelector('.acknowledge_background');
+    const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
+
+// Flag to track if the acknowledgment background has been shown
+let hasAcknowledgmentBeenShown = false;
+
+// Function to show the acknowledgment background and disable scrolling
+function showAcknowledgeBackground() {
+    if (hasAcknowledgmentBeenShown) return; // Exit if already shown
+
+    hasAcknowledgmentBeenShown = true; // Set the flag to true
+
+    // Make the background visible immediately
+    acknowledgeBackground.style.display = 'flex';
+
+    // Make the wrap visible immediately
+    acknowledgeWrap.style.display = 'flex';
+    acknowledgeWrap.classList.add('animate-in');
+
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+}
+
+// Function to hide the acknowledgment background and enable scrolling
+function hideAcknowledgeBackground(button) {
+    // Start animation for the wrap
+    acknowledgeWrap.classList.remove('animate-in');
+    acknowledgeWrap.classList.add('animate-out');
+
+    // Hide the wrap immediately after starting animation
+    acknowledgeWrap.style.display = 'none';
+    
+    // Hide the background immediately
+    acknowledgeBackground.style.display = 'none';
+
+    // Enable scrolling
+    document.body.style.overflow = '';
+}
+
+// Ensure acknowledgment background is hidden on page load
+document.addEventListener('DOMContentLoaded', () => {
+    acknowledgeBackground.style.display = 'none';
+    acknowledgeWrap.style.display = 'none';
+});
+
+// Event listener for mouse leaving the viewport
+document.addEventListener('mouseout', (event) => {
+    // Check if the mouse is leaving the viewport from the top edge
+    if (event.clientY < 0) {
+        showAcknowledgeBackground();
+    }
+});
+
+// Event listener for visibility change
+document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+        // The document is hidden (user switched tabs or minimized the browser)
+        showAcknowledgeBackground();
+    }
+});
+
+// Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
+acknowledgeButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (button.dataset.pressed === 'false') {
+            button.dataset.pressed = 'true'; // Update data attribute
+        }
+        hideAcknowledgeBackground(button);
+    });
+});
+
+// Add event listener to the close div
+closeDiv.addEventListener('click', () => {
+    hideAcknowledgeBackground(closeDiv);
+});
+
+
     function handleScroll() {
         if (window.scrollY > 1) { // Change 50 to the desired scroll position threshold
             header.classList.add('scrolled');
@@ -229,11 +308,11 @@ document.addEventListener('DOMContentLoaded', () => {
         return `${monthNames[monthIndex]} ${day}${suffix}`;
     }
 
-    document.querySelectorAll('.today-suffix').forEach(function(selected){
+    document.querySelectorAll('.today-suffix').forEach(function (selected) {
         selected.innerHTML = getFormattedDate();
     });
 
-    document.querySelectorAll('.days-21-suffix').forEach(function(selected){
+    document.querySelectorAll('.days-21-suffix').forEach(function (selected) {
         const today = new Date();
         const futureDate = new Date(today.getTime() + (21 * 24 * 60 * 60 * 1000));
         selected.innerHTML = getFormattedDate(futureDate);
