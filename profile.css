@@ -94,7 +94,7 @@ header.scrolled {
 .steps {
     position: absolute;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     width: 100%;
 }
 
