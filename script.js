@@ -70,14 +70,6 @@ document.addEventListener('mouseout', (event) => {
     }
 });
 
-// Event listener for visibility change
-document.addEventListener('visibilitychange', () => {
-    if (document.hidden) {
-        // The document is hidden (user switched tabs or minimized the browser)
-        showAcknowledgeBackground();
-    }
-});
-
 // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
 acknowledgeButtons.forEach(button => {
     button.addEventListener('click', () => {
