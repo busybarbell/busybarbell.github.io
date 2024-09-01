@@ -304,7 +304,8 @@ footer {
     display: flex;
     gap: .5rem;
     margin: auto;
-    padding-top: 1rem;;
+    padding-top: 1rem;
+    ;
 }
 
 .dots {
@@ -417,7 +418,7 @@ a {
 }
 
 .highlight {
-    background-color: rgba(0,111,250,.8);
+    background-color: rgba(0, 111, 250, .8);
 }
 
 .highlight-green {
@@ -435,8 +436,10 @@ a {
     max-width: 40rem;
     width: 100%;
     justify-content: flex-start;
-    overflow: hidden; /* Hide overflow of the pseudo-element */
-    color: white; /* Adjust text color if needed for better visibility */
+    overflow: hidden;
+    /* Hide overflow of the pseudo-element */
+    color: white;
+    /* Adjust text color if needed for better visibility */
     background-color: rgba(0, 0, 0, 0.8);
 }
 
@@ -452,7 +455,8 @@ a {
     background-position: top;
     background-repeat: no-repeat;
     filter: blur(4px);
-    z-index: -1; /* Place it behind the content */
+    z-index: -1;
+    /* Place it behind the content */
 }
 
 
@@ -526,9 +530,17 @@ button:active {
 }
 
 @keyframes blink {
-    0% { opacity: 1; }
-    50% { opacity: 0; }
-    100% { opacity: 1; }
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        opacity: 1;
+    }
 }
 
 #scarcity-check {
@@ -608,6 +620,148 @@ button:active {
 
 .point_face {
     border-radius: 100%;
+}
+
+.acknowledge_background {
+    align-items: flex-start;
+    justify-content: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    overflow: auto;
+}
+
+.acknowledge_wrap {
+    z-index: 1000;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    max-width: 40rem;
+    padding: 2rem;
+    background-color: #0f1f25;
+    border-radius: .75rem;
+}
+
+.appointment_time {
+    width: 100%;
+    max-width: 60rem;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.pop-up-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.bar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 60rem;
+    height: 1rem;
+    margin: .25rem 0;
+    background-color: #334750;
+    border-radius: 100px;
+    position: relative;
+}
+
+.pop-up-x {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+#close {
+    height: 1rem;
+    width: 1rem;
+    cursor: pointer;
+}
+
+.steps {
+    position: absolute;
+    display: flex;
+    justify-content: flex-end;
+    width: 100%;
+}
+
+.step {
+    height: 1.5rem;
+    width: 1.5rem;
+    background-color: #006FFA;
+    border: 2px solid #0045b3;
+    border-radius: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 550;
+}
+
+.inner_bar {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+    height: 1rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #006ffa;
+    border-radius: 100px;
+    transition: width 1s ease;
+    animation: stretchBounce 5s cubic-bezier(0.5, -0.2, 0.3, 1.3) infinite;
+}
+
+@keyframes stretchBounce {
+    0% {
+        width: 50%;
+    }
+    30% {
+        width: 60%; /* A bit of a struggle before reaching the max */
+    }
+    32.5% {
+        width: 60%;
+    }
+    42.5% {
+        width: 50%; /* Maximum tension point */
+    }
+    50% {
+        width: 50%;
+    }
+    85% {
+        width: 65%; /* Maintain tension, showing the effort to reach full */
+    }
+    85% {
+        width: 65%;
+    }
+    90% {
+        width: 50%; /* Reset for the next cycle */
+    }
+}
+
+
+.bar_accent {
+    height: .25rem;
+    width: 100%;
+    background-color: #008dff;
+    border-radius: 100px;
 }
 
 .faq {
@@ -769,15 +923,15 @@ button:active {
     #cta {
         padding: 0 4%;
     }
-    
+
     #copy {
         padding: 0 4%;
     }
-    
+
     #faq {
         padding: 0 4%;
     }
-    
+
     footer {
         padding: 2rem 4%;
     }
@@ -835,15 +989,15 @@ button:active {
     #cta {
         padding: 0 4%;
     }
-    
+
     #copy {
         padding: 0 4%;
     }
-    
+
     #faq {
         padding: 0 4%;
     }
-    
+
     footer {
         padding: 2rem 4%;
     }
