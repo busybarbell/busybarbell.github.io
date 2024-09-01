@@ -205,4 +205,37 @@ document.addEventListener('DOMContentLoaded', () => {
             answer.style.display = 'none';
         });
     });
+
+    // New Date Functionality
+    function getFormattedDate(date) {
+        date = date || new Date();
+        const day = date.getDate();
+        const monthIndex = date.getMonth();
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        const suffixes = ["st", "nd", "rd", "th"];
+        let suffix;
+
+        if (day >= 11 && day <= 13) {
+            suffix = "th";
+        } else {
+            suffix = suffixes[(day - 1) % 10] || "th";
+        }
+
+        // Wrap suffix in <sup> tags
+        suffix = `<sup>${suffix}</sup>`;
+
+        return `${monthNames[monthIndex]} ${day}${suffix}`;
+    }
+
+    document.querySelectorAll('.today-suffix').forEach(function(selected){
+        selected.innerHTML = getFormattedDate();
+    });
+
+    document.querySelectorAll('.days-21-suffix').forEach(function(selected){
+        const today = new Date();
+        const futureDate = new Date(today.getTime() + (21 * 24 * 60 * 60 * 1000));
+        selected.innerHTML = getFormattedDate(futureDate);
+    });
 });
