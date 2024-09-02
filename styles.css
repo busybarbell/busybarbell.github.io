@@ -4,11 +4,6 @@
         url('PODIUMSharp-211.ttf') format('truetype');
 }
 
-@font-face {
-    font-family: 'Inter';
-    src: url('Inter-VariableFont_opsz\,wght.ttf') format('truetype');
-}
-
 *,
 *::before,
 *::after {
@@ -33,7 +28,7 @@ html {
 
 body {
     background-color: #0f1f25;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
     color: #fff;
 }
 
@@ -53,14 +48,14 @@ h2 {
     font-weight: 600;
     letter-spacing: .03125rem;
     text-align: center;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
 }
 
 p {
     line-height: 1.6;
     cursor: default;
     text-align: center;
-    font-family: 'Inter', system-ui, sans-serif;
+    font-family: system-ui, sans-serif;
 }
 
 header {
