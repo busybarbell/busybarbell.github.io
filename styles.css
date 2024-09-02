@@ -1,6 +1,6 @@
 @font-face {
-    font-family: 'Bebas';
-    src: url('BebasNeue-Regular.ttf') format('truetype');
+    font-family: 'Podium';
+    src: url('PODIUMSharp-211.woff2') format('woff2');
 }
 
 @font-face {
@@ -41,7 +41,8 @@ h1 {
     cursor: default;
     letter-spacing: .0625;
     text-align: center;
-    font-family: 'Bebas', system-ui, sans-serif;
+    font-family: 'Podium', system-ui, sans-serif;
+    text-transform: uppercase;
 }
 
 h2 {
