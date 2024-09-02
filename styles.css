@@ -30,6 +30,7 @@ h1 {
     line-height: 1.2;
     cursor: default;
     letter-spacing: .0625;
+    text-align: center;
 }
 
 h2 {
@@ -37,11 +38,13 @@ h2 {
     cursor: default;
     font-weight: 600;
     letter-spacing: .03125rem;
+    text-align: center;
 }
 
 p {
     line-height: 1.6;
     cursor: default;
+    text-align: center;
 }
 
 header {
@@ -66,7 +69,9 @@ nav {
     justify-content: space-between;
     align-items: center;
     padding: 1rem 0;
+    gap: 1rem;
     width: 100%;
+    max-width: 60rem;
     margin: auto;
 }
 
@@ -206,6 +211,8 @@ nav {
 #phone-number {
     padding: 0 2%;
     background-color: #ffc800;
+    display: flex;
+    align-items: center;
 }
 
 .button-under {
@@ -241,7 +248,7 @@ nav {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -281,7 +288,7 @@ footer {
     max-width: 40rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 2rem;
     margin: auto;
 }
@@ -338,6 +345,8 @@ footer {
     margin: -0.255rem 0;
     line-height: 1.6;
     font-weight: 500;
+    cursor: default;
+    text-align: center;
 }
 
 .fine-print2 {
@@ -348,12 +357,16 @@ footer {
     align-items: center;
     gap: .5rem;
     margin: auto;
+    cursor: default;
+    text-align: center;
 }
 
 .fine-print {
     font-size: .85rem;
     margin: -0.255rem 0;
     line-height: 1.6;
+    cursor: default;
+    text-align: center;
 }
 
 a {
@@ -489,6 +502,7 @@ a {
     max-width: 60rem;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 2rem;
     padding: 2rem 0;
     margin: auto;
@@ -526,7 +540,8 @@ button:active {
     display: grid;
     grid-template-columns: repeat(16, 1fr);
     grid-template-rows: repeat(2);
-    row-gap: .5rem;
+    gap: .5rem;
+    z-index: 1;
 }
 
 @keyframes blink {
@@ -734,10 +749,10 @@ button:active {
         width: 50%;
     }
     30% {
-        width: 60%; /* A bit of a struggle before reaching the max */
+        width: 55%; /* A bit of a struggle before reaching the max */
     }
     32.5% {
-        width: 60%;
+        width: 55%;
     }
     42.5% {
         width: 50%; /* Maximum tension point */
@@ -817,7 +832,7 @@ button:active {
 
 @media (min-width: 1440px) {
     h1 {
-        font-size: 2.5rem;
+        font-size: 2.75rem;
         margin: -0.25rem 0;
     }
 
@@ -834,7 +849,7 @@ button:active {
 
 @media (min-width: 1200px) and (max-width: 1439px) {
     h1 {
-        font-size: 2.25rem;
+        font-size: 2.5rem;
         margin: -0.225rem 0;
     }
 
@@ -851,7 +866,7 @@ button:active {
 
 @media (min-width: 1024px) and (max-width: 1199px) {
     h1 {
-        font-size: 2rem;
+        font-size: 2.25rem;
         margin: -0.2rem 0;
     }
 
@@ -868,7 +883,7 @@ button:active {
 
 @media (min-width: 768px) and (max-width: 1023px) {
     h1 {
-        font-size: 1.75rem;
+        font-size: 2rem;
         margin: -0.175rem 0;
     }
 
@@ -885,7 +900,7 @@ button:active {
 
 @media (min-width: 480px) and (max-width: 767px) {
     h1 {
-        font-size: 1.625rem;
+        font-size: 1.875rem;
         margin: -0.1625rem 0;
     }
 
@@ -955,7 +970,7 @@ button:active {
 
 @media (max-width: 479px) {
     h1 {
-        font-size: 1.5rem;
+        font-size: 1.75rem;
         margin: -0.15rem 0;
     }
 
