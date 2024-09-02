@@ -41,6 +41,7 @@ h1 {
     line-height: 1;
     cursor: default;
     letter-spacing: .0625;
+    font-weight: normal;
     text-align: center;
     font-family: 'Podium', system-ui, sans-serif;
     text-transform: uppercase;
