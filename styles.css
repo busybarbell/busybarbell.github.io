@@ -1,6 +1,7 @@
 @font-face {
     font-family: 'Podium';
-    src: url('PODIUMSharp-211.woff2') format('woff2');
+    src: url('PODIUMSharp-211.woff2') format('woff2'),
+        url('PODIUMSharp-211.ttf') format('truetype');
 }
 
 @font-face {
@@ -660,8 +661,8 @@ button:active {
     left: 0;
     right: 0;
     z-index: 999;
-    padding-top: 2rem;
-    padding-bottom: 2rem;
+    padding-top: 4rem;
+    padding-bottom: 4rem;
     background-color: rgba(0, 0, 0, 0.8);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
@@ -761,26 +762,37 @@ button:active {
     0% {
         width: 50%;
     }
+
     30% {
-        width: 55%; /* A bit of a struggle before reaching the max */
+        width: 55%;
+        /* A bit of a struggle before reaching the max */
     }
+
     32.5% {
         width: 55%;
     }
+
     42.5% {
-        width: 50%; /* Maximum tension point */
+        width: 50%;
+        /* Maximum tension point */
     }
+
     50% {
         width: 50%;
     }
+
     85% {
-        width: 65%; /* Maintain tension, showing the effort to reach full */
+        width: 65%;
+        /* Maintain tension, showing the effort to reach full */
     }
+
     85% {
         width: 65%;
     }
+
     90% {
-        width: 50%; /* Reset for the next cycle */
+        width: 50%;
+        /* Reset for the next cycle */
     }
 }
 
