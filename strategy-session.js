@@ -3,9 +3,14 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('multiStepForm');
     const steps = document.querySelectorAll('.form-step');
     const innerBar = document.querySelector('.inner_bar');
+    const barAccent = document.querySelector('.bar_accent'); // Make sure you have this element
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
+    const countdownElement = document.getElementById('countdown'); // Countdown element
     let currentStep = 1;
+
+    // Timer variables
+    let timeRemaining = 10 * 60; // 10 minutes in seconds
 
     // Show the current step
     function showStep(step) {
@@ -17,6 +22,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 stepDiv.classList.add('active');
                 focusFirstInput(stepDiv); // Focus the first input in the active step
                 typeText(stepDiv); // Apply typing effect to the <p> tag
+
+                // Apply color changes for step 5
+                if (step === 5) {
+                    innerBar.style.backgroundColor = '#ffa600'; // Change inner bar color
+                    if (barAccent) {
+                        barAccent.style.backgroundColor = '#ffb84d'; // Change bar accent color
+                    }
+                }
             } else {
                 stepDiv.style.display = 'none'; // Hide non-active steps immediately
                 stepDiv.classList.remove('active');
@@ -140,6 +153,29 @@ document.addEventListener('DOMContentLoaded', () => {
             }, 10); // Adjust typing speed here (in milliseconds)
         }
     }
+
+    // Countdown Timer
+    function formatTime(seconds) {
+        const minutes = Math.floor(seconds / 60);
+        const secs = seconds % 60;
+        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+    }
+
+    function updateCountdown() {
+        if (timeRemaining <= 0) {
+            countdownElement.textContent = 'Time’s up!';
+            clearInterval(timerInterval);
+            return;
+        }
+        countdownElement.textContent = `${formatTime(timeRemaining)}`;
+        timeRemaining--;
+    }
+
+    // Initial countdown display
+    countdownElement.textContent = `${formatTime(timeRemaining)}`;
+    
+    // Update the countdown every second
+    const timerInterval = setInterval(updateCountdown, 1000);
 
     // Show the initial step
     showStep(currentStep);

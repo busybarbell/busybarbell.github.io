@@ -292,6 +292,7 @@ header {
     left: 0;
     right: 0;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     width: 100%;
@@ -303,6 +304,15 @@ header {
 
 header.scrolled {
     border-bottom: 2px solid #334750;
+}
+
+.hee {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    gap: 1rem;
+    max-width: 60rem;
 }
 
 .question {
@@ -342,6 +352,14 @@ header.scrolled {
     display: flex;
     gap: 1.625rem;
     width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
+.timer {
+    color: #dd81ff;
+    gap: .5rem;
+    display: flex;
     align-items: center;
     justify-content: flex-start;
 }
