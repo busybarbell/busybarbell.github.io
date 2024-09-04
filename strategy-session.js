@@ -7,7 +7,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
     const countdownElement = document.getElementById('countdown'); // Countdown element
+    const motivation = document.querySelector('.motivation'); // Motivation element
     let currentStep = 1;
+    let step6Visited = false; // Track if step 6 has been visited
+    let isForwardMove = true; // Track if the user is moving forward
 
     // Timer variables
     let timeRemaining = 9 * 60; // 9 minutes in seconds
@@ -22,11 +25,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 stepDiv.classList.add('active');
                 typeText(stepDiv); // Apply typing effect to the <p> tag
 
-                // Apply color changes for step 6
+                // Apply color changes and show/hide elements for specific steps
                 if (step === 6) {
                     innerBar.style.backgroundColor = '#ffa600'; // Change inner bar color
                     if (barAccent) {
                         barAccent.style.backgroundColor = '#ffb84d'; // Change bar accent color
+                    }
+                    const picture = document.querySelector('.picture');
+                    if (picture) {
+                        picture.src = 'https://i.postimg.cc/mD33VsKq/surprised.webp'; // Change image URL
+                    }
+                    if (motivation) {
+                        if (!step6Visited) {
+                            motivation.style.display = 'block'; // Show motivation element
+                            step6Visited = true; // Mark step 6 as visited
+                        }
+                    }
+                } else {
+                    if (motivation) {
+                        motivation.style.display = 'none'; // Hide motivation element for other steps
                     }
                 }
             } else {
@@ -42,9 +59,38 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update the progress bar
     function updateProgressBar() {
         const totalSteps = steps.length;
-        // If `currentStep` is 1, set progress to 8%; otherwise, calculate based on steps
         const progress = currentStep === 1 ? 8 : ((currentStep - 1) / (totalSteps - 1)) * 92 + 8;
         innerBar.style.width = `${progress}%`;
+
+        // Create a bubble effect at the end of the progress bar if moving forward
+        if (isForwardMove) {
+            createBubble();
+        }
+    }
+
+    // Create a bubble animation at the end of the progress bar
+    function createBubble() {
+        // Remove any existing bubbles
+        const existingBubbles = innerBar.querySelectorAll('.bubble');
+        existingBubbles.forEach(bubble => bubble.remove());
+
+        const bubble = document.createElement('div');
+        bubble.className = 'bubble';
+        
+        // Set the bubble's border color to match the inner bar's background color
+        const innerBarColor = getComputedStyle(innerBar).backgroundColor;
+        bubble.style.borderColor = innerBarColor;
+        
+        // Position the bubble at the end of the progress bar
+        bubble.style.right = `0`;
+        bubble.style.transform = `translateX(50%)`; // Center the bubble at the edge
+
+        innerBar.appendChild(bubble);
+
+        // Remove the bubble after animation to keep the DOM clean
+        bubble.addEventListener('animationend', () => {
+            bubble.remove();
+        });
     }
 
     // Update navigation buttons
@@ -69,6 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle previous button click
     prevButton.addEventListener('click', () => {
         if (currentStep > 1) {
+            isForwardMove = false; // Moving backward
             currentStep--;
             showStep(currentStep);
         }
@@ -78,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
     nextButton.addEventListener('click', () => {
         if (isCurrentStepValid()) {
             if (currentStep < steps.length) {
+                isForwardMove = true; // Moving forward
                 currentStep++;
                 showStep(currentStep);
             } else {
@@ -140,7 +188,8 @@ document.addEventListener('DOMContentLoaded', () => {
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
-        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        // Show "0:xx" format if minutes are zero
+        return `${minutes === 0 ? '0' : String(minutes).padStart(1, '0')}:${String(secs).padStart(2, '0')}`;
     }
 
     function updateCountdown() {
@@ -161,4 +210,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show the initial step
     showStep(currentStep);
+
+    // Add number-only validation to the age input field in step 1
+    const ageInput = document.querySelector('.form-step[data-step="1"] input[name="age"]');
+    if (ageInput) {
+        ageInput.addEventListener('input', (event) => {
+            const value = event.target.value;
+            event.target.value = value.replace(/[^0-9]/g, ''); // Allow only numbers
+        });
+    }
 });

@@ -365,6 +365,46 @@ header.scrolled {
     justify-content: flex-start;
 }
 
+.motivation {
+    position: absolute;
+    bottom: -1.75rem;
+    right: 0;
+    color: #ffa600;
+    display: none; /* Hide by default */
+}
+
+.bubble {
+    position: absolute;
+    width: 1.5rem;
+    height: 1.5rem;
+    right: 0;
+    bottom: -0.25rem;
+    border: 2px solid #ffa600; /* Default color for border */
+    border-radius: 50%;
+    pointer-events: none; /* Avoid interaction with bubbles */
+    animation: bubbleAnimation .8s cubic-bezier(0.4, 0, 0.2, 1); /* Custom easing for ramping effect */
+    transform: translateX(50%); /* Center bubble at the edge */
+    opacity: 0; /* Start invisible */
+}
+
+/* Bubble animation keyframes */
+@keyframes bubbleAnimation {
+    0% {
+        transform: translateX(-100%) scale(0); /* Start off-screen with zero scale */
+        border-width: 10px; /* Initial border width */
+        opacity: .8; /* Fully visible */
+    }
+    10% {
+        transform: translateX(5%) scale(.4); /* Move to the right and grow */
+        opacity: .8; /* Fully visible */
+    }
+    100% {
+        transform: translateX(50%) scale(2); /* Continue moving and scaling */
+        border-width: 2; /* Border disappears */
+        opacity: 0; /* Fully invisible */
+    }
+}
+
 @media (min-width: 1440px) {
     h1 {
         font-size: 4rem;
