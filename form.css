@@ -303,6 +303,34 @@ header.scrolled {
     gap: 1rem;
 }
 
+.box {
+    border: 2px solid #334750;
+    border-radius: .75rem;
+    padding: .5rem .75rem;
+    position: relative;
+}
+
+.picture {
+    max-width: 7rem;
+    width: 30%;
+    border-radius: .75rem;
+    aspect-ratio: 1/1;
+    height: 100%;
+}
+
+.sharp {
+    position: absolute;
+    left: -1.125rem;
+}
+
+.asking {
+    display: flex;
+    gap: 1.625rem;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+}
+
 @media (min-width: 1440px) {
     h1 {
         font-size: 4rem;
