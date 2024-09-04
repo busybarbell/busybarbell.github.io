@@ -390,12 +390,8 @@ header.scrolled {
 /* Bubble animation keyframes */
 @keyframes bubbleAnimation {
     0% {
-        transform: translateX(-100%) scale(0); /* Start off-screen with zero scale */
+        transform: translateX(50%) scale(0); /* Start off-screen with zero scale */
         border-width: 10px; /* Initial border width */
-        opacity: .8; /* Fully visible */
-    }
-    10% {
-        transform: translateX(5%) scale(.4); /* Move to the right and grow */
         opacity: .8; /* Fully visible */
     }
     100% {
