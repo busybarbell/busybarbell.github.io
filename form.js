@@ -125,6 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
+    // Attach event listeners
     document.addEventListener('focusin', handleInputFocus);
     document.addEventListener('focusout', handleInputBlur);
 
