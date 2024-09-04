@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <title>Busy Barbell</title>
+
+    <!-- Apple Touch Icons -->
+    <link rel="apple-touch-icon" sizes="180x180" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <link rel="apple-touch-icon" sizes="152x152" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <link rel="apple-touch-icon" sizes="120x120" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+
+    <!-- Android Chrome Icons -->
+    <link rel="icon" sizes="192x192" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <link rel="icon" sizes="512x512" href="https://i.postimg.cc/VLSnyzZc/icon.webp">
+
+    <!-- Microsoft Tile Icon -->
+    <meta name="msapplication-TileImage" content="https://i.postimg.cc/VLSnyzZc/icon.webp">
+    <meta name="msapplication-TileColor" content="#ffffff">
+
+    <!-- Social Media Icons (if needed) -->
+    <link rel="icon" type="image/webp" href="https://i.postimg.cc/VLSnyzZc/icon.webp" sizes="32x32">
+    <link rel="icon" type="image/webp" href="https://i.postimg.cc/VLSnyzZc/icon.webp" sizes="32x32">
+
+    <link rel="icon" href="https://i.postimg.cc/NM1Ck1Tp/favicon.webp" type="image/x-icon">
+    <meta name="description"
+        content="Busy Barbell's 21-Day Summer Slim Down. Transform your body 💪 with 1-on-1 online fitness coaching.">
+
+    <link rel="stylesheet" href="form.css">
+</head>
+
+<body>
+    <header>
+        <img class="back" id="prevButton" src="https://i.postimg.cc/tTv9xnBC/back-arrow.webp" alt="Back">
+        <div class="bar">
+            <div class="bar-gift">
+                <img src="https://i.postimg.cc/CxT0TYB1/treasure.webp" alt="gift" height="24px"
+                    style="border-left: 2px solid #0f1f25; z-index: 999;">
+            </div>
+            <div class="inner_bar">
+                <div class="bar_accent"></div>
+            </div>
+        </div>
+    </header>
+
+    <div class="form-container">
+        <form id="multiStepForm" class="formy">
+            <!-- Step 1 -->
+            <div class="form-step active" data-step="1">
+                <h2>Alright Asher, first things first. How old are you?</h2>
+                <input type="number" id="age" name="age" placeholder="Your Age" required>
+            </div>
+
+            <!-- Step 2 -->
+            <div class="form-step" data-step="2">
+                <h2>42 years young! Nice! Now, can you meet the qualifications for this mentorship?</h2>
+                <p>(Coachable, work out 3x a week, make better eating habits, in good general condition, etc.)</p>
+                <div class="custom-radio-group">
+                    <input type="radio" id="coachable" name="qualification" value="Coachable" required>
+                    <label for="coachable" class="custom-radio-label">Yes</label>
+                    
+                    <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
+                    <label for="workout" class="custom-radio-label">No</label>
+                </div>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="form-step" data-step="3">
+                <h2>What are your primary fitness goals right now?</h2>
+                <p>(I want to lose weight, get fit, be more athletic, etc.)</p>
+                <textarea id="feedback" name="feedback" required></textarea>
+            </div>
+        </form>
+    </div>
+
+    <section id="cta">
+        <div class="cta-wrap">
+            <button id="nextButton" aria-label="Next" disabled>CONTINUE</button>
+        </div>
+    </section>
+
+    <script src="form.js"></script>
+</body>
+
+</html>
