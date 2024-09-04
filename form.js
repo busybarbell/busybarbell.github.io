@@ -93,6 +93,37 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Handle viewport zoom prevention
+    function setViewportZoomPrevent() {
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        if (viewportMeta) {
+            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+        } else {
+            const newViewportMeta = document.createElement('meta');
+            newViewportMeta.name = 'viewport';
+            newViewportMeta.content = 'width=device-width, initial-scale=1.0';
+            document.head.appendChild(newViewportMeta);
+        }
+    }
+
+    function handleInputFocus(event) {
+        if (event.target.tagName === 'INPUT') {
+            setViewportZoomPrevent();
+        }
+    }
+
+    function handleInputBlur(event) {
+        if (event.target.tagName === 'INPUT') {
+            const viewportMeta = document.querySelector('meta[name="viewport"]');
+            if (viewportMeta) {
+                viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+            }
+        }
+    }
+
+    document.addEventListener('focusin', handleInputFocus);
+    document.addEventListener('focusout', handleInputBlur);
+
     // Show the initial step
     showStep(currentStep);
 });
