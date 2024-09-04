@@ -1,57 +1,362 @@
-// script.js
 document.addEventListener('DOMContentLoaded', () => {
-    const form = document.getElementById('multiStepForm');
-    const steps = document.querySelectorAll('.form-step');
-    const innerBar = document.querySelector('.inner_bar');
-    const prevButton = document.getElementById('prevButton');
-    const nextButton = document.getElementById('nextButton');
-    let currentStep = 1;
+    const video = document.getElementById('myVideo');
+    const lockedElement = document.getElementById('locked');
+    const firstButton = document.getElementById('first-button');
+    const muteBtn = document.querySelector('.click_for_sound');
+    const volumeDiv = document.querySelector('.volume');
+    const volumeOn = volumeDiv.querySelector('.volume-on');
+    const volumeOff = volumeDiv.querySelector('.volume-off');
+    const clickText = muteBtn.querySelector('.click-text');
+    const tapText = muteBtn.querySelector('.tap-text');
+    const playButton = document.querySelector('.play');
+    const controls = document.querySelector('.controls');
+    const fullscreenButton = document.getElementById('fullscreenButton');
+    const fullscreenIcon = fullscreenButton.querySelector('.fullscreen');
+    const exitFullscreenIcon = fullscreenButton.querySelector('.exit-fullscreen');
+    const header = document.querySelector('header');
 
-    function showStep(step) {
-        steps.forEach((stepDiv) => {
-            stepDiv.classList.toggle('active', stepDiv.dataset.step == step);
-        });
-        updateProgressBar();
-        updateButtons();
-    }
+    const acknowledgeButtons = document.querySelectorAll('.keep-watching');
+    const closeDiv = document.getElementById('close');
+    const acknowledgeBackground = document.querySelector('.acknowledge_background');
+    const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
 
-    function updateProgressBar() {
-        const totalSteps = steps.length;
-        const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
-        innerBar.style.width = `${progress}%`;
-    }
+    const close2Div = document.getElementById('close2');
+    const signWrap = document.querySelector('.sign_wrap');
 
-    function updateButtons() {
-        prevButton.disabled = currentStep === 1;
-        nextButton.disabled = !isCurrentStepValid();
-    }
-
-    function isCurrentStepValid() {
-        const currentStepDiv = document.querySelector(`.form-step[data-step="${currentStep}"]`);
-        return [...currentStepDiv.querySelectorAll('input, textarea')].every(input => input.value.trim() !== '');
-    }
-
-    prevButton.addEventListener('click', () => {
-        if (currentStep > 1) {
-            currentStep--;
-            showStep(currentStep);
+    // Toggle visibility of signWrap on button click
+    firstButton.addEventListener('click', () => {
+        if (signWrap.style.display === 'flex') {
+            signWrap.style.display = 'none'; // Hide if currently shown
+        } else {
+            signWrap.style.display = 'flex'; // Show if currently hidden
         }
     });
 
-    nextButton.addEventListener('click', () => {
-        if (isCurrentStepValid()) {
-            if (currentStep < steps.length) {
-                currentStep++;
-                showStep(currentStep);
-            } else {
-                form.submit();
+    close2Div.addEventListener('click', () => {
+        if (signWrap.style.display === 'none') {
+            signWrap.style.display = 'flex'; // Hide if currently shown
+        } else {
+            signWrap.style.display = 'none'; // Show if currently hidden
+        }
+    });
+
+
+    document.getElementById('phone').addEventListener('input', function(e) {
+        let input = e.target.value;
+        input = input.replace(/\D/g, ''); // Remove non-numeric characters
+
+        if (input.length > 10) input = input.slice(0, 10); // Limit to 10 digits
+
+        // Format the phone number
+        if (input.length > 6) {
+            e.target.value = `(${input.slice(0, 3)}) ${input.slice(3, 6)}-${input.slice(6)}`;
+        } else if (input.length > 3) {
+            e.target.value = `(${input.slice(0, 3)}) ${input.slice(3)}`;
+        } else {
+            e.target.value = `(${input}`;
+        }
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        const closeBtn = document.querySelector('.close-btn');
+        const signWrap = document.querySelector('.sign_wrap');
+
+        // Function to hide the sign_wrap element
+        function hideSignWrap() {
+            signWrap.style.display = 'none';
+        }
+
+        // Add event listener to the close button
+        closeBtn.addEventListener('click', hideSignWrap);
+    });
+
+
+    // Flag to track if the acknowledgment background has been shown
+    let hasAcknowledgmentBeenShown = false;
+
+    // Function to show the acknowledgment background and disable scrolling
+    function showAcknowledgeBackground() {
+        if (hasAcknowledgmentBeenShown) return; // Exit if already shown
+
+        hasAcknowledgmentBeenShown = true; // Set the flag to true
+
+        // Make the background visible immediately
+        acknowledgeBackground.style.display = 'flex';
+
+        // Make the wrap visible immediately
+        acknowledgeWrap.style.display = 'flex';
+        acknowledgeWrap.classList.add('animate-in');
+
+        // Disable scrolling
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Function to hide the acknowledgment background and enable scrolling
+    function hideAcknowledgeBackground(button) {
+        // Start animation for the wrap
+        acknowledgeWrap.classList.remove('animate-in');
+        acknowledgeWrap.classList.add('animate-out');
+
+        // Hide the wrap immediately after starting animation
+        acknowledgeWrap.style.display = 'none';
+
+        // Hide the background immediately
+        acknowledgeBackground.style.display = 'none';
+
+        // Enable scrolling
+        document.body.style.overflow = '';
+    }
+
+    // Ensure acknowledgment background is hidden on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        acknowledgeBackground.style.display = 'none';
+        acknowledgeWrap.style.display = 'none';
+    });
+
+    // Event listener for mouse leaving the viewport
+    document.addEventListener('mouseout', (event) => {
+        // Check if the mouse is leaving the viewport from the top edge
+        if (event.clientY < 0) {
+            showAcknowledgeBackground();
+        }
+    });
+
+    // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
+    acknowledgeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.dataset.pressed === 'false') {
+                button.dataset.pressed = 'true'; // Update data attribute
             }
+            hideAcknowledgeBackground(button);
+        });
+    });
+
+    // Add event listener to the close div
+    closeDiv.addEventListener('click', () => {
+        hideAcknowledgeBackground(closeDiv);
+    });
+
+    function handleScroll() {
+        if (window.scrollY > 1) { // Change 50 to the desired scroll position threshold
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Initial check in case the page is loaded with some scroll position
+    handleScroll();
+
+    // Check for video and locked elements
+    if (video) {
+        console.log('Video element found');
+    } else {
+        console.log('Video element not found');
+    }
+
+    if (lockedElement) {
+        console.log('Locked element found');
+    } else {
+        console.log('Locked element not found');
+    }
+
+    // Time update event for the video
+    video.addEventListener('timeupdate', () => {
+        console.log(`Current time: ${video.currentTime} seconds`);
+
+        if (video.currentTime >= 1) {
+            console.log('1 seconds reached');
+            lockedElement.style.cssText = '';
+            lockedElement.classList.remove('locked-styled');
+            firstButton.classList.remove('button-changed');
         }
     });
 
-    form.addEventListener('input', () => {
-        updateButtons();
+    // Handling click for sound/mute button
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (isMobile) {
+        clickText.style.display = 'none';
+        tapText.style.display = 'inline';
+    } else {
+        clickText.style.display = 'inline';
+        tapText.style.display = 'none';
+    }
+
+    let audioContext;
+    if (window.AudioContext || window.webkitAudioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const emptySource = audioContext.createBufferSource();
+        emptySource.buffer = audioContext.createBuffer(1, 1, 22050);
+        emptySource.connect(audioContext.destination);
+        emptySource.start(0);
+    }
+
+    function playVideoWithSound() {
+        video.muted = false;
+        video.play();
+        volumeDiv.style.display = 'flex';
+        volumeOn.style.display = 'flex';
+        volumeOff.style.display = 'none';
+        muteBtn.style.display = 'none';
+        playButton.style.display = 'none';
+    }
+
+    function toggleMute() {
+        video.muted = !video.muted;
+        volumeOn.style.display = video.muted ? 'none' : 'flex';
+        volumeOff.style.display = video.muted ? 'flex' : 'none';
+    }
+
+    function togglePlayPause() {
+        if (video.paused) {
+            playVideoWithSound();
+        } else {
+            video.pause();
+        }
+    }
+
+    // Apply the same functionality to all relevant elements
+    function setupPlayAndSound() {
+        playVideoWithSound();
+        playButton.style.display = 'none';
+        muteBtn.style.display = 'none';
+        volumeDiv.style.display = 'flex';
+    }
+
+    // Event listeners for play functionality
+    muteBtn.addEventListener('click', setupPlayAndSound);
+    playButton.addEventListener('click', setupPlayAndSound);
+
+    // Play/Pause video functionality on controls click
+    controls.addEventListener('click', togglePlayPause);
+    playButton.addEventListener('click', togglePlayPause);
+    muteBtn.addEventListener('click', togglePlayPause);
+
+    // Toggle mute when clicking on the volume div
+    volumeDiv.addEventListener('click', toggleMute);
+
+    // Fullscreen functionality
+    function toggleFullscreen() {
+        if (video.requestFullscreen) {
+            video.requestFullscreen();
+        } else if (video.mozRequestFullScreen) { // Firefox
+            video.mozRequestFullScreen();
+        } else if (video.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+            video.webkitRequestFullscreen();
+        } else if (video.msRequestFullscreen) { // IE/Edge
+            video.msRequestFullscreen();
+        }
+    }
+
+    fullscreenButton.addEventListener('click', () => {
+        if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+            document.exitFullscreen();
+        } else {
+            toggleFullscreen();
+        }
     });
 
-    showStep(currentStep);
+    // Optional: Handle fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+        if (document.fullscreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('mozfullscreenchange', () => {
+        if (document.mozFullScreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('webkitfullscreenchange', () => {
+        if (document.webkitFullscreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
+
+    document.addEventListener('msfullscreenchange', () => {
+        if (document.msFullscreenElement) {
+            fullscreenIcon.style.display = 'none';
+            exitFullscreenIcon.style.display = 'block';
+        } else {
+            fullscreenIcon.style.display = 'block';
+            exitFullscreenIcon.style.display = 'none';
+        }
+    });
+
+    // FAQ functionality
+    const faqItems = document.querySelectorAll('.faq_item');
+
+    faqItems.forEach(item => {
+        item.addEventListener('click', () => {
+            const answer = item.nextElementSibling;
+
+            if (answer && answer.classList.contains('faq_answer')) {
+                const isVisible = answer.style.display === 'block';
+
+                document.querySelectorAll('.faq_answer').forEach(otherAnswer => {
+                    if (otherAnswer !== answer) {
+                        otherAnswer.style.display = 'none';
+                    }
+                });
+
+                answer.style.display = isVisible ? 'none' : 'block';
+            }
+        });
+    });
+
+    document.querySelectorAll('.faq_answer').forEach(answer => {
+        answer.addEventListener('click', () => {
+            answer.style.display = 'none';
+        });
+    });
+
+    // New Date Functionality
+    function getFormattedDate(date) {
+        date = date || new Date();
+        const day = date.getDate();
+        const monthIndex = date.getMonth();
+        const monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+            "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
+        ];
+        const suffixes = ["st", "nd", "rd", "th"];
+        let suffix;
+
+        if (day >= 11 && day <= 13) {
+            suffix = "th";
+        } else {
+            suffix = suffixes[(day - 1) % 10] || "th";
+        }
+
+        // Wrap suffix in <sup> tags
+        suffix = `<sup>${suffix}</sup>`;
+
+        return `${monthNames[monthIndex]} ${day}${suffix}`;
+    }
+
+    document.querySelectorAll('.today-suffix').forEach(function (selected) {
+        selected.innerHTML = getFormattedDate();
+    });
+
+    document.querySelectorAll('.days-21-suffix').forEach(function (selected) {
+        const today = new Date();
+        const futureDate = new Date(today.getTime() + (21 * 24 * 60 * 60 * 1000));
+        selected.innerHTML = getFormattedDate(futureDate);
+    });
 });
