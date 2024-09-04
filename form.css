@@ -115,7 +115,7 @@ textarea::placeholder {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 0%;
+    width: 8%;
     height: 1rem;
     background-color: #006ffa;
     border-radius: 100px;
@@ -443,6 +443,10 @@ header.scrolled {
     header {
         padding: 2rem 4%;
     }
+
+    .cta-wrap {
+        padding: 1rem 0;
+    }
 }
 
 @media (max-width: 479px) {
@@ -521,5 +525,9 @@ header.scrolled {
 
     header {
         padding: 2rem 4%;
+    }
+
+    .cta-wrap {
+        padding: 1rem 0;
     }
 }
