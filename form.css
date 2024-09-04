@@ -59,7 +59,7 @@ input {
     padding: .5rem .75rem;
     border-radius: .75rem;
     border: 2px solid #334750;
-    background-color: #0f1f25;
+    background-color: rgba(51,71,80,.2);
     color: white;
     font-size: 1.25rem;
     width: 100%;
@@ -74,7 +74,7 @@ textarea {
     padding: .5rem .75rem;
     border-radius: .75rem;
     border: 2px solid #334750;
-    background-color: #0f1f25;
+    background-color: rgba(51,71,80,.2);
     color: white;
     font-size: 1.25rem;
     width: 100%;
@@ -299,7 +299,7 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 1rem 2%;
+    padding: 4rem 2%;
     gap: 1rem;
     background-color: #0f1f25;
     z-index: 450;
@@ -307,6 +307,15 @@ header {
 
 header.scrolled {
     border-bottom: 2px solid #334750;
+}
+
+.question {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: stretch;
+    width: 100%;
+    gap: 1rem;
 }
 
 @media (min-width: 1440px) {
@@ -406,10 +415,6 @@ header.scrolled {
         top: .5rem;
     }
 
-    header {
-        padding: 1rem 4%;
-    }
-
     #title {
         padding: 1rem 4%;
     }
@@ -449,6 +454,10 @@ header.scrolled {
     .custom-radio-group {
         flex-direction: column;
     }
+
+    header {
+        padding: 2rem 4%;
+    }
 }
 
 @media (max-width: 479px) {
@@ -478,10 +487,6 @@ header.scrolled {
     .click_for_sound {
         left: .5rem;
         top: .5rem;
-    }
-
-    header {
-        padding: 1rem 4%;
     }
 
     #title {
@@ -527,5 +532,9 @@ header.scrolled {
 
     .custom-radio-group {
         flex-direction: column;
+    }
+
+    header {
+        padding: 2rem 4%;
     }
 }

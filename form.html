@@ -34,7 +34,7 @@
 
 <body>
     <header>
-        <img class="back" id="prevButton" src="https://i.postimg.cc/tTv9xnBC/back-arrow.webp" alt="Back">
+        <img class="back" id="prevButton" src="https://i.postimg.cc/KvGgRRDC/back-arrow.webp" alt="Back">
         <div class="bar">
             <div class="bar-gift">
                 <img src="https://i.postimg.cc/CxT0TYB1/treasure.webp" alt="gift" height="24px"
@@ -51,17 +51,20 @@
             <!-- Step 1 -->
             <div class="form-step active" data-step="1">
                 <h2>Alright Asher, first things first. How old are you?</h2>
-                <input type="number" inputmode="numeric" pattern="\d*" id="age" name="age" placeholder="Your Age" required min="18" max="80">
+                <input type="number" inputmode="numeric" pattern="\d*" id="age" name="age" placeholder="Your Age"
+                    required min="18" max="80">
             </div>
 
             <!-- Step 2 -->
             <div class="form-step" data-step="2">
-                <h2>42 years young! Nice! Now, can you meet the qualifications for this mentorship?</h2>
-                <p>(Coachable, work out 3x a week, make better eating habits, in good general condition, etc.)</p>
+                <div class="question">
+                    <h2>42 years young! Nice! Now, can you meet the qualifications for this mentorship?</h2>
+                    <p>(Coachable, work out 3x a week, make better eating habits, in good general condition, etc.)</p>
+                </div>
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Yes</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">No</label>
                 </div>
@@ -70,16 +73,20 @@
             <!-- Step 3 -->
             <div class="form-step" data-step="3">
                 <h2>And, what are your primary fitness goals right now?</h2>
-                <textarea id="feedback" name="feedback" placeholder="I want to lose weight, get fit, be more athletic, etc." required></textarea>
+                <textarea id="feedback" name="feedback"
+                    placeholder="I want to lose weight, get fit, be more athletic, etc." required></textarea>
             </div>
 
             <div class="form-step" data-step="4">
-                <h2>We can make that happen, Asher! I'm curious, what’s your dream goal? And really think about what outcome you truly want long term.</h2>
-                <textarea id="feedback" name="feedback" placeholder="I’d like to lose 40 pounds and fit into my old clothes again." required></textarea>
+                <h2>We can make that happen, Asher! I'm curious, what’s your dream goal? And really think about what
+                    outcome you truly want long term.</h2>
+                <textarea id="feedback" name="feedback"
+                    placeholder="I’d like to lose 40 pounds and fit into my old clothes again." required></textarea>
             </div>
 
             <div class="form-step" data-step="5">
-                <h2>Wow, truly inspirational. How long do you think it would take you to accomplish that on your own?</h2>
+                <h2>Wow, truly inspirational. How long do you think it would take you to accomplish that on your own?
+                </h2>
                 <textarea id="feedback" name="feedback" placeholder="Forever!" required></textarea>
             </div>
 
@@ -90,20 +97,24 @@
 
             <div class="form-step" data-step="7">
                 <h2>How long have you wanted to get in shape?</h2>
-                <textarea id="feedback" name="feedback" placeholder="Since I started a new job, I haven't seen the inside of a gym. It’s been 10 years and I just can’t get rid of the weight." required></textarea>
+                <textarea id="feedback" name="feedback"
+                    placeholder="Since I started a new job, I haven't seen the inside of a gym. It’s been 10 years and I just can’t get rid of the weight."
+                    required></textarea>
             </div>
 
             <div class="form-step" data-step="8">
                 <h2>Why do you want this so badly?</h2>
-                <textarea id="feedback" name="feedback" placeholder="I have a 10-year reunion coming up and I want to look good." required></textarea>
+                <textarea id="feedback" name="feedback"
+                    placeholder="I have a 10-year reunion coming up and I want to look good." required></textarea>
             </div>
 
             <div class="form-step" data-step="9">
-                <h2>You already know it’s not easy to drop the weight/get in shape. Will you take our recommendations and do what we ask in order to help you reach your goal?</h2>
+                <h2>You already know it’s not easy to drop the weight/get in shape. Will you take our recommendations
+                    and do what we ask in order to help you reach your goal?</h2>
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Yes</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">No</label>
                 </div>
@@ -111,12 +122,15 @@
 
             <div class="form-step" data-step="10">
                 <h2>Why are you applying now?</h2>
-                <textarea id="feedback" name="feedback" placeholder="I want to lose weight, and I’m tired of struggling." required></textarea>
+                <textarea id="feedback" name="feedback"
+                    placeholder="I want to lose weight, and I’m tired of struggling." required></textarea>
             </div>
 
             <div class="form-step" data-step="11">
                 <h2>Why do you think you’ll succeed this time?</h2>
-                <textarea id="feedback" name="feedback" placeholder="Because I’m committed and my friend lost weight after joining your program." required></textarea>
+                <textarea id="feedback" name="feedback"
+                    placeholder="Because I’m committed and my friend lost weight after joining your program."
+                    required></textarea>
             </div>
 
             <div class="form-step" data-step="12">
@@ -124,7 +138,7 @@
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Yes</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">No</label>
                 </div>
@@ -132,7 +146,9 @@
 
             <div class="form-step" data-step="13">
                 <h2>What’s your current state? What is your desired state?</h2>
-                <textarea id="feedback" name="feedback" placeholder="I’m currently 40 pounds overweight. I want to be down to my college weight." required></textarea>
+                <textarea id="feedback" name="feedback"
+                    placeholder="I’m currently 40 pounds overweight. I want to be down to my college weight."
+                    required></textarea>
             </div>
 
             <div class="form-step" data-step="14">
@@ -140,7 +156,7 @@
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Yes</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">No</label>
                 </div>
@@ -151,7 +167,7 @@
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Yes</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">No</label>
                 </div>
@@ -162,7 +178,7 @@
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Yes</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">No</label>
                 </div>
@@ -173,7 +189,7 @@
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Yes</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">No</label>
                 </div>
@@ -184,18 +200,19 @@
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">Quickly</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">Permanently</label>
                 </div>
             </div>
 
             <div class="form-step" data-step="19">
-                <h2>If we feel like we can help and you're accepted into the program, when would you be able to begin getting into the best shape of your life?</h2>
+                <h2>If we feel like we can help and you're accepted into the program, when would you be able to begin
+                    getting into the best shape of your life?</h2>
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">I am ready now</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">I'm just thinking about it</label>
                 </div>
@@ -206,19 +223,24 @@
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">I am the sole decision maker</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">I am not the sole decision maker</label>
                 </div>
             </div>
 
             <div class="form-step" data-step="19">
-                <h2>We don’t do reschedules because we’re simply too booked up. And we only work with people who are serious and keep their word. Do you confirm you will show up to your scheduled appointment on time and distraction free?</h2>
-                <p>Please confirm by signing your name below.</p>
+                <div class="question">
+                    <h2>We don’t do reschedules because we’re simply too booked up. And we only work with people who are
+                        serious and keep their word. Do you confirm you will show up to your scheduled appointment on
+                        time
+                        and distraction free?</h2>
+                    <p>Please confirm by signing your name below.</p>
+                </div>
                 <div class="custom-radio-group">
                     <input type="radio" id="coachable" name="qualification" value="Coachable" required>
                     <label for="coachable" class="custom-radio-label">I am the sole decision maker</label>
-                    
+
                     <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
                     <label for="workout" class="custom-radio-label">I am not the sole decision maker</label>
                 </div>
