@@ -13,19 +13,32 @@ document.addEventListener('DOMContentLoaded', () => {
             const isActive = stepDiv.dataset.step == step;
             const isPrevious = stepDiv.classList.contains('active') && !isActive;
 
-            stepDiv.classList.toggle('active', isActive);
-            stepDiv.classList.toggle('previous', isPrevious);
-
             if (isActive) {
-                stepDiv.style.display = 'flex';
-            } else if (isPrevious) {
-                setTimeout(() => {
-                    stepDiv.style.display = 'none';
-                }, 400); // Match the animation duration
+                stepDiv.style.display = 'flex'; // Ensure the active step is displayed
+                stepDiv.classList.add('active');
+                focusFirstInput(stepDiv); // Focus the first input in the active step
+            } else {
+                stepDiv.classList.remove('active');
+                if (isPrevious) {
+                    stepDiv.classList.add('previous');
+                    setTimeout(() => {
+                        stepDiv.style.display = 'none';
+                        stepDiv.classList.remove('previous');
+                    }, 400); // Match the animation duration
+                }
             }
         });
+
         updateProgressBar();
         updateButtons();
+    }
+
+    // Focus the first input element within a given step
+    function focusFirstInput(stepDiv) {
+        const firstInput = stepDiv.querySelector('input, textarea');
+        if (firstInput) {
+            firstInput.focus();
+        }
     }
 
     // Update the progress bar
@@ -70,6 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update buttons on input
     form.addEventListener('input', () => {
         updateButtons();
+    });
+
+    // Handle Enter key press
+    form.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent default form submission
+            nextButton.click(); // Simulate a click on the next button
+        }
     });
 
     // Show the initial step
