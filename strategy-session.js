@@ -38,7 +38,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update the progress bar
     function updateProgressBar() {
         const totalSteps = steps.length;
-        const progress = ((currentStep - 1) / (totalSteps - 1)) * 100;
+        // If `currentStep` is 1, set progress to 8%; otherwise, calculate based on steps
+        const progress = currentStep === 1 ? 8 : ((currentStep - 1) / (totalSteps - 1)) * 92 + 8;
         innerBar.style.width = `${progress}%`;
     }
 
