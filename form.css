@@ -157,23 +157,7 @@ textarea::placeholder {
     flex-direction: column;
     gap: 2rem;
     padding: 2rem 0;
-    opacity: 0;
-    transform: translateX(100%);
-    transition: opacity 0.4s ease, transform 0.4s ease;
 }
-
-/* Active step */
-.form-step.active {
-    opacity: 1;
-    transform: translateX(0);
-}
-
-/* Previous step animation */
-.form-step.previous {
-    opacity: 0;
-    transform: translateX(-100%);
-}
-
 
 .form-buttons {
     margin-top: 20px;

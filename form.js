@@ -11,21 +11,14 @@ document.addEventListener('DOMContentLoaded', () => {
     function showStep(step) {
         steps.forEach((stepDiv) => {
             const isActive = stepDiv.dataset.step == step;
-            const isPrevious = stepDiv.classList.contains('active') && !isActive;
 
             if (isActive) {
                 stepDiv.style.display = 'flex'; // Ensure the active step is displayed
                 stepDiv.classList.add('active');
                 focusFirstInput(stepDiv); // Focus the first input in the active step
             } else {
+                stepDiv.style.display = 'none'; // Hide non-active steps immediately
                 stepDiv.classList.remove('active');
-                if (isPrevious) {
-                    stepDiv.classList.add('previous');
-                    setTimeout(() => {
-                        stepDiv.style.display = 'none';
-                        stepDiv.classList.remove('previous');
-                    }, 400); // Match the animation duration
-                }
             }
         });
 
