@@ -72,6 +72,7 @@ input {
     color: white;
     font-size: 1.25rem;
     width: 100%;
+    max-width: 40rem;
 }
 
 input::placeholder {
@@ -95,7 +96,7 @@ textarea::placeholder {
 }
 
 .formy {
-    max-width: 40rem;
+    max-width: 60rem;
     margin: auto;
 }
 
@@ -165,7 +166,8 @@ textarea::placeholder {
     display: flex; /* Ensure all steps are in the flow initially */
     flex-direction: column;
     gap: 2rem;
-    padding: 2rem 0;
+    padding-bottom: 4rem;
+    align-items: center;
 }
 
 .form-buttons {
@@ -482,7 +484,7 @@ header.scrolled {
     }
 
     header {
-        padding: 2rem 4%;
+        padding: 1rem 4%;
     }
 
     .cta-wrap {
@@ -565,7 +567,7 @@ header.scrolled {
     }
 
     header {
-        padding: 2rem 4%;
+        padding: 1rem 4%;
     }
 
     .cta-wrap {
