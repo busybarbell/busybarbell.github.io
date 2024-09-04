@@ -97,27 +97,31 @@ document.addEventListener('DOMContentLoaded', () => {
     function setViewportZoomPrevent() {
         const viewportMeta = document.querySelector('meta[name="viewport"]');
         if (viewportMeta) {
-            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0, maximum-scale=1.0');
         } else {
             const newViewportMeta = document.createElement('meta');
             newViewportMeta.name = 'viewport';
-            newViewportMeta.content = 'width=device-width, initial-scale=1.0';
+            newViewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0';
             document.head.appendChild(newViewportMeta);
         }
     }
 
+    function resetViewport() {
+        const viewportMeta = document.querySelector('meta[name="viewport"]');
+        if (viewportMeta) {
+            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
+        }
+    }
+
     function handleInputFocus(event) {
-        if (event.target.tagName === 'INPUT') {
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
             setViewportZoomPrevent();
         }
     }
 
     function handleInputBlur(event) {
-        if (event.target.tagName === 'INPUT') {
-            const viewportMeta = document.querySelector('meta[name="viewport"]');
-            if (viewportMeta) {
-                viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
-            }
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+            resetViewport();
         }
     }
 
