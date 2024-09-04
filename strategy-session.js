@@ -24,7 +24,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 typeText(stepDiv); // Apply typing effect to the <p> tag
 
                 // Apply color changes for step 5
-                if (step === 5) {
+                if (step === 6) {
                     innerBar.style.backgroundColor = '#ffa600'; // Change inner bar color
                     if (barAccent) {
                         barAccent.style.backgroundColor = '#ffb84d'; // Change bar accent color
