@@ -50,6 +50,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Update navigation buttons
     function updateButtons() {
         prevButton.disabled = currentStep === 1;
+
+        if (currentStep === steps.length) {
+            nextButton.textContent = 'COMPLETE PROFILE & CONTINUE'; // Change button text on the last step
+        } else {
+            nextButton.textContent = 'CONTINUE'; // Default button text
+        }
+
         nextButton.disabled = !isCurrentStepValid();
     }
 
@@ -133,17 +140,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
-        return `${minutes}:${String(secs).padStart(2, '0')}`;
+        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
     }
 
     function updateCountdown() {
+        // Ensure countdown doesn't go below zero and display 0:00
         if (timeRemaining <= 0) {
-            countdownElement.textContent = 'Time’s up!';
-            clearInterval(timerInterval);
-            return;
+            countdownElement.textContent = '00:00';
+        } else {
+            countdownElement.textContent = `${formatTime(timeRemaining)}`;
+            timeRemaining--;
         }
-        countdownElement.textContent = `${formatTime(timeRemaining)}`;
-        timeRemaining--;
     }
 
     // Initial countdown display
