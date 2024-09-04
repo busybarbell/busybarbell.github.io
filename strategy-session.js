@@ -10,7 +10,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 1;
 
     // Timer variables
-    let timeRemaining = 10 * 60; // 10 minutes in seconds
+    let timeRemaining = 9 * 60; // 9 minutes in seconds
 
     // Show the current step
     function showStep(step) {
@@ -158,7 +158,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function formatTime(seconds) {
         const minutes = Math.floor(seconds / 60);
         const secs = seconds % 60;
-        return `${String(minutes).padStart(2, '0')}:${String(secs).padStart(2, '0')}`;
+        return `${minutes}:${String(secs).padStart(2, '0')}`;
     }
 
     function updateCountdown() {
@@ -173,9 +173,10 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Initial countdown display
     countdownElement.textContent = `${formatTime(timeRemaining)}`;
-    
+
     // Update the countdown every second
     const timerInterval = setInterval(updateCountdown, 1000);
+
 
     // Show the initial step
     showStep(currentStep);
