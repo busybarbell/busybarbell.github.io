@@ -148,6 +148,7 @@ textarea::placeholder {
 
 .form-container {
     padding: 0 2%;
+    overflow: hidden;
 }
 
 /* Form steps */
