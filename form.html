@@ -51,7 +51,7 @@
             <!-- Step 1 -->
             <div class="form-step active" data-step="1">
                 <h2>Alright Asher, first things first. How old are you?</h2>
-                <input type="number" id="age" name="age" placeholder="Your Age" required>
+                <input type="number" inputmode="numeric" pattern="\d*" id="age" name="age" placeholder="Your Age" required min="18" max="80">
             </div>
 
             <!-- Step 2 -->
@@ -70,8 +70,13 @@
             <!-- Step 3 -->
             <div class="form-step" data-step="3">
                 <h2>What are your primary fitness goals right now?</h2>
-                <p>(I want to lose weight, get fit, be more athletic, etc.)</p>
-                <textarea id="feedback" name="feedback" required></textarea>
+                <textarea id="feedback" name="feedback" placeholder="(I want to lose weight, get fit, be more athletic, etc.)" required></textarea>
+            </div>
+
+            <!-- Step 3 -->
+            <div class="form-step" data-step="4">
+                <h2>What are your primary fitness goals right now?</h2>
+                <textarea id="feedback" name="feedback" placeholder="(I want to lose weight, get fit, be more athletic, etc.)" required></textarea>
             </div>
         </form>
     </div>

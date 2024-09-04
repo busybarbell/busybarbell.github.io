@@ -85,10 +85,6 @@ textarea::placeholder {
     font-size: 1.25rem;
 }
 
-.form-container {
-    padding: 0 2%;
-}
-
 .formy {
     max-width: 40rem;
     margin: auto;
@@ -150,16 +146,33 @@ textarea::placeholder {
     border-color: #4caf50;
 }
 
+.form-container {
+    padding: 0 2%;
+}
+
+/* Form steps */
 .form-step {
-    display: none;
+    display: flex; /* Ensure all steps are in the flow initially */
     flex-direction: column;
     gap: 2rem;
     padding: 2rem 0;
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 0.4s ease, transform 0.4s ease;
 }
 
+/* Active step */
 .form-step.active {
-    display: flex;
+    opacity: 1;
+    transform: translateX(0);
 }
+
+/* Previous step animation */
+.form-step.previous {
+    opacity: 0;
+    transform: translateX(-100%);
+}
+
 
 .form-buttons {
     margin-top: 20px;
