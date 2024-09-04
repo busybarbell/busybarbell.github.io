@@ -20,10 +20,9 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isActive) {
                 stepDiv.style.display = 'flex'; // Ensure the active step is displayed
                 stepDiv.classList.add('active');
-                focusFirstInput(stepDiv); // Focus the first input in the active step
                 typeText(stepDiv); // Apply typing effect to the <p> tag
 
-                // Apply color changes for step 5
+                // Apply color changes for step 6
                 if (step === 6) {
                     innerBar.style.backgroundColor = '#ffa600'; // Change inner bar color
                     if (barAccent) {
@@ -38,14 +37,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
         updateProgressBar();
         updateButtons();
-    }
-
-    // Focus the first input element within a given step
-    function focusFirstInput(stepDiv) {
-        const firstInput = stepDiv.querySelector('input, textarea');
-        if (firstInput) {
-            firstInput.focus();
-        }
     }
 
     // Update the progress bar
@@ -121,22 +112,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    function handleInputFocus(event) {
-        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-            setViewportZoomPrevent();
-        }
-    }
-
-    function handleInputBlur(event) {
-        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-            resetViewport();
-        }
-    }
-
-    // Attach event listeners
-    document.addEventListener('focusin', handleInputFocus);
-    document.addEventListener('focusout', handleInputBlur);
-
     // Function to type text in the <p> tag
     function typeText(stepDiv) {
         const paragraph = stepDiv.querySelector('p');
@@ -176,7 +151,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update the countdown every second
     const timerInterval = setInterval(updateCountdown, 1000);
-
 
     // Show the initial step
     showStep(currentStep);
