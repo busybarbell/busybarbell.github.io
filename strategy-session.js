@@ -29,7 +29,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 typeText(stepDiv); // Apply typing effect to the <p> tag
 
                 // Apply color changes and show/hide elements for specific steps
-                if (step === 6) {
+                if (step === 4) {
                     innerBar.style.backgroundColor = '#ffa600'; // Change inner bar color
                     if (barAccent) {
                         barAccent.style.backgroundColor = '#ffb84d'; // Change bar accent color
@@ -41,17 +41,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             step6Visited = true; // Mark step 6 as visited
                         }
                     }
-                } else if (step === 12) {
+                } else if (step === 8) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Doing great!'; // Motivation text for step 12
                     }
-                } else if (step === 18) {
+                } else if (step === 12) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Almost done!'; // Motivation text for step 18
                     }
-                } else if (step === 22) {
+                } else if (step === 16) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Last step!'; // Motivation text for step 22
