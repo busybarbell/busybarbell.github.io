@@ -22,7 +22,8 @@ select {
     font: inherit;
 }
 
-html, body {
+html,
+body {
     font-size: 100%;
     height: 100vh;
     margin: 0;
@@ -75,7 +76,7 @@ input {
     padding: .5rem .75rem;
     border-radius: .75rem;
     border: 2px solid #334750;
-    background-color: rgba(51,71,80,.2);
+    background-color: rgba(51, 71, 80, .2);
     color: white;
     font-size: 1.25rem;
     width: 100%;
@@ -91,11 +92,12 @@ textarea {
     padding: .5rem .75rem;
     border-radius: .75rem;
     border: 2px solid #334750;
-    background-color: rgba(51,71,80,.2);
+    background-color: rgba(51, 71, 80, .2);
     color: white;
     font-size: 1.25rem;
     width: 100%;
-    resize: none; /* Disables resizing */
+    resize: none;
+    /* Disables resizing */
     height: 100%;
 }
 
@@ -181,10 +183,13 @@ textarea::placeholder {
 }
 
 .form-container {
-    flex: 1; /* Allows the container to take up available space */
+    flex: 1;
+    /* Allows the container to take up available space */
     padding: 0 2%;
-    max-width: 60rem; /* Optional: Limit the width */
-    margin: auto; /* Centers the form-container horizontally */
+    max-width: 60rem;
+    /* Optional: Limit the width */
+    margin: auto;
+    /* Centers the form-container horizontally */
     overflow: hidden;
     height: 100%;
     width: 100%;
@@ -192,14 +197,16 @@ textarea::placeholder {
 
 /* Form steps */
 .form-step {
-    display: flex; /* Ensure all steps are in the flow initially */
+    display: flex;
+    /* Ensure all steps are in the flow initially */
     flex-direction: column;
     gap: 2rem;
     padding-bottom: 2rem;
     max-width: 40rem;
     margin: auto;
     height: 100%;
-    margin: auto; /* top, horizontal, bottom */
+    margin: auto;
+    /* top, horizontal, bottom */
 }
 
 .form-buttons {
@@ -211,8 +218,10 @@ textarea::placeholder {
 /* Hide the default radio button */
 .custom-radio-group input[type="radio"] {
     position: absolute;
-    opacity: 0; /* Hide the radio button */
-    pointer-events: none; /* Prevent clicks on the hidden radio button */
+    opacity: 0;
+    /* Hide the radio button */
+    pointer-events: none;
+    /* Prevent clicks on the hidden radio button */
 }
 
 /* Style the label to look like a custom radio button */
@@ -230,7 +239,8 @@ textarea::placeholder {
     width: 100%;
     border: 2px solid #334750;
     font-weight: 600;
-    user-select: none; /* Prevent text selection */
+    user-select: none;
+    /* Prevent text selection */
 }
 
 .custom-radio-label:active {
@@ -239,8 +249,9 @@ textarea::placeholder {
 }
 
 /* Style the label to look different when radio button is checked */
-.custom-radio-group input[type="radio"]:checked + .custom-radio-label {
-    background-color: rgba(51,71,80,.2); /* Darker background when selected */
+.custom-radio-group input[type="radio"]:checked+.custom-radio-label {
+    background-color: rgba(51, 71, 80, .2);
+    /* Darker background when selected */
     box-shadow: 0 4px 0 #006FFA;
     border-color: #006FFA;
     color: #006FFA;
@@ -422,7 +433,8 @@ header.scrolled {
     bottom: -1.75rem;
     right: 0;
     color: #ffa600;
-    display: none; /* Hide by default */
+    display: none;
+    /* Hide by default */
     text-wrap: none;
 }
 
@@ -432,25 +444,37 @@ header.scrolled {
     height: 1.5rem;
     right: 0;
     bottom: -0.25rem;
-    border: 2px solid #ffa600; /* Default color for border */
+    border: 2px solid #ffa600;
+    /* Default color for border */
     border-radius: 50%;
-    pointer-events: none; /* Avoid interaction with bubbles */
-    animation: bubbleAnimation .8s cubic-bezier(0.4, 0, 0.2, 1); /* Custom easing for ramping effect */
-    transform: translateX(50%); /* Center bubble at the edge */
-    opacity: 0; /* Start invisible */
+    pointer-events: none;
+    /* Avoid interaction with bubbles */
+    animation: bubbleAnimation .8s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Custom easing for ramping effect */
+    transform: translateX(50%);
+    /* Center bubble at the edge */
+    opacity: 0;
+    /* Start invisible */
 }
 
 /* Bubble animation keyframes */
 @keyframes bubbleAnimation {
     0% {
-        transform: translateX(50%) scale(0); /* Start off-screen with zero scale */
-        border-width: 10px; /* Initial border width */
-        opacity: .8; /* Fully visible */
+        transform: translateX(50%) scale(0);
+        /* Start off-screen with zero scale */
+        border-width: 10px;
+        /* Initial border width */
+        opacity: .8;
+        /* Fully visible */
     }
+
     100% {
-        transform: translateX(50%) scale(2); /* Continue moving and scaling */
-        border-width: 2px; /* Border disappears */
-        opacity: 0; /* Fully invisible */
+        transform: translateX(50%) scale(2);
+        /* Continue moving and scaling */
+        border-width: 2px;
+        /* Border disappears */
+        opacity: 0;
+        /* Fully invisible */
     }
 }
 
@@ -557,6 +581,7 @@ header.scrolled {
 
     #cta {
         padding: 0 4%;
+        border-top: 0;
     }
 
     #copy {
@@ -593,6 +618,14 @@ header.scrolled {
 
     header {
         padding: 2rem 4%;
+    }
+
+    .cta-wrap {
+        padding: 1rem 0;
+    }
+
+    .form-step {
+        padding-bottom: 1rem;
     }
 }
 
@@ -631,6 +664,7 @@ header.scrolled {
 
     #cta {
         padding: 0 4%;
+        border-top: 0;
     }
 
     #copy {
@@ -672,5 +706,13 @@ header.scrolled {
 
     header {
         padding: 2rem 4%;
+    }
+
+    .cta-wrap {
+        padding: 1rem 0;
+    }
+
+    .form-step {
+        padding-bottom: 1rem;
     }
 }
