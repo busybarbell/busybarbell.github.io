@@ -363,6 +363,21 @@ header.scrolled {
     justify-content: flex-start;
 }
 
+.perty {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.poop {
+    opacity: 0;
+}
+
+#countdown {
+    left: 0;
+    position: absolute;
+}
+
 .timer {
     color: #dd81ff;
     gap: .5rem;
