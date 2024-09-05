@@ -104,6 +104,13 @@ textarea::placeholder {
 .formy {
     max-width: 60rem;
     margin: auto;
+    height: 100%;
+}
+
+#multistepform {
+    max-width: 60rem;
+    margin: auto;
+    height: 100%;
 }
 
 .bar-wrapper {
