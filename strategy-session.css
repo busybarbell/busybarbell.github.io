@@ -161,10 +161,10 @@ textarea::placeholder {
 
 .form-container {
     flex: 1; /* Allows the container to take up available space */
-    overflow: auto; /* Adds scroll if content exceeds height */
     padding: 0 2%;
     max-width: 60rem; /* Optional: Limit the width */
     margin: auto; /* Centers the form-container horizontally */
+    overflow: hidden;
 }
 
 /* Form steps */
@@ -175,6 +175,7 @@ textarea::placeholder {
     padding-bottom: 4rem;
     max-width: 40rem;
     margin: auto;
+    height: 100vh;
 }
 
 .form-buttons {
