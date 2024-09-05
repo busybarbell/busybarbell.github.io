@@ -22,8 +22,11 @@ select {
     font: inherit;
 }
 
-html {
+html, body {
     font-size: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
 }
 
 body {
@@ -35,7 +38,7 @@ body {
 h1 {
     line-height: 1;
     cursor: default;
-    letter-spacing: .0625;
+    letter-spacing: .0625rem;
     font-weight: normal;
     font-family: 'Podium', system-ui, sans-serif;
     text-transform: uppercase;
@@ -157,8 +160,11 @@ textarea::placeholder {
 }
 
 .form-container {
+    flex: 1; /* Allows the container to take up available space */
+    overflow: auto; /* Adds scroll if content exceeds height */
     padding: 0 2%;
-    overflow: hidden;
+    max-width: 60rem; /* Optional: Limit the width */
+    margin: auto; /* Centers the form-container horizontally */
 }
 
 /* Form steps */
@@ -270,7 +276,7 @@ button:not(:disabled) {
 #cta {
     border-top: 2px solid #334750;
     padding: 0 2%;
-    position: fixed;
+    position: sticky;
     bottom: 0;
     left: 0;
     right: 0;
@@ -365,6 +371,12 @@ header.scrolled {
     justify-content: flex-start;
 }
 
+.clock {
+    height: 1.5rem;
+    width: auto;
+    transition: transform 0.5s ease-out;
+}
+
 .motivation {
     position: absolute;
     bottom: -1.75rem;
@@ -396,7 +408,7 @@ header.scrolled {
     }
     100% {
         transform: translateX(50%) scale(2); /* Continue moving and scaling */
-        border-width: 2; /* Border disappears */
+        border-width: 2px; /* Border disappears */
         opacity: 0; /* Fully invisible */
     }
 }

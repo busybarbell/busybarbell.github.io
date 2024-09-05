@@ -8,12 +8,15 @@ document.addEventListener('DOMContentLoaded', () => {
     const nextButton = document.getElementById('nextButton');
     const countdownElement = document.getElementById('countdown'); // Countdown element
     const motivation = document.querySelector('.motivation'); // Motivation element
+    const clock = document.querySelector('.clock'); // Clock element
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
 
     // Timer variables
-    let timeRemaining = 9 * 60; // 9 minutes in seconds
+    let timeRemaining = 8 * 60; // 8 minutes in seconds
+    let rotationDegree = 0; // Track the rotation angle
+    let timerInterval; // Variable to store the timer interval ID
 
     // Show the current step
     function showStep(step) {
@@ -38,8 +41,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (motivation) {
                         if (!step6Visited) {
                             motivation.style.display = 'block'; // Show motivation element
+                            motivation.textContent = 'Great start!'; // Motivation text for step 6
                             step6Visited = true; // Mark step 6 as visited
                         }
+                    }
+                } else if (step === 12) {
+                    if (motivation) {
+                        motivation.style.display = 'block'; // Show motivation element
+                        motivation.textContent = 'Doing great!'; // Motivation text for step 12
+                    }
+                } else if (step === 18) {
+                    if (motivation) {
+                        motivation.style.display = 'block'; // Show motivation element
+                        motivation.textContent = 'Almost done!'; // Motivation text for step 18
+                    }
+                } else if (step === 22) {
+                    if (motivation) {
+                        motivation.style.display = 'block'; // Show motivation element
+                        motivation.textContent = 'Last step!'; // Motivation text for step 22
                     }
                 } else {
                     if (motivation) {
@@ -56,10 +75,22 @@ document.addEventListener('DOMContentLoaded', () => {
         updateButtons();
     }
 
+    // Initial setup of the progress bar
+    function initializeProgressBar() {
+        // Set the initial width of the progress bar to 8%
+        innerBar.style.width = '8%';
+    }
+
     // Update the progress bar
     function updateProgressBar() {
-        const totalSteps = steps.length;
-        const progress = currentStep === 1 ? 8 : ((currentStep - 1) / (totalSteps - 1)) * 92 + 8;
+        const totalSteps = 23; // Total number of steps
+        const initialFill = 8; // Initial fill percentage
+        const stepsCompleted = currentStep - 1; // Steps completed before the current step
+
+        // Calculate the progress excluding the initial fill
+        let progress = ((stepsCompleted / (totalSteps - 1)) * (100 - initialFill)) + initialFill;
+
+        // Set the progress bar width
         innerBar.style.width = `${progress}%`;
 
         // Create a bubble effect at the end of the progress bar if moving forward
@@ -98,7 +129,7 @@ document.addEventListener('DOMContentLoaded', () => {
         prevButton.disabled = currentStep === 1;
 
         if (currentStep === steps.length) {
-            nextButton.textContent = 'COMPLETE PROFILE & CONTINUE'; // Change button text on the last step
+            nextButton.textContent = 'BOOK MY STRATEGY SESSION'; // Change button text on the last step
         } else {
             nextButton.textContent = 'CONTINUE'; // Default button text
         }
@@ -129,7 +160,10 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentStep++;
                 showStep(currentStep);
             } else {
-                form.submit(); // Submit the form if it’s the last step
+                // Fill the progress bar to 100% before form submission
+                innerBar.style.width = '100%';
+                // Slight delay to ensure progress bar completes filling
+                setTimeout(() => form.submit(), 500);
             }
         }
     });
@@ -195,21 +229,37 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateCountdown() {
         // Ensure countdown doesn't go below zero and display 0:00
         if (timeRemaining <= 0) {
-            countdownElement.textContent = '00:00';
+            countdownElement.textContent = '0:00';
+            clearInterval(timerInterval); // Stop the timer
         } else {
             countdownElement.textContent = `${formatTime(timeRemaining)}`;
             timeRemaining--;
         }
     }
 
+    function rotateClock() {
+        if (timeRemaining > 0) {
+            rotationDegree = (rotationDegree + 90); // Increment by 90 degrees and keep within 360 degrees
+            if (clock) {
+                clock.style.transform = `rotate(${rotationDegree}deg)`;
+            }
+        }
+    }
+
     // Initial countdown display
     countdownElement.textContent = `${formatTime(timeRemaining)}`;
 
-    // Update the countdown every second
-    const timerInterval = setInterval(updateCountdown, 1000);
+    // Update the countdown and rotate the clock every second
+    timerInterval = setInterval(() => {
+        updateCountdown();
+        rotateClock();
+    }, 1000);
 
     // Show the initial step
     showStep(currentStep);
+
+    // Initialize the progress bar
+    initializeProgressBar();
 
     // Add number-only validation to the age input field in step 1
     const ageInput = document.querySelector('.form-step[data-step="1"] input[name="age"]');

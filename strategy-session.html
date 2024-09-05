@@ -48,6 +48,7 @@
                 </div>
             </div>
             <div class="timer">
+                <img src="https://i.postimg.cc/j2fQ5qw3/clock.webp" alt="clock" class="clock">
                 <p id="countdown">9:00</p>
             </div>
         </div>
@@ -186,7 +187,13 @@
                         <p data-text="Do you want to sustain your goal long after you achieve it?"></p>
                     </div>
                 </div>
-                <textarea id="feedback" name="feedback" placeholder="Of course!" required></textarea>
+                <div class="custom-radio-group">
+                    <input type="radio" id="coachable" name="qualification" value="Coachable" required>
+                    <label for="coachable" class="custom-radio-label">Of course!</label>
+
+                    <input type="radio" id="workout" name="qualification" value="Work out 3x a week">
+                    <label for="workout" class="custom-radio-label">Not really</label>
+                </div>
             </div>
 
             <div class="form-step" data-step="7">
@@ -574,7 +581,7 @@
                         <p data-text="Awesome! Last step! Complete your profile and then book your strategy session."></p>
                     </div>
                 </div>
-                <input type="text" inputmode="numeric" pattern="\d*" id="age" name="age" placeholder="Your Age" required
+                <input type="text" inputmode="numeric" pattern="\d*" id="age" name="age" placeholder="Card Number" required
                     min="18" max="80">
 
             </div>
