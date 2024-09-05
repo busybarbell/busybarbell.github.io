@@ -78,13 +78,13 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial setup of the progress bar
     function initializeProgressBar() {
         // Set the initial width of the progress bar to 8%
-        innerBar.style.width = '8%';
+        innerBar.style.width = '10%';
     }
 
     // Update the progress bar
     function updateProgressBar() {
-        const totalSteps = 23; // Total number of steps
-        const initialFill = 8; // Initial fill percentage
+        const totalSteps = 21; // Total number of steps
+        const initialFill = 10; // Initial fill percentage
         const stepsCompleted = currentStep - 1; // Steps completed before the current step
 
         // Calculate the progress excluding the initial fill

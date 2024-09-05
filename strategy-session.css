@@ -128,7 +128,7 @@ textarea::placeholder {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 8%;
+    width: 10%;
     height: 1rem;
     background-color: #006ffa;
     border-radius: 100px;
