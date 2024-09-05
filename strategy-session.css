@@ -24,10 +24,13 @@ select {
 
 html, body {
     font-size: 100%;
-    height: 100%;
+    height: 100vh;
     margin: 0;
     padding: 0;
-    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: space-between;
 }
 
 body {
@@ -184,6 +187,7 @@ textarea::placeholder {
     margin: auto; /* Centers the form-container horizontally */
     overflow: hidden;
     height: 100%;
+    width: 100%;
 }
 
 /* Form steps */
@@ -191,11 +195,11 @@ textarea::placeholder {
     display: flex; /* Ensure all steps are in the flow initially */
     flex-direction: column;
     gap: 2rem;
-    padding-bottom: 4rem;
+    padding-bottom: 2.125rem;
     max-width: 40rem;
     margin: auto;
     height: 100%;
-    margin: 2rem auto 0 auto; /* top, horizontal, bottom */
+    margin: auto; /* top, horizontal, bottom */
 }
 
 .form-buttons {
@@ -596,7 +600,7 @@ header.scrolled {
     }
 
     .form-step {
-        margin: 6rem auto 0 auto; /* top, horizontal, bottom */
+        padding-bottom: 1.125rem;
     }
 }
 
@@ -683,6 +687,6 @@ header.scrolled {
     }
 
     .form-step {
-        margin: 6rem auto 0 auto; /* top, horizontal, bottom */
+        padding-bottom: 1.125rem;
     }
 }
