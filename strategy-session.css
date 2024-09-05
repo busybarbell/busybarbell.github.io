@@ -92,6 +92,8 @@ textarea {
     color: white;
     font-size: 1.25rem;
     width: 100%;
+    resize: none; /* Disables resizing */
+    height: 100%;
 }
 
 textarea::placeholder {
@@ -174,6 +176,7 @@ textarea::placeholder {
     max-width: 60rem; /* Optional: Limit the width */
     margin: auto; /* Centers the form-container horizontally */
     overflow: hidden;
+    height: 100%;
 }
 
 /* Form steps */
@@ -184,7 +187,7 @@ textarea::placeholder {
     padding-bottom: 4rem;
     max-width: 40rem;
     margin: auto;
-    height: 100vh;
+    height: 100%;
     margin: 2rem auto 0 auto; /* top, horizontal, bottom */
 }
 
@@ -409,6 +412,7 @@ header.scrolled {
     right: 0;
     color: #ffa600;
     display: none; /* Hide by default */
+    text-wrap: none;
 }
 
 .bubble {
