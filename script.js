@@ -162,18 +162,6 @@ document.addEventListener('DOMContentLoaded', () => {
         console.log('Locked element not found');
     }
 
-    // Time update event for the video
-    video.addEventListener('timeupdate', () => {
-        console.log(`Current time: ${video.currentTime} seconds`);
-
-        if (video.currentTime >= 1) {
-            console.log('1 seconds reached');
-            lockedElement.style.cssText = '';
-            lockedElement.classList.remove('locked-styled');
-            firstButton.classList.remove('button-changed');
-        }
-    });
-
     // Handling click for sound/mute button
     const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
 
