@@ -34,10 +34,6 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (barAccent) {
                         barAccent.style.backgroundColor = '#ffb84d'; // Change bar accent color
                     }
-                    const picture = document.querySelector('.picture');
-                    if (picture) {
-                        picture.src = 'https://i.postimg.cc/mD33VsKq/surprised.webp'; // Change image URL
-                    }
                     if (motivation) {
                         if (!step6Visited) {
                             motivation.style.display = 'block'; // Show motivation element
