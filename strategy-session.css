@@ -195,7 +195,7 @@ textarea::placeholder {
     display: flex; /* Ensure all steps are in the flow initially */
     flex-direction: column;
     gap: 2rem;
-    padding-bottom: 2.125rem;
+    padding-bottom: 2rem;
     max-width: 40rem;
     margin: auto;
     height: 100%;
@@ -594,14 +594,6 @@ header.scrolled {
     header {
         padding: 2rem 4%;
     }
-
-    .cta-wrap {
-        padding: 1rem 0;
-    }
-
-    .form-step {
-        padding-bottom: 1.125rem;
-    }
 }
 
 @media (max-width: 479px) {
@@ -680,13 +672,5 @@ header.scrolled {
 
     header {
         padding: 2rem 4%;
-    }
-
-    .cta-wrap {
-        padding: 1rem 0;
-    }
-
-    .form-step {
-        padding-bottom: 1.125rem;
     }
 }
