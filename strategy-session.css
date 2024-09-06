@@ -82,6 +82,7 @@ input {
     font-size: 1.25rem;
     width: 100%;
     max-width: 40rem;
+    margin: auto 0;
 }
 
 input::placeholder {
