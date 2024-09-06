@@ -18,6 +18,9 @@ document.addEventListener('DOMContentLoaded', () => {
     let rotationDegree = 0; // Track the rotation angle
     let timerInterval; // Variable to store the timer interval ID
 
+    // Default fill percentage for progress bar
+    const initialFill = 0; // Adjust this value if you want an initial fill
+
     // Show the current step
     function showStep(step) {
         steps.forEach((stepDiv) => {
@@ -37,24 +40,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (motivation) {
                         if (!step6Visited) {
                             motivation.style.display = 'block'; // Show motivation element
-                            motivation.textContent = 'Great start!'; // Motivation text for step 6
+                            motivation.textContent = 'Great start!'; // Motivation text for step 4
                             step6Visited = true; // Mark step 6 as visited
                         }
                     }
                 } else if (step === 8) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
-                        motivation.textContent = 'Doing great!'; // Motivation text for step 12
+                        motivation.textContent = 'Doing great!'; // Motivation text for step 8
                     }
                 } else if (step === 12) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
-                        motivation.textContent = 'Almost done!'; // Motivation text for step 18
+                        motivation.textContent = 'Almost done!'; // Motivation text for step 12
                     }
                 } else if (step === 16) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
-                        motivation.textContent = 'Last step!'; // Motivation text for step 22
+                        motivation.textContent = 'Last step!'; // Motivation text for step 16
                     }
                 } else {
                     if (motivation) {
@@ -71,16 +74,9 @@ document.addEventListener('DOMContentLoaded', () => {
         updateButtons();
     }
 
-    // Initial setup of the progress bar
-    function initializeProgressBar() {
-        // Set the initial width of the progress bar to 8%
-        innerBar.style.width = '12.5%';
-    }
-
     // Update the progress bar
     function updateProgressBar() {
-        const totalSteps = 17; // Total number of steps
-        const initialFill = 12.5; // Initial fill percentage
+        const totalSteps = 19; // Total number of steps
         const stepsCompleted = currentStep - 1; // Steps completed before the current step
 
         // Calculate the progress excluding the initial fill
@@ -136,7 +132,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Check if the current step is valid
     function isCurrentStepValid() {
         const currentStepDiv = document.querySelector(`.form-step[data-step="${currentStep}"]`);
-        return [...currentStepDiv.querySelectorAll('input, textarea')].every(input => input.value.trim() !== '');
+        const inputs = [...currentStepDiv.querySelectorAll('input, textarea')];
+        if (inputs.length === 0) {
+            // If there are no inputs, the step is considered valid
+            return true;
+        }
+        // Check if all required fields are filled (if there are any input fields)
+        return inputs.every(input => {
+            if (input.hasAttribute('required')) {
+                return input.value.trim() !== ''; // Ensure value is not empty
+            }
+            return true;
+        });
     }
 
     // Handle previous button click
@@ -253,9 +260,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show the initial step
     showStep(currentStep);
-
-    // Initialize the progress bar
-    initializeProgressBar();
 
     // Add number-only validation to the age input field in step 1
     const ageInput = document.querySelector('.form-step[data-step="1"] input[name="age"]');

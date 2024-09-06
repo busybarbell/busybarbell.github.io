@@ -153,7 +153,7 @@ textarea::placeholder {
     display: flex;
     align-items: flex-start;
     justify-content: center;
-    width: 12.5%;
+    width: 0;
     height: 1rem;
     background-color: #006ffa;
     border-radius: 100px;
@@ -400,6 +400,15 @@ header.scrolled {
     width: 100%;
     align-items: center;
     justify-content: flex-start;
+}
+
+.asking2 {
+    display: flex;
+    gap: 1.625rem;
+    width: 100%;
+    align-items: center;
+    justify-content: flex-start;
+    height: 100%;
 }
 
 .perty {
