@@ -281,8 +281,20 @@ document.addEventListener('DOMContentLoaded', () => {
         if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
             // Scroll the .asking and #cta into view
             if (asking && cta) {
-                asking.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                // Get the height of the viewport excluding the keyboard
+                const viewportHeight = window.innerHeight;
+                // Calculate the required scroll position to keep .asking and #cta visible
+                const askingRect = asking.getBoundingClientRect();
+                const ctaRect = cta.getBoundingClientRect();
+
+                const scrollY = window.scrollY || window.pageYOffset;
+                const newScrollY = Math.max(
+                    scrollY,
+                    askingRect.top + scrollY - viewportHeight + askingRect.height,
+                    ctaRect.top + scrollY - viewportHeight + ctaRect.height
+                );
+
+                window.scrollTo({ top: newScrollY, behavior: 'smooth' });
             }
         }
     });
