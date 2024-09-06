@@ -59,55 +59,52 @@
                     week in the gym.</p>
             </div>
         </section>
-        <section id="video">
-            <div class="video-wrap">
-                <video id="myVideo" preload="metadata" playsinline>
-                    <source src="sabri.mp4" type="video/mp4">
-                    Your browser does not support the video tag.
-                </video>
-                <div class="video_controls_wrap">
-
-                    <div class="controls">
-                        <div class="volume" style="display: none;">
-                            <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Volume on"
-                                height="13.6px" width="auto">
-                            <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp" alt="Volume off"
-                                height="13.6px" width="auto">
-                        </div>
-
-                        <button class="click_for_sound">
-                            <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available"
-                                class="sound-mobile">
-                            <span class="click-text">Click for sound</span>
-                            <span class="tap-text">Tap for sound</span>
-                        </button>
-
-                        <button class="play">
-                            <img src="https://i.postimg.cc/zftvYWWp/play-button.webp" alt="image not available"
-                                height="32px" width="auto">
-                        </button>
-
-                        <div id="fullscreenButton">
-                            <img class="fullscreen" src="https://i.postimg.cc/qMdM4fXY/fullscreen.webp" alt="Fullscreen"
-                                height="16px" width="auto">
-                            <img class="exit-fullscreen" src="https://i.postimg.cc/y8113FGy/exit.webp"
-                                alt="Exit fullscreen" height="16px" width="auto">
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
         <section id="phone-number">
             <div class="phone">
                 <img src="https://i.postimg.cc/y6gLqLXJ/play.webp" alt="play" height="16px" width="auto">(Watch
                 Carefully. Then Click)
             </div>
         </section>
+        <section id="video" class="video-wrap">
+            <video id="myVideo" preload="metadata" playsinline>
+                <source src="sabri.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+            <div class="video_controls_wrap">
+
+                <div class="controls">
+                    <div class="volume" style="display: none;">
+                        <img class="volume-on" src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="Volume on"
+                            height="13.6px" width="auto">
+                        <img class="volume-off" src="https://i.postimg.cc/XYn9yhPT/no-sound.webp" alt="Volume off"
+                            height="13.6px" width="auto">
+                    </div>
+
+                    <button class="click_for_sound">
+                        <img src="https://i.postimg.cc/sg1SRYCQ/sound.webp" alt="image not available"
+                            class="sound-mobile">
+                        <span class="click-text">Click for sound</span>
+                        <span class="tap-text">Tap for sound</span>
+                    </button>
+
+                    <button class="play">
+                        <img src="https://i.postimg.cc/zftvYWWp/play-button.webp" alt="image not available"
+                            height="32px" width="auto">
+                    </button>
+
+                    <div id="fullscreenButton">
+                        <img class="fullscreen" src="https://i.postimg.cc/qMdM4fXY/fullscreen.webp" alt="Fullscreen"
+                            height="16px" width="auto">
+                        <img class="exit-fullscreen" src="https://i.postimg.cc/y8113FGy/exit.webp" alt="Exit fullscreen"
+                            height="16px" width="auto">
+                    </div>
+                </div>
+            </div>
+        </section>
         <section id="cta">
             <div class="cta-wrap">
                 <div class="button-under">
-                    <button id="first-button" class="button"
-                        aria-label="Book your free onboarding meeting">CLAIM YOUR
+                    <button id="first-button" class="button" aria-label="Book your free onboarding meeting">CLAIM YOUR
                         FREE STRATEGY SESSION</button>
                     <div class="fine-print2" style="color: #afafaf;"><img
                             src="https://i.postimg.cc/TYMdXHmh/verified.webp" alt="check" height="16px" width="auto">No
@@ -298,7 +295,6 @@
 
     <section class="sign_wrap">
         <div class="sign_time">
-            <img id="close2" src="https://i.postimg.cc/5tY1Z3bB/close.webp" alt="close">
             <div class="pop-up-header">
                 <h1>FREE 30-MINUTE STRATEGY SESSION</h1>
                 <p>Claim your 100% FREE no-obligation 30-minute scaling growth map call
@@ -313,8 +309,11 @@
                 <input type="email" id="email" name="email" placeholder="Email" required>
                 <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
             </div>
-            <button class="keep-watching sticky_button" aria-label="Book your free onboarding meeting"
-                data-pressed="false">CONTINUE</button>
+            <div class="button-under">
+                <button class="keep-watching sticky_button" aria-label="Book your free onboarding meeting"
+                    data-pressed="false">CONTINUE</button>
+                <p class="fine-print2" style="color: #afafaf;" id="close2">No thanks</p>
+            </div>
         </div>
     </section>
 
