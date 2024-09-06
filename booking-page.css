@@ -355,7 +355,7 @@ header.scrolled {
     justify-content: center;
     width: 100%;
     gap: 1rem;
-    max-width: 60rem;
+    max-width: 40rem;
 }
 
 .question {
