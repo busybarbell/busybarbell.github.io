@@ -83,6 +83,7 @@ textarea {
     width: 100%;
     max-width: 40rem;
     margin: auto 0;
+    height: 100%;
 }
 
 input::placeholder,
@@ -92,8 +93,18 @@ textarea::placeholder {
 }
 
 textarea {
+    padding: .5rem .75rem;
+    border-radius: .75rem;
+    border: 2px solid #334750;
+    background-color: rgba(51, 71, 80, .2);
+    color: white;
+    font-size: 1.25rem;
+    width: 100%;
+    max-width: 40rem;
+    margin: auto 0;
     resize: none;
-    height: auto; /* Adjust to fit content */
+    flex: 1; /* Ensures the textarea grows to fill available space */
+    height: auto; /* Allows textarea to adjust its height based on content */
 }
 
 .formy {
@@ -172,15 +183,6 @@ textarea {
     border-color: #4caf50;
 }
 
-.form-container {
-    flex: 1;
-    padding: 0 2%;
-    max-width: 60rem;
-    margin: auto;
-    overflow: hidden;
-    width: 100%;
-}
-
 .form-step {
     display: flex;
     flex-direction: column;
@@ -189,6 +191,17 @@ textarea {
     max-width: 40rem;
     margin: auto;
     height: 100%;
+}
+
+.form-container {
+    display: flex;
+    flex-direction: column;
+    flex: 1; /* Ensures the form container takes up available height */
+    padding: 0 2%;
+    max-width: 60rem;
+    margin: auto;
+    overflow: hidden;
+    width: 100%;
 }
 
 .form-buttons {
