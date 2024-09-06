@@ -9,6 +9,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const countdownElement = document.getElementById('countdown'); // Countdown element
     const motivation = document.querySelector('.motivation'); // Motivation element
     const clock = document.querySelector('.clock'); // Clock element
+    const asking = document.querySelector('.asking'); // Element to keep visible
+    const cta = document.getElementById('cta'); // Element to keep visible
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
@@ -269,4 +271,26 @@ document.addEventListener('DOMContentLoaded', () => {
             event.target.value = value.replace(/[^0-9]/g, ''); // Allow only numbers
         });
     }
+
+    // Focus event handler to keep .asking and #cta visible when the keyboard appears
+    form.addEventListener('focusin', (event) => {
+        // Check if the focused element is an input or textarea
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+            // Scroll the .asking and #cta into view
+            if (asking && cta) {
+                asking.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                cta.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
+    });
+
+    // Disable word suggestions and autocorrect on inputs
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.setAttribute('autocorrect', 'off');
+        input.setAttribute('spellcheck', 'false');
+    });
+
+    // Call this function initially to prevent viewport zoom
+    setViewportZoomPrevent();
 });
