@@ -13,6 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const cta = document.getElementById('cta'); // Element to keep visible
     const ctaWrap = document.querySelector('.cta-wrap'); // Element for padding adjustments
     const formStep = document.querySelector('.form-step'); // Element for gap adjustments
+    const header = document.querySelector('header'); // Header element
 
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
@@ -74,6 +75,15 @@ document.addEventListener('DOMContentLoaded', () => {
                 stepDiv.classList.remove('active');
             }
         });
+
+        // Hide or show header based on the current step
+        if (header) {
+            if (currentStep <= 2) {
+                header.style.display = 'none'; // Hide header for the first two steps
+            } else {
+                header.style.display = 'flex'; // Show header from the third step onward
+            }
+        }
 
         updateProgressBar();
         updateButtons();
