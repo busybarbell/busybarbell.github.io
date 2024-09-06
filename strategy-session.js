@@ -11,6 +11,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const clock = document.querySelector('.clock'); // Clock element
     const asking = document.querySelector('.asking'); // Element to keep visible
     const cta = document.getElementById('cta'); // Element to keep visible
+
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
