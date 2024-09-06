@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Podium';
     src: url('PODIUMSharp-211.woff2') format('woff2'),
-        url('PODIUMSharp-211.ttf') format('truetype');
+         url('PODIUMSharp-211.ttf') format('truetype');
 }
 
 *,
@@ -312,7 +312,7 @@ button:not(:disabled) {
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
-    padding: 2rem 0;
+    padding: calc(var(--vh, 1vh) * 2) 0; /* Adjusted padding based on viewport height */
     margin: auto;
 }
 

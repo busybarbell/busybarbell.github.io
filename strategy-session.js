@@ -11,6 +11,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const clock = document.querySelector('.clock'); // Clock element
     const asking = document.querySelector('.asking'); // Element to keep visible
     const cta = document.getElementById('cta'); // Element to keep visible
+    const ctaWrap = document.querySelector('.cta-wrap'); // Element for padding adjustments
+    const formStep = document.querySelector('.form-step'); // Element for gap adjustments
 
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
@@ -295,6 +297,25 @@ document.addEventListener('DOMContentLoaded', () => {
                 );
 
                 window.scrollTo({ top: newScrollY, behavior: 'smooth' });
+            }
+
+            // Adjust the layout when the keyboard is open
+            if (ctaWrap && formStep) {
+                // Check if the viewport height is reduced, indicating the keyboard is open
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+                if (window.innerHeight < document.documentElement.clientHeight) {
+                    // Keyboard is open
+                    ctaWrap.style.paddingTop = '1rem';
+                    ctaWrap.style.paddingBottom = '1rem';
+                    formStep.style.gap = '1rem';
+                } else {
+                    // Keyboard is closed
+                    ctaWrap.style.paddingTop = '';
+                    ctaWrap.style.paddingBottom = '';
+                    formStep.style.gap = '';
+                }
             }
         }
     });
