@@ -313,7 +313,6 @@ button:not(:disabled) {
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
-    padding: calc(var(--vh, 1vh) * 2) 0; /* Adjusted padding based on viewport height */
     margin: auto;
 }
 
