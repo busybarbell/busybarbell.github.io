@@ -339,6 +339,10 @@ header.scrolled {
     padding: 2rem 2%;
 }
 
+.agenda {
+    padding: 0rem 2%;
+}
+
 .headline {
     max-width: 60rem;
     margin: auto;
@@ -356,6 +360,30 @@ header.scrolled {
     width: 100%;
     gap: 1rem;
     max-width: 40rem;
+}
+
+.happy {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    max-width: 40rem;
+    border-radius: .75rem;
+    background-color: rgba(51, 71, 80, .2);
+    padding: .5rem 1rem;
+    margin: auto;
+}
+
+.bullet {
+    padding: .5rem .75rem;
+}
+
+.break {
+    background-color: #334750;
+    height: 2px;
+    width: 100%;
+    border: 100px;
 }
 
 .question {
@@ -603,6 +631,10 @@ header.scrolled {
         padding: 2rem 0%;
     }
 
+    .agenda {
+        padding: 0rem 4%;
+    }
+
     .form-container {
         padding: 0 4%;
     }
@@ -709,5 +741,9 @@ header.scrolled {
 
     .form-step {
         padding-bottom: 1rem;
+    }
+
+    .agenda {
+        padding: 0rem 4%;
     }
 }
