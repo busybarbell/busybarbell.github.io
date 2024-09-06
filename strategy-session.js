@@ -267,6 +267,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Add number-only validation to the age input field in step 1
     const ageInput = document.querySelector('.form-step[data-step="1"] input[name="age"]');
     if (ageInput) {
+        // Convert the input type to "text" and add validation for numeric input
+        ageInput.setAttribute('type', 'text');
         ageInput.addEventListener('input', (event) => {
             const value = event.target.value;
             event.target.value = value.replace(/[^0-9]/g, ''); // Allow only numbers
