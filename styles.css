@@ -679,6 +679,10 @@ input::placeholder {
     width: 100%;
     padding: 2rem;
     background-color: #0f1f25;
+    background-image: url(https://i.postimg.cc/MHZdchRJ/64aa4e323ad9b2d8940d7fd7-left-blur.webp);
+    background-size: contain; /* Adjusts image size to cover the element */
+background-position: top; /* Centers the background image */
+background-repeat: no-repeat;
 }
 
 .sign_time {
