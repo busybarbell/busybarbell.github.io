@@ -111,12 +111,14 @@ textarea {
     max-width: 60rem;
     margin: auto;
     height: 100%;
+    width: 100%;
 }
 
 #multistepform {
     max-width: 60rem;
     margin: auto;
     height: 100%;
+    width: 100%;
 }
 
 .bar-wrapper {
@@ -384,7 +386,6 @@ header.scrolled {
     width: 100%;
     align-items: center;
     justify-content: flex-start;
-    flex-wrap: wrap; /* Handle overflow on smaller screens */
 }
 
 .asking2 {
