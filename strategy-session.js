@@ -18,6 +18,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
+    let typingEffectFinished = false; // Track if typing effect is finished
 
     // Timer variables
     let timeRemaining = 8 * 60; // 8 minutes in seconds
@@ -35,10 +36,15 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isActive) {
                 stepDiv.style.display = 'flex'; // Ensure the active step is displayed
                 stepDiv.classList.add('active');
-                typeText(stepDiv); // Apply typing effect to the <p> tag
+                // Reset typing effect status and apply typing effect
+                typingEffectFinished = false; 
+                typeText(stepDiv, () => {
+                    typingEffectFinished = true;
+                    updateButtons(); // Enable the Next button when typing effect is finished
+                });
 
                 // Apply color changes and show/hide elements for specific steps
-                if (step === 4) {
+                if (step === 6) {
                     innerBar.style.backgroundColor = '#ffa600'; // Change inner bar color
                     if (barAccent) {
                         barAccent.style.backgroundColor = '#ffb84d'; // Change bar accent color
@@ -50,17 +56,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             step6Visited = true; // Mark step 6 as visited
                         }
                     }
-                } else if (step === 8) {
+                } else if (step === 10) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Doing great!'; // Motivation text for step 8
                     }
-                } else if (step === 12) {
+                } else if (step === 14) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Almost done!'; // Motivation text for step 12
                     }
-                } else if (step === 16) {
+                } else if (step === 18) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Last step!'; // Motivation text for step 16
@@ -141,7 +147,12 @@ document.addEventListener('DOMContentLoaded', () => {
             nextButton.textContent = 'CONTINUE'; // Default button text
         }
 
-        nextButton.disabled = !isCurrentStepValid();
+        // Disable the Next button on the first two steps until typing effect is complete
+        if (currentStep <= 2 && !typingEffectFinished) {
+            nextButton.disabled = true;
+        } else {
+            nextButton.disabled = !isCurrentStepValid();
+        }
     }
 
     // Check if the current step is valid
@@ -167,6 +178,7 @@ document.addEventListener('DOMContentLoaded', () => {
             isForwardMove = false; // Moving backward
             currentStep--;
             showStep(currentStep);
+            typingEffectFinished = false; // Reset typing effect status
         }
     });
 
@@ -177,6 +189,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 isForwardMove = true; // Moving forward
                 currentStep++;
                 showStep(currentStep);
+                typingEffectFinished = false; // Reset typing effect status
             } else {
                 // Fill the progress bar to 100% before form submission
                 innerBar.style.width = '100%';
@@ -220,7 +233,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Function to type text in the <p> tag
-    function typeText(stepDiv) {
+    function typeText(stepDiv, callback) {
         const paragraph = stepDiv.querySelector('p');
         if (paragraph) {
             const text = paragraph.dataset.text;
@@ -231,8 +244,13 @@ document.addEventListener('DOMContentLoaded', () => {
                 index++;
                 if (index >= text.length) {
                     clearInterval(interval);
+                    if (callback) {
+                        callback(); // Execute callback after typing effect is complete
+                    }
                 }
             }, 10); // Adjust typing speed here (in milliseconds)
+        } else if (callback) {
+            callback(); // Execute callback if there's no text to type
         }
     }
 
