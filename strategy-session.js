@@ -15,13 +15,22 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStep = document.querySelector('.form-step'); // Element for gap adjustments
     const header = document.querySelector('header'); // Header element
 
-    // Audio element
-    const audio = new Audio('progress.mp3'); // Replace with your audio file path
+    // Audio elements
+    const progressAudio = new Audio('progress.mp3'); // Replace with your audio file path
+    const step3Audio = new Audio('3.mp3');
+    const step4Audio = new Audio('4.mp3');
+    const step5Audio = new Audio('5.mp3');
+    step3Audio.playbackRate = 1.5; // Set playback rate to 1.5x
+    step4Audio.playbackRate = 1.5; // Set playback rate to 1.5x
+    step5Audio.playbackRate = 1.5; // Set playback rate to 1.5x
 
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
     let typingEffectFinished = false; // Track if typing effect is finished
+    let step3AudioPlayed = false; // Track if step 3 audio has been played
+    let step4AudioPlayed = false; // Track if step 4 audio has been played
+    let step5AudioPlayed = false; // Track if step 5 audio has been played
 
     // Timer variables
     let timeRemaining = 8 * 60; // 8 minutes in seconds
@@ -50,6 +59,18 @@ document.addEventListener('DOMContentLoaded', () => {
                     typingEffectFinished = true;
                     updateButtons(); // Enable the Next button when typing effect is finished
                 });
+
+                // Play audio for the respective step only if it has not been played before
+                if (step === 3 && !step3AudioPlayed) {
+                    step3Audio.play();
+                    step3AudioPlayed = true; // Mark audio as played
+                } else if (step === 4 && !step4AudioPlayed) {
+                    step4Audio.play();
+                    step4AudioPlayed = true; // Mark audio as played
+                } else if (step === 5 && !step5AudioPlayed) {
+                    step5Audio.play();
+                    step5AudioPlayed = true; // Mark audio as played
+                }
 
                 // Apply color changes and show/hide elements for specific steps
                 if (step === 6) {
@@ -120,9 +141,9 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         // Play sound when the inner bar grows
-        audio.pause(); // Ensure audio is paused before setting it to start from the beginning
-        audio.currentTime = 0;
-        audio.play();
+        progressAudio.pause(); // Ensure audio is paused before setting it to start from the beginning
+        progressAudio.currentTime = 0;
+        progressAudio.play();
     }
 
     // Create a bubble animation at the end of the progress bar
@@ -188,27 +209,18 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle previous button click
     prevButton.addEventListener('click', () => {
         if (currentStep > 1) {
-            isForwardMove = false; // Moving backward
+            isForwardMove = false; // Set to false as we are moving backward
             currentStep--;
             showStep(currentStep);
-            typingEffectFinished = false; // Reset typing effect status
         }
     });
 
     // Handle next button click
     nextButton.addEventListener('click', () => {
-        if (isCurrentStepValid()) {
-            if (currentStep < steps.length) {
-                isForwardMove = true; // Moving forward
-                currentStep++;
-                showStep(currentStep);
-                typingEffectFinished = false; // Reset typing effect status
-            } else {
-                // Fill the progress bar to 100% before form submission
-                innerBar.style.width = '100%';
-                // Slight delay to ensure progress bar completes filling
-                setTimeout(() => form.submit(), 500);
-            }
+        if (currentStep < steps.length && isCurrentStepValid()) {
+            isForwardMove = true; // Set to true as we are moving forward
+            currentStep++;
+            showStep(currentStep);
         }
     });
 
@@ -217,7 +229,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateButtons();
     });
 
-    // Handle Enter key press
+    // Handle Enter key to click the Next button
     form.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault(); // Prevent default form submission
