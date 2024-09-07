@@ -17,20 +17,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Audio elements
     const progressAudio = new Audio('progress.mp3'); // Replace with your audio file path
-    const step3Audio = new Audio('3.mp3');
-    const step4Audio = new Audio('4.mp3');
-    const step5Audio = new Audio('5.mp3');
-    step3Audio.playbackRate = 1.5; // Set playback rate to 1.5x
-    step4Audio.playbackRate = 1.5; // Set playback rate to 1.5x
-    step5Audio.playbackRate = 1.5; // Set playback rate to 1.5x
+    const stepAudio = {
+        3: new Audio('3.mp3'),
+        4: new Audio('4.mp3'),
+        5: new Audio('5.mp3'),
+        6: new Audio('6.mp3'),
+        7: new Audio('7.mp3'),
+        8: new Audio('8.mp3'),
+        9: new Audio('9.mp3'),
+        10: new Audio('10.mp3'),
+        11: new Audio('11.mp3'),
+        12: new Audio('12.mp3'),
+        13: new Audio('13.mp3'),
+        14: new Audio('14.mp3'),
+        15: new Audio('15.mp3'),
+        16: new Audio('16.mp3'),
+        17: new Audio('17.mp3'),
+        18: new Audio('18.mp3')
+    };
+
+    // Set playback rate to 1.5x for all audio files
+    Object.values(stepAudio).forEach(audio => {
+        audio.playbackRate = 1.5;
+    });
 
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
     let typingEffectFinished = false; // Track if typing effect is finished
-    let step3AudioPlayed = false; // Track if step 3 audio has been played
-    let step4AudioPlayed = false; // Track if step 4 audio has been played
-    let step5AudioPlayed = false; // Track if step 5 audio has been played
+    const stepAudiosPlayed = {}; // Object to keep track of which step audios have been played
 
     // Timer variables
     let timeRemaining = 8 * 60; // 8 minutes in seconds
@@ -61,15 +76,12 @@ document.addEventListener('DOMContentLoaded', () => {
                 });
 
                 // Play audio for the respective step only if it has not been played before
-                if (step === 3 && !step3AudioPlayed) {
-                    step3Audio.play();
-                    step3AudioPlayed = true; // Mark audio as played
-                } else if (step === 4 && !step4AudioPlayed) {
-                    step4Audio.play();
-                    step4AudioPlayed = true; // Mark audio as played
-                } else if (step === 5 && !step5AudioPlayed) {
-                    step5Audio.play();
-                    step5AudioPlayed = true; // Mark audio as played
+                if (!stepAudiosPlayed[step]) {
+                    const stepAudioFile = stepAudio[step];
+                    if (stepAudioFile) {
+                        stepAudioFile.play();
+                        stepAudiosPlayed[step] = true; // Mark audio as played
+                    }
                 }
 
                 // Apply color changes and show/hide elements for specific steps
@@ -193,17 +205,7 @@ document.addEventListener('DOMContentLoaded', () => {
     function isCurrentStepValid() {
         const currentStepDiv = document.querySelector(`.form-step[data-step="${currentStep}"]`);
         const inputs = [...currentStepDiv.querySelectorAll('input, textarea')];
-        if (inputs.length === 0) {
-            // If there are no inputs, the step is considered valid
-            return true;
-        }
-        // Check if all required fields are filled (if there are any input fields)
-        return inputs.every(input => {
-            if (input.hasAttribute('required')) {
-                return input.value.trim() !== ''; // Ensure value is not empty
-            }
-            return true;
-        });
+        return inputs.every(input => input.value.trim() !== '');
     }
 
     // Handle previous button click
