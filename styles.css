@@ -452,8 +452,19 @@ a {
 }
 
 .highlight-red {
+    padding: .25rem .75rem;
+
     background-color: rgba(255, 75, 75, .8);
 }
+
+.clip {
+    color: transparent; /* Hide the text color */
+    background-image: url('https://i.postimg.cc/5NqjDP2c/GRADIENT-FOR-TEXT.webp');
+    background-size: cover;
+    background-clip: text; /* Clip the background image to the text */
+    -webkit-background-clip: text; /* For Safari */
+    display: inline; /* Ensure the background-clip works */
+  }
 
 .insta {
     position: relative;
