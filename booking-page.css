@@ -325,8 +325,8 @@ header {
     align-items: center;
     justify-content: center;
     width: 100%;
-    padding: 4rem 2%;
-    gap: 1rem;
+    padding: 4rem 2% 2rem 4%;
+    gap: 2rem;
     background-color: #0f1f25;
     z-index: 450;
 }
@@ -363,7 +363,7 @@ header.scrolled {
 .hee {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start;
     width: 100%;
     gap: 1rem;
     max-width: 40rem;
