@@ -15,6 +15,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const formStep = document.querySelector('.form-step'); // Element for gap adjustments
     const header = document.querySelector('header'); // Header element
 
+    // Audio element
+    const audio = new Audio('progress.mp3'); // Replace with your audio file path
+
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
@@ -52,24 +55,24 @@ document.addEventListener('DOMContentLoaded', () => {
                     if (motivation) {
                         if (!step6Visited) {
                             motivation.style.display = 'block'; // Show motivation element
-                            motivation.textContent = 'Great start!'; // Motivation text for step 4
+                            motivation.textContent = 'Great start!'; // Motivation text for step 6
                             step6Visited = true; // Mark step 6 as visited
                         }
                     }
                 } else if (step === 10) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
-                        motivation.textContent = 'Doing great!'; // Motivation text for step 8
+                        motivation.textContent = 'Doing great!'; // Motivation text for step 10
                     }
                 } else if (step === 14) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
-                        motivation.textContent = 'Almost done!'; // Motivation text for step 12
+                        motivation.textContent = 'Almost done!'; // Motivation text for step 14
                     }
                 } else if (step === 18) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
-                        motivation.textContent = 'Last step!'; // Motivation text for step 16
+                        motivation.textContent = 'Last step!'; // Motivation text for step 18
                     }
                 } else {
                     if (motivation) {
@@ -142,7 +145,7 @@ document.addEventListener('DOMContentLoaded', () => {
         prevButton.disabled = currentStep === 1;
 
         if (currentStep === steps.length) {
-            nextButton.textContent = 'BOOK MY STRATEGY SESSION'; // Change button text on the last step
+            nextButton.textContent = 'CONTINUE'; // Default button text for the last step
         } else {
             nextButton.textContent = 'CONTINUE'; // Default button text
         }
@@ -190,6 +193,14 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentStep++;
                 showStep(currentStep);
                 typingEffectFinished = false; // Reset typing effect status
+
+                // Play the audio if the current step is greater than 2
+                if (currentStep > 2) {
+                    // Stop and reset the audio to ensure it plays from the start
+                    audio.pause();
+                    audio.currentTime = 0;
+                    audio.play();
+                }
             } else {
                 // Fill the progress bar to 100% before form submission
                 innerBar.style.width = '100%';
