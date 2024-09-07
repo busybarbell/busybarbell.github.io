@@ -453,7 +453,7 @@ a {
 
 .highlight-red {
     padding: .25rem .75rem;
-
+    border-radius: .5rem;
     background-color: rgba(255, 75, 75, .8);
 }
 
