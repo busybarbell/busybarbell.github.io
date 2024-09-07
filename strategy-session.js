@@ -118,6 +118,11 @@ document.addEventListener('DOMContentLoaded', () => {
         if (isForwardMove) {
             createBubble();
         }
+
+        // Play sound when the inner bar grows
+        audio.pause(); // Ensure audio is paused before setting it to start from the beginning
+        audio.currentTime = 0;
+        audio.play();
     }
 
     // Create a bubble animation at the end of the progress bar
@@ -198,14 +203,6 @@ document.addEventListener('DOMContentLoaded', () => {
                 currentStep++;
                 showStep(currentStep);
                 typingEffectFinished = false; // Reset typing effect status
-
-                // Play the audio if the current step is greater than 2
-                if (currentStep > 2) {
-                    // Stop and reset the audio to ensure it plays from the start
-                    audio.pause();
-                    audio.currentTime = 0;
-                    audio.play();
-                }
             } else {
                 // Fill the progress bar to 100% before form submission
                 innerBar.style.width = '100%';
