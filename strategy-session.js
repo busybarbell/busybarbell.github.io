@@ -31,6 +31,11 @@ document.addEventListener('DOMContentLoaded', () => {
     // Default fill percentage for progress bar
     const initialFill = 0; // Adjust this value if you want an initial fill
 
+    // Function to check if the device is mobile
+    function isMobile() {
+        return window.matchMedia('(max-width: 768px)').matches; // Adjust the width as needed
+    }
+
     // Show the current step
     function showStep(step) {
         steps.forEach((stepDiv) => {
@@ -219,11 +224,11 @@ document.addEventListener('DOMContentLoaded', () => {
     form.addEventListener('keydown', (event) => {
         if (event.key === 'Enter') {
             event.preventDefault(); // Prevent default form submission
-            nextButton.click(); // Simulate a click on the next button
+            nextButton.click(); // Trigger the Next button click
         }
     });
 
-    // Handle viewport zoom prevention
+    // Update viewport zoom prevention for mobile
     function setViewportZoomPrevent() {
         const viewportMeta = document.querySelector('meta[name="viewport"]');
         if (viewportMeta) {
@@ -316,48 +321,73 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    // Focus event handler to keep .asking and #cta visible when the keyboard appears
-    form.addEventListener('focusin', (event) => {
-        // Check if the focused element is an input or textarea
-        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-            // Scroll the .asking and #cta into view
-            if (asking && cta) {
-                // Get the height of the viewport excluding the keyboard
-                const viewportHeight = window.innerHeight;
-                // Calculate the required scroll position to keep .asking and #cta visible
-                const askingRect = asking.getBoundingClientRect();
-                const ctaRect = cta.getBoundingClientRect();
+    // Mobile-specific focus event handler
+    if (isMobile()) {
+        form.addEventListener('focusin', (event) => {
+            // Check if the focused element is an input or textarea
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                // Hide the header and <h2> elements
+                if (header) {
+                    header.style.display = 'none';
+                }
+                const h2Elements = document.querySelectorAll('h2');
+                h2Elements.forEach(h2 => {
+                    h2.style.display = 'none';
+                });
 
-                const scrollY = window.scrollY || window.pageYOffset;
-                const newScrollY = Math.max(
-                    scrollY,
-                    askingRect.top + scrollY - viewportHeight + askingRect.height,
-                    ctaRect.top + scrollY - viewportHeight + ctaRect.height
-                );
+                // Scroll the .asking and #cta into view
+                if (asking && cta) {
+                    // Get the height of the viewport excluding the keyboard
+                    const viewportHeight = window.innerHeight;
+                    // Calculate the required scroll position to keep .asking and #cta visible
+                    const askingRect = asking.getBoundingClientRect();
+                    const ctaRect = cta.getBoundingClientRect();
 
-                window.scrollTo({ top: newScrollY, behavior: 'smooth' });
-            }
+                    const scrollY = window.scrollY || window.pageYOffset;
+                    const newScrollY = Math.max(
+                        scrollY,
+                        askingRect.top + scrollY - viewportHeight + askingRect.height,
+                        ctaRect.top + scrollY - viewportHeight + ctaRect.height
+                    );
 
-            // Adjust the layout when the keyboard is open
-            if (ctaWrap && formStep) {
-                // Check if the viewport height is reduced, indicating the keyboard is open
-                const vh = window.innerHeight * 0.01;
-                document.documentElement.style.setProperty('--vh', `${vh}px`);
+                    window.scrollTo({ top: newScrollY, behavior: 'smooth' });
+                }
 
-                if (window.innerHeight < document.documentElement.clientHeight) {
-                    // Keyboard is open
-                    ctaWrap.style.paddingTop = '1rem';
-                    ctaWrap.style.paddingBottom = '1rem';
-                    formStep.style.gap = '1rem';
-                } else {
-                    // Keyboard is closed
-                    ctaWrap.style.paddingTop = '';
-                    ctaWrap.style.paddingBottom = '';
-                    formStep.style.gap = '';
+                // Adjust the layout when the keyboard is open
+                if (ctaWrap && formStep) {
+                    // Check if the viewport height is reduced, indicating the keyboard is open
+                    const vh = window.innerHeight * 0.01;
+                    document.documentElement.style.setProperty('--vh', `${vh}px`);
+
+                    if (window.innerHeight < document.documentElement.clientHeight) {
+                        // Keyboard is open
+                        ctaWrap.style.paddingTop = '1rem';
+                        ctaWrap.style.paddingBottom = '1rem';
+                        formStep.style.gap = '1rem';
+                    } else {
+                        // Keyboard is closed
+                        ctaWrap.style.paddingTop = '';
+                        ctaWrap.style.paddingBottom = '';
+                        formStep.style.gap = '';
+                    }
                 }
             }
-        }
-    });
+        });
+
+        form.addEventListener('focusout', (event) => {
+            // Check if the focused element is an input or textarea
+            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+                // Show the header and <h2> elements again
+                if (header) {
+                    header.style.display = 'flex';
+                }
+                const h2Elements = document.querySelectorAll('h2');
+                h2Elements.forEach(h2 => {
+                    h2.style.display = '';
+                });
+            }
+        });
+    }
 
     // Disable word suggestions and autocorrect on inputs
     const inputs = form.querySelectorAll('input, textarea');
