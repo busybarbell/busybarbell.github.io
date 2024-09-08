@@ -51,7 +51,6 @@ h2 {
     cursor: default;
     font-weight: 600;
     letter-spacing: .03125rem;
-    text-align: center;
     font-family: system-ui, sans-serif;
 }
 
@@ -451,6 +450,105 @@ a {
     gap: .5rem;
 }
 
+.happy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    padding: 2rem;
+}
+
+.dottt {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 2px;
+}
+
+.bop {
+    background-color: #334750;
+    height: 2px;
+    width: 2px;
+    border-radius: 100%;
+    margin-left: 7px;
+}
+
+.happier {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    max-width: 40rem;
+    padding: 2rem;
+    position: relative;
+    gap: 2rem;
+    border-left: 1px solid #334750;
+}
+
+
+
+.happier1 {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    position: relative;
+    border-right: 1px solid #334750;
+}
+
+.dirty {
+    min-width: 40%;
+    width: 40%;
+    max-width: 50%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding: .5rem 1rem;
+    right: 1rem;
+    top: .5rem;
+    bottom: .5rem;
+}
+
+.sheeth {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    min-width: 40%;
+    width: 40%;
+    max-width: 50%;
+    border-radius: .75rem;
+    background-color: rgba(51, 71, 80, .2);
+    padding: .5rem 1rem;
+    right: 1rem;
+    top: .5rem;
+    bottom: .5rem;
+}
+
+.bullet {
+    padding: .5rem .75rem;
+}
+
+.break {
+    background-color: #334750;
+    height: 2px;
+    width: 100%;
+}
+
+.learn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: .5rem;
+}
+
 .highlight {
     background-color: rgba(0, 111, 250, .8);
 }
@@ -696,7 +794,7 @@ input::placeholder {
     z-index: 1000;
     display: none;
     /* Change to block or flex when you want to show it */
-    align-items: center;
+    align-items: flex-start;
     /* Center items vertically if using flexbox */
     justify-content: center;
     /* Center items horizontally if using flexbox */
@@ -709,21 +807,18 @@ input::placeholder {
     height: 100%;
     /* Ensure height is 100% to cover the viewport */
     padding: 4rem 4%;
-    background-color: rgba(0, 0, 0, 0.8);
+    background-color: rgba(0, 0, 0);
     /* Fallback background color */
-    overflow: hidden;
+    overflow: auto;
     /* Ensure no overflow */
 }
 
 .sign_time {
     width: 100%;
-    max-width: 30rem;
+    max-width: 60rem;
     display: flex;
-    flex-direction: column;
-    align-items: left;
-    justify-content: space-between;
-    gap: 2rem;
-    padding: 2rem;
+    align-items: flex-start;
+    justify-content: stretch;
     border-radius: .75rem;
     border: 2px solid #334750;
     background-color: #0f1f25;
@@ -757,6 +852,7 @@ input::placeholder {
     padding: 2rem;
     background-color: #0f1f25;
     border-radius: .75rem;
+    border: 2px solid #334750;
 }
 
 .appointment_time {
@@ -776,6 +872,16 @@ input::placeholder {
     align-items: left;
     justify-content: space-between;
     gap: 1rem;
+}
+
+.pop-up-header2 {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    gap: 1rem;
+    padding: 2rem;
 }
 
 .inputs {
@@ -897,6 +1003,14 @@ input::placeholder {
     }
 }
 
+.looped {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: .5rem;
+}
+
 
 .bar_accent {
     height: .25rem;
@@ -964,8 +1078,7 @@ input::placeholder {
     }
 
     h2 {
-        font-size: 2rem;
-        /* Larger font size for the largest screens */
+        font-size: 1.625rem;
         margin: -0.4875rem 0;
     }
 
@@ -983,8 +1096,7 @@ input::placeholder {
     }
 
     h2 {
-        font-size: 1.75rem;
-        /* Slightly smaller than 1440px screens */
+        font-size: 1.625rem;
         margin: -0.4875rem 0;
     }
 
@@ -1003,7 +1115,6 @@ input::placeholder {
 
     h2 {
         font-size: 1.5rem;
-        /* Smaller for medium screens */
         margin: -0.45rem 0;
     }
 
@@ -1104,11 +1215,22 @@ input::placeholder {
     }
 
     .sign_wrap {
-        padding: 4rem 2%;
+        padding: 0;
     }
 
     .sign_time {
-        padding: 2rem 4%;
+        padding: 0rem 4%;
+        border: 0;
+        border-radius: 0;
+        flex-direction: column;
+    }
+
+    .happier1 {
+        display: none;
+    }
+
+    .happier {
+        padding: 4rem 2%;
     }
 }
 
@@ -1184,10 +1306,21 @@ input::placeholder {
     }
 
     .sign_wrap {
-        padding: 4rem 2%;
+        padding: 0;
     }
 
     .sign_time {
-        padding: 2rem 4%;
+        padding: 0rem 4%;
+        border: 0;
+        border-radius: 0;
+        flex-direction: column;
+    }
+
+    .happier1 {
+        display: none;
+    }
+
+    .happier {
+        padding: 4rem 2%;
     }
 }
