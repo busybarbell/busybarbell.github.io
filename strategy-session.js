@@ -240,10 +240,6 @@ document.addEventListener('DOMContentLoaded', () => {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Last step!'; // Motivation text for step 19
                     }
-                    // Change the image source on step 19
-                    if (treasureImage) {
-                        treasureImage.src = 'https://i.postimg.cc/13F0QdyB/treasurechest.webp';
-                    }
                 } else {
                     if (motivation) {
                         motivation.style.display = 'none'; // Hide motivation element for other steps
