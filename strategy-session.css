@@ -1,7 +1,7 @@
 @font-face {
     font-family: 'Podium';
     src: url('PODIUMSharp-211.woff2') format('woff2'),
-         url('PODIUMSharp-211.ttf') format('truetype');
+        url('PODIUMSharp-211.ttf') format('truetype');
 }
 
 *,
@@ -11,6 +11,14 @@
     padding: 0;
     box-sizing: border-box;
 }
+
+html {
+    zoom: 1;
+    transform: scale(1);
+    transform-origin: 0 0;
+    touch-action: manipulation; /* Prevents zooming gestures on touch screens */
+}
+
 
 button,
 input,
@@ -103,8 +111,10 @@ textarea {
     max-width: 40rem;
     margin: auto 0;
     resize: none;
-    flex: 1; /* Ensures the textarea grows to fill available space */
-    height: auto; /* Allows textarea to adjust its height based on content */
+    flex: 1;
+    /* Ensures the textarea grows to fill available space */
+    height: auto;
+    /* Allows textarea to adjust its height based on content */
 }
 
 .formy {
@@ -127,6 +137,16 @@ textarea {
     justify-content: flex-start;
     width: 100%;
     max-width: 60rem;
+    position: relative;
+    padding-right: .5rem;
+}
+
+#treasure {
+    position: absolute;
+    right: 0;
+    bottom: auto;
+    top: auto;
+    left: auto;
 }
 
 .bar {
@@ -139,7 +159,6 @@ textarea {
     background-color: #334750;
     border-bottom-left-radius: 100px;
     border-top-left-radius: 100px;
-    position: relative;
 }
 
 .bar-gift {
@@ -198,7 +217,8 @@ textarea {
 .form-container {
     display: flex;
     flex-direction: column;
-    flex: 1; /* Ensures the form container takes up available height */
+    flex: 1;
+    /* Ensures the form container takes up available height */
     padding: 0 2%;
     max-width: 60rem;
     margin: auto;
@@ -240,7 +260,7 @@ textarea {
     transform: translateY(4px);
 }
 
-.custom-radio-group input[type="radio"]:checked + .custom-radio-label {
+.custom-radio-group input[type="radio"]:checked+.custom-radio-label {
     background-color: rgba(51, 71, 80, .2);
     box-shadow: 0 4px 0 #006FFA;
     border-color: #006FFA;
@@ -257,6 +277,7 @@ textarea {
     display: flex;
     gap: 1rem;
     margin: auto 0;
+    position: relative;
 }
 
 button {
@@ -314,7 +335,8 @@ button:not(:disabled) {
     display: flex;
     justify-content: flex-end;
     gap: 2rem;
-    padding: calc(var(--vh, 1vh) * 2) 0; /* Adjusted padding based on viewport height */
+    padding: calc(var(--vh, 1vh) * 2) 0;
+    /* Adjusted padding based on viewport height */
     margin: auto;
 }
 
@@ -359,12 +381,8 @@ header.scrolled {
 .box {
     border: 2px solid #334750;
     border-radius: .75rem;
-    padding: .5rem .75rem;
+    padding: 1rem;
     position: relative;
-    gap: 1rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 .picture {
@@ -429,7 +447,8 @@ header.scrolled {
 .motivation {
     position: absolute;
     bottom: -1.75rem;
-    right: 0;
+    right: auto;
+    left: auto;
     color: #ffa600;
     display: none;
     text-wrap: none;
@@ -455,10 +474,164 @@ header.scrolled {
         border-width: 10px;
         opacity: .8;
     }
+
     100% {
         transform: translateX(50%) scale(2);
         border-width: 2px;
         opacity: 0;
+    }
+}
+
+.gift_background {
+    align-items: flex-start;
+    justify-content: center;
+    display: none;
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 999;
+    padding: 4rem 0;
+    background-color: rgba(0, 0, 0, 0.8);
+    -webkit-backdrop-filter: blur(4px);
+    backdrop-filter: blur(4px);
+    overflow: auto;
+}
+
+.choice {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+.keyboard {
+    padding: .25rem;
+    color: inherit;
+    border: 2px solid;
+    border-color: inherit;
+    border-radius: .5rem;
+    aspect-ratio: 1/1;
+    height: 2rem;
+    width: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+}
+
+.gift_wrap {
+    z-index: 1000;
+    display: flex;
+    align-items: stretch;
+    justify-content: center;
+    width: 100%;
+    max-width: 50rem;
+    padding: 2rem;
+    background-color: #0f1f25;
+    border-radius: .75rem;
+}
+
+.gift_time {
+    width: 100%;
+    max-width: 60rem;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    gap: 2rem;
+}
+
+.pop-up-x {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.pop-up-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: left;
+    justify-content: space-between;
+    gap: 1rem;
+}
+
+.highlight-red {
+    padding: .25rem .75rem;
+    border-radius: .5rem;
+    background-color: rgba(255, 75, 75, .8);
+}
+
+#close {
+    height: 1rem;
+    width: 1rem;
+    cursor: pointer;
+}
+
+.car {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    width: 100%;
+    max-width: 60rem;
+    height: 1rem;
+    margin: .25rem 0;
+    background-color: #334750;
+    border-radius: 100px;
+    position: relative;
+}
+
+.gooner_bar {
+    position: relative;
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    width: 50%;
+    height: 1rem;
+    padding: 0.25rem 0.5rem;
+    background-color: #006ffa;
+    border-radius: 100px;
+    transition: width 1s ease;
+    animation: stretchBounce 5s cubic-bezier(0.5, -0.2, 0.3, 1.3) infinite;
+}
+
+@keyframes stretchBounce {
+    0% {
+        width: 50%;
+    }
+
+    30% {
+        width: 55%;
+        /* A bit of a struggle before reaching the max */
+    }
+
+    32.5% {
+        width: 55%;
+    }
+
+    42.5% {
+        width: 50%;
+        /* Maximum tension point */
+    }
+
+    50% {
+        width: 50%;
+    }
+
+    85% {
+        width: 65%;
+        /* Maintain tension, showing the effort to reach full */
+    }
+
+    85% {
+        width: 65%;
+    }
+
+    90% {
+        width: 50%;
+        /* Reset for the next cycle */
     }
 }
 

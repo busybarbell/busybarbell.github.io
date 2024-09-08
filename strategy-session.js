@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const form = document.getElementById('multiStepForm');
     const steps = document.querySelectorAll('.form-step');
     const innerBar = document.querySelector('.inner_bar');
-    const barAccent = document.querySelector('.bar_accent'); // Make sure you have this element
+    const barAccent = document.querySelector('.bar_accent'); // Ensure this element exists
     const prevButton = document.getElementById('prevButton');
     const nextButton = document.getElementById('nextButton');
     const countdownElement = document.getElementById('countdown'); // Countdown element
@@ -14,6 +14,134 @@ document.addEventListener('DOMContentLoaded', () => {
     const ctaWrap = document.querySelector('.cta-wrap'); // Element for padding adjustments
     const formStep = document.querySelector('.form-step'); // Element for gap adjustments
     const header = document.querySelector('header'); // Header element
+    const treasureImage = document.getElementById('treasure'); // Image element to change
+
+    const giftButtons = document.querySelectorAll('.keep-watching');
+    const closeDiv = document.getElementById('close');
+    const giftBackground = document.querySelector('.gift_background');
+    const giftWrap = document.querySelector('.gift_wrap');
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Existing code...
+    
+        // Set viewport meta tag to prevent zoom
+        function setViewportZoomPrevent() {
+            let viewportMeta = document.querySelector('meta[name="viewport"]');
+            if (!viewportMeta) {
+                viewportMeta = document.createElement('meta');
+                viewportMeta.name = 'viewport';
+                document.head.appendChild(viewportMeta);
+            }
+            viewportMeta.content = 'width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no';
+        }
+    
+        setViewportZoomPrevent();
+    
+        // Prevent zooming with keyboard shortcuts
+        document.addEventListener('keydown', (event) => {
+            if ((event.metaKey || event.ctrlKey) && (event.key === '+' || event.key === '-')) {
+                event.preventDefault();
+            }
+        });
+    
+        // Optional: Prevent zooming on touch devices (if relevant)
+        document.querySelector('html').style.touchAction = 'manipulation';
+    });
+
+    document.addEventListener('DOMContentLoaded', () => {
+        // Prevent zoom with keyboard shortcuts
+        document.addEventListener('keydown', (event) => {
+            if ((event.metaKey || event.ctrlKey) && (event.key === '+' || event.key === '-' || event.key === '0')) {
+                event.preventDefault();
+            }
+        });
+
+        // Prevent zoom with mouse wheel
+        document.addEventListener('wheel', (event) => {
+            if (event.ctrlKey) {
+                event.preventDefault();
+            }
+        }, { passive: false });
+    });
+    
+
+    // Flag to track if the acknowledgment background has been shown
+    let hasAcknowledgmentBeenShown = false;
+
+    // Function to show the acknowledgment background and disable scrolling
+    function showgiftBackground() {
+        if (hasAcknowledgmentBeenShown) return; // Exit if already shown
+
+        hasAcknowledgmentBeenShown = true; // Set the flag to true
+
+        // Make the background visible immediately
+        giftBackground.style.display = 'flex';
+
+        // Make the wrap visible immediately
+        giftWrap.style.display = 'flex';
+        giftWrap.classList.add('animate-in');
+
+        // Disable scrolling
+        document.body.style.overflow = 'hidden';
+    }
+
+    // Function to hide the acknowledgment background and enable scrolling
+    function hidegiftBackground(button) {
+        // Start animation for the wrap
+        giftWrap.classList.remove('animate-in');
+        giftWrap.classList.add('animate-out');
+
+        // Hide the wrap immediately after starting animation
+        giftWrap.style.display = 'none';
+
+        // Hide the background immediately
+        giftBackground.style.display = 'none';
+
+        // Enable scrolling
+        document.body.style.overflow = '';
+    }
+
+    // Ensure acknowledgment background is hidden on page load
+    document.addEventListener('DOMContentLoaded', () => {
+        giftBackground.style.display = 'none';
+        giftWrap.style.display = 'none';
+    });
+
+    // Event listener for mouse leaving the viewport
+    document.addEventListener('mouseout', (event) => {
+        // Check if the mouse is leaving the viewport from the top edge
+        if (event.clientY < 0) {
+            showgiftBackground();
+        }
+    });
+
+    // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
+    giftButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.dataset.pressed === 'false') {
+                button.dataset.pressed = 'true'; // Update data attribute
+            }
+            hidegiftBackground(button);
+        });
+    });
+
+    // Add event listener to the close div
+    closeDiv.addEventListener('click', () => {
+        hidegiftBackground(closeDiv);
+    });
+
+    function handleScroll() {
+        if (window.scrollY > 1) { // Change 50 to the desired scroll position threshold
+            header.classList.add('scrolled');
+        } else {
+            header.classList.remove('scrolled');
+        }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    // Initial check in case the page is loaded with some scroll position
+    handleScroll();
 
     // Audio elements
     const progressAudio = new Audio('progress.mp3'); // Replace with your audio file path
@@ -44,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
     let currentStep = 1;
     let step6Visited = false; // Track if step 6 has been visited
     let isForwardMove = true; // Track if the user is moving forward
-    let typingEffectFinished = false; // Track if typing effect is finished
+    let typingEffectFinished = true; // Default to true since we are skipping typing effect
     const stepAudiosPlayed = {}; // Object to keep track of which step audios have been played
 
     // Timer variables
@@ -68,12 +196,12 @@ document.addEventListener('DOMContentLoaded', () => {
             if (isActive) {
                 stepDiv.style.display = 'flex'; // Ensure the active step is displayed
                 stepDiv.classList.add('active');
-                // Reset typing effect status and apply typing effect
-                typingEffectFinished = false; 
-                typeText(stepDiv, () => {
-                    typingEffectFinished = true;
-                    updateButtons(); // Enable the Next button when typing effect is finished
-                });
+
+                // Directly set the text content without typing effect
+                const paragraph = stepDiv.querySelector('p');
+                if (paragraph) {
+                    paragraph.textContent = paragraph.dataset.text;
+                }
 
                 // Play audio for the respective step only if it has not been played before
                 if (!stepAudiosPlayed[step]) {
@@ -107,10 +235,14 @@ document.addEventListener('DOMContentLoaded', () => {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Almost done!'; // Motivation text for step 14
                     }
-                } else if (step === 18) {
+                } else if (step === 19) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
-                        motivation.textContent = 'Last step!'; // Motivation text for step 18
+                        motivation.textContent = 'Last step!'; // Motivation text for step 19
+                    }
+                    // Change the image source on step 19
+                    if (treasureImage) {
+                        treasureImage.src = 'https://i.postimg.cc/13F0QdyB/treasurechest.webp';
                     }
                 } else {
                     if (motivation) {
@@ -166,11 +298,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const bubble = document.createElement('div');
         bubble.className = 'bubble';
-        
+
         // Set the bubble's border color to match the inner bar's background color
         const innerBarColor = getComputedStyle(innerBar).backgroundColor;
         bubble.style.borderColor = innerBarColor;
-        
+
         // Position the bubble at the end of the progress bar
         bubble.style.right = `0`;
         bubble.style.transform = `translateX(50%)`; // Center the bubble at the edge
@@ -220,6 +352,14 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle next button click
     nextButton.addEventListener('click', () => {
         if (currentStep < steps.length && isCurrentStepValid()) {
+            if (currentStep === 19) {
+                // Ensure the progress bar fills up to 100% on the final step
+                innerBar.style.width = '100%';
+                progressAudio.pause(); // Ensure audio is paused before setting it to start from the beginning
+                progressAudio.currentTime = 0;
+                progressAudio.play();
+            }
+
             isForwardMove = true; // Set to true as we are moving forward
             currentStep++;
             showStep(currentStep);
@@ -256,28 +396,6 @@ document.addEventListener('DOMContentLoaded', () => {
         const viewportMeta = document.querySelector('meta[name="viewport"]');
         if (viewportMeta) {
             viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
-        }
-    }
-
-    // Function to type text in the <p> tag
-    function typeText(stepDiv, callback) {
-        const paragraph = stepDiv.querySelector('p');
-        if (paragraph) {
-            const text = paragraph.dataset.text;
-            let index = 0;
-            paragraph.textContent = '';
-            const interval = setInterval(() => {
-                paragraph.textContent += text[index];
-                index++;
-                if (index >= text.length) {
-                    clearInterval(interval);
-                    if (callback) {
-                        callback(); // Execute callback after typing effect is complete
-                    }
-                }
-            }, 10); // Adjust typing speed here (in milliseconds)
-        } else if (callback) {
-            callback(); // Execute callback if there's no text to type
         }
     }
 
@@ -399,6 +517,34 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
     }
+
+    // Function to handle the visibility of the keyboard divs based on screen width
+    function adjustKeyboardVisibility() {
+        const keyboardDivs = document.querySelectorAll('.keyboard');
+        if (window.innerWidth <= 767) {
+            // Hide keyboard divs on mobile
+            keyboardDivs.forEach(div => div.style.display = 'none');
+        } else {
+            // Show keyboard divs on larger screens
+            keyboardDivs.forEach(div => div.style.display = 'flex');
+        }
+    }
+
+    // Adjust visibility on page load
+    adjustKeyboardVisibility();
+
+    // Adjust visibility on window resize
+    window.addEventListener('resize', adjustKeyboardVisibility);
+
+    // Handle keyboard input for radio selection
+    document.addEventListener('keydown', function (event) {
+        if (event.key === '1') {
+            document.getElementById('coachable').checked = true;
+        } else if (event.key === '2') {
+            document.getElementById('workout').checked = true;
+        }
+    });
+
 
     // Disable word suggestions and autocorrect on inputs
     const inputs = form.querySelectorAll('input, textarea');
