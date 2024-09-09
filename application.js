@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const stepAudiosPlayed = {}; // Object to keep track of which step audios have been played
 
     // Timer variables
-    let timeRemaining = 8 * 60; // 8 minutes in seconds
+    let timeRemaining = 5 * 60; // 8 minutes in seconds
     let rotationDegree = 0; // Track the rotation angle
     let timerInterval; // Variable to store the timer interval ID
 
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 }
 
                 // Apply color changes and show/hide elements for specific steps
-                if (step === 6) {
+                if (step === 4) {
                     innerBar.style.backgroundColor = '#ffa600'; // Change inner bar color
                     if (barAccent) {
                         barAccent.style.backgroundColor = '#ffb84d'; // Change bar accent color
@@ -225,17 +225,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             step6Visited = true; // Mark step 6 as visited
                         }
                     }
-                } else if (step === 10) {
+                } else if (step === 9) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Doing great!'; // Motivation text for step 10
                     }
-                } else if (step === 14) {
+                } else if (step === 12) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Almost done!'; // Motivation text for step 14
                     }
-                } else if (step === 19) {
+                } else if (step === 14) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Last step!'; // Motivation text for step 19
@@ -266,7 +266,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update the progress bar
     function updateProgressBar() {
-        const totalSteps = 19; // Total number of steps
+        const totalSteps = 14; // Total number of steps
         const stepsCompleted = currentStep - 1; // Steps completed before the current step
 
         // Calculate the progress excluding the initial fill
@@ -348,7 +348,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Handle next button click
     nextButton.addEventListener('click', () => {
         if (currentStep < steps.length && isCurrentStepValid()) {
-            if (currentStep === 19) {
+            if (currentStep === 14) {
                 // Ensure the progress bar fills up to 100% on the final step
                 innerBar.style.width = '100%';
                 progressAudio.pause(); // Ensure audio is paused before setting it to start from the beginning
