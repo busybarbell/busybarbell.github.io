@@ -27,7 +27,7 @@ html {
 }
 
 body {
-    background-color: #0f1f25;
+    background-color: black;
     font-family: system-ui, sans-serif;
     color: #fff;
 }
@@ -69,7 +69,7 @@ header {
     top: 0;
     left: 0;
     right: 0;
-    background-color: #0f1f25;
+    background-color: black;
     z-index: 450;
 }
 
@@ -754,7 +754,7 @@ button:active {
     letter-spacing: 0.025rem;
     cursor: pointer;
     margin-bottom: 4px;
-    color: #0f1f25;
+    color: black;
     font-weight: 600;
     width: 100%;
 }
@@ -802,7 +802,7 @@ input {
     padding: .5rem .75rem;
     border-radius: .75rem;
     border: 2px solid #334750;
-    background-color: #0f1f25;
+    background-color: black;
     color: white;
     font-size: 1.25rem;
     width: 100%;
@@ -852,7 +852,7 @@ input::placeholder {
     justify-content: stretch;
     border-radius: .75rem;
     border: 2px solid #334750;
-    background-color: #0f1f25;
+    background-color: #1d1e20;
 }
 
 .acknowledge_background {
@@ -881,7 +881,7 @@ input::placeholder {
     width: 100%;
     max-width: 50rem;
     padding: 2rem;
-    background-color: #0f1f25;
+    background-color: #1d1e20;
     border-radius: .75rem;
     border: 2px solid #334750;
 }

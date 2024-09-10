@@ -43,7 +43,7 @@ body {
 }
 
 body {
-    background-color: #0f1f25;
+    background-color: black;
     font-family: system-ui, sans-serif;
     color: #fff;
 }
@@ -326,7 +326,7 @@ button:not(:disabled) {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: #0f1f25;
+    background-color: black;
     z-index: 451;
 }
 
@@ -352,7 +352,7 @@ header {
     width: 100%;
     padding: 4rem 2%;
     gap: 1rem;
-    background-color: #0f1f25;
+    background-color: black;
     z-index: 450;
 }
 
@@ -529,7 +529,7 @@ header.scrolled {
     width: 100%;
     max-width: 50rem;
     padding: 2rem;
-    background-color: #0f1f25;
+    background-color: #1d1e20;
     border-radius: .75rem;
 }
 
