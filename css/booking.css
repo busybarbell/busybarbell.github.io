@@ -34,7 +34,7 @@ body {
 }
 
 body {
-    background-color: black;
+    background-color: #02040b;
     font-family: system-ui, sans-serif;
     color: #fff;
 }
@@ -304,7 +304,7 @@ button:not(:disabled) {
     bottom: 0;
     left: 0;
     right: 0;
-    background-color: black;
+    background-color: #02040b;
     z-index: 451;
 }
 
@@ -327,7 +327,7 @@ header {
     width: 100%;
     padding: 4rem 2% 2rem 4%;
     gap: 2rem;
-    background-color: black;
+    background-color: #02040b;
     z-index: 450;
 }
 

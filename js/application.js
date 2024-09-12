@@ -144,24 +144,24 @@ document.addEventListener('DOMContentLoaded', () => {
     handleScroll();
 
     // Audio elements
-    const progressAudio = new Audio('progress.mp3'); // Replace with your audio file path
+    const progressAudio = new Audio('../sound/progress.mp3'); // Replace with your audio file path
     const stepAudio = {
-        3: new Audio('3.mp3'),
-        4: new Audio('4.mp3'),
-        5: new Audio('5.mp3'),
-        6: new Audio('6.mp3'),
-        7: new Audio('7.mp3'),
-        8: new Audio('8.mp3'),
-        9: new Audio('9.mp3'),
-        10: new Audio('10.mp3'),
-        11: new Audio('11.mp3'),
-        12: new Audio('12.mp3'),
-        13: new Audio('13.mp3'),
-        14: new Audio('14.mp3'),
-        15: new Audio('15.mp3'),
-        16: new Audio('16.mp3'),
-        17: new Audio('17.mp3'),
-        18: new Audio('18.mp3')
+        3: new Audio('../sound/3.mp3'),
+        4: new Audio('../sound/4.mp3'),
+        5: new Audio('../sound/5.mp3'),
+        6: new Audio('../sound/6.mp3'),
+        7: new Audio('../sound/7.mp3'),
+        8: new Audio('../sound/8.mp3'),
+        9: new Audio('../sound/9.mp3'),
+        10: new Audio('../sound/10.mp3'),
+        11: new Audio('../sound/11.mp3'),
+        12: new Audio('../sound/12.mp3'),
+        13: new Audio('../sound/13.mp3'),
+        14: new Audio('../sound/14.mp3'),
+        15: new Audio('../sound/15.mp3'),
+        16: new Audio('../sound/16.mp3'),
+        17: new Audio('../sound/17.mp3'),
+        18: new Audio('../sound/18.mp3')
     };
 
     // Set playback rate to 1.5x for all audio files

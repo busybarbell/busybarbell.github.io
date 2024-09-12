@@ -2,9 +2,18 @@ document.addEventListener('DOMContentLoaded', () => {
     const video = document.getElementById('myVideo');
     const lockedElement = document.getElementById('locked');
     const firstButton = document.getElementById('first-button');
+    const muteBtn = document.querySelector('.click_for_sound');
+    const volumeDiv = document.querySelector('.volume');
+    const volumeOn = volumeDiv?.querySelector('.volume-on');
+    const volumeOff = volumeDiv?.querySelector('.volume-off');
+    const clickText = muteBtn?.querySelector('.click-text');
+    const tapText = muteBtn?.querySelector('.tap-text');
     const playButton = document.querySelector('.play');
     const controls = document.querySelector('.controls');
-
+    const fullscreenButton = document.getElementById('fullscreenButton');
+    const fullscreenIcon = fullscreenButton?.querySelector('.fullscreen');
+    const exitFullscreenIcon = fullscreenButton?.querySelector('.exit-fullscreen');
+    
     const acknowledgeButtons = document.querySelectorAll('.keep-watching');
     const closeDiv = document.getElementById('close');
     const acknowledgeBackground = document.querySelector('.acknowledge_background');
@@ -12,51 +21,16 @@ document.addEventListener('DOMContentLoaded', () => {
     const close2Div = document.getElementById('close2');
     const signWrap = document.querySelector('.sign_wrap');
 
-    // Function to toggle visibility of signWrap
-    function toggleSignWrap() {
-        if (signWrap) {
-            signWrap.style.display = signWrap.style.display === 'flex' ? 'none' : 'flex';
-            console.log('signWrap toggled:', signWrap.style.display);
-        }
-    }
-
-    // Toggle visibility of signWrap on firstButton click
+    // Toggle visibility of signWrap on button click
     if (firstButton) {
         firstButton.addEventListener('click', () => {
-            console.log('firstButton clicked');
-            toggleSignWrap();
+            signWrap.style.display = signWrap.style.display === 'flex' ? 'none' : 'flex';
         });
     }
 
-    // Toggle visibility of signWrap on close2Div click
     if (close2Div) {
         close2Div.addEventListener('click', () => {
-            console.log('close2Div clicked');
-            toggleSignWrap();
-        });
-    }
-
-    // Toggle visibility of signWrap on click_for_sound buttons
-    document.querySelectorAll('.click_for_sound').forEach(button => {
-        button.addEventListener('click', () => {
-            console.log('click_for_sound button clicked');
-            toggleSignWrap();
-        });
-    });
-
-    // Toggle visibility of signWrap on video-wrap elements
-    document.querySelectorAll('.video-wrap').forEach(wrapper => {
-        wrapper.addEventListener('click', () => {
-            console.log('video-wrap element clicked');
-            toggleSignWrap();
-        });
-    });
-
-    // Toggle visibility of signWrap on playButton click
-    if (playButton) {
-        playButton.addEventListener('click', () => {
-            console.log('playButton clicked');
-            toggleSignWrap();
+            signWrap.style.display = signWrap.style.display === 'none' ? 'flex' : 'none';
         });
     }
 
@@ -156,6 +130,152 @@ document.addEventListener('DOMContentLoaded', () => {
     } else {
         console.log('Locked element not found');
     }
+
+    // Handling click for sound/mute button
+    const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+
+    if (clickText && tapText) {
+        if (isMobile) {
+            clickText.style.display = 'none';
+            tapText.style.display = 'inline';
+        } else {
+            clickText.style.display = 'inline';
+            tapText.style.display = 'none';
+        }
+    }
+
+    let audioContext;
+    if (window.AudioContext || window.webkitAudioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)();
+        const emptySource = audioContext.createBufferSource();
+        emptySource.buffer = audioContext.createBuffer(1, 1, 22050);
+        emptySource.connect(audioContext.destination);
+        emptySource.start(0);
+    }
+
+    function playVideoWithSound() {
+        if (video) {
+            video.muted = false;
+            video.play();
+            if (volumeDiv) volumeDiv.style.display = 'flex';
+            if (volumeOn) volumeOn.style.display = 'flex';
+            if (volumeOff) volumeOff.style.display = 'none';
+            if (muteBtn) muteBtn.style.display = 'none';
+            if (playButton) playButton.style.display = 'none';
+        }
+    }
+
+    function toggleMute() {
+        if (video) {
+            video.muted = !video.muted;
+            if (volumeOn) volumeOn.style.display = video.muted ? 'none' : 'flex';
+            if (volumeOff) volumeOff.style.display = video.muted ? 'flex' : 'none';
+        }
+    }
+
+    function togglePlayPause() {
+        if (video) {
+            if (video.paused) {
+                playVideoWithSound();
+            } else {
+                video.pause();
+            }
+        }
+    }
+
+    // Apply the same functionality to all relevant elements
+    function setupPlayAndSound() {
+        playVideoWithSound();
+        if (playButton) playButton.style.display = 'none';
+        if (muteBtn) muteBtn.style.display = 'none';
+        if (volumeDiv) volumeDiv.style.display = 'flex';
+    }
+
+    // Event listeners for play functionality
+    if (muteBtn) muteBtn.addEventListener('click', setupPlayAndSound);
+    if (playButton) playButton.addEventListener('click', setupPlayAndSound);
+
+    // Play/Pause video functionality on controls click
+    if (controls) controls.addEventListener('click', togglePlayPause);
+    if (playButton) playButton.addEventListener('click', togglePlayPause);
+    if (muteBtn) muteBtn.addEventListener('click', togglePlayPause);
+
+    // Toggle mute when clicking on the volume div
+    if (volumeDiv) volumeDiv.addEventListener('click', toggleMute);
+
+    // Fullscreen functionality
+    function toggleFullscreen() {
+        if (video) {
+            if (video.requestFullscreen) {
+                video.requestFullscreen();
+            } else if (video.mozRequestFullScreen) { // Firefox
+                video.mozRequestFullScreen();
+            } else if (video.webkitRequestFullscreen) { // Chrome, Safari, and Opera
+                video.webkitRequestFullscreen();
+            } else if (video.msRequestFullscreen) { // IE/Edge
+                video.msRequestFullscreen();
+            }
+        }
+    }
+
+    if (fullscreenButton) {
+        fullscreenButton.addEventListener('click', () => {
+            if (document.fullscreenElement || document.mozFullScreenElement || document.webkitFullscreenElement || document.msFullscreenElement) {
+                document.exitFullscreen();
+            } else {
+                toggleFullscreen();
+            }
+        });
+    }
+
+    // Optional: Handle fullscreen change
+    document.addEventListener('fullscreenchange', () => {
+        if (fullscreenIcon && exitFullscreenIcon) {
+            if (document.fullscreenElement) {
+                fullscreenIcon.style.display = 'none';
+                exitFullscreenIcon.style.display = 'block';
+            } else {
+                fullscreenIcon.style.display = 'block';
+                exitFullscreenIcon.style.display = 'none';
+            }
+        }
+    });
+
+    document.addEventListener('mozfullscreenchange', () => {
+        if (fullscreenIcon && exitFullscreenIcon) {
+            if (document.mozFullScreenElement) {
+                fullscreenIcon.style.display = 'none';
+                exitFullscreenIcon.style.display = 'block';
+            } else {
+                fullscreenIcon.style.display = 'block';
+                exitFullscreenIcon.style.display = 'none';
+            }
+        }
+    });
+
+    document.addEventListener('webkitfullscreenchange', () => {
+        if (fullscreenIcon && exitFullscreenIcon) {
+            if (document.webkitFullscreenElement) {
+                fullscreenIcon.style.display = 'none';
+                exitFullscreenIcon.style.display = 'block';
+            } else {
+                fullscreenIcon.style.display = 'block';
+                exitFullscreenIcon.style.display = 'none';
+            }
+        }
+    });
+
+    document.addEventListener('msfullscreenchange', () => {
+        if (fullscreenIcon && exitFullscreenIcon) {
+            if (document.msFullscreenElement) {
+                fullscreenIcon.style.display = 'none';
+                exitFullscreenIcon.style.display = 'block';
+            } else {
+                fullscreenIcon.style.display = 'block';
+                exitFullscreenIcon.style.display = 'none';
+            }
+        }
+    });
 
     // FAQ functionality
     const faqItems = document.querySelectorAll('.faq_item');
