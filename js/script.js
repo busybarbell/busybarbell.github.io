@@ -5,21 +5,45 @@ document.addEventListener('DOMContentLoaded', () => {
     const playButton = document.querySelector('.play');
     const controls = document.querySelector('.controls');
 
-    const acknowledgeButtons = document.querySelectorAll('.keep-watching');
-    const closeDiv = document.getElementById('close');
     const acknowledgeBackground = document.querySelector('.acknowledge_background');
-    const acknowledgeWrap = document.querySelector('.acknowledge_wrap');
-    const close2Div = document.getElementById('close2');
     const signWrap = document.querySelector('.sign_wrap');
-
+    const body = document.body;
+    const closeCartel = document.querySelector('.closecartel'); // Reference to close button
+    
+    // Variables to store scroll position
+    let scrollTop = 0;
+    
+    // Function to disable scrolling and preserve scroll position
+    function disableScroll() {
+        scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+        body.style.position = 'fixed';
+        body.style.top = `-${scrollTop}px`;
+        body.style.width = '100%'; // Prevent horizontal scroll bar appearance
+    }
+    
+    // Function to enable scrolling and restore scroll position
+    function enableScroll() {
+        body.style.position = '';
+        body.style.top = '';
+        body.style.width = '';
+        window.scrollTo(0, scrollTop); // Restore scroll position
+    }
+    
     // Function to toggle visibility of signWrap
     function toggleSignWrap() {
         if (signWrap) {
-            signWrap.style.display = signWrap.style.display === 'flex' ? 'none' : 'flex';
-            console.log('signWrap toggled:', signWrap.style.display);
+            const isVisible = signWrap.classList.toggle('visible');
+            console.log('signWrap toggled:', isVisible ? 'visible' : 'hidden');
+    
+            // Enable or disable scroll based on visibility
+            if (isVisible) {
+                disableScroll();
+            } else {
+                enableScroll();
+            }
         }
     }
-
+    
     // Toggle visibility of signWrap on firstButton click
     if (firstButton) {
         firstButton.addEventListener('click', () => {
@@ -27,15 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleSignWrap();
         });
     }
-
-    // Toggle visibility of signWrap on close2Div click
-    if (close2Div) {
-        close2Div.addEventListener('click', () => {
-            console.log('close2Div clicked');
-            toggleSignWrap();
-        });
-    }
-
+    
     // Toggle visibility of signWrap on click_for_sound buttons
     document.querySelectorAll('.click_for_sound').forEach(button => {
         button.addEventListener('click', () => {
@@ -43,7 +59,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleSignWrap();
         });
     });
-
+    
     // Toggle visibility of signWrap on video-wrap elements
     document.querySelectorAll('.video-wrap').forEach(wrapper => {
         wrapper.addEventListener('click', () => {
@@ -51,7 +67,7 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleSignWrap();
         });
     });
-
+    
     // Toggle visibility of signWrap on playButton click
     if (playButton) {
         playButton.addEventListener('click', () => {
@@ -59,8 +75,17 @@ document.addEventListener('DOMContentLoaded', () => {
             toggleSignWrap();
         });
     }
+    
+    // Close signWrap when closeCartel is clicked
+    if (closeCartel) {
+        closeCartel.addEventListener('click', () => {
+            console.log('closeCartel clicked');
+            // Ensure it hides the signWrap by toggling its visibility
+            toggleSignWrap();
+        });
+    }    
 
-    document.getElementById('phone')?.addEventListener('input', function(e) {
+    document.getElementById('phone')?.addEventListener('input', function (e) {
         let input = e.target.value;
         input = input.replace(/\D/g, ''); // Remove non-numeric characters
 
@@ -76,73 +101,8 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Flag to track if the acknowledgment background has been shown
-    let hasAcknowledgmentBeenShown = false;
-
-    // Function to show the acknowledgment background and disable scrolling
-    function showAcknowledgeBackground() {
-        if (hasAcknowledgmentBeenShown) return; // Exit if already shown
-
-        hasAcknowledgmentBeenShown = true; // Set the flag to true
-
-        // Make the background visible immediately
-        if (acknowledgeBackground) acknowledgeBackground.style.display = 'flex';
-
-        // Make the wrap visible immediately
-        if (acknowledgeWrap) {
-            acknowledgeWrap.style.display = 'flex';
-            acknowledgeWrap.classList.add('animate-in');
-        }
-
-        // Disable scrolling
-        document.body.style.overflow = 'hidden';
-    }
-
-    // Function to hide the acknowledgment background and enable scrolling
-    function hideAcknowledgeBackground() {
-        // Start animation for the wrap
-        if (acknowledgeWrap) {
-            acknowledgeWrap.classList.remove('animate-in');
-            acknowledgeWrap.classList.add('animate-out');
-            // Hide the wrap immediately after starting animation
-            acknowledgeWrap.style.display = 'none';
-        }
-
-        // Hide the background immediately
-        if (acknowledgeBackground) acknowledgeBackground.style.display = 'none';
-
-        // Enable scrolling
-        document.body.style.overflow = '';
-    }
-
     // Ensure acknowledgment background is hidden on page load
     if (acknowledgeBackground) acknowledgeBackground.style.display = 'none';
-    if (acknowledgeWrap) acknowledgeWrap.style.display = 'none';
-
-    // Event listener for mouse leaving the viewport
-    document.addEventListener('mouseout', (event) => {
-        // Check if the mouse is leaving the viewport from the top edge
-        if (event.clientY < 0) {
-            showAcknowledgeBackground();
-        }
-    });
-
-    // Add event listener to all buttons with the class "keep-watching"
-    acknowledgeButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (button.dataset.pressed === 'false') {
-                button.dataset.pressed = 'true'; // Update data attribute
-            }
-            hideAcknowledgeBackground();
-        });
-    });
-
-    // Add event listener to the close div
-    if (closeDiv) {
-        closeDiv.addEventListener('click', () => {
-            hideAcknowledgeBackground();
-        });
-    }
 
     // Check for video and locked elements
     if (video) {
