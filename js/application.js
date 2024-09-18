@@ -64,7 +64,6 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: false });
     });
 
-
     // Flag to track if the acknowledgment background has been shown
     let hasAcknowledgmentBeenShown = false;
 
