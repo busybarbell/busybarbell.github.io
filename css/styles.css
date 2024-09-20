@@ -284,7 +284,7 @@ nav {
 }
 
 #header {
-    padding: 0 2% 2rem 2%;
+    padding: 2rem 2%;
 }
 
 .headline {
@@ -321,6 +321,21 @@ nav {
 
 #faq {
     padding: 0 2%;
+}
+
+.timezone {
+    background-color: #313841;
+    padding: .5rem .75rem;
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: .5rem;
+    border-radius: .75rem 0 0 .75rem;
+    overflow: hidden;
 }
 
 footer {
@@ -1102,6 +1117,15 @@ input::placeholder {
     align-items: flex-start;
     justify-content: flex-start;
     gap: .5rem;
+}
+
+.timmy {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
+    gap: .5rem;
+    position: relative;
 }
 
 
