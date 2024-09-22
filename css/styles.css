@@ -14,6 +14,7 @@ select {
     border: none;
     padding: 0;
     font: inherit;
+    z-index: 999;
 }
 
 html {
@@ -1025,6 +1026,9 @@ input::placeholder {
     height: 1rem;
     width: 1rem;
     cursor: pointer;
+    top: 1rem;
+    left: 1rem;
+    position: absolute;
 }
 
 .closecartel {
