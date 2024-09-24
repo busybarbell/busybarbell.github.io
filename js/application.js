@@ -64,101 +64,101 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: false });
     });
 
-// Flag to track if the gift background has been shown
-let hasGiftBeenShown = false;
+    // Flag to track if the gift background has been shown
+    let hasGiftBeenShown = false;
 
-// Function to show the gift background and disable scrolling
-function showGiftBackground() {
-    if (hasGiftBeenShown) return; // Exit if already shown
+    // Function to show the gift background and disable scrolling
+    function showGiftBackground() {
+        if (hasGiftBeenShown) return; // Exit if already shown
 
-    hasGiftBeenShown = true; // Set the flag to true
+        hasGiftBeenShown = true; // Set the flag to true
 
-    // Make the background visible immediately
-    if (giftBackground) {
-        giftBackground.style.display = 'flex';
-        // Use a timeout to allow the display change before applying the visible class
-        setTimeout(() => {
-            giftBackground.classList.add('visible');
-        }, 10); // Small timeout to allow for rendering
+        // Make the background visible immediately
+        if (giftBackground) {
+            giftBackground.style.display = 'flex';
+            // Use a timeout to allow the display change before applying the visible class
+            setTimeout(() => {
+                giftBackground.classList.add('visible');
+            }, 10); // Small timeout to allow for rendering
+        }
+
+        // Make the wrap visible immediately
+        if (giftWrap) {
+            giftWrap.style.display = 'flex';
+            giftWrap.classList.add('animate-in');
+        }
+
+        // Disable scrolling
+        document.body.style.overflow = 'hidden';
     }
 
-    // Make the wrap visible immediately
-    if (giftWrap) {
-        giftWrap.style.display = 'flex';
-        giftWrap.classList.add('animate-in');
+    // Function to hide the gift background and enable scrolling
+    function hideGiftBackground() {
+        // Start animation for the wrap
+        if (giftWrap) {
+            giftWrap.classList.remove('animate-in');
+            giftWrap.classList.add('animate-out');
+
+            // Hide the wrap after the exit animation completes
+            giftWrap.addEventListener('animationend', () => {
+                giftWrap.style.display = 'none';
+            }, { once: true });
+        }
+
+        // Hide the background with a transition
+        if (giftBackground) {
+            giftBackground.classList.remove('visible');
+            // Wait for the opacity transition to finish before hiding
+            giftBackground.addEventListener('transitionend', () => {
+                giftBackground.style.display = 'none';
+            }, { once: true });
+        }
+
+        // Enable scrolling
+        document.body.style.overflow = '';
     }
 
-    // Disable scrolling
-    document.body.style.overflow = 'hidden';
-}
+    // Function to toggle visibility of giftWrap
+    function toggleGiftWrap() {
+        if (giftWrap) {
+            const isVisible = giftWrap.classList.toggle('visible');
+            console.log('giftWrap toggled:', isVisible ? 'visible' : 'hidden');
 
-// Function to hide the gift background and enable scrolling
-function hideGiftBackground() {
-    // Start animation for the wrap
-    if (giftWrap) {
-        giftWrap.classList.remove('animate-in');
-        giftWrap.classList.add('animate-out');
-
-        // Hide the wrap after the exit animation completes
-        giftWrap.addEventListener('animationend', () => {
-            giftWrap.style.display = 'none';
-        }, { once: true });
+            // Enable or disable scrolling based on visibility
+            if (isVisible) {
+                showGiftBackground();
+            } else {
+                hideGiftBackground();
+            }
+        }
     }
 
-    // Hide the background with a transition
-    if (giftBackground) {
-        giftBackground.classList.remove('visible');
-        // Wait for the opacity transition to finish before hiding
-        giftBackground.addEventListener('transitionend', () => {
-            giftBackground.style.display = 'none';
-        }, { once: true });
-    }
+    // Ensure gift background is hidden on page load
+    if (giftBackground) giftBackground.style.display = 'none';
+    if (giftWrap) giftWrap.style.display = 'none';
 
-    // Enable scrolling
-    document.body.style.overflow = '';
-}
-
-// Function to toggle visibility of giftWrap
-function toggleGiftWrap() {
-    if (giftWrap) {
-        const isVisible = giftWrap.classList.toggle('visible');
-        console.log('giftWrap toggled:', isVisible ? 'visible' : 'hidden');
-
-        // Enable or disable scrolling based on visibility
-        if (isVisible) {
+    // Event listener for mouse leaving the viewport
+    document.addEventListener('mouseout', (event) => {
+        // Check if the mouse is leaving the viewport from the top edge
+        if (event.clientY < 0) {
             showGiftBackground();
-        } else {
+        }
+    });
+
+    // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
+    giftButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            if (button.dataset.pressed === 'false') {
+                button.dataset.pressed = 'true'; // Update data attribute
+            }
             hideGiftBackground();
-        }
-    }
-}
+        });
+    });
 
-// Ensure gift background is hidden on page load
-if (giftBackground) giftBackground.style.display = 'none';
-if (giftWrap) giftWrap.style.display = 'none';
-
-// Event listener for mouse leaving the viewport
-document.addEventListener('mouseout', (event) => {
-    // Check if the mouse is leaving the viewport from the top edge
-    if (event.clientY < 0) {
-        showGiftBackground();
-    }
-});
-
-// Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
-giftButtons.forEach(button => {
-    button.addEventListener('click', () => {
-        if (button.dataset.pressed === 'false') {
-            button.dataset.pressed = 'true'; // Update data attribute
-        }
+    // Add event listener to the close div
+    closeDiv.addEventListener('click', () => {
         hideGiftBackground();
     });
-});
-
-// Add event listener to the close div
-closeDiv.addEventListener('click', () => {
-    hideGiftBackground();
-});
 
 
     function handleScroll() {
@@ -449,12 +449,6 @@ closeDiv.addEventListener('click', () => {
         }
     }
 
-    function resetViewport() {
-        const viewportMeta = document.querySelector('meta[name="viewport"]');
-        if (viewportMeta) {
-            viewportMeta.setAttribute('content', 'width=device-width, initial-scale=1.0');
-        }
-    }
 
     // Countdown Timer
     function formatTime(seconds) {
@@ -507,73 +501,19 @@ closeDiv.addEventListener('click', () => {
         });
     }
 
-    // Mobile-specific focus event handler
-    if (isMobile()) {
-        form.addEventListener('focusin', (event) => {
-            // Check if the focused element is an input or textarea
-            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-                // Hide the header and <h2> elements
-                if (header) {
-                    header.style.display = 'none';
-                }
-                const h2Elements = document.querySelectorAll('h2');
-                h2Elements.forEach(h2 => {
-                    h2.style.display = 'none';
-                });
-
-                // Scroll the .asking and #cta into view
-                if (asking && cta) {
-                    // Get the height of the viewport excluding the keyboard
-                    const viewportHeight = window.innerHeight;
-                    // Calculate the required scroll position to keep .asking and #cta visible
-                    const askingRect = asking.getBoundingClientRect();
-                    const ctaRect = cta.getBoundingClientRect();
-
-                    const scrollY = window.scrollY || window.pageYOffset;
-                    const newScrollY = Math.max(
-                        scrollY,
-                        askingRect.top + scrollY - viewportHeight + askingRect.height,
-                        ctaRect.top + scrollY - viewportHeight + ctaRect.height
-                    );
-
-                    window.scrollTo({ top: newScrollY, behavior: 'smooth' });
-                }
-
-                // Adjust the layout when the keyboard is open
-                if (ctaWrap && formStep) {
-                    // Check if the viewport height is reduced, indicating the keyboard is open
-                    const vh = window.innerHeight * 0.01;
-                    document.documentElement.style.setProperty('--vh', `${vh}px`);
-
-                    if (window.innerHeight < document.documentElement.clientHeight) {
-                        // Keyboard is open
-                        ctaWrap.style.paddingTop = '1rem';
-                        ctaWrap.style.paddingBottom = '1rem';
-                        formStep.style.gap = '1rem';
-                    } else {
-                        // Keyboard is closed
-                        ctaWrap.style.paddingTop = '';
-                        ctaWrap.style.paddingBottom = '';
-                        formStep.style.gap = '';
-                    }
-                }
+    form.addEventListener('focusout', (event) => {
+        // Check if the focused element is an input or textarea
+        if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
+            // Show the header and <h2> elements again
+            if (header) {
+                header.style.display = 'flex';
             }
-        });
-
-        form.addEventListener('focusout', (event) => {
-            // Check if the focused element is an input or textarea
-            if (event.target.tagName === 'INPUT' || event.target.tagName === 'TEXTAREA') {
-                // Show the header and <h2> elements again
-                if (header) {
-                    header.style.display = 'flex';
-                }
-                const h2Elements = document.querySelectorAll('h2');
-                h2Elements.forEach(h2 => {
-                    h2.style.display = '';
-                });
-            }
-        });
-    }
+            const h2Elements = document.querySelectorAll('h2');
+            h2Elements.forEach(h2 => {
+                h2.style.display = '';
+            });
+        }
+    });
 
     // Function to handle the visibility of the keyboard divs based on screen width
     function adjustKeyboardVisibility() {
@@ -590,26 +530,26 @@ closeDiv.addEventListener('click', () => {
     // Adjust visibility on page load
     adjustKeyboardVisibility();
 
-    // Adjust visibility on window resize
-    window.addEventListener('resize', adjustKeyboardVisibility);
+// Adjust visibility on window resize
+window.addEventListener('resize', adjustKeyboardVisibility);
 
-    // Handle keyboard input for radio selection
-    document.addEventListener('keydown', function (event) {
-        if (event.key === '1') {
-            document.getElementById('coachable').checked = true;
-        } else if (event.key === '2') {
-            document.getElementById('workout').checked = true;
-        }
-    });
+// Handle keyboard input for radio selection
+document.addEventListener('keydown', function (event) {
+    if (event.key === '1') {
+        document.getElementById('coachable').checked = true;
+    } else if (event.key === '2') {
+        document.getElementById('workout').checked = true;
+    }
+});
 
 
-    // Disable word suggestions and autocorrect on inputs
-    const inputs = form.querySelectorAll('input, textarea');
-    inputs.forEach(input => {
-        input.setAttribute('autocorrect', 'off');
-        input.setAttribute('spellcheck', 'false');
-    });
+// Disable word suggestions and autocorrect on inputs
+const inputs = form.querySelectorAll('input, textarea');
+inputs.forEach(input => {
+    input.setAttribute('autocorrect', 'off');
+    input.setAttribute('spellcheck', 'false');
+});
 
-    // Call this function initially to prevent viewport zoom
-    setViewportZoomPrevent();
+// Call this function initially to prevent viewport zoom
+setViewportZoomPrevent();
 });
