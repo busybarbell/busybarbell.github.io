@@ -744,6 +744,7 @@ button {
     margin-bottom: 4px;
     color: inherit;
     font-weight: 600;
+    z-index: 999;
 }
 
 button:active {
