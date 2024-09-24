@@ -14,7 +14,6 @@ select {
     border: none;
     padding: 0;
     font: inherit;
-    z-index: 999;
 }
 
 html {
@@ -89,6 +88,15 @@ nav {
 }
 
 .pop-nav {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0;
+    gap: 1rem;
+    width: 100%;
+}
+
+.pop-nav2 {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -517,6 +525,10 @@ a {
     display: block;
 }
 
+.wraplogo2 {
+    display: block;
+}
+
 .formlogo {
     display: none;
 }
@@ -927,21 +939,33 @@ input::placeholder {
 }
 
 .acknowledge_background {
-    align-items: flex-start;
-    justify-content: center;
-    display: none;
+    z-index: 1000;
+    opacity: 0; /* Initially invisible */
+    visibility: hidden; /* Ensure it's not visible but still in the layout */
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+    display: flex; /* Ensure flex properties are active */
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
     position: fixed;
     top: 0;
-    bottom: 0;
     left: 0;
     right: 0;
-    z-index: 999;
-    padding-top: 4rem;
-    padding-bottom: 4rem;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    padding: 0 4% 4rem;
+    overflow: auto;
+    gap: 4rem;
     background-color: rgba(0, 0, 0, 0.8);
     -webkit-backdrop-filter: blur(4px);
     backdrop-filter: blur(4px);
     overflow: auto;
+}
+
+.acknowledge_background.visible {
+    opacity: 1; /* Fully visible */
+    visibility: visible; /* Make it visible in the layout */
 }
 
 .acknowledge_wrap {
