@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const fullscreenButton = document.getElementById('fullscreenButton');
     const fullscreenIcon = fullscreenButton?.querySelector('.fullscreen');
     const exitFullscreenIcon = fullscreenButton?.querySelector('.exit-fullscreen');
-    
+
     const acknowledgeButtons = document.querySelectorAll('.keep-watching');
     const closeDiv = document.getElementById('close');
     const acknowledgeBackground = document.querySelector('.acknowledge_background');
@@ -25,7 +25,7 @@ document.addEventListener('DOMContentLoaded', () => {
         firstButton.addEventListener('click', () => {
             window.location.href = 'https://busybarbell.github.io/application';
         });
-    }    
+    }
 
     if (close2Div) {
         close2Div.addEventListener('click', () => {
@@ -33,7 +33,7 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
-    document.getElementById('phone')?.addEventListener('input', function(e) {
+    document.getElementById('phone')?.addEventListener('input', function (e) {
         let input = e.target.value;
         input = input.replace(/\D/g, ''); // Remove non-numeric characters
 
@@ -59,7 +59,13 @@ document.addEventListener('DOMContentLoaded', () => {
         hasAcknowledgmentBeenShown = true; // Set the flag to true
 
         // Make the background visible immediately
-        if (acknowledgeBackground) acknowledgeBackground.style.display = 'flex';
+        if (acknowledgeBackground) {
+            acknowledgeBackground.style.display = 'flex';
+            // Use a timeout to allow the display change before applying the visible class
+            setTimeout(() => {
+                acknowledgeBackground.classList.add('visible');
+            }, 10); // Small timeout to allow for rendering
+        }
 
         // Make the wrap visible immediately
         if (acknowledgeWrap) {
@@ -77,15 +83,39 @@ document.addEventListener('DOMContentLoaded', () => {
         if (acknowledgeWrap) {
             acknowledgeWrap.classList.remove('animate-in');
             acknowledgeWrap.classList.add('animate-out');
-            // Hide the wrap immediately after starting animation
-            acknowledgeWrap.style.display = 'none';
+
+            // Hide the wrap after the exit animation completes
+            acknowledgeWrap.addEventListener('animationend', () => {
+                acknowledgeWrap.style.display = 'none';
+            }, { once: true });
         }
 
-        // Hide the background immediately
-        if (acknowledgeBackground) acknowledgeBackground.style.display = 'none';
+        // Hide the background with a transition
+        if (acknowledgeBackground) {
+            acknowledgeBackground.classList.remove('visible');
+            // Wait for the opacity transition to finish before hiding
+            acknowledgeBackground.addEventListener('transitionend', () => {
+                acknowledgeBackground.style.display = 'none';
+            }, { once: true });
+        }
 
         // Enable scrolling
         document.body.style.overflow = '';
+    }
+
+    // Function to toggle visibility of acknowledgeWrap
+    function toggleAcknowledgeWrap() {
+        if (acknowledgeWrap) {
+            const isVisible = acknowledgeWrap.classList.toggle('visible');
+            console.log('acknowledgeWrap toggled:', isVisible ? 'visible' : 'hidden');
+
+            // Enable or disable scrolling based on visibility
+            if (isVisible) {
+                showAcknowledgeBackground();
+            } else {
+                hideAcknowledgeBackground();
+            }
+        }
     }
 
     // Ensure acknowledgment background is hidden on page load
