@@ -451,7 +451,9 @@ header.scrolled {
     left: auto;
     color: #ffa600;
     display: none;
-    text-wrap: none;
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide any overflow */
+    text-overflow: ellipsis; /* Add ellipsis if text overflows */
 }
 
 .bubble {
