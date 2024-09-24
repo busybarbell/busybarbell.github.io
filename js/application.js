@@ -64,70 +64,102 @@ document.addEventListener('DOMContentLoaded', () => {
         }, { passive: false });
     });
 
-    // Flag to track if the acknowledgment background has been shown
-    let hasAcknowledgmentBeenShown = false;
+// Flag to track if the gift background has been shown
+let hasGiftBeenShown = false;
 
-    // Function to show the acknowledgment background and disable scrolling
-    function showgiftBackground() {
-        if (hasAcknowledgmentBeenShown) return; // Exit if already shown
+// Function to show the gift background and disable scrolling
+function showGiftBackground() {
+    if (hasGiftBeenShown) return; // Exit if already shown
 
-        hasAcknowledgmentBeenShown = true; // Set the flag to true
+    hasGiftBeenShown = true; // Set the flag to true
 
-        // Make the background visible immediately
+    // Make the background visible immediately
+    if (giftBackground) {
         giftBackground.style.display = 'flex';
-
-        // Make the wrap visible immediately
-        giftWrap.style.display = 'flex';
-        giftWrap.classList.add('animate-in');
-
-        // Disable scrolling
-        document.body.style.overflow = 'hidden';
+        // Use a timeout to allow the display change before applying the visible class
+        setTimeout(() => {
+            giftBackground.classList.add('visible');
+        }, 10); // Small timeout to allow for rendering
     }
 
-    // Function to hide the acknowledgment background and enable scrolling
-    function hidegiftBackground(button) {
-        // Start animation for the wrap
+    // Make the wrap visible immediately
+    if (giftWrap) {
+        giftWrap.style.display = 'flex';
+        giftWrap.classList.add('animate-in');
+    }
+
+    // Disable scrolling
+    document.body.style.overflow = 'hidden';
+}
+
+// Function to hide the gift background and enable scrolling
+function hideGiftBackground() {
+    // Start animation for the wrap
+    if (giftWrap) {
         giftWrap.classList.remove('animate-in');
         giftWrap.classList.add('animate-out');
 
-        // Hide the wrap immediately after starting animation
-        giftWrap.style.display = 'none';
-
-        // Hide the background immediately
-        giftBackground.style.display = 'none';
-
-        // Enable scrolling
-        document.body.style.overflow = '';
+        // Hide the wrap after the exit animation completes
+        giftWrap.addEventListener('animationend', () => {
+            giftWrap.style.display = 'none';
+        }, { once: true });
     }
 
-    // Ensure acknowledgment background is hidden on page load
-    document.addEventListener('DOMContentLoaded', () => {
-        giftBackground.style.display = 'none';
-        giftWrap.style.display = 'none';
-    });
+    // Hide the background with a transition
+    if (giftBackground) {
+        giftBackground.classList.remove('visible');
+        // Wait for the opacity transition to finish before hiding
+        giftBackground.addEventListener('transitionend', () => {
+            giftBackground.style.display = 'none';
+        }, { once: true });
+    }
 
-    // Event listener for mouse leaving the viewport
-    document.addEventListener('mouseout', (event) => {
-        // Check if the mouse is leaving the viewport from the top edge
-        if (event.clientY < 0) {
-            showgiftBackground();
+    // Enable scrolling
+    document.body.style.overflow = '';
+}
+
+// Function to toggle visibility of giftWrap
+function toggleGiftWrap() {
+    if (giftWrap) {
+        const isVisible = giftWrap.classList.toggle('visible');
+        console.log('giftWrap toggled:', isVisible ? 'visible' : 'hidden');
+
+        // Enable or disable scrolling based on visibility
+        if (isVisible) {
+            showGiftBackground();
+        } else {
+            hideGiftBackground();
         }
-    });
+    }
+}
 
-    // Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
-    giftButtons.forEach(button => {
-        button.addEventListener('click', () => {
-            if (button.dataset.pressed === 'false') {
-                button.dataset.pressed = 'true'; // Update data attribute
-            }
-            hidegiftBackground(button);
-        });
-    });
+// Ensure gift background is hidden on page load
+if (giftBackground) giftBackground.style.display = 'none';
+if (giftWrap) giftWrap.style.display = 'none';
 
-    // Add event listener to the close div
-    closeDiv.addEventListener('click', () => {
-        hidegiftBackground(closeDiv);
+// Event listener for mouse leaving the viewport
+document.addEventListener('mouseout', (event) => {
+    // Check if the mouse is leaving the viewport from the top edge
+    if (event.clientY < 0) {
+        showGiftBackground();
+    }
+});
+
+// Add event listener to all buttons with the class "button" to hide the acknowledgment and start the expansion
+giftButtons.forEach(button => {
+    button.addEventListener('click', () => {
+        if (button.dataset.pressed === 'false') {
+            button.dataset.pressed = 'true'; // Update data attribute
+        }
+        hideGiftBackground();
     });
+});
+
+// Add event listener to the close div
+closeDiv.addEventListener('click', () => {
+    hideGiftBackground();
+});
+
 
     function handleScroll() {
         if (window.scrollY > 1) { // Change 50 to the desired scroll position threshold
