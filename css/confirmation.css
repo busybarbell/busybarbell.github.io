@@ -45,9 +45,6 @@ select {
     border-radius: .75rem;
     overflow: hidden;
     box-shadow: 0 0 8rem 0 rgba(0, 0, 0, .4);
-    z-index: -1;
-    background-color: black;
-    margin: auto;
 }
 
 #testimonials {
