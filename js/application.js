@@ -314,37 +314,20 @@ document.addEventListener('DOMContentLoaded', () => {
         progressAudio.play();
     }
 
-    // Update navigation buttons
     function updateButtons() {
+        // Disable the Previous button on the first step
         prevButton.disabled = currentStep === 1;
-
-        // Update navigation buttons
-        function updateButtons() {
-            prevButton.disabled = currentStep === 1;
-
-            if (currentStep === steps.length) {
-                // Check if it's step 16
-                if (currentStep === 15) {
-                    nextButton.textContent = 'BOOK YOUR STRATEGY SESSION'; // Update button text for step 16
-                } else if (currentStep === 14) {
-                    nextButton.innerHTML = `
-                <img id="treasure" src="https://i.postimg.cc/CxT0TYB1/treasure.webp" alt="gift" height="24px" style="vertical-align: middle;">
+    
+        // Update Next button text and state based on the current step
+        if (currentStep === 15) {
+            nextButton.textContent = 'BOOK YOUR STRATEGY SESSION'; // Update button text for step 16
+        } else if (currentStep === 14) {
+            nextButton.innerHTML = `CLAIM<img src="https://i.postimg.cc/CxT0TYB1/treasure.webp" alt="gift" height="16px">
             `;
-                } else {
-                    nextButton.textContent = 'CONTINUE'; // Default button text for other steps
-                }
-            } else {
-                nextButton.textContent = 'CONTINUE'; // Default button text for non-final steps
-            }
-
-            // Disable the Next button on the first two steps until typing effect is complete
-            if (currentStep <= 2 && !typingEffectFinished) {
-                nextButton.disabled = true;
-            } else {
-                nextButton.disabled = !isCurrentStepValid();
-            }
+        } else {
+            nextButton.textContent = 'CONTINUE'; // Default button text for other steps
         }
-
+    
         // Disable the Next button on the first two steps until typing effect is complete
         if (currentStep <= 2 && !typingEffectFinished) {
             nextButton.disabled = true;
@@ -352,6 +335,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextButton.disabled = !isCurrentStepValid();
         }
     }
+    
 
     // Check if the current step is valid
     function isCurrentStepValid() {
