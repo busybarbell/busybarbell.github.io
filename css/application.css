@@ -456,34 +456,6 @@ header.scrolled {
     text-overflow: ellipsis; /* Add ellipsis if text overflows */
 }
 
-.bubble {
-    position: absolute;
-    width: 1.5rem;
-    height: 1.5rem;
-    right: 0;
-    bottom: -0.25rem;
-    border: 2px solid #ffa600;
-    border-radius: 50%;
-    pointer-events: none;
-    animation: bubbleAnimation .8s cubic-bezier(0.4, 0, 0.2, 1);
-    transform: translateX(50%);
-    opacity: 0;
-}
-
-@keyframes bubbleAnimation {
-    0% {
-        transform: translateX(50%) scale(0);
-        border-width: 10px;
-        opacity: .8;
-    }
-
-    100% {
-        transform: translateX(50%) scale(2);
-        border-width: 2px;
-        opacity: 0;
-    }
-}
-
 .gift_background {
     z-index: 1000;
     opacity: 0; /* Initially invisible */
