@@ -197,6 +197,24 @@ textarea {
     border-radius: 100px;
 }
 
+.giftor {
+    height: auto;
+    width: 50%;
+}
+
+.diddy {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+    padding-bottom: 2rem;
+    max-width: 40rem;
+    margin: auto;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
 .step {
     flex: 1;
     text-align: center;
