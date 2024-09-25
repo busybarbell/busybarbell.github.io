@@ -317,6 +317,10 @@ button {
     margin-bottom: 4px;
     color: inherit;
     font-weight: 600;
+    display: flex;
+    gap: .5rem;
+    align-items: center;
+    justify-content: center;
 }
 
 button:active {
