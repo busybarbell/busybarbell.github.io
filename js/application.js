@@ -256,17 +256,17 @@ document.addEventListener('DOMContentLoaded', () => {
                             step6Visited = true; // Mark step 6 as visited
                         }
                     }
-                } else if (step === 9) {
+                } else if (step === 7) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Doing great!'; // Motivation text for step 10
                     }
-                } else if (step === 12) {
+                } else if (step === 10) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Almost done!'; // Motivation text for step 14
                     }
-                } else if (step === 14) {
+                } else if (step === 13) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Last step!'; // Motivation text for step 19
@@ -324,9 +324,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (currentStep === steps.length) {
                 // Check if it's step 16
-                if (currentStep === 16) {
+                if (currentStep === 15) {
                     nextButton.textContent = 'BOOK YOUR STRATEGY SESSION'; // Update button text for step 16
-                } else if (currentStep === 15) {
+                } else if (currentStep === 14) {
                     nextButton.innerHTML = `
                 <img id="treasure" src="https://i.postimg.cc/CxT0TYB1/treasure.webp" alt="gift" height="24px" style="vertical-align: middle;">
             `;
@@ -382,8 +382,8 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // If current step is 16, redirect to booking page
-            if (currentStep === 16) {
-                window.location.href = 'https://busybarbell.github.io/booking-page';
+            if (currentStep === 15) {
+                window.location.href = 'https://busybarbell.com/booking';
                 return; // Exit the function to prevent further code execution
             }
 
