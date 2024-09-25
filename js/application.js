@@ -308,40 +308,10 @@ document.addEventListener('DOMContentLoaded', () => {
         // Set the progress bar width
         innerBar.style.width = `${progress}%`;
 
-        // Create a bubble effect at the end of the progress bar if moving forward
-        if (isForwardMove) {
-            createBubble();
-        }
-
         // Play sound when the inner bar grows
         progressAudio.pause(); // Ensure audio is paused before setting it to start from the beginning
         progressAudio.currentTime = 0;
         progressAudio.play();
-    }
-
-    // Create a bubble animation at the end of the progress bar
-    function createBubble() {
-        // Remove any existing bubbles
-        const existingBubbles = innerBar.querySelectorAll('.bubble');
-        existingBubbles.forEach(bubble => bubble.remove());
-
-        const bubble = document.createElement('div');
-        bubble.className = 'bubble';
-
-        // Set the bubble's border color to match the inner bar's background color
-        const innerBarColor = getComputedStyle(innerBar).backgroundColor;
-        bubble.style.borderColor = innerBarColor;
-
-        // Position the bubble at the end of the progress bar
-        bubble.style.right = `0`;
-        bubble.style.transform = `translateX(50%)`; // Center the bubble at the edge
-
-        innerBar.appendChild(bubble);
-
-        // Remove the bubble after animation to keep the DOM clean
-        bubble.addEventListener('animationend', () => {
-            bubble.remove();
-        });
     }
 
     // Update navigation buttons
