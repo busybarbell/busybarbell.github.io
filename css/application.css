@@ -78,7 +78,18 @@ p {
     color: #afafaf;
 }
 
-input,
+input {
+    padding: .5rem .75rem;
+    border-radius: .75rem;
+    border: 2px solid #313841;
+    background-color: rgba(51, 71, 80, .2);
+    color: white;
+    font-size: 1.25rem;
+    width: 100%;
+    max-width: 40rem;
+    margin: auto 0;
+}
+
 textarea {
     padding: .5rem .75rem;
     border-radius: .75rem;
@@ -94,7 +105,7 @@ textarea {
 
 input::placeholder,
 textarea::placeholder {
-    color: #313841;
+    color: #afafaf;
     font-size: 1.25rem;
 }
 
