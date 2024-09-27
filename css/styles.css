@@ -109,7 +109,6 @@ nav {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #ffa600;
 }
 
 .proof {
@@ -689,7 +688,7 @@ a {
 
 
 .inline_image {
-    border-radius: .75rem;
+    border-radius: .5rem;
 }
 
 .inline_button_last {
