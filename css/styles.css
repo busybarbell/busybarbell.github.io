@@ -922,7 +922,7 @@ input::placeholder {
     height: 100%;
     padding: 0 4% 4rem;
     overflow: auto;
-    gap: 4rem;
+    gap: 6rem;
     background: rgba(0, 42, 51, 1);
     background: -moz-linear-gradient(165deg, rgba(0, 42, 51, 1) 0%, rgba(2, 2, 24, 1) 35%, rgba(0, 0, 7, 1) 100%);
     background: -webkit-linear-gradient(165deg, rgba(0, 42, 51, 1) 0%, rgba(2, 2, 24, 1) 35%, rgba(0, 0, 7, 1) 100%);
@@ -1552,7 +1552,7 @@ input::placeholder {
     }
 
     .happier {
-        padding: 4rem 0;
+        padding: 9.5rem 0 4rem;
         min-height: 100dvh;
         border-left: 0;
     }
