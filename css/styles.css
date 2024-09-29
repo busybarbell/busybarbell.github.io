@@ -308,6 +308,14 @@ nav {
     gap: 1rem;
 }
 
+.headline2 {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+    gap: 1rem;
+}
+
 .big {
     text-align: center;
     text-transform: uppercase;
@@ -782,6 +790,14 @@ button:active {
     align-items: center;
     justify-content: center;
     z-index: 500;
+}
+
+.hadukie {
+    display: none;
+}
+
+.hadukie2 {
+    display: flex;
 }
 
 .scarcity {
@@ -1484,6 +1500,14 @@ input::placeholder {
 
     header {
         padding: 0 4%;
+    }
+
+    .hadukie {
+        display: flex;
+    }
+
+    .hadukie2 {
+        display: none;
     }
 
     #title {
