@@ -68,6 +68,8 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Show the current step
     function showStep(step) {
+        currentStep = step;  // Make sure currentStep is updated
+
         steps.forEach((stepDiv) => {
             const isActive = stepDiv.dataset.step == step;
 
@@ -113,7 +115,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Almost done!'; // Motivation text for step 14
                     }
-                } else if (step === 13) {
+                } else if (step === 14) {
                     if (motivation) {
                         motivation.style.display = 'block'; // Show motivation element
                         motivation.textContent = 'Last step!'; // Motivation text for step 19
@@ -129,14 +131,12 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Hide or show header based on the current step
+        // Hide or show header based on the updated current step
         if (header) {
-            if (currentStep <= 2) {
-                header.style.display = 'none'; // Hide header for the first two steps
-            } else if (currentStep > 14) {
-                header.style.display = 'none'; // Hide header for steps greater than 14
+            if (currentStep === 1 || currentStep === 15 || currentStep === 16) {
+                header.style.display = 'none'; // Hide header on steps 1, 15, and 16
             } else {
-                header.style.display = 'flex'; // Show header from the third step up to step 14
+                header.style.display = 'flex'; // Show header on all other steps
             }
         }
 
@@ -146,7 +146,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Update the progress bar
     function updateProgressBar() {
-        const totalSteps = 14; // Total number of steps
+        const totalSteps = 15; // Total number of steps
         const stepsCompleted = currentStep - 1; // Steps completed before the current step
 
         // Calculate the progress excluding the initial fill
@@ -164,17 +164,17 @@ document.addEventListener('DOMContentLoaded', () => {
     function updateButtons() {
         // Disable the Previous button on the first step
         prevButton.disabled = currentStep === 1;
-    
+
         // Update Next button text and state based on the current step
-        if (currentStep === 15) {
+        if (currentStep === 16) {
             nextButton.textContent = 'BOOK YOUR STRATEGY SESSION'; // Update button text for step 16
-        } else if (currentStep === 14) {
+        } else if (currentStep === 15) {
             nextButton.innerHTML = `CLAIM<img src="https://i.postimg.cc/CxT0TYB1/treasure.webp" alt="gift" height="16px">
             `;
         } else {
             nextButton.textContent = 'CONTINUE'; // Default button text for other steps
         }
-    
+
         // Disable the Next button on the first two steps until typing effect is complete
         if (currentStep <= 2 && !typingEffectFinished) {
             nextButton.disabled = true;
@@ -182,7 +182,7 @@ document.addEventListener('DOMContentLoaded', () => {
             nextButton.disabled = !isCurrentStepValid();
         }
     }
-    
+
 
     // Check if the current step is valid
     function isCurrentStepValid() {
@@ -213,7 +213,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
 
             // If current step is 16, redirect to booking page
-            if (currentStep === 15) {
+            if (currentStep === 16) {
                 window.location.href = 'https://busybarbell.com/booking';
                 return; // Exit the function to prevent further code execution
             }
@@ -293,26 +293,26 @@ document.addEventListener('DOMContentLoaded', () => {
     // Adjust visibility on page load
     adjustKeyboardVisibility();
 
-// Adjust visibility on window resize
-window.addEventListener('resize', adjustKeyboardVisibility);
+    // Adjust visibility on window resize
+    window.addEventListener('resize', adjustKeyboardVisibility);
 
-// Handle keyboard input for radio selection
-document.addEventListener('keydown', function (event) {
-    if (event.key === '1') {
-        document.getElementById('coachable').checked = true;
-    } else if (event.key === '2') {
-        document.getElementById('workout').checked = true;
-    }
-});
+    // Handle keyboard input for radio selection
+    document.addEventListener('keydown', function (event) {
+        if (event.key === '1') {
+            document.getElementById('coachable').checked = true;
+        } else if (event.key === '2') {
+            document.getElementById('workout').checked = true;
+        }
+    });
 
 
-// Disable word suggestions and autocorrect on inputs
-const inputs = form.querySelectorAll('input, textarea');
-inputs.forEach(input => {
-    input.setAttribute('autocorrect', 'off');
-    input.setAttribute('spellcheck', 'false');
-});
+    // Disable word suggestions and autocorrect on inputs
+    const inputs = form.querySelectorAll('input, textarea');
+    inputs.forEach(input => {
+        input.setAttribute('autocorrect', 'off');
+        input.setAttribute('spellcheck', 'false');
+    });
 
-// Call this function initially to prevent viewport zoom
-setViewportZoomPrevent();
+    // Call this function initially to prevent viewport zoom
+    setViewportZoomPrevent();
 });
