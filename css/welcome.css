@@ -1280,6 +1280,10 @@ input::placeholder {
     height: 1.5rem;
 }
 
+.harp {
+    display: none;
+}
+
 @media (min-width: 1440px) {
     h1 {
         font-size: 3rem;
@@ -1388,6 +1392,10 @@ input::placeholder {
         display: none;
     }
 
+    .harp {
+        display: block;
+    }
+
     .video-wrap {
         height: 26rem;
     }
@@ -1427,6 +1435,10 @@ input::placeholder {
 
     .herp {
         display: none;
+    }
+
+    .harp {
+        display: block;
     }
 
     .divide {
@@ -1549,6 +1561,10 @@ input::placeholder {
 
     .herp {
         display: none;
+    }
+
+    .harp {
+        display: block;
     }
 
     .divide {
