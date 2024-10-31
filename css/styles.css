@@ -254,6 +254,27 @@ nav {
     margin: auto;
 }
 
+button:active {
+    box-shadow: none;
+    transform: translateY(4px);
+}
+
+button:disabled {
+    background-color: #313841;
+    box-shadow: 0 0 0;
+    letter-spacing: 0.025rem;
+    cursor: pointer;
+    margin-bottom: 4px;
+    transform: translateY(4px);
+    color: #afafaf;
+    pointer-events: none;
+}
+
+button:not(:disabled) {
+    background: #006FFA;
+    color: white;
+}
+
 .button-under {
     width: 100%;
     display: flex;
