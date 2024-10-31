@@ -438,7 +438,7 @@ header.scrolled {
 .box {
     border: 2px solid #313841;
     border-radius: .75rem;
-    padding: .5rem .75rem;
+    padding: 1rem;
     position: relative;
     gap: 1rem;
     display: flex;
