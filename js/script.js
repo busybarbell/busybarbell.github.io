@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const button = document.getElementById('first-button');
 
     video.addEventListener('timeupdate', function() {
-        if (video.currentTime >= 241.8) { // 4 minutes and 1 second
+        if (video.currentTime >= 10.8) { // 4 minutes and 1 second
             button.disabled = false; // Enable the button
         }
     });
