@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
     // Enable the button when the video reaches the specified time
     video.addEventListener('timeupdate', function() {
-        if (video.currentTime >= 241.8) { // 4 minutes and 1 second
+        if (video.currentTime >= 11.8) { // 4 minutes and 1 second
             button.disabled = false; // Enable the button
         }
     });
