@@ -6,7 +6,7 @@ document.addEventListener('DOMContentLoaded', function() {
         id: "odeh9l3bfv",
         onReady: function(video) {
             video.bind("timechange", function(t) {
-                if (t >= 241.8) {
+                if (t >= 30) {
                     button.disabled = false;
                 }
             });
