@@ -1,20 +1,19 @@
 document.addEventListener('DOMContentLoaded', function() {
-    const video = document.getElementById('myVideo');
     const button = document.getElementById('first-button');
+    
+    window._wq = window._wq || [];
+    _wq.push({ 
+        id: "odeh9l3bfv",
+        onReady: function(video) {
+            video.bind("timechange", function(t) {
+                if (t >= 241.8) {
+                    button.disabled = false;
+                }
+            });
 
-    // Enable the button when the video reaches the specified time
-    video.addEventListener('timeupdate', function() {
-        if (video.currentTime >= 11.8) { // 4 minutes and 1 second
-            button.disabled = false; // Enable the button
+            button.addEventListener('click', function() {
+                console.log("Button clicked!");
+            });
         }
-    });
-
-    // Add a click event listener to the button without navigating to the booking page
-    button.addEventListener('click', function() {
-        // Remove the line that redirects to the booking page
-        // window.location.href = 'https://busybarbell.com/booking';
-        
-        // Optional: You can add other functionalities here, e.g., show a message or trigger another action
-        console.log("Button clicked!"); // Placeholder action
     });
 });
