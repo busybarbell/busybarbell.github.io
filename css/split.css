@@ -31,6 +31,7 @@ body {
 .eyebrow {
     font-weight: 600;
     z-index: 999;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 h1 {
@@ -41,7 +42,7 @@ h1 {
     font-family: 'Podium', system-ui, sans-serif;
     font-weight: 700;
     z-index: 999;
-    text-shadow: 0 0 4px black;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 h2 {
@@ -51,6 +52,7 @@ h2 {
     letter-spacing: .03125rem;
     font-family: system-ui, sans-serif;
     z-index: 999;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 p {
@@ -58,6 +60,7 @@ p {
     cursor: default;
     font-family: system-ui, sans-serif;
     z-index: 999;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 form {
@@ -83,7 +86,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1rem 0 0;
     gap: 1rem;
     width: 100%;
     margin: auto;
