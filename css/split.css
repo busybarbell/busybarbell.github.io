@@ -768,6 +768,31 @@ a {
     display: flex;
 }
 
+.lips {
+    /* Retain existing styles */
+    -webkit-text-size-adjust: 100%;
+    --royal-blue: #0275fa;
+    --medium-turquoise: #07cfc1;
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-family: Inter, sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    justify-content: center;
+    background-image: radial-gradient(circle, #019cfd, #0b68cf 33%, rgba(0, 107, 255, 0));
+    align-items: center;
+    overflow: hidden;
+
+    /* Adjust line styling */
+    width: 2px;           /* Make the line thin */
+    height: 10rem;        /* Set the height to 10rem */
+    background-color: #0275fa; /* Use a solid color to make the line visible */
+    margin: 2rem auto;       /* Center the line horizontally */
+    border-radius: 100px;
+}
+
 .yupe{
     width: 100%;
     overflow: hidden;
