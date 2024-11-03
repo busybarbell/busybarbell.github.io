@@ -18,6 +18,8 @@ select {
 
 html {
     font-size: 100%;
+    text-align: center;
+
 }
 
 body {
@@ -29,6 +31,7 @@ body {
 .eyebrow {
     font-weight: 600;
     z-index: 999;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 h1 {
@@ -39,6 +42,7 @@ h1 {
     font-family: 'Podium', system-ui, sans-serif;
     font-weight: 700;
     z-index: 999;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 h2 {
@@ -48,6 +52,7 @@ h2 {
     letter-spacing: .03125rem;
     font-family: system-ui, sans-serif;
     z-index: 999;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 p {
@@ -55,6 +60,7 @@ p {
     cursor: default;
     font-family: system-ui, sans-serif;
     z-index: 999;
+    text-shadow: 0 0 4px rgba(0, 0, 0, .6);
 }
 
 form {
@@ -78,13 +84,12 @@ main {
 
 nav {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     align-items: center;
-    padding: 1rem 0;
+    padding: 1rem 0 0;
     gap: 1rem;
     width: 100%;
     margin: auto;
-    max-width: 60rem;
 }
 
 .pop-nav {
@@ -276,7 +281,6 @@ button:not(:disabled) {
 }
 
 .button-under {
-    width: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -325,15 +329,17 @@ button:not(:disabled) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     gap: 1rem;
 }
 
 .headline2 {
+    max-width: 40rem;
     display: flex;
+    margin: auto;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: flex-start;
+    justify-content: center;
+    align-items: center;
     gap: 1rem;
 }
 
@@ -386,7 +392,7 @@ footer {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 2rem;
     margin: auto;
     max-width: 60rem;
@@ -741,11 +747,76 @@ a {
     margin: auto;
 }
 
+.line{
+    -webkit-text-size-adjust: 100%;
+    --royal-blue: #0275fa;
+    --medium-turquoise: #07cfc1;
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-family: Inter, sans-serif;
+    box-sizing: border-box;
+    padding: 100px 5vw;
+    position: relative;
+    justify-content: center;
+    background-image: radial-gradient(circle, #019cfd, #0b68cf 33%, rgba(0, 107, 255, 0));
+    flex-direction: column;
+    align-items: center;
+    margin-top: 0;
+    margin-bottom: 0;
+    padding-top: 1px;
+    padding-bottom: 1px;
+    overflow: hidden;
+    width: 100%;
+    max-width: 100%;
+    display: flex;
+}
+
+.lips {
+    /* Retain existing styles */
+    -webkit-text-size-adjust: 100%;
+    --royal-blue: #0275fa;
+    --medium-turquoise: #07cfc1;
+    font-size: 14px;
+    line-height: 20px;
+    -webkit-font-smoothing: antialiased;
+    color: #fff;
+    font-family: Inter, sans-serif;
+    box-sizing: border-box;
+    position: relative;
+    justify-content: center;
+    background-image: radial-gradient(circle, #019cfd, #0b68cf 33%, rgba(0, 107, 255, 0));
+    align-items: center;
+    overflow: hidden;
+
+    /* Adjust line styling */
+    width: 2px;           /* Make the line thin */
+    height: 10rem;        /* Set the height to 10rem */
+    background-color: #0275fa; /* Use a solid color to make the line visible */
+    margin: 2rem auto;       /* Center the line horizontally */
+    border-radius: 100px;
+}
+
+.yupe{
+    width: 100%;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    z-index: -1;
+}
+
+.grady{
+    opacity: 80%;
+}
+
 .cta-wrap {
     max-width: 60rem;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
     gap: 2rem;
     padding: 2rem 0;
     margin: auto;
