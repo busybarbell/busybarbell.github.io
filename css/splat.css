@@ -79,10 +79,6 @@ header {
     border-bottom: 2px solid #313841;
 }
 
-main {
-    padding: 4rem 0;
-}
-
 nav {
     display: flex;
     justify-content: center;
@@ -134,6 +130,7 @@ nav {
     border-radius: .75rem;
     overflow: hidden;
     box-shadow: 0 0 8rem 0 rgba(0, 0, 0, .4);
+    margin: auto;
 }
 
 .controls {
@@ -320,8 +317,12 @@ button:not(:disabled) {
     color: #ff0000;
 }
 
-#header {
+.header {
     padding: 2rem 2%;
+}
+
+.headyy {
+    padding: 0 2%;
 }
 
 .headline {
@@ -330,7 +331,7 @@ button:not(:disabled) {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    align-items: center;
+    align-items: flex-start;
     gap: 1rem;
 }
 
@@ -1430,10 +1431,6 @@ input::placeholder {
 }
 
 @media (max-width: 60rem) {
-    .video-wrap {
-        border-radius: 0rem;
-        overflow: hidden;
-    }
 
     .play {
         padding: 1.5rem 3rem 1.5rem 3rem;
@@ -1529,8 +1526,12 @@ input::placeholder {
         padding: 0 4%;
     }
 
-    #header {
+    .header {
         padding: 2rem 4%;
+    }
+
+    .headyy {
+        padding: 0 4%;
     }
 
     .acknowledge_wrap {
@@ -1646,8 +1647,14 @@ input::placeholder {
         padding: 0 4%;
     }
 
-    #header {
+    .header {
         padding: 2rem 4%;
+    }
+
+    .headyy {
+        padding: 0 4%;
+        max-width: 60rem;
+        margin: auto;
     }
 
     .acknowledge_wrap {
