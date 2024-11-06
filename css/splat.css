@@ -76,6 +76,7 @@ header {
     left: 0;
     right: 0;
     z-index: 450;
+    border-bottom: 2px solid #313841;
 }
 
 main {
@@ -86,7 +87,7 @@ nav {
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 1rem 0 0;
+    padding: 1rem 0;
     gap: 1rem;
     width: 100%;
     margin: auto;
@@ -334,15 +335,16 @@ button:not(:disabled) {
 }
 
 .headline2 {
+    max-width: 45rem;
     display: flex;
+    margin: auto;
     flex-direction: column;
-    justify-content: flex-start;
+    justify-content: center;
     align-items: flex-start;
     gap: 1rem;
 }
 
 .big {
-    text-align: center;
     text-transform: uppercase;
 }
 
