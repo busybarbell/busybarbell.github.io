@@ -354,7 +354,6 @@ button:not(:disabled) {
 }
 
 .headline {
-    max-width: 50rem;
     margin: auto;
     display: flex;
     flex-direction: column;
