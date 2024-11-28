@@ -1,0 +1,45 @@
+/* Minified CSS without fixed or sticky button updates */
+
+/* Reset and Basic Styles */
+*{margin:0;padding:0;box-sizing:border-box}body{font-family:'Inter',sans-serif;color:#333;background-color:#fff}.container{width:90%;max-width:1200px;margin:0 auto}
+
+/* Header Styles */
+header{background-color:#222}header .container{display:flex;align-items:center;justify-content:space-between;padding:20px 0}.logo{max-width:100px}nav .nav-button{background-color:#006ffa;color:#fff;padding:10px 20px;font-size:1em;font-weight:500;text-decoration:none;border-radius:5px}nav .nav-button:hover{background-color:#0051bf}
+
+/* Main Content Styles */
+main{text-align:center;padding:50px 0}
+
+/* Pre-Headline */
+.preheadline{font-size:1.5em;color:#333;margin-bottom:10px;font-weight:normal}
+
+/* Headline */
+h1{font-size:3.5em;font-weight:800;margin:0 auto 20px auto;line-height:1.2;max-width:800px}
+
+/* Subheadline */
+.subheadline{font-size:2em;margin:0 auto 30px auto;padding:0 20px;max-width:800px;font-weight:500}
+
+/* CTA Button */
+.cta-button{display:inline-block;background-color:#006ffa;color:#fff;padding:20px 40px;font-size:1.5em;font-weight:500;text-decoration:none;border-radius:5px;margin-bottom:40px;white-space:nowrap}.cta-button:hover{background-color:#0051bf}
+
+/* Small Text Under Second CTA Button */
+.small-text{font-size:0.9em;color:#666;margin-top:5px;text-align:center}
+
+/* Features and Benefits */
+.features{display:flex;justify-content:center;align-items:center;margin-bottom:40px}.feature-item{display:flex;align-items:center;margin:0 20px}.checkmark-circle{width:1.2em;height:1.2em;margin-right:8px;display:flex;align-items:center;justify-content:center}.feature-item p{font-size:1.2em;margin:0;font-weight:500}
+
+/* Video Section Styles */
+.video-section{position:relative;max-width:1100px;margin:0 auto 40px}.video-explanation{background-color:#006ffa;color:#fff;padding:10px;font-size:1.2em;font-weight:500;display:flex;align-items:center;justify-content:center}.video-explanation .play-icon{width:1.2em;height:1.2em;margin-right:8px;display:flex;align-items:center;justify-content:center}.video-text.mobile-text{display:none}.video-container{position:relative;padding-bottom:56.25%;height:0;overflow:hidden}.video-container iframe{position:absolute;top:0;left:0;width:100%;height:100%}
+
+/* Footer Styles */
+footer{background-color:#f8f8f8;padding:20px 0;margin-top:50px;text-align:center}footer p{margin-bottom:10px}footer a{color:#333;text-decoration:none;margin:0 5px}footer a:hover{text-decoration:underline}
+
+/* Responsive Styles */
+@media screen and (max-width:992px){.features{display:none}}@media screen and (max-width:768px){.container{width:95%}header .container{flex-direction:row;align-items:center;justify-content:space-between}.logo{max-width:80px}.preheadline{font-size:1.2em;padding:0 10px;font-weight:normal}h1{font-size:2.2em;padding:0 10px;max-width:100%}.subheadline{font-size:1.4em;padding:0 10px;max-width:100%;font-weight:500}.cta-button{font-size:1.2em;padding:12px 24px;font-weight:500;white-space:normal}.video-section{max-width:100%}.video-explanation{font-size:1em;padding:8px;font-weight:500}.video-explanation .play-icon{width:1em;height:1em}.video-explanation .video-text.desktop-text{display:none}.video-explanation .video-text.mobile-text{display:inline}}
+
+/* New CSS for Added Sections */
+.benefits{margin-bottom:40px}.benefits h2{font-size:2em;margin-bottom:20px;font-weight:500}.benefits ul{list-style-type:none;padding:0}.benefits ul li{font-size:1.2em;margin-bottom:10px;position:relative;padding-left:25px}.benefits ul li::before{content:'✔';color:#006ffa;position:absolute;left:0;top:0}.testimonials{background-color:#f9f9f9;padding:40px 20px;margin-bottom:40px}.testimonials h2{font-size:2em;margin-bottom:20px;font-weight:500}.testimonial-item{margin-bottom:20px}.testimonial-item p{font-size:1.2em;line-height:1.5}.urgency{background-color:#ffe6e6;color:#cc0000;padding:15px;margin-bottom:40px;font-size:1.2em;font-weight:bold}.faq{margin-bottom:40px;text-align:left;max-width:800px;margin-left:auto;margin-right:auto}.faq h2{font-size:2em;margin-bottom:20px;font-weight:500;text-align:center}.faq-item{margin-bottom:15px;border-bottom:1px solid #ddd}.faq-checkbox{display:none}.faq-item .question{font-weight:500;font-size:1.2em;display:block;padding:10px 0;cursor:pointer;position:relative}.faq-item .question::after{content:'+';position:absolute;right:0;font-size:1.2em}.faq-checkbox:checked + .question::after{content:'-'} .answer{max-height:0;overflow:hidden;transition:max-height 0.3s ease} .faq-checkbox:checked ~ .answer{max-height:500px;padding:10px 0} .faq-item .answer p{margin:0;font-size:1.1em;line-height:1.5}.contact-info{margin-bottom:40px}.contact-info p{font-size:1.2em}
+
+/* Responsive Styles for New Sections */
+@media screen and (max-width:768px){.benefits h2,.testimonials h2,.faq h2{font-size:1.6em}.benefits ul li,.testimonial-item p,.faq-item .question,.faq-item .answer p,.contact-info p{font-size:1em}}@media screen and (max-width:480px){.cta-button{font-size:1.1em;padding:10px 20px}}
+
+/* Removed Fixed CTA Button and Sticky Navigation Styles */
