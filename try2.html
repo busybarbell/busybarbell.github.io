@@ -15,7 +15,8 @@
     <!-- Preload critical CSS -->
     <link rel="preload" href="css/try2.css" as="style">
     <!-- Link to your CSS file -->
-    <link rel="stylesheet" href="css/try2.css">
+    <link rel="stylesheet" href="css/try2.css" media="print" onload="this.media='all'">
+    <noscript><link rel="stylesheet" href="css/try2.css"></noscript>
 
     <!-- Google Fonts - Using a single request for optimal performance -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;800&display=swap" rel="stylesheet">
@@ -29,25 +30,41 @@
         <div class="container">
             <img src="https://i.postimg.cc/gj46Pbbv/logo.webp" alt="Busy Barbell" class="logo" width="100" height="auto" loading="lazy">
             <nav>
-                <a href="https://cal.com/busy-barbell/30min" class="nav-button">Claim Now</a>
+                <a href="https://cal.com/busy-barbell/30min" class="nav-button">Reserve Your Free Session</a>
             </nav>
         </div>
     </header>
+
+    <!-- Scarcity (Urgency) Section -->
+    <div class="urgency">
+        <p>
+            <span class="urgency-text desktop-text">Special Offer: Price Will Raise After 3 Clients! Reserve Your Spot Now!</span>
+            <span class="urgency-text mobile-text">Price Raises After 3 Clients! Reserve Now!</span>
+        </p>
+    </div>
 
     <!-- Main Content -->
     <main>
         <div class="container">
             <!-- Pre-Headline -->
-            <p class="preheadline">Attention Busy Professionals!</p>
+            <p class="preheadline">Busy Professionals: Ready to Enhance Your Fitness?</p>
 
             <!-- Headline -->
-            <h1>Transform Your Body in Just 6 Weeks!</h1>
+            <h1>Start Your Body Transformation in Just 6 Weeks</h1>
 
             <!-- Subheadline -->
-            <p class="subheadline">Discover the Proven System to Achieve Your Fitness Goals Without Wasting Time</p>
+            <p class="subheadline">Join a Structured Program Designed to Help You Achieve Your Fitness Goals Efficiently</p>
 
             <!-- Call-to-Action Button -->
-            <a href="https://cal.com/busy-barbell/30min" class="cta-button">Claim Your Free Strategy Session Now&nbsp;&raquo;</a>
+            <a href="https://cal.com/busy-barbell/30min" class="cta-button">Reserve Your Free Strategy Session Today&nbsp;&raquo;</a>
+
+            <!-- Risk Reversal Section -->
+            <div class="risk-reversal">
+                <p>
+                    <span class="risk-reversal-text desktop-text">Not sure if it's right for you? Our free strategy session comes with no obligation to continue. We’re here to help you make an informed decision about your fitness journey.</span>
+                    <span class="risk-reversal-text mobile-text">Not sure? Our free session has no obligation. Let us help you decide.</span>
+                </p>
+            </div>
 
             <!-- Features and Benefits -->
             <div class="features">
@@ -59,7 +76,7 @@
                             <path d="M4 8l2 2 6-6" stroke="#fff" stroke-width="2" fill="none"/>
                         </svg>
                     </div>
-                    <p>Customized Workout Plans</p>
+                    <p>Tailored Workouts</p>
                 </div>
                 <div class="feature-item">
                     <div class="checkmark-circle">
@@ -68,7 +85,7 @@
                             <path d="M4 8l2 2 6-6" stroke="#fff" stroke-width="2" fill="none"/>
                         </svg>
                     </div>
-                    <p>Nutritional Guidance</p>
+                    <p>Personalized Nutrition</p>
                 </div>
                 <div class="feature-item">
                     <div class="checkmark-circle">
@@ -77,13 +94,13 @@
                             <path d="M4 8l2 2 6-6" stroke="#fff" stroke-width="2" fill="none"/>
                         </svg>
                     </div>
-                    <p>24/7 Support</p>
+                    <p>Continuous Support</p>
                 </div>
             </div>
 
             <!-- Video Section -->
             <div class="video-section">
-                <!-- "Discover How" Text -->
+                <!-- "Watch the Video Below" Text -->
                 <div class="video-explanation">
                     <div class="play-icon">
                         <!-- Inline SVG -->
@@ -92,80 +109,76 @@
                             <polygon points="6,4 12,8 6,12" fill="#006ffa"/>
                         </svg>
                     </div>
-                    <span class="video-text desktop-text">Learn More In The Video Below And Sign Up For Free Today!</span>
-                    <span class="video-text mobile-text">Discover How In The Video Below</span>
+                    <span class="video-text desktop-text">Watch the Video Below to Learn More About Our Program and How It Can Fit Your Life</span>
+                    <span class="video-text mobile-text">See How Our Program Can Fit Your Life</span>
                 </div>
 
                 <!-- Embedded Video -->
                 <div class="video-container">
-                    <!-- Added lazy loading to iframe -->
                     <iframe src="https://www.loom.com/embed/5ea5e98bb4f44496b875fa2e95017d00" frameborder="0" allowfullscreen loading="lazy"></iframe>
                 </div>
             </div>
 
             <!-- Trust Indicators -->
             <div class="trust-indicators">
-                <!-- You can include logos or testimonials here -->
+                <!-- Example Trust Logos -->
+                <img src="https://i.postimg.cc/xyz/logo1.png" alt="Trusted by Professionals" loading="lazy">
+                <img src="https://i.postimg.cc/xyz/logo2.png" alt="Featured in Health Magazine" loading="lazy">
+                <!-- Add more logos as needed -->
             </div>
-
-            <!-- Below-the-Fold Content Starts Here -->
 
             <!-- Benefits Section -->
             <div class="benefits">
-                <h2>Unlock Your Potential With:</h2>
+                <h2>What You’ll Gain from Our Program:</h2>
                 <ul>
-                    <li>Personalized workout plans that fit your busy schedule</li>
-                    <li>Nutrition guides that simplify healthy eating</li>
-                    <li>Support from a community of like-minded professionals</li>
+                    <li>Custom Workouts</li>
+                    <li>Balanced Nutrition</li>
+                    <li>Community Support</li>
                 </ul>
             </div>
 
             <!-- Testimonials Section -->
             <div class="testimonials">
-                <h2>What Our Clients Are Saying</h2>
+                <h2>Hear from Our Clients</h2>
                 <div class="testimonial-item">
-                    <p>"This program changed my life! I lost 20 pounds in 6 weeks without sacrificing my busy schedule."</p>
+                    <p>"This program helped me incorporate fitness into my busy life without overwhelming me. I feel healthier and more energized."</p>
                     <p><strong>- John D.</strong></p>
                 </div>
                 <div class="testimonial-item">
-                    <p>"I've never felt better. The personalized plan fit perfectly into my hectic work life."</p>
+                    <p>"The personalized plans made it easy to stay on track, even with my hectic work schedule."</p>
                     <p><strong>- Sarah K.</strong></p>
                 </div>
-            </div>
-
-            <!-- Urgency Section -->
-            <div class="urgency">
-                <p>Only <strong>10 spots</strong> left for this month! Don't miss out.</p>
+                <!-- Add more testimonials as needed -->
             </div>
 
             <!-- Additional CTA Button -->
-            <a href="https://cal.com/busy-barbell/30min" class="cta-button">Claim Your Spot Now&nbsp;&raquo;</a>
+            <a href="https://cal.com/busy-barbell/30min" class="cta-button">Reserve Your Spot Now&nbsp;&raquo;</a>
 
             <!-- Small Text Under Second CTA Button -->
-            <p class="small-text">Join Now and Start Your Transformation Today!</p>
+            <p class="small-text">Join Today and Take the First Step Towards Your Fitness Goals</p>
 
             <!-- Extensive FAQ Section -->
             <div class="faq">
                 <h2>Frequently Asked Questions</h2>
                 <div class="faq-item">
                     <input type="checkbox" id="faq1" class="faq-checkbox">
-                    <label for="faq1" class="question">How long are the workout sessions?</label>
+                    <label for="faq1" class="question">How long do the workouts take?</label>
                     <div class="answer">
-                        <p>Each session is designed to be completed in under 45 minutes, perfect for a busy schedule.</p>
+                        <p>Each workout is designed to be completed in under 45 minutes, making it manageable for your busy schedule.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq2" class="faq-checkbox">
-                    <label for="faq2" class="question">Do I need any special equipment?</label>
+                    <label for="faq2" class="question">Do I need special equipment for the workouts?</label>
                     <div class="answer">
-                        <p>No special equipment is necessary. We tailor workouts to what you have available, whether that's a full gym or just bodyweight exercises.</p>
+                        <p>No, you don't need any special equipment. We tailor workouts to fit whatever resources you have available, whether it's a full gym or just bodyweight exercises at home.</p>
                     </div>
                 </div>
                 <div class="faq-item">
                     <input type="checkbox" id="faq3" class="faq-checkbox">
-                    <label for="faq3" class="question">What if I have dietary restrictions?</label>
+                    <label for="faq3" class="question">I have dietary restrictions. Can your nutrition plans accommodate them?</label>
                     <div class="answer">
-                        <p>Our nutrition guides are customized to accommodate your dietary needs, including vegetarian, vegan, gluten-free, and more.</p>
+                        <p>Yes, our nutrition guides are customizable to meet your specific dietary needs, including vegetarian, vegan, gluten-free, and more.</p>
                     </div>
                 </div>
                 <!-- Add more FAQ items as needed -->
@@ -173,17 +186,22 @@
 
             <!-- Contact Information -->
             <div class="contact-info">
-                <p>Have Questions? Call us at <a href="tel:+1234567890">+1 (234) 567-890</a> or email us at <a href="mailto:info@busybarbell.com">info@busybarbell.com</a></p>
+                <p>Have Questions? We're Here to Help! Call us at <a href="tel:+1234567890">+1 (234) 567-890</a> or email us at <a href="mailto:info@busybarbell.com">info@busybarbell.com</a></p>
             </div>
 
         </div>
     </main>
 
+    <!-- Facebook Disclaimer Section -->
+    <div class="facebook-disclaimer">
+        <p>This is not a Facebook site. We are not affiliated with Facebook in any way.</p>
+    </div>
+
     <!-- Footer Section -->
     <footer>
         <div class="container">
             <p>&copy; 2023 Busy Barbell. All rights reserved.</p>
-            <a href="privacy-policy.html">Privacy Policy</a> | <a href="terms.html">Terms & Conditions</a>
+            <!-- Removed Terms & Conditions and Privacy Policy links -->
         </div>
     </footer>
 
