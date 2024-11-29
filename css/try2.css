@@ -39,9 +39,12 @@ header .container {
 
 .collab-logo {
     width: auto;
-    height: 29.5px; /* Ensure it's a perfect square */
-    border-radius: 50%; /* Makes the image circular */
-    object-fit: cover; /* Ensures the image scales nicely within the circle */
+    height: 29.5px;
+    /* Ensure it's a perfect square */
+    border-radius: 50%;
+    /* Makes the image circular */
+    object-fit: cover;
+    /* Ensures the image scales nicely within the circle */
 }
 
 .logo {
@@ -52,7 +55,8 @@ header .container {
 .collab-x {
     font-size: 1.5em;
     font-weight: bold;
-    color: #ffffff; /* Adjust based on your background color */
+    color: #ffffff;
+    /* Adjust based on your background color */
     margin: 0 5px;
 }
 
@@ -341,11 +345,32 @@ h1 {
     border-radius: 8px
 }
 
+.testimonials2 {
+    background-color: #071b38;
+    color: #1a1a1a;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.testimonials3 {
+    width: 90%;
+    max-width: 1200px;
+    margin: 0 auto
+}
+
 .testimonials h2 {
     font-size: 2em;
     margin-bottom: 20px;
     font-weight: 500;
     color: #1a1a1a;
+    text-align: center
+}
+
+.testimonials2 h2 {
+    font-size: 2em;
+    margin-bottom: 20px;
+    font-weight: 500;
+    color: #fff;
     text-align: center
 }
 
@@ -365,6 +390,18 @@ h1 {
     display: block;
     margin-top: 10px;
     color: #666
+}
+
+.testimonial2-item {
+    margin-bottom: 20px;
+    padding: 0 20px
+}
+
+.testimonial2-item p {
+    font-size: 1.2em;
+    line-height: 1.5;
+    color: #fff;
+    text-align: center;
 }
 
 .urgency {
@@ -483,8 +520,7 @@ h1 {
 }
 
 .facebook-disclaimer {
-    background-color: #f3f4f6;
-    color: #1a1a1a;
+    color: #fff;
     padding: 10px 20px;
     text-align: center;
     font-size: 0.9em;
@@ -560,6 +596,8 @@ footer a:hover {
     line-height: 1.4;
 }
 
+
+
 @media screen and (max-width: 768px) {
     .flex-container {
         margin: 10px;
@@ -584,6 +622,10 @@ footer a:hover {
 
 @media screen and (max-width:768px) {
     .container {
+        width: 95%
+    }
+
+    .testimonials3 {
         width: 95%
     }
 
@@ -702,6 +744,7 @@ footer a:hover {
 
     .benefits h2,
     .testimonials h2,
+    .testimonials2 h2,
     .faq h2 {
         font-size: 1.6em
     }
@@ -713,6 +756,10 @@ footer a:hover {
     .contact-info p {
         font-size: 1em;
         color: #1a1a1a
+    }
+
+    .testimonial2-item p {
+        font-size: 1em;
     }
 
     .urgency {
