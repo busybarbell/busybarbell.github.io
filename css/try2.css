@@ -31,6 +31,31 @@ header .container {
     max-width: 100px
 }
 
+.logo-collaboration {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.collab-logo {
+    width: auto;
+    height: 29.5px; /* Ensure it's a perfect square */
+    border-radius: 50%; /* Makes the image circular */
+    object-fit: cover; /* Ensures the image scales nicely within the circle */
+}
+
+.logo {
+    max-width: 100px;
+    height: auto;
+}
+
+.collab-x {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffffff; /* Adjust based on your background color */
+    margin: 0 5px;
+}
+
 nav .nav-button {
     background-color: #006ffa;
     color: #fff;
@@ -443,7 +468,8 @@ h1 {
     color: #1a1a1a;
     padding: 10px 20px;
     text-align: center;
-    font-size: 0.9em
+    font-size: 0.9em;
+    margin-bottom: 50px;
 }
 
 footer {
