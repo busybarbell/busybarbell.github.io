@@ -134,6 +134,24 @@ h1 {
     background-color: #0051bf
 }
 
+.cta-button2 {
+    display: inline-block;
+    background-color: #006ffa;
+    color: #fff;
+    padding: 20px 40px;
+    font-size: 1.5em;
+    font-weight: 500;
+    text-decoration: none;
+    border-radius: 5px;
+    white-space: nowrap;
+    transition: background-color .3s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)
+}
+
+.cta-button2:hover {
+    background-color: #0051bf
+}
+
 .cta-text.desktop-text {
     display: inline
 }
@@ -630,6 +648,13 @@ footer a:hover {
         white-space: nowrap
     }
 
+    .cta-button2 {
+        font-size: 1.2em;
+        padding: 14px 28px;
+        font-weight: 500;
+        white-space: nowrap
+    }
+
     .video-section {
         max-width: 100%
     }
@@ -717,6 +742,10 @@ footer a:hover {
 
 @media screen and (max-width:480px) {
     .cta-button {
+        font-size: 1.1em;
+    }
+
+    .cta-button2 {
         font-size: 1.1em;
     }
 }
