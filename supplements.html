@@ -1,0 +1,872 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busy Barbell - Dark Reddit-Style</title>
+  <!-- Example of using Google Fonts or system fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
+  <!-- Material Symbols (Icons) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <!-- Prefetch pages for faster navigation -->
+  <link rel="prefetch" href="index.html">
+  <link rel="prefetch" href="articles.html">
+  <link rel="prefetch" href="classroom.html">
+  <link rel="prefetch" href="members.html">
+  <link rel="prefetch" href="leaderboard.html">
+  <link rel="prefetch" href="about.html">
+
+  <style>
+    /* Base & Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans', sans-serif;
+    }
+
+    body {
+      background-color: #1A1A1B;
+      /* Typical dark Reddit background */
+      color: #D7DADC;
+      /* Light gray text */
+    }
+
+    a {
+      text-decoration: none;
+      color: #0079D3;
+      /* Reddit-like blue for links */
+    }
+
+    a:hover {
+      /* Removed underline effect globally; sidebar-specific hover already has its own styling */
+      text-decoration: none;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1A1A1B;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #343536;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+      /* Ensure the header stays on top */
+    }
+
+    .nav-left,
+    .nav-center,
+    .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    /* Smaller gap for nav-right to reduce spacing between buttons */
+    .nav-right {
+      gap: 0.5rem;
+    }
+
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #D7DADC;
+    }
+
+    /* SEARCH BAR (Pill shape, icon background #343536) */
+    .search-container {
+      display: flex;
+      align-items: center;
+      background-color: #121212;
+      /* Dark background similar to YouTube */
+      border: 1px solid #343536;
+      border-radius: 9999px;
+      /* Pill shape */
+      max-width: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+
+    .search-box {
+      flex: 1;
+      border: none;
+      background: #121212;
+      color: #D7DADC;
+      font-size: 14px;
+      padding: 0.5rem 1rem;
+      outline: none;
+    }
+
+    .search-btn {
+      background: #343536;
+      /* Same color as Get App button */
+      color: #D7DADC;
+      padding: 0.5rem 1rem;
+      border-left: none;
+      /* No divider for a smooth pill shape */
+    }
+
+    .search-btn:hover {
+      background-color: #484a4c;
+    }
+
+    /* Base Button Styles & Icon Normalization */
+    button,
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      background: none;
+    }
+
+    .material-symbols-outlined {
+      font-size: 1rem;
+      line-height: 1;
+      margin: 0 4px;
+    }
+
+    /* Button Variants */
+    .btn-pill {
+      background-color: #343536;
+      color: #D7DADC;
+    }
+
+    .btn-pill:hover {
+      background-color: #484a4c;
+    }
+
+    .btn-get-app {
+      background-color: #343536;
+      /* Same color as the "Best" toggle */
+      color: #FFFFFF;
+    }
+
+    .btn-get-app:hover {
+      background-color: #484a4c;
+    }
+
+    .btn-login {
+      background-color: #FF4500;
+      /* Filled red with white text */
+      color: #FFFFFF;
+    }
+
+    .btn-login:hover {
+      background-color: #e03e00;
+    }
+
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #D7DADC;
+      color: #D7DADC;
+      padding: 10px 20px;
+    }
+
+    .btn-outline:hover {
+      background-color: #343536;
+    }
+
+    .toggle-pinned {
+      padding: 10px 20px;
+      background: transparent;
+      font-size: 1rem;
+    }
+
+    .btn-join {
+      background-color: #0079D3;
+      /* Original get-app blue */
+      color: #FFFFFF;
+    }
+
+    .btn-join:hover {
+      background-color: #1483DA;
+    }
+
+    /* MAIN GRID */
+    .main-grid {
+      display: flex;
+      min-height: calc(100vh - 56px);
+      margin-top: 56px;
+      /* Account for fixed header height */
+    }
+
+    /* LEFT SIDEBAR */
+    .sidebar-left {
+      min-width: 250px;
+      background-color: #1A1A1B;
+      border-right: 1px solid #343536;
+      padding: 1rem;
+      position: fixed;
+      top: 56px;
+      /* Below the fixed header */
+      left: 0;
+      height: calc(100vh - 56px);
+      overflow-y: auto;
+    }
+
+    .sidebar-section {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #D7DADC;
+    }
+
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.25rem;
+      cursor: pointer;
+      color: #D7DADC;
+      /* Remove underline effect from anchor tags */
+      text-decoration: none;
+    }
+
+    /* Active indicator for the current page with rounded corners */
+    .sidebar-item.active {
+      background-color: #484a4c;
+      border-radius: 4px;
+    }
+
+    .sidebar-item:hover {
+      background-color: #272729;
+      border-radius: 4px;
+    }
+
+    .sidebar-item span.material-symbols-outlined {
+      margin-right: 0.5rem;
+      font-size: 20px;
+    }
+
+    .recent-item,
+    .topic-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.25rem;
+      cursor: pointer;
+      color: #D7DADC;
+    }
+
+    .recent-item:hover,
+    .topic-item:hover {
+      background-color: #272729;
+      border-radius: 4px;
+    }
+
+    .recent-pic {
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      margin-right: 0.5rem;
+    }
+
+    .sidebar-divider {
+      border: 0;
+      height: 1px;
+      background-color: #343536;
+      margin: 1rem 0;
+    }
+
+    /* RIGHT CONTENT */
+    .content-right {
+      flex: 1;
+      padding: 1rem;
+      margin-left: 250px;
+      /* Prevent overlap with fixed sidebar */
+    }
+
+    .banner img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    /* COMMUNITY HEADER */
+    .community-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1A1A1B;
+      padding: 1rem;
+      border-radius: 4px;
+      border: 1px solid #343536;
+      margin-bottom: 1rem;
+    }
+
+    .community-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .community-profile {
+      width: 64px;
+      height: 64px;
+      border-radius: 9999px;
+    }
+
+    /* Smaller gap for consistent spacing */
+    .community-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* FEED GRID */
+    .feed-grid {
+      display: flex;
+      gap: 1rem;
+    }
+
+    .main-feed {
+      flex: 1;
+    }
+
+    .sidebar-right {
+      width: 300px;
+      max-width: 300px;
+    }
+
+    /* Toggle Buttons for Feed Controls */
+    .feed-controls {
+      margin-bottom: 1rem;
+    }
+
+    .toggle-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    .toggle-btn {
+      background-color: #343536;
+      color: #D7DADC;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .toggle-btn:hover {
+      background-color: #484a4c;
+    }
+
+    .toggle-btn.active {
+      background-color: #484a4c;
+    }
+
+    /* PINNED HIGHLIGHTS */
+    .pinned-highlights {
+      border: 1px solid #343536;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      background-color: #1A1A1B;
+    }
+
+    .pinned-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #343536;
+    }
+
+    .pinned-header h2 {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .pinned-content {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+    }
+
+    .pinned-post {
+      background-color: #272729;
+      border-radius: 4px;
+      padding: 0.5rem;
+      flex: 1;
+      text-align: center;
+    }
+
+    .pinned-post img {
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+
+    .pinned-title {
+      font-size: 0.9rem;
+      color: #D7DADC;
+    }
+
+    /* POST CARDS */
+    .post-card {
+      border: 1px solid #343536;
+      border-radius: 4px;
+      background-color: #1A1A1B;
+      margin-bottom: 1rem;
+    }
+
+    .post-content {
+      padding: 1rem;
+    }
+
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      color: #818384;
+    }
+
+    .post-header .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+    }
+
+    .subreddit-link {
+      color: #D7DADC;
+      font-weight: 600;
+    }
+
+    .post-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #D7DADC;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-body {
+      font-size: 0.9rem;
+      color: #D7DADC;
+      margin-bottom: 0.5rem;
+    }
+
+    .post-media {
+      margin-bottom: 0.5rem;
+      background-color: #272729;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .post-media video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    .post-footer {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      background-color: #343536;
+      color: #D7DADC;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .pill-btn:hover {
+      background-color: #484a4c;
+    }
+
+    /* VOTE PILL */
+    .vote-pill {
+      background-color: #343536;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      color: #D7DADC;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+
+    .vote-pill:hover {
+      background-color: #484a4c;
+    }
+
+    .vote-count {
+      font-size: 0.8rem;
+    }
+
+    /* SIDEBAR-RIGHT COMMUNITY INFO */
+    .about-community {
+      border: none;
+      border-radius: 4px;
+      background-color: #0A0A0A;
+      /* Darker background */
+      padding: 1.5rem;
+      /* Increased to make it bigger */
+    }
+
+    .about-community h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+
+    .community-description {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+
+    .community-stats {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      color: #818384;
+    }
+
+    .online-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #46D160;
+      border-radius: 9999px;
+      margin-right: 0.25rem;
+    }
+
+    .community-created,
+    .community-type {
+      font-size: 0.8rem;
+      color: #818384;
+      margin-bottom: 0.5rem;
+    }
+
+    .community-rules {
+      list-style: disc;
+      list-style-position: inside;
+      font-size: 0.85rem;
+      color: #D7DADC;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-left">
+      <div class="logo">Busy Barbell</div>
+    </div>
+    <div class="nav-center">
+      <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search" />
+        <button class="btn search-btn" onclick="performSearch()">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-pill btn-get-app">
+        <span class="material-symbols-outlined">qr_code_scanner</span>
+        Get App
+      </button>
+      <button class="btn btn-pill btn-login">Log In</button>
+      <span class="dots-icon">&#8230;</span>
+    </div>
+  </header>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid" id="mainGrid">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-left" id="sidebarLeft">
+      <div class="sidebar-main">
+        <a class="sidebar-item" href="index.html">
+          <span class="material-symbols-outlined">forum</span>
+          <span>Community</span>
+        </a>
+        <a class="sidebar-item" href="articles.html">
+          <span class="material-symbols-outlined">article</span>
+          <span>Articles</span>
+        </a>
+        <a class="sidebar-item" href="classroom.html">
+          <span class="material-symbols-outlined">school</span>
+          <span>Classroom</span>
+        </a>
+        <a class="sidebar-item" href="supplements.html">
+          <span class="material-symbols-outlined">storefront</span>
+          <span>Supplements</span>
+        </a>
+      </div>
+      <!-- Visible divider above Recents -->
+      <hr class="sidebar-divider">
+      <div class="sidebar-recents">
+        <div class="sidebar-section">Recents</div>
+        <div class="recent-item">
+          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+          <span>Post preview one…</span>
+        </div>
+        <div class="recent-item">
+          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+          <span>Post preview two…</span>
+        </div>
+      </div>
+      <!-- Visible divider above Topics -->
+      <hr class="sidebar-divider">
+      <div class="sidebar-topics">
+        <div class="sidebar-section">Topics</div>
+        <div class="topic-item">Fitness</div>
+        <div class="topic-item">Nutrition</div>
+        <div class="topic-item">Recovery</div>
+        <div class="topic-item">Mindset</div>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT COLUMN -->
+    <div class="content-right">
+      <!-- Banner -->
+      <div class="banner">
+        <img src="https://i.postimg.cc/9FTc92Dz/channels4-banner.jpg" alt="Community Banner">
+      </div>
+      <!-- COMMUNITY HEADER -->
+      <div class="community-header">
+        <div class="community-info">
+          <img class="community-profile" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg"
+            alt="Community Profile">
+          <h1>Busy Barbell Community</h1>
+        </div>
+        <div class="community-actions">
+          <button class="btn btn-outline">
+            <span class="material-symbols-outlined">add</span>
+            Create Post
+          </button>
+          <button class="btn btn-pill btn-join">Join</button>
+        </div>
+      </div>
+
+      <!-- FEED GRID -->
+      <div class="feed-grid">
+        <!-- MAIN FEED -->
+        <main class="main-feed">
+          <!-- FEED CONTROLS (Toggle Buttons) -->
+          <div class="feed-controls">
+            <div class="toggle-buttons">
+              <button class="btn btn-pill toggle-btn active">Best</button>
+              <button class="btn btn-pill toggle-btn">Hot</button>
+              <button class="btn btn-pill toggle-btn">New</button>
+              <button class="btn btn-pill toggle-btn">Top</button>
+              <button class="btn btn-pill toggle-btn">Rising</button>
+            </div>
+          </div>
+
+          <!-- PINNED HIGHLIGHTS -->
+          <div class="pinned-highlights">
+            <div class="pinned-header">
+              <h2>
+                <span class="material-symbols-outlined">keep</span>
+                Pinned Highlights
+              </h2>
+              <button id="togglePinned" class="btn toggle-pinned">
+                <span class="material-symbols-outlined">keyboard_arrow_up</span>
+              </button>
+            </div>
+            <div class="pinned-content" id="pinnedContent">
+              <div class="pinned-post">
+                <img src="https://via.placeholder.com/300x200?text=Pinned+1" alt="Pinned 1">
+                <div class="pinned-title">Pinned Post Title 1</div>
+              </div>
+              <div class="pinned-post">
+                <img src="https://via.placeholder.com/300x200?text=Pinned+2" alt="Pinned 2">
+                <div class="pinned-title">Pinned Post Title 2</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- FEED POSTS -->
+          <div class="post-card">
+            <div class="post-content">
+              <div class="post-header">
+                <img class="profile-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+                <a href="#" class="subreddit-link">r/fuomai</a>
+                <span>• Posted by u/someUser 2h ago</span>
+              </div>
+              <div class="post-title">Ethan Klein puts up a hater’s Instagram live on air...</div>
+              <div class="post-body">
+                Possibly insulting fans, sending hate. This is a snippet from your screenshot.
+              </div>
+              <div class="post-media">
+                <video autoplay muted loop playsinline controls
+                  poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div class="post-footer">
+                <button class="btn pill-btn vote-pill">
+                  <span class="material-symbols-outlined">thumb_up</span>
+                  <span class="vote-count">1123</span>
+                  <span class="material-symbols-outlined">thumb_down</span>
+                </button>
+                <button class="btn pill-btn">Comments</button>
+                <button class="btn pill-btn">Award</button>
+                <button class="btn pill-btn">Share</button>
+                <button class="btn pill-btn">...</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-card">
+            <div class="post-content">
+              <div class="post-header">
+                <img class="profile-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+                <a href="#" class="subreddit-link">r/relationship_advice</a>
+                <span>• Posted by u/anotherUser 5h ago</span>
+              </div>
+              <div class="post-title">Am I overreacting? Thinking this means my wife slept with the guy</div>
+              <div class="post-body">
+                A snippet from your screenshot about texts and possible cheating.
+              </div>
+              <div class="post-media">
+                <video autoplay muted loop playsinline controls
+                  poster="https://via.placeholder.com/800x450/000000/ffffff?text=Screenshot+Placeholder">
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div class="post-footer">
+                <button class="btn pill-btn vote-pill">
+                  <span class="material-symbols-outlined">thumb_up</span>
+                  <span class="vote-count">356</span>
+                  <span class="material-symbols-outlined">thumb_down</span>
+                </button>
+                <button class="btn pill-btn">Comments</button>
+                <button class="btn pill-btn">Award</button>
+                <button class="btn pill-btn">Share</button>
+                <button class="btn pill-btn">...</button>
+              </div>
+            </div>
+          </div>
+
+          <div class="post-card">
+            <div class="post-content">
+              <div class="post-header">
+                <img class="profile-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+                <a href="#" class="subreddit-link">r/BusyBarbell</a>
+                <span>• Posted by u/coach 1 day ago</span>
+              </div>
+              <div class="post-title">Grimes on whether or not she is evil</div>
+              <div class="post-media">
+                <video autoplay muted loop playsinline controls
+                  poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div class="post-footer">
+                <button class="btn pill-btn vote-pill">
+                  <span class="material-symbols-outlined">thumb_up</span>
+                  <span class="vote-count">123</span>
+                  <span class="material-symbols-outlined">thumb_down</span>
+                </button>
+                <button class="btn pill-btn">Comments</button>
+                <button class="btn pill-btn">Award</button>
+                <button class="btn pill-btn">Share</button>
+                <button class="btn pill-btn">...</button>
+              </div>
+            </div>
+          </div>
+        </main>
+        <aside class="sidebar-right">
+          <div class="about-community">
+            <h2>About This Community</h2>
+            <p class="community-description">
+              Busy Barbell Community is a place for enthusiasts to discuss training, nutrition, and more.
+            </p>
+            <div class="community-stats">
+              <span>123 Posts</span>
+              <span><span class="online-dot"></span>10 Online</span>
+            </div>
+            <p class="community-created">Created: January 1, 2020</p>
+            <div class="community-type">Public Community</div>
+            <ul class="community-rules">
+              <li>Be respectful to one another.</li>
+              <li>No spam or self-promotion.</li>
+              <li>Keep posts on-topic.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <script>
+    function performSearch() {
+      const query = document.querySelector('.search-box').value;
+      console.log("Searching for:", query);
+      // Implement search functionality here if desired
+    }
+
+    // Intercept sidebar link clicks for instant page transitions
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', function (event) {
+        event.preventDefault();
+        const url = this.getAttribute('href');
+
+        // Update active indicator
+        document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        // Use fetch for fast content loading
+        fetch(url)
+          .then(response => response.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('.content-right').innerHTML;
+            document.querySelector('.content-right').innerHTML = newContent;
+            history.pushState(null, '', url);
+            // Scroll to top after new page content is loaded
+            window.scrollTo(0, 0);
+          })
+          .catch(err => {
+            console.error('Error loading page:', err);
+            window.location.href = url; // fallback to normal navigation
+          });
+      });
+    });
+
+    // On page load, mark the current page’s sidebar link as active
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        if (item.getAttribute('href') === currentPage) {
+          item.classList.add('active');
+        }
+      });
+    });
+  </script>
+</body>
+
+</html>
