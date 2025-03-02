@@ -1,0 +1,213 @@
+/* global.css */
+/* Reset & Base */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', sans-serif;
+  }
+  body {
+    background-color: #1A1A1B;
+    color: #D7DADC;
+  }
+  a {
+    text-decoration: none;
+    color: #0079D3;
+  }
+  a:hover {
+    text-decoration: none;
+  }
+  
+  /* HEADER */
+  header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #1A1A1B;
+    padding: 0.5rem 1rem;
+    border-bottom: 1px solid #343536;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+  }
+  .nav-left, .nav-center, .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  .nav-right {
+    gap: 0.5rem;
+  }
+  .logo {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #D7DADC;
+  }
+  
+  /* SEARCH BAR */
+  .search-container {
+    display: flex;
+    align-items: center;
+    background-color: #121212;
+    border: 1px solid #343536;
+    border-radius: 9999px;
+    max-width: 400px;
+    width: 100%;
+    overflow: hidden;
+  }
+  .search-box {
+    flex: 1;
+    border: none;
+    background: #121212;
+    color: #D7DADC;
+    font-size: 14px;
+    padding: 0.5rem 1rem;
+    outline: none;
+  }
+  .search-btn {
+    background: #343536;
+    color: #D7DADC;
+    padding: 0.5rem 1rem;
+    border-left: none;
+  }
+  .search-btn:hover {
+    background-color: #484a4c;
+  }
+  
+  /* BUTTON STYLES */
+  button, .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px 20px;
+    font-size: 1rem;
+    border-radius: 9999px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    background: none;
+  }
+  .material-symbols-outlined {
+    font-size: 1rem;
+    line-height: 1;
+    margin: 0 4px;
+  }
+  .btn-pill {
+    background-color: #343536;
+    color: #D7DADC;
+  }
+  .btn-pill:hover {
+    background-color: #484a4c;
+  }
+  .btn-get-app {
+    background-color: #343536;
+    color: #FFFFFF;
+  }
+  .btn-get-app:hover {
+    background-color: #484a4c;
+  }
+  .btn-login {
+    background-color: #FF4500;
+    color: #FFFFFF;
+  }
+  .btn-login:hover {
+    background-color: #e03e00;
+  }
+  .btn-outline {
+    background: transparent;
+    border: 1px solid #D7DADC;
+    color: #D7DADC;
+    padding: 10px 20px;
+  }
+  .btn-outline:hover {
+    background-color: #343536;
+  }
+  .toggle-pinned {
+    padding: 10px 20px;
+    background: transparent;
+    font-size: 1rem;
+  }
+  .btn-join {
+    background-color: #0079D3;
+    color: #FFFFFF;
+  }
+  .btn-join:hover {
+    background-color: #1483DA;
+  }
+  
+  /* SIDEBAR */
+  .sidebar-left {
+    min-width: 250px;
+    background-color: #1A1A1B;
+    border-right: 1px solid #343536;
+    padding: 1rem;
+    position: fixed;
+    top: 56px;
+    left: 0;
+    height: calc(100vh - 56px);
+    overflow-y: auto;
+  }
+  .sidebar-section {
+    margin-top: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: #D7DADC;
+  }
+  .sidebar-item {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.25rem;
+    cursor: pointer;
+    color: #D7DADC;
+    text-decoration: none;
+  }
+  .sidebar-item.active {
+    background-color: #484a4c;
+    border-radius: 4px;
+  }
+  .sidebar-item:hover {
+    background-color: #272729;
+    border-radius: 4px;
+  }
+  .sidebar-item span.material-symbols-outlined {
+    margin-right: 0.5rem;
+    font-size: 20px;
+  }
+  .recent-item, .topic-item {
+    display: flex;
+    align-items: center;
+    padding: 0.4rem 0.25rem;
+    cursor: pointer;
+    color: #D7DADC;
+  }
+  .recent-item:hover, .topic-item:hover {
+    background-color: #272729;
+    border-radius: 4px;
+  }
+  .recent-pic {
+    width: 24px;
+    height: 24px;
+    border-radius: 9999px;
+    margin-right: 0.5rem;
+  }
+  .sidebar-divider {
+    border: 0;
+    height: 1px;
+    background-color: #343536;
+    margin: 1rem 0;
+  }
+  
+  /* LAYOUT */
+  .main-grid {
+    display: flex;
+    min-height: calc(100vh - 56px);
+    margin-top: 56px;
+  }
+  .content-right {
+    flex: 1;
+    padding: 1rem;
+    margin-left: 250px;
+  }
