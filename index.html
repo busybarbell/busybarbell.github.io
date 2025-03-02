@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-  <meta charset="UTF-8"/>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Busy Barbell - Dark Reddit-Style</title>
   <!-- Example of using Google Fonts or system fonts -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
   <!-- Material Symbols (Icons) -->
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <!-- Prefetch pages for faster navigation -->
+  <link rel="prefetch" href="index.html">
+  <link rel="prefetch" href="articles.html">
+  <link rel="prefetch" href="classroom.html">
+  <link rel="prefetch" href="members.html">
+  <link rel="prefetch" href="leaderboard.html">
+  <link rel="prefetch" href="about.html">
 
   <style>
     /* Base & Reset */
@@ -17,16 +25,23 @@
       padding: 0;
       font-family: 'Noto Sans', sans-serif;
     }
+
     body {
-      background-color: #1A1A1B; /* Typical dark Reddit background */
-      color: #D7DADC;            /* Light gray text */
+      background-color: #1A1A1B;
+      /* Typical dark Reddit background */
+      color: #D7DADC;
+      /* Light gray text */
     }
+
     a {
       text-decoration: none;
-      color: #0079D3; /* Reddit-like blue for links */
+      color: #0079D3;
+      /* Reddit-like blue for links */
     }
+
     a:hover {
-      text-decoration: underline;
+      /* Removed underline effect globally; sidebar-specific hover already has its own styling */
+      text-decoration: none;
     }
 
     /* HEADER */
@@ -37,55 +52,73 @@
       background-color: #1A1A1B;
       padding: 0.5rem 1rem;
       border-bottom: 1px solid #343536;
-      /* Fixed Navigation */
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       z-index: 1000;
+      /* Ensure the header stays on top */
     }
-    .nav-left, .nav-center, .nav-right {
+
+    .nav-left,
+    .nav-center,
+    .nav-right {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
+
+    /* Smaller gap for nav-right to reduce spacing between buttons */
+    .nav-right {
+      gap: 0.5rem;
+    }
+
     .logo {
       font-size: 1.2rem;
       font-weight: bold;
       color: #D7DADC;
     }
 
-    /* SEARCH BAR */
+    /* SEARCH BAR (Pill shape, icon background #343536) */
     .search-container {
       display: flex;
       align-items: center;
-      background-color: #272729;
+      background-color: #121212;
+      /* Dark background similar to YouTube */
       border: 1px solid #343536;
       border-radius: 9999px;
+      /* Pill shape */
       max-width: 400px;
       width: 100%;
       overflow: hidden;
     }
+
     .search-box {
       flex: 1;
       border: none;
-      background: transparent;
+      background: #121212;
       color: #D7DADC;
       font-size: 14px;
       padding: 0.5rem 1rem;
       outline: none;
     }
+
     .search-btn {
       background: #343536;
+      /* Same color as Get App button */
       color: #D7DADC;
       padding: 0.5rem 1rem;
+      border-left: none;
+      /* No divider for a smooth pill shape */
     }
+
     .search-btn:hover {
       background-color: #484a4c;
     }
 
     /* Base Button Styles & Icon Normalization */
-    button, .btn {
+    button,
+    .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
@@ -97,6 +130,7 @@
       transition: background-color 0.2s;
       background: none;
     }
+
     .material-symbols-outlined {
       font-size: 1rem;
       line-height: 1;
@@ -108,41 +142,54 @@
       background-color: #343536;
       color: #D7DADC;
     }
+
     .btn-pill:hover {
       background-color: #484a4c;
     }
+
     .btn-get-app {
       background-color: #343536;
+      /* Same color as the "Best" toggle */
       color: #FFFFFF;
     }
+
     .btn-get-app:hover {
       background-color: #484a4c;
     }
+
     .btn-login {
       background-color: #FF4500;
+      /* Filled red with white text */
       color: #FFFFFF;
     }
+
     .btn-login:hover {
       background-color: #e03e00;
     }
+
     .btn-outline {
       background: transparent;
       border: 1px solid #D7DADC;
       color: #D7DADC;
       padding: 10px 20px;
     }
+
     .btn-outline:hover {
       background-color: #343536;
     }
+
     .toggle-pinned {
       padding: 10px 20px;
       background: transparent;
       font-size: 1rem;
     }
+
     .btn-join {
       background-color: #0079D3;
+      /* Original get-app blue */
       color: #FFFFFF;
     }
+
     .btn-join:hover {
       background-color: #1483DA;
     }
@@ -151,7 +198,8 @@
     .main-grid {
       display: flex;
       min-height: calc(100vh - 56px);
-      margin-top: 56px; /* Adjust for fixed header */
+      margin-top: 56px;
+      /* Account for fixed header height */
     }
 
     /* LEFT SIDEBAR */
@@ -161,11 +209,13 @@
       border-right: 1px solid #343536;
       padding: 1rem;
       position: fixed;
-      top: 56px; /* below the fixed header */
+      top: 56px;
+      /* Below the fixed header */
       left: 0;
       height: calc(100vh - 56px);
       overflow-y: auto;
     }
+
     .sidebar-section {
       margin-top: 1rem;
       margin-bottom: 0.5rem;
@@ -173,38 +223,55 @@
       font-size: 0.9rem;
       color: #D7DADC;
     }
+
     .sidebar-item {
       display: flex;
       align-items: center;
       padding: 0.4rem 0.25rem;
       cursor: pointer;
       color: #D7DADC;
+      /* Remove underline effect from anchor tags */
+      text-decoration: none;
     }
+
+    /* Active indicator for the current page with rounded corners */
+    .sidebar-item.active {
+      background-color: #484a4c;
+      border-radius: 4px;
+    }
+
     .sidebar-item:hover {
       background-color: #272729;
       border-radius: 4px;
     }
+
     .sidebar-item span.material-symbols-outlined {
       margin-right: 0.5rem;
       font-size: 20px;
     }
-    .recent-item, .topic-item {
+
+    .recent-item,
+    .topic-item {
       display: flex;
       align-items: center;
       padding: 0.4rem 0.25rem;
       cursor: pointer;
       color: #D7DADC;
     }
-    .recent-item:hover, .topic-item:hover {
+
+    .recent-item:hover,
+    .topic-item:hover {
       background-color: #272729;
       border-radius: 4px;
     }
+
     .recent-pic {
       width: 24px;
       height: 24px;
       border-radius: 9999px;
       margin-right: 0.5rem;
     }
+
     .sidebar-divider {
       border: 0;
       height: 1px;
@@ -216,8 +283,10 @@
     .content-right {
       flex: 1;
       padding: 1rem;
-      margin-left: 250px; /* Ensure content isn't hidden behind fixed sidebar */
+      margin-left: 250px;
+      /* Prevent overlap with fixed sidebar */
     }
+
     .banner img {
       width: 100%;
       height: auto;
@@ -236,16 +305,20 @@
       border: 1px solid #343536;
       margin-bottom: 1rem;
     }
+
     .community-info {
       display: flex;
       align-items: center;
       gap: 1rem;
     }
+
     .community-profile {
       width: 64px;
       height: 64px;
       border-radius: 9999px;
     }
+
+    /* Smaller gap for consistent spacing */
     .community-actions {
       display: flex;
       gap: 0.5rem;
@@ -256,22 +329,26 @@
       display: flex;
       gap: 1rem;
     }
+
     .main-feed {
       flex: 1;
     }
+
     .sidebar-right {
       width: 300px;
       max-width: 300px;
     }
 
-    /* NEW: Toggle Buttons for Feed Controls */
+    /* Toggle Buttons for Feed Controls */
     .feed-controls {
       margin-bottom: 1rem;
     }
+
     .toggle-buttons {
       display: flex;
       gap: 0.5rem;
     }
+
     .toggle-btn {
       background-color: #343536;
       color: #D7DADC;
@@ -281,9 +358,11 @@
       cursor: pointer;
       transition: background-color 0.2s;
     }
+
     .toggle-btn:hover {
       background-color: #484a4c;
     }
+
     .toggle-btn.active {
       background-color: #484a4c;
     }
@@ -295,6 +374,7 @@
       margin-bottom: 1rem;
       background-color: #1A1A1B;
     }
+
     .pinned-header {
       display: flex;
       align-items: center;
@@ -302,15 +382,18 @@
       padding: 0.5rem 1rem;
       border-bottom: 1px solid #343536;
     }
+
     .pinned-header h2 {
       font-size: 1rem;
       font-weight: bold;
     }
+
     .pinned-content {
       display: flex;
       gap: 1rem;
       padding: 1rem;
     }
+
     .pinned-post {
       background-color: #272729;
       border-radius: 4px;
@@ -318,11 +401,13 @@
       flex: 1;
       text-align: center;
     }
+
     .pinned-post img {
       max-width: 100%;
       border-radius: 4px;
       margin-bottom: 0.5rem;
     }
+
     .pinned-title {
       font-size: 0.9rem;
       color: #D7DADC;
@@ -335,9 +420,11 @@
       background-color: #1A1A1B;
       margin-bottom: 1rem;
     }
+
     .post-content {
       padding: 1rem;
     }
+
     .post-header {
       display: flex;
       align-items: center;
@@ -346,42 +433,50 @@
       font-size: 0.85rem;
       color: #818384;
     }
+
     .post-header .profile-pic {
       width: 32px;
       height: 32px;
       border-radius: 9999px;
     }
+
     .subreddit-link {
       color: #D7DADC;
       font-weight: 600;
     }
+
     .post-title {
       font-size: 1rem;
       font-weight: 600;
       color: #D7DADC;
       margin-bottom: 0.5rem;
     }
+
     .post-body {
       font-size: 0.9rem;
       color: #D7DADC;
       margin-bottom: 0.5rem;
     }
+
     .post-media {
       margin-bottom: 0.5rem;
       background-color: #272729;
       border-radius: 4px;
       overflow: hidden;
     }
+
     .post-media video {
       width: 100%;
       height: auto;
       display: block;
     }
+
     .post-footer {
       display: flex;
       gap: 0.5rem;
       margin-top: 0.5rem;
     }
+
     .pill-btn {
       display: inline-flex;
       align-items: center;
@@ -395,6 +490,7 @@
       transition: background 0.2s;
       cursor: pointer;
     }
+
     .pill-btn:hover {
       background-color: #484a4c;
     }
@@ -413,9 +509,11 @@
       transition: background 0.2s;
       cursor: pointer;
     }
+
     .vote-pill:hover {
       background-color: #484a4c;
     }
+
     .vote-count {
       font-size: 0.8rem;
     }
@@ -424,18 +522,23 @@
     .about-community {
       border: none;
       border-radius: 4px;
-      background-color: #0A0A0A; /* Darker background */
-      padding: 1rem;
+      background-color: #0A0A0A;
+      /* Darker background */
+      padding: 1.5rem;
+      /* Increased to make it bigger */
     }
+
     .about-community h2 {
       margin-bottom: 0.5rem;
       font-size: 1rem;
       font-weight: bold;
     }
+
     .community-description {
       font-size: 0.9rem;
       margin-bottom: 0.5rem;
     }
+
     .community-stats {
       display: flex;
       gap: 1rem;
@@ -443,6 +546,7 @@
       font-size: 0.8rem;
       color: #818384;
     }
+
     .online-dot {
       display: inline-block;
       width: 8px;
@@ -451,12 +555,14 @@
       border-radius: 9999px;
       margin-right: 0.25rem;
     }
+
     .community-created,
     .community-type {
       font-size: 0.8rem;
       color: #818384;
       margin-bottom: 0.5rem;
     }
+
     .community-rules {
       list-style: disc;
       list-style-position: inside;
@@ -465,6 +571,7 @@
     }
   </style>
 </head>
+
 <body>
   <!-- HEADER -->
   <header>
@@ -494,30 +601,22 @@
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar-left" id="sidebarLeft">
       <div class="sidebar-main">
-        <div class="sidebar-item">
+        <a class="sidebar-item" href="index.html">
           <span class="material-symbols-outlined">forum</span>
           <span>Community</span>
-        </div>
-        <div class="sidebar-item">
+        </a>
+        <a class="sidebar-item" href="articles.html">
           <span class="material-symbols-outlined">article</span>
           <span>Articles</span>
-        </div>
-        <div class="sidebar-item">
+        </a>
+        <a class="sidebar-item" href="classroom.html">
           <span class="material-symbols-outlined">school</span>
           <span>Classroom</span>
-        </div>
-        <div class="sidebar-item">
-          <span class="material-symbols-outlined">groups</span>
-          <span>Members</span>
-        </div>
-        <div class="sidebar-item">
-          <span class="material-symbols-outlined">leaderboard</span>
-          <span>Leaderboard</span>
-        </div>
-        <div class="sidebar-item">
-          <span class="material-symbols-outlined">data_loss_prevention</span>
-          <span>About</span>
-        </div>
+        </a>
+        <a class="sidebar-item" href="supplements.html">
+          <span class="material-symbols-outlined">storefront</span>
+          <span>Supplements</span>
+        </a>
       </div>
       <!-- Visible divider above Recents -->
       <hr class="sidebar-divider">
@@ -542,7 +641,7 @@
         <div class="topic-item">Mindset</div>
       </div>
     </aside>
-    
+
     <!-- RIGHT CONTENT COLUMN -->
     <div class="content-right">
       <!-- Banner -->
@@ -552,7 +651,8 @@
       <!-- COMMUNITY HEADER -->
       <div class="community-header">
         <div class="community-info">
-          <img class="community-profile" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="Community Profile">
+          <img class="community-profile" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg"
+            alt="Community Profile">
           <h1>Busy Barbell Community</h1>
         </div>
         <div class="community-actions">
@@ -563,7 +663,7 @@
           <button class="btn btn-pill btn-join">Join</button>
         </div>
       </div>
-      
+
       <!-- FEED GRID -->
       <div class="feed-grid">
         <!-- MAIN FEED -->
@@ -578,7 +678,7 @@
               <button class="btn btn-pill toggle-btn">Rising</button>
             </div>
           </div>
-          
+
           <!-- PINNED HIGHLIGHTS -->
           <div class="pinned-highlights">
             <div class="pinned-header">
@@ -601,7 +701,7 @@
               </div>
             </div>
           </div>
-          
+
           <!-- FEED POSTS -->
           <div class="post-card">
             <div class="post-content">
@@ -615,8 +715,10 @@
                 Possibly insulting fans, sending hate. This is a snippet from your screenshot.
               </div>
               <div class="post-media">
-                <video autoplay muted loop playsinline controls poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
-                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                <video autoplay muted loop playsinline controls
+                  poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -633,7 +735,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="post-card">
             <div class="post-content">
               <div class="post-header">
@@ -646,8 +748,10 @@
                 A snippet from your screenshot about texts and possible cheating.
               </div>
               <div class="post-media">
-                <video autoplay muted loop playsinline controls poster="https://via.placeholder.com/800x450/000000/ffffff?text=Screenshot+Placeholder">
-                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                <video autoplay muted loop playsinline controls
+                  poster="https://via.placeholder.com/800x450/000000/ffffff?text=Screenshot+Placeholder">
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -664,7 +768,7 @@
               </div>
             </div>
           </div>
-          
+
           <div class="post-card">
             <div class="post-content">
               <div class="post-header">
@@ -674,8 +778,10 @@
               </div>
               <div class="post-title">Grimes on whether or not she is evil</div>
               <div class="post-media">
-                <video autoplay muted loop playsinline controls poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
-                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                <video autoplay muted loop playsinline controls
+                  poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4"
+                    type="video/mp4">
                   Your browser does not support the video tag.
                 </video>
               </div>
@@ -721,6 +827,46 @@
       console.log("Searching for:", query);
       // Implement search functionality here if desired
     }
+
+    // Intercept sidebar link clicks for instant page transitions
+    document.querySelectorAll('.sidebar-item').forEach(item => {
+      item.addEventListener('click', function (event) {
+        event.preventDefault();
+        const url = this.getAttribute('href');
+
+        // Update active indicator
+        document.querySelectorAll('.sidebar-item').forEach(el => el.classList.remove('active'));
+        this.classList.add('active');
+
+        // Use fetch for fast content loading
+        fetch(url)
+          .then(response => response.text())
+          .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newContent = doc.querySelector('.content-right').innerHTML;
+            document.querySelector('.content-right').innerHTML = newContent;
+            history.pushState(null, '', url);
+            // Scroll to top after new page content is loaded
+            window.scrollTo(0, 0);
+          })
+          .catch(err => {
+            console.error('Error loading page:', err);
+            window.location.href = url; // fallback to normal navigation
+          });
+      });
+    });
+
+    // On page load, mark the current page’s sidebar link as active
+    document.addEventListener('DOMContentLoaded', () => {
+      const currentPage = window.location.pathname.split("/").pop() || 'index.html';
+      document.querySelectorAll('.sidebar-item').forEach(item => {
+        if (item.getAttribute('href') === currentPage) {
+          item.classList.add('active');
+        }
+      });
+    });
   </script>
 </body>
+
 </html>
