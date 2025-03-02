@@ -1,11 +1,469 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
+  <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Busy Barbell - Refined & Responsive</title>
-  <!-- Link to external CSS -->
-  <link rel="stylesheet" href="css/styles.css">
+  <title>Busy Barbell - Dark Reddit-Style</title>
+  <!-- Example of using Google Fonts or system fonts -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
+  <!-- Material Symbols (Icons) -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+
+  <style>
+    /* Base & Reset */
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Noto Sans', sans-serif;
+    }
+    body {
+      background-color: #1A1A1B; /* Typical dark Reddit background */
+      color: #D7DADC;            /* Light gray text */
+    }
+    a {
+      text-decoration: none;
+      color: #0079D3; /* Reddit-like blue for links */
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+
+    /* HEADER */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      background-color: #1A1A1B;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #343536;
+      /* Fixed Navigation */
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      z-index: 1000;
+    }
+    .nav-left, .nav-center, .nav-right {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .logo {
+      font-size: 1.2rem;
+      font-weight: bold;
+      color: #D7DADC;
+    }
+
+    /* SEARCH BAR */
+    .search-container {
+      display: flex;
+      align-items: center;
+      background-color: #272729;
+      border: 1px solid #343536;
+      border-radius: 9999px;
+      max-width: 400px;
+      width: 100%;
+      overflow: hidden;
+    }
+    .search-box {
+      flex: 1;
+      border: none;
+      background: transparent;
+      color: #D7DADC;
+      font-size: 14px;
+      padding: 0.5rem 1rem;
+      outline: none;
+    }
+    .search-btn {
+      background: #343536;
+      color: #D7DADC;
+      padding: 0.5rem 1rem;
+    }
+    .search-btn:hover {
+      background-color: #484a4c;
+    }
+
+    /* Base Button Styles & Icon Normalization */
+    button, .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 10px 20px;
+      font-size: 1rem;
+      border-radius: 9999px;
+      border: none;
+      cursor: pointer;
+      transition: background-color 0.2s;
+      background: none;
+    }
+    .material-symbols-outlined {
+      font-size: 1rem;
+      line-height: 1;
+      margin: 0 4px;
+    }
+
+    /* Button Variants */
+    .btn-pill {
+      background-color: #343536;
+      color: #D7DADC;
+    }
+    .btn-pill:hover {
+      background-color: #484a4c;
+    }
+    .btn-get-app {
+      background-color: #343536;
+      color: #FFFFFF;
+    }
+    .btn-get-app:hover {
+      background-color: #484a4c;
+    }
+    .btn-login {
+      background-color: #FF4500;
+      color: #FFFFFF;
+    }
+    .btn-login:hover {
+      background-color: #e03e00;
+    }
+    .btn-outline {
+      background: transparent;
+      border: 1px solid #D7DADC;
+      color: #D7DADC;
+      padding: 10px 20px;
+    }
+    .btn-outline:hover {
+      background-color: #343536;
+    }
+    .toggle-pinned {
+      padding: 10px 20px;
+      background: transparent;
+      font-size: 1rem;
+    }
+    .btn-join {
+      background-color: #0079D3;
+      color: #FFFFFF;
+    }
+    .btn-join:hover {
+      background-color: #1483DA;
+    }
+
+    /* MAIN GRID */
+    .main-grid {
+      display: flex;
+      min-height: calc(100vh - 56px);
+      margin-top: 56px; /* Adjust for fixed header */
+    }
+
+    /* LEFT SIDEBAR */
+    .sidebar-left {
+      min-width: 250px;
+      background-color: #1A1A1B;
+      border-right: 1px solid #343536;
+      padding: 1rem;
+      position: fixed;
+      top: 56px; /* below the fixed header */
+      left: 0;
+      height: calc(100vh - 56px);
+      overflow-y: auto;
+    }
+    .sidebar-section {
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      font-weight: bold;
+      font-size: 0.9rem;
+      color: #D7DADC;
+    }
+    .sidebar-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.25rem;
+      cursor: pointer;
+      color: #D7DADC;
+    }
+    .sidebar-item:hover {
+      background-color: #272729;
+      border-radius: 4px;
+    }
+    .sidebar-item span.material-symbols-outlined {
+      margin-right: 0.5rem;
+      font-size: 20px;
+    }
+    .recent-item, .topic-item {
+      display: flex;
+      align-items: center;
+      padding: 0.4rem 0.25rem;
+      cursor: pointer;
+      color: #D7DADC;
+    }
+    .recent-item:hover, .topic-item:hover {
+      background-color: #272729;
+      border-radius: 4px;
+    }
+    .recent-pic {
+      width: 24px;
+      height: 24px;
+      border-radius: 9999px;
+      margin-right: 0.5rem;
+    }
+    .sidebar-divider {
+      border: 0;
+      height: 1px;
+      background-color: #343536;
+      margin: 1rem 0;
+    }
+
+    /* RIGHT CONTENT */
+    .content-right {
+      flex: 1;
+      padding: 1rem;
+      margin-left: 250px; /* Ensure content isn't hidden behind fixed sidebar */
+    }
+    .banner img {
+      width: 100%;
+      height: auto;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    /* COMMUNITY HEADER */
+    .community-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #1A1A1B;
+      padding: 1rem;
+      border-radius: 4px;
+      border: 1px solid #343536;
+      margin-bottom: 1rem;
+    }
+    .community-info {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+    }
+    .community-profile {
+      width: 64px;
+      height: 64px;
+      border-radius: 9999px;
+    }
+    .community-actions {
+      display: flex;
+      gap: 0.5rem;
+    }
+
+    /* FEED GRID */
+    .feed-grid {
+      display: flex;
+      gap: 1rem;
+    }
+    .main-feed {
+      flex: 1;
+    }
+    .sidebar-right {
+      width: 300px;
+      max-width: 300px;
+    }
+
+    /* NEW: Toggle Buttons for Feed Controls */
+    .feed-controls {
+      margin-bottom: 1rem;
+    }
+    .toggle-buttons {
+      display: flex;
+      gap: 0.5rem;
+    }
+    .toggle-btn {
+      background-color: #343536;
+      color: #D7DADC;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+    .toggle-btn:hover {
+      background-color: #484a4c;
+    }
+    .toggle-btn.active {
+      background-color: #484a4c;
+    }
+
+    /* PINNED HIGHLIGHTS */
+    .pinned-highlights {
+      border: 1px solid #343536;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+      background-color: #1A1A1B;
+    }
+    .pinned-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.5rem 1rem;
+      border-bottom: 1px solid #343536;
+    }
+    .pinned-header h2 {
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .pinned-content {
+      display: flex;
+      gap: 1rem;
+      padding: 1rem;
+    }
+    .pinned-post {
+      background-color: #272729;
+      border-radius: 4px;
+      padding: 0.5rem;
+      flex: 1;
+      text-align: center;
+    }
+    .pinned-post img {
+      max-width: 100%;
+      border-radius: 4px;
+      margin-bottom: 0.5rem;
+    }
+    .pinned-title {
+      font-size: 0.9rem;
+      color: #D7DADC;
+    }
+
+    /* POST CARDS */
+    .post-card {
+      border: 1px solid #343536;
+      border-radius: 4px;
+      background-color: #1A1A1B;
+      margin-bottom: 1rem;
+    }
+    .post-content {
+      padding: 1rem;
+    }
+    .post-header {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.85rem;
+      color: #818384;
+    }
+    .post-header .profile-pic {
+      width: 32px;
+      height: 32px;
+      border-radius: 9999px;
+    }
+    .subreddit-link {
+      color: #D7DADC;
+      font-weight: 600;
+    }
+    .post-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #D7DADC;
+      margin-bottom: 0.5rem;
+    }
+    .post-body {
+      font-size: 0.9rem;
+      color: #D7DADC;
+      margin-bottom: 0.5rem;
+    }
+    .post-media {
+      margin-bottom: 0.5rem;
+      background-color: #272729;
+      border-radius: 4px;
+      overflow: hidden;
+    }
+    .post-media video {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+    .post-footer {
+      display: flex;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    .pill-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      background-color: #343536;
+      color: #D7DADC;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .pill-btn:hover {
+      background-color: #484a4c;
+    }
+
+    /* VOTE PILL */
+    .vote-pill {
+      background-color: #343536;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 20px;
+      border-radius: 9999px;
+      color: #D7DADC;
+      font-size: 1rem;
+      font-weight: 600;
+      transition: background 0.2s;
+      cursor: pointer;
+    }
+    .vote-pill:hover {
+      background-color: #484a4c;
+    }
+    .vote-count {
+      font-size: 0.8rem;
+    }
+
+    /* SIDEBAR-RIGHT COMMUNITY INFO */
+    .about-community {
+      border: none;
+      border-radius: 4px;
+      background-color: #0A0A0A; /* Darker background */
+      padding: 1rem;
+    }
+    .about-community h2 {
+      margin-bottom: 0.5rem;
+      font-size: 1rem;
+      font-weight: bold;
+    }
+    .community-description {
+      font-size: 0.9rem;
+      margin-bottom: 0.5rem;
+    }
+    .community-stats {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 0.5rem;
+      font-size: 0.8rem;
+      color: #818384;
+    }
+    .online-dot {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: #46D160;
+      border-radius: 9999px;
+      margin-right: 0.25rem;
+    }
+    .community-created,
+    .community-type {
+      font-size: 0.8rem;
+      color: #818384;
+      margin-bottom: 0.5rem;
+    }
+    .community-rules {
+      list-style: disc;
+      list-style-position: inside;
+      font-size: 0.85rem;
+      color: #D7DADC;
+    }
+  </style>
 </head>
 <body>
   <!-- HEADER -->
@@ -15,74 +473,54 @@
     </div>
     <div class="nav-center">
       <div class="search-container">
-        <span class="search-icon">&#128269;</span>
-        <input type="text" class="search-box" placeholder="Search Busy Barbell">
+        <input type="text" class="search-box" placeholder="Search" />
+        <button class="btn search-btn" onclick="performSearch()">
+          <span class="material-symbols-outlined">search</span>
+        </button>
       </div>
     </div>
     <div class="nav-right">
-      <button class="btn-pill btn-get-app">
-        <svg class="qr-icon" viewBox="0 0 24 24">
-          <path d="M3 3h5v5H3V3zm2 2v1h1V5H5zm11-2h5v5h-5V3zm2 2v1h1V5h-1zM3 16h5v5H3v-5zm2 2v1h1v-1H5zM10 3h3v3h-3V3zm1 1v1h1V4h-1zM10 8h3v3h-3V8zm1 1v1h1V9h-1zM15 8h2v2h-2V8zm1 1v0h0-1 1zm3 3h3v3h-1v2h-2v-2h-2v-1h1v-2zM10 13h3v3h-3v-3zm1 1v1h1v-1h-1zM15 13h2v2h-2v-2zm1 1v0h0-1 1z" fill="currentColor"/>
-        </svg>
+      <button class="btn btn-pill btn-get-app">
+        <span class="material-symbols-outlined">qr_code_scanner</span>
         Get App
       </button>
-      <button class="btn-pill btn-login">Log In</button>
+      <button class="btn btn-pill btn-login">Log In</button>
       <span class="dots-icon">&#8230;</span>
     </div>
   </header>
-  
+
   <!-- MAIN GRID -->
   <div class="main-grid" id="mainGrid">
-    
     <!-- LEFT SIDEBAR -->
     <aside class="sidebar-left" id="sidebarLeft">
       <div class="sidebar-main">
-        <div class="sidebar-section">Main</div>
         <div class="sidebar-item">
-          <svg width="16" height="16" fill="currentColor" style="vertical-align: middle;">
-            <circle cx="8" cy="8" r="8"/>
-          </svg>
+          <span class="material-symbols-outlined">forum</span>
           <span>Community</span>
         </div>
         <div class="sidebar-item">
-          <svg width="16" height="16" fill="currentColor" style="vertical-align: middle;">
-            <rect x="1" y="3" width="14" height="12" rx="2" ry="2"/>
-            <line x1="1" y1="7" x2="15" y2="7" stroke="currentColor" stroke-width="1"/>
-          </svg>
-          <span>Calendar</span>
+          <span class="material-symbols-outlined">article</span>
+          <span>Articles</span>
         </div>
         <div class="sidebar-item">
-          <svg width="16" height="16" fill="currentColor" style="vertical-align: middle;">
-            <rect x="2" y="4" width="12" height="8" rx="2" ry="2"/>
-            <polyline points="2,4 8,9 14,4" fill="none" stroke="currentColor" stroke-width="1"/>
-          </svg>
+          <span class="material-symbols-outlined">school</span>
           <span>Classroom</span>
         </div>
         <div class="sidebar-item">
-          <svg width="16" height="16" fill="currentColor" style="vertical-align: middle;">
-            <circle cx="5" cy="5" r="3"/>
-            <circle cx="11" cy="5" r="3"/>
-            <path d="M2,14 C2,10 10,10 10,14" stroke="currentColor" stroke-width="1" fill="none"/>
-          </svg>
+          <span class="material-symbols-outlined">groups</span>
           <span>Members</span>
         </div>
         <div class="sidebar-item">
-          <svg width="16" height="16" fill="currentColor" style="vertical-align: middle;">
-            <rect x="2" y="6" width="3" height="6"/>
-            <rect x="7" y="4" width="3" height="8"/>
-            <rect x="12" y="2" width="3" height="10"/>
-          </svg>
+          <span class="material-symbols-outlined">leaderboard</span>
           <span>Leaderboard</span>
         </div>
         <div class="sidebar-item">
-          <svg width="16" height="16" fill="currentColor" style="vertical-align: middle;">
-            <circle cx="8" cy="8" r="8"/>
-            <rect x="7" y="4" width="2" height="2" fill="#fff"/>
-            <rect x="7" y="7" width="2" height="5" fill="#fff"/>
-          </svg>
+          <span class="material-symbols-outlined">data_loss_prevention</span>
           <span>About</span>
         </div>
       </div>
+      <!-- Visible divider above Recents -->
+      <hr class="sidebar-divider">
       <div class="sidebar-recents">
         <div class="sidebar-section">Recents</div>
         <div class="recent-item">
@@ -94,6 +532,8 @@
           <span>Post preview two…</span>
         </div>
       </div>
+      <!-- Visible divider above Topics -->
+      <hr class="sidebar-divider">
       <div class="sidebar-topics">
         <div class="sidebar-section">Topics</div>
         <div class="topic-item">Fitness</div>
@@ -102,11 +542,6 @@
         <div class="topic-item">Mindset</div>
       </div>
     </aside>
-    
-    <!-- VERTICAL SEPARATOR WITH COLLAPSE TOGGLE -->
-    <div class="sidebar-separator" id="sidebarSeparator">
-      <div class="collapse-toggle" id="collapseToggle">&#9650;</div>
-    </div>
     
     <!-- RIGHT CONTENT COLUMN -->
     <div class="content-right">
@@ -121,13 +556,11 @@
           <h1>Busy Barbell Community</h1>
         </div>
         <div class="community-actions">
-          <button class="btn-outline">
-            <svg class="plus-icon" width="16" height="16" viewBox="0 0 16 16" fill="white">
-              <path d="M8 1v14M1 8h14" stroke="white" stroke-width="2" stroke-linecap="round"/>
-            </svg>
+          <button class="btn btn-outline">
+            <span class="material-symbols-outlined">add</span>
             Create Post
           </button>
-          <button class="btn-pill btn-join">Join</button>
+          <button class="btn btn-pill btn-join">Join</button>
         </div>
       </div>
       
@@ -135,28 +568,14 @@
       <div class="feed-grid">
         <!-- MAIN FEED -->
         <main class="main-feed">
-          <!-- FEED CONTROLS (Dropdowns) -->
-          <div class="feed-controls" style="display: flex; gap: 12px;">
-            <div class="dropdown">
-              <button class="btn-pill dropdown-btn" id="sortDropdown" style="border-radius: 8px;">
-                Best <span class="arrow">&#9660;</span>
-              </button>
-              <div class="dropdown-content" id="sortContent">
-                <div class="dropdown-item">Best</div>
-                <div class="dropdown-item">Hot</div>
-                <div class="dropdown-item">New</div>
-                <div class="dropdown-item">Top</div>
-                <div class="dropdown-item">Rising</div>
-              </div>
-            </div>
-            <div class="dropdown">
-              <button class="btn-pill dropdown-btn" id="viewDropdown" style="border-radius: 8px;">
-                Card <span class="arrow">&#9660;</span>
-              </button>
-              <div class="dropdown-content" id="viewContent">
-                <div class="dropdown-item">Card</div>
-                <div class="dropdown-item">Collapsed</div>
-              </div>
+          <!-- FEED CONTROLS (Toggle Buttons) -->
+          <div class="feed-controls">
+            <div class="toggle-buttons">
+              <button class="btn btn-pill toggle-btn active">Best</button>
+              <button class="btn btn-pill toggle-btn">Hot</button>
+              <button class="btn btn-pill toggle-btn">New</button>
+              <button class="btn btn-pill toggle-btn">Top</button>
+              <button class="btn btn-pill toggle-btn">Rising</button>
             </div>
           </div>
           
@@ -164,12 +583,12 @@
           <div class="pinned-highlights">
             <div class="pinned-header">
               <h2>
-                <svg class="pin-icon" width="16" height="16" viewBox="0 0 16 16" fill="white" style="vertical-align: middle; margin-right: 8px;">
-                  <path d="M8 0L6 4H2l4 3-1 4 4-2 4 2-1-4 4-3h-4L10 0z"/>
-                </svg>
+                <span class="material-symbols-outlined">keep</span>
                 Pinned Highlights
               </h2>
-              <button id="togglePinned" class="toggle-pinned">&#9650;</button>
+              <button id="togglePinned" class="btn toggle-pinned">
+                <span class="material-symbols-outlined">keyboard_arrow_up</span>
+              </button>
             </div>
             <div class="pinned-content" id="pinnedContent">
               <div class="pinned-post">
@@ -192,7 +611,9 @@
                 <span>• Posted by u/someUser 2h ago</span>
               </div>
               <div class="post-title">Ethan Klein puts up a hater’s Instagram live on air...</div>
-              <div class="post-body">Possibly insulting fans, sending hate. This is a snippet from your screenshot.</div>
+              <div class="post-body">
+                Possibly insulting fans, sending hate. This is a snippet from your screenshot.
+              </div>
               <div class="post-media">
                 <video autoplay muted loop playsinline controls poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
                   <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
@@ -200,15 +621,15 @@
                 </video>
               </div>
               <div class="post-footer">
-                <button class="pill-btn vote-pill">
-                  <span class="pill-icon upvote">&#9650;</span>
+                <button class="btn pill-btn vote-pill">
+                  <span class="material-symbols-outlined">thumb_up</span>
                   <span class="vote-count">1123</span>
-                  <span class="pill-icon downvote">&#9660;</span>
+                  <span class="material-symbols-outlined">thumb_down</span>
                 </button>
-                <button class="pill-btn">Comments</button>
-                <button class="pill-btn">Award</button>
-                <button class="pill-btn">Share</button>
-                <button class="pill-btn">...</button>
+                <button class="btn pill-btn">Comments</button>
+                <button class="btn pill-btn">Award</button>
+                <button class="btn pill-btn">Share</button>
+                <button class="btn pill-btn">...</button>
               </div>
             </div>
           </div>
@@ -221,7 +642,9 @@
                 <span>• Posted by u/anotherUser 5h ago</span>
               </div>
               <div class="post-title">Am I overreacting? Thinking this means my wife slept with the guy</div>
-              <div class="post-body">A snippet from your screenshot about texts and possible cheating.</div>
+              <div class="post-body">
+                A snippet from your screenshot about texts and possible cheating.
+              </div>
               <div class="post-media">
                 <video autoplay muted loop playsinline controls poster="https://via.placeholder.com/800x450/000000/ffffff?text=Screenshot+Placeholder">
                   <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
@@ -229,15 +652,15 @@
                 </video>
               </div>
               <div class="post-footer">
-                <button class="pill-btn vote-pill">
-                  <span class="pill-icon upvote">&#9650;</span>
+                <button class="btn pill-btn vote-pill">
+                  <span class="material-symbols-outlined">thumb_up</span>
                   <span class="vote-count">356</span>
-                  <span class="pill-icon downvote">&#9660;</span>
+                  <span class="material-symbols-outlined">thumb_down</span>
                 </button>
-                <button class="pill-btn">Comments</button>
-                <button class="pill-btn">Award</button>
-                <button class="pill-btn">Share</button>
-                <button class="pill-btn">...</button>
+                <button class="btn pill-btn">Comments</button>
+                <button class="btn pill-btn">Award</button>
+                <button class="btn pill-btn">Share</button>
+                <button class="btn pill-btn">...</button>
               </div>
             </div>
           </div>
@@ -257,21 +680,19 @@
                 </video>
               </div>
               <div class="post-footer">
-                <button class="pill-btn vote-pill">
-                  <span class="pill-icon upvote">&#9650;</span>
+                <button class="btn pill-btn vote-pill">
+                  <span class="material-symbols-outlined">thumb_up</span>
                   <span class="vote-count">123</span>
-                  <span class="pill-icon downvote">&#9660;</span>
+                  <span class="material-symbols-outlined">thumb_down</span>
                 </button>
-                <button class="pill-btn">Comments</button>
-                <button class="pill-btn">Award</button>
-                <button class="pill-btn">Share</button>
-                <button class="pill-btn">...</button>
+                <button class="btn pill-btn">Comments</button>
+                <button class="btn pill-btn">Award</button>
+                <button class="btn pill-btn">Share</button>
+                <button class="btn pill-btn">...</button>
               </div>
             </div>
           </div>
         </main>
-        
-        <!-- RIGHT SIDEBAR -->
         <aside class="sidebar-right">
           <div class="about-community">
             <h2>About This Community</h2>
@@ -279,9 +700,8 @@
               Busy Barbell Community is a place for enthusiasts to discuss training, nutrition, and more.
             </p>
             <div class="community-stats">
-              <span>12,345 Members</span>
-              <span><span class="online-dot"></span>1,234 Online</span>
-              <span>567 Posts</span>
+              <span>123 Posts</span>
+              <span><span class="online-dot"></span>10 Online</span>
             </div>
             <p class="community-created">Created: January 1, 2020</p>
             <div class="community-type">Public Community</div>
@@ -295,8 +715,12 @@
       </div>
     </div>
   </div>
-  
-  <!-- External JavaScript -->
-  <script src="js/main.js"></script>
+  <script>
+    function performSearch() {
+      const query = document.querySelector('.search-box').value;
+      console.log("Searching for:", query);
+      // Implement search functionality here if desired
+    }
+  </script>
 </body>
 </html>
