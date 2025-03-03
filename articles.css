@@ -1,0 +1,34 @@
+/* articles.css */
+.articles-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+  @media (max-width: 1200px) {
+    .articles-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  .article-card {
+    background-color: #1A1A1B;
+    border: 1px solid #343536;
+    border-radius: 4px;
+    overflow: hidden;
+    transition: transform 0.2s;
+    text-align: center;
+    padding: 0.5rem;
+  }
+  .article-card:hover {
+    transform: scale(1.02);
+  }
+  .article-card img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+  .article-title {
+    margin-top: 0.5rem;
+    font-size: 1rem;
+    font-weight: bold;
+    color: #D7DADC;
+  }

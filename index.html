@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Busy Barbell - Dark Reddit-Style</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="css/global.css">
+  <!-- Index-specific CSS -->
+  <link rel="stylesheet" href="css/index.css">
+  <!-- Fonts & Prefetch Links -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+  <link rel="prefetch" href="index.html">
+  <link rel="prefetch" href="articles.html">
+  <link rel="prefetch" href="classroom.html">
+  <link rel="prefetch" href="supplements.html">
+  <link rel="prefetch" href="gym-rankings.html">
+  <link rel="prefetch" href="supplement-rankings.html">
+  <link rel="prefetch" href="training-philosophy.html">
+</head>
+
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-left">
+      <div class="logo">
+        <img src="https://i.postimg.cc/NfK3ZhTB/busybarbell-logo.png" alt="Long Logo" class="logo-long">
+        <img src="https://i.postimg.cc/C5wP90sM/Reddit-Logo.png" alt="Short Logo" class="logo-short">
+      </div>
+    </div>
+    <div class="nav-center">
+      <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search">
+        <button class="btn search-btn" onclick="performSearch()">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-pill btn-login">Log In</button>
+      <span class="dots-icon">&#8230;</span>
+    </div>
+  </header>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid" id="mainGrid">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-left" id="sidebarLeft">
+      <div class="sidebar-main">
+        <a class="sidebar-item" href="index.html">
+          <span class="material-symbols-outlined">forum</span>
+          <span>Community</span>
+        </a>
+        <a class="sidebar-item" href="gym-rankings.html">
+          <span class="material-symbols-outlined">exercise</span>
+          <span>Gym Rankings</span>
+        </a>
+        <a class="sidebar-item" href="supplement-rankings.html">
+          <span class="material-symbols-outlined">local_pharmacy</span>
+          <span>Supplement Rankings</span>
+        </a>
+        <a class="sidebar-item" href="training-philosophy.html">
+          <span class="material-symbols-outlined">fitness_center</span>
+          <span>Training Philosophy</span>
+        </a>
+      </div>
+      <hr class="sidebar-divider">
+      <div class="sidebar-recents">
+        <div class="sidebar-section">Recents</div>
+        <div class="recent-item">
+          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+          <span>Post preview one…</span>
+        </div>
+        <div class="recent-item">
+          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+          <span>Post preview two…</span>
+        </div>
+      </div>
+      <hr class="sidebar-divider">
+      <div class="sidebar-topics">
+        <div class="sidebar-section">Topics</div>
+        <div class="topic-item">Fitness</div>
+        <div class="topic-item">Nutrition</div>
+        <div class="topic-item">Recovery</div>
+        <div class="topic-item">Mindset</div>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT COLUMN -->
+    <div class="content-right">
+      <!-- Banner -->
+      <div class="banner">
+        <img src="https://i.postimg.cc/9FTc92Dz/channels4-banner.jpg" alt="Community Banner">
+      </div>
+      <!-- Community Header -->
+      <div class="community-header">
+        <div class="community-info">
+          <img class="community-profile" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="Community Profile">
+          <h1>Busy Barbell Community</h1>
+        </div>
+        <div class="community-actions">
+          <button class="btn btn-outline" onclick="window.location.href='create_post.html';">
+            <span class="material-symbols-outlined">add</span>
+            Create Post
+          </button>
+          <!-- MODAL BACKDROP -->
+          <div id="modalBackdrop" class="modal-backdrop" style="display: none;"></div>
+          <!-- MODAL CONTAINER -->
+          <div id="createPostModal" class="modal-container" style="display: none;">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h2>Create a Post</h2>
+                <button id="closeModalBtn" class="close-btn">X</button>
+              </div>
+              <div class="modal-body">
+                <form id="addPostForm">
+                  <input type="text" name="title" placeholder="Title" required />
+                  <textarea name="body" rows="5" placeholder="Body text..." required></textarea>
+                  <button type="submit" class="btn btn-pill btn-login">Post</button>
+                </form>
+                <div id="postMessage"></div>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-pill btn-join">Join</button>
+        </div>
+      </div>
+      <!-- FEED GRID -->
+      <div class="feed-grid">
+        <main class="main-feed">
+          <div class="feed-controls">
+            <div class="toggle-buttons">
+              <button class="btn btn-pill toggle-btn active">Best</button>
+              <button class="btn btn-pill toggle-btn">Hot</button>
+              <button class="btn btn-pill toggle-btn">New</button>
+              <button class="btn btn-pill toggle-btn">Top</button>
+              <button class="btn btn-pill toggle-btn">Rising</button>
+            </div>
+          </div>
+          <div id="feedContainer">
+            <!-- Dynamic posts will be inserted here -->
+          </div>
+          <!-- Feed Posts -->
+          <div class="post-card">
+            <div class="post-content">
+              <div class="post-header">
+                <img class="profile-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+                <a href="#" class="subreddit-link">r/fuomai</a>
+                <span>• Posted by u/someUser 2h ago</span>
+              </div>
+              <div class="post-title">Ethan Klein puts up a hater’s Instagram live on air...</div>
+              <div class="post-body">
+                Possibly insulting fans, sending hate. This is a snippet from your screenshot.
+              </div>
+              <div class="post-media">
+                <video autoplay muted loop playsinline controls poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+              <div class="post-footer">
+                <button class="btn pill-btn vote-pill">
+                  <span class="material-symbols-outlined">thumb_up</span>
+                  <span class="vote-count">1123</span>
+                  <span class="material-symbols-outlined">thumb_down</span>
+                </button>
+                <button class="btn pill-btn">Comments</button>
+                <button class="btn pill-btn">Award</button>
+                <button class="btn pill-btn">Share</button>
+                <button class="btn pill-btn">...</button>
+              </div>
+            </div>
+          </div>
+          <!-- (Additional feed posts as needed) -->
+        </main>
+        <aside class="sidebar-right">
+          <div class="about-community">
+            <h2>About This Community</h2>
+            <p class="community-description">
+              Busy Barbell Community is a place for enthusiasts to discuss training, nutrition, and more.
+            </p>
+            <div class="community-stats">
+              <span>123 Posts</span>
+              <span><span class="online-dot"></span>10 Online</span>
+            </div>
+            <p class="community-created">Created: January 1, 2020</p>
+            <div class="community-type">Public Community</div>
+            <ul class="community-rules">
+              <li>Be respectful to one another.</li>
+              <li>No spam or self-promotion.</li>
+              <li>Keep posts on-topic.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+  <script src="js/main.js"></script>
+</body>
+
+</html>

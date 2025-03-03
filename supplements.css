@@ -1,0 +1,71 @@
+/* supplements.css */
+
+/* Grid layout similar to the Momentous product listing */
+.supplements-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  
+  @media (max-width: 1200px) {
+    .supplements-grid {
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    }
+  }
+  
+  /* Each product card */
+  .supplement-card {
+    background-color: #1A1A1B;
+    border: 1px solid #343536;
+    border-radius: 4px;
+    padding: 1rem;
+    text-align: center;
+    transition: transform 0.2s;
+  }
+  
+  .supplement-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Product image */
+  .supplement-card img {
+    width: 100%;
+    height: auto;
+    margin-bottom: 0.75rem;
+    border-radius: 4px;
+  }
+  
+  /* Title, desc, and price */
+  .supplement-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #D7DADC;
+    margin-bottom: 0.25rem;
+  }
+  
+  .supplement-desc {
+    font-size: 0.9rem;
+    color: #818384;
+    margin-bottom: 0.5rem;
+  }
+  
+  .supplement-price {
+    font-size: 1rem;
+    font-weight: bold;
+    margin-bottom: 0.5rem;
+    color: #D7DADC;
+  }
+  
+  /* Add to Bag button */
+  .add-to-bag {
+    background-color: #FF4500; /* Bright orange */
+    color: #FFFFFF;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 600;
+    transition: background-color 0.2s;
+  }
+  
+  .add-to-bag:hover {
+    background-color: #e03e00;
+  }

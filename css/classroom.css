@@ -1,0 +1,68 @@
+/* classroom.css */
+
+/* Grid for the class cards (like the Skool screenshot) */
+.courses-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr); /* 3 wide, adjust as needed */
+    gap: 1.5rem;
+    margin-bottom: 2rem;
+  }
+  
+  /* Class Card */
+  .course-card {
+    background-color: #1A1A1B;
+    border: 1px solid #343536;
+    border-radius: 4px;
+    padding: 1rem;
+    transition: transform 0.2s;
+    text-align: center;
+  }
+  
+  .course-card:hover {
+    transform: scale(1.02);
+  }
+  
+  /* Thumbnail */
+  .course-thumb {
+    width: 100%;
+    height: auto;
+    border-radius: 4px;
+    margin-bottom: 0.75rem;
+  }
+  
+  /* Title & Description */
+  .course-title {
+    font-size: 1rem;
+    font-weight: bold;
+    color: #D7DADC;
+    margin-bottom: 0.25rem;
+  }
+  .course-desc {
+    font-size: 0.9rem;
+    color: #818384;
+    margin-bottom: 0.75rem;
+    line-height: 1.4;
+  }
+  
+  /* Progress Bar */
+  .progress-container {
+    background-color: #343536;
+    border-radius: 4px;
+    height: 8px;
+    width: 100%;
+    margin: 0 auto 0.5rem auto;
+    overflow: hidden;
+  }
+  .progress-bar {
+    background-color: #FF4500; /* Bright orange */
+    height: 100%;
+    width: 0%; /* Adjust via inline style for dynamic progress */
+    transition: width 0.4s ease;
+  }
+  
+  /* Progress Text */
+  .progress-text {
+    font-size: 0.8rem;
+    color: #D7DADC;
+    margin-bottom: 0;
+  }

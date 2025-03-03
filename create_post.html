@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Create Post - Busy Barbell</title>
+  <!-- Global CSS -->
+  <link rel="stylesheet" href="css/global.css">
+  <!-- Index-specific CSS (can also be reused for create_post) -->
+  <link rel="stylesheet" href="css/index.css">
+  <!-- Quill Editor CSS (for the rich text editor) -->
+  <link href="https://cdn.quilljs.com/1.3.6/quill.snow.css" rel="stylesheet" />
+  <!-- Fonts & Icons -->
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
+</head>
+<body>
+  <!-- HEADER -->
+  <header>
+    <div class="nav-left">
+      <div class="logo">
+        <img src="https://i.postimg.cc/B6nPzw19/longlogo.png" alt="Long Logo" class="logo-long">
+        <img src="https://i.postimg.cc/C5wP90sM/Reddit-Logo.png" alt="Short Logo" class="logo-short">
+      </div>
+    </div>
+    <div class="nav-center">
+      <div class="search-container">
+        <input type="text" class="search-box" placeholder="Search">
+        <button class="btn search-btn" onclick="performSearch()">
+          <span class="material-symbols-outlined">search</span>
+        </button>
+      </div>
+    </div>
+    <div class="nav-right">
+      <button class="btn btn-pill btn-login">Log In</button>
+      <span class="dots-icon">&#8230;</span>
+    </div>
+  </header>
+
+  <!-- MAIN GRID -->
+  <div class="main-grid" id="mainGrid">
+    <!-- LEFT SIDEBAR -->
+    <aside class="sidebar-left" id="sidebarLeft">
+      <div class="sidebar-main">
+        <a class="sidebar-item" href="index.html">
+          <span class="material-symbols-outlined">forum</span>
+          <span>Community</span>
+        </a>
+        <a class="sidebar-item" href="gym-rankings.html">
+          <span class="material-symbols-outlined">exercise</span>
+          <span>Gym Rankings</span>
+        </a>
+        <a class="sidebar-item" href="supplement-rankings.html">
+          <span class="material-symbols-outlined">local_pharmacy</span>
+          <span>Supplement Rankings</span>
+        </a>
+        <a class="sidebar-item" href="training-philosophy.html">
+          <span class="material-symbols-outlined">fitness_center</span>
+          <span>Training Philosophy</span>
+        </a>
+      </div>
+      <hr class="sidebar-divider">
+      <div class="sidebar-recents">
+        <div class="sidebar-section">Recents</div>
+        <div class="recent-item">
+          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+          <span>Post preview one…</span>
+        </div>
+        <div class="recent-item">
+          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
+          <span>Post preview two…</span>
+        </div>
+      </div>
+      <hr class="sidebar-divider">
+      <div class="sidebar-topics">
+        <div class="sidebar-section">Topics</div>
+        <div class="topic-item">Fitness</div>
+        <div class="topic-item">Nutrition</div>
+        <div class="topic-item">Recovery</div>
+        <div class="topic-item">Mindset</div>
+      </div>
+    </aside>
+
+    <!-- RIGHT CONTENT COLUMN -->
+    <div class="content-right">
+      <!-- No banner or community header here -->
+      <div class="feed-grid">
+        <main class="main-feed">
+          <div class="create-post-container">
+            <h1>Create a Post</h1>
+
+            <!-- The form for creating a post -->
+            <form id="addPostForm">
+              <!-- Title + Character Counter -->
+              <div class="title-row">
+                <input
+                  type="text"
+                  id="titleInput"
+                  name="title"
+                  placeholder="Title"
+                  maxlength="300"
+                  required
+                />
+                <div class="title-counter" id="titleCounter">0/300</div>
+              </div>
+
+              <!-- Quill editor for body text -->
+              <div class="body-row">
+                <div id="editor"></div>
+                <!-- Hidden input to store Quill's HTML -->
+                <input type="hidden" name="body" id="bodyInput" />
+              </div>
+
+              <button type="submit" class="btn btn-pill btn-login">Post</button>
+            </form>
+
+            <div id="postMessage"></div>
+          </div>
+        </main>
+
+        <!-- About This Community Sidebar -->
+        <aside class="sidebar-right">
+          <div class="about-community">
+            <h2>About This Community</h2>
+            <p class="community-description">
+              Busy Barbell Community is a place for enthusiasts to discuss training, nutrition, and more.
+            </p>
+            <div class="community-stats">
+              <span>123 Posts</span>
+              <span><span class="online-dot"></span>10 Online</span>
+            </div>
+            <p class="community-created">Created: January 1, 2020</p>
+            <div class="community-type">Public Community</div>
+            <ul class="community-rules">
+              <li>Be respectful to one another.</li>
+              <li>No spam or self-promotion.</li>
+              <li>Keep posts on-topic.</li>
+            </ul>
+          </div>
+        </aside>
+      </div>
+    </div>
+  </div>
+
+  <!-- Quill Editor JS -->
+  <script src="https://cdn.quilljs.com/1.3.6/quill.js"></script>
+  <!-- Main JS (handles form submission, etc.) -->
+  <script src="js/main.js"></script>
+
+  <script>
+    // Initialize Quill and make it global so main.js can see it
+    window.quill = new Quill('#editor', {
+      theme: 'snow',
+      modules: {
+        toolbar: [
+          ['bold', 'italic', 'underline', 'strike'],
+          ['link']
+        ]
+      }
+    });
+  </script>
+</body>
+</html>

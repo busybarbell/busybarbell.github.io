@@ -1,0 +1,457 @@
+/* index.css */
+
+/* Banner (if the index page uses one) */
+.banner img {
+  width: 100%;
+  height: auto;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+}
+
+/* Community Header */
+.community-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.community-info {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.community-profile {
+  width: 64px;
+  height: 64px;
+  border-radius: 9999px;
+}
+
+.community-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* Feed Grid & Layout for Main Content */
+.feed-grid {
+  display: flex;
+  gap: 1rem;
+}
+
+.main-feed {
+  flex: 1;
+}
+
+.sidebar-right {
+  width: 300px;
+  max-width: 300px;
+}
+
+/* Feed Controls */
+.feed-controls {
+  margin-bottom: 1rem;
+}
+
+.toggle-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.toggle-btn {
+  background-color: #343536;
+  color: #D7DADC;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+
+.toggle-btn:hover {
+  background-color: #484a4c;
+}
+
+.toggle-btn.active {
+  background-color: #484a4c;
+}
+
+/* Pinned Highlights */
+.pinned-highlights {
+  border: 1px solid #343536;
+  border-radius: 4px;
+  margin-bottom: 1rem;
+  background-color: #1A1A1B;
+}
+
+.pinned-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+  border-bottom: 1px solid #343536;
+}
+
+.pinned-header h2 {
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.pinned-content {
+  display: flex;
+  gap: 1rem;
+  padding: 1rem;
+}
+
+.pinned-post {
+  background-color: #272729;
+  border-radius: 4px;
+  padding: 0.5rem;
+  flex: 1;
+  text-align: center;
+}
+
+.pinned-post img {
+  max-width: 100%;
+  border-radius: 4px;
+  margin-bottom: 0.5rem;
+}
+
+.pinned-title {
+  font-size: 0.9rem;
+  color: #D7DADC;
+}
+
+/* Post Cards (Feed Posts) */
+.post-card {
+  border: 1px solid #343536;
+  border-radius: 4px;
+  background-color: #1A1A1B;
+  margin-bottom: 1rem;
+}
+
+.post-content {
+  padding: 1rem;
+}
+
+.post-header {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.85rem;
+  color: #818384;
+}
+
+.post-header .profile-pic {
+  width: 32px;
+  height: 32px;
+  border-radius: 9999px;
+}
+
+.subreddit-link {
+  color: #D7DADC;
+  font-weight: 600;
+}
+
+.post-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #D7DADC;
+  margin-bottom: 0.5rem;
+}
+
+.post-body {
+  font-size: 0.9rem;
+  color: #D7DADC;
+  margin-bottom: 0.5rem;
+}
+
+.post-media {
+  margin-bottom: 0.5rem;
+  background-color: #272729;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.post-media video {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+
+.post-footer {
+  display: flex;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.pill-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  background-color: #343536;
+  color: #D7DADC;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.pill-btn:hover {
+  background-color: #484a4c;
+}
+
+.vote-pill {
+  background-color: #343536;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 9999px;
+  color: #D7DADC;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: background 0.2s;
+  cursor: pointer;
+}
+
+.vote-pill:hover {
+  background-color: #484a4c;
+}
+
+.vote-count {
+  font-size: 0.8rem;
+}
+
+/* About Community Section (if present on index page) */
+.about-community {
+  border: none;
+  border-radius: 4px;
+  background-color: #0A0A0A;
+  padding: 1.5rem;
+}
+
+.about-community h2 {
+  margin-bottom: 0.5rem;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.community-description {
+  font-size: 0.9rem;
+  margin-bottom: 0.5rem;
+}
+
+.community-stats {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
+  color: #818384;
+}
+
+.online-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  background-color: #46D160;
+  border-radius: 9999px;
+  margin-right: 0.25rem;
+}
+
+.community-created,
+.community-type {
+  font-size: 0.8rem;
+  color: #818384;
+  margin-bottom: 0.5rem;
+}
+
+.community-rules {
+  list-style: disc;
+  list-style-position: inside;
+  font-size: 0.85rem;
+  color: #D7DADC;
+}
+
+/* Modal Backdrop */
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  /* dark overlay */
+  z-index: 999;
+  /* on top of the page */
+}
+
+/* Modal Container */
+.modal-container {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  /* center the modal */
+  width: 90%;
+  max-width: 600px;
+  background-color: #1A1A1B;
+  border: 1px solid #343536;
+  border-radius: 8px;
+  z-index: 1000;
+  /* above the backdrop */
+  display: flex;
+  flex-direction: column;
+}
+
+/* Modal Content Layout */
+.modal-content {
+  padding: 1rem;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.2rem;
+  color: #D7DADC;
+}
+
+.close-btn {
+  background: none;
+  border: none;
+  font-size: 1.2rem;
+  color: #D7DADC;
+  cursor: pointer;
+}
+
+/* Modal Body */
+.modal-body form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.modal-body form input,
+.modal-body form textarea {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: #272729;
+  color: #D7DADC;
+  border: 1px solid #343536;
+  border-radius: 4px;
+}
+
+.modal-body form button {
+  align-self: flex-end;
+}
+
+#postMessage {
+  font-size: 0.9rem;
+  margin-top: -0.5rem;
+}
+
+/* --- Minimal Create Post Layout Overrides --- */
+
+/* Hide old create post styles that are no longer needed */
+.post-type-tabs,
+.create-post-wrapper,
+.create-post-form {
+  display: none !important;
+}
+
+/* Container for the new create post form */
+.create-post-container {
+  margin-top: 2rem;
+}
+
+/* "Create a Post" heading */
+.create-post-container h1 {
+  font-size: 1.2rem;
+  color: #D7DADC;
+  margin-bottom: 1rem;
+}
+
+/* Basic form layout */
+.create-post-container form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: 1rem;
+}
+
+/* Title row with character counter */
+.title-row {
+  position: relative;
+}
+
+#titleInput {
+  width: 100%;
+  padding: 0.75rem;
+  background-color: transparent;  /* no fill, just an outline */
+  color: #D7DADC;
+  font-size: 1rem;
+  border: 1px solid #343536;
+  border-radius: 4px;
+  outline: none;
+}
+
+.title-counter {
+  position: absolute;
+  top: 8px;
+  right: 12px;
+  font-size: 0.8rem;
+  color: #818384;
+}
+
+/* Quill Editor area */
+#editor {
+  min-height: 200px;
+}
+
+/* Quill Editor Dark Theme Overrides */
+
+/* Editor container border */
+.ql-container.ql-snow {
+  border: 1px solid #343536;
+}
+
+/* Editor background */
+.ql-editor {
+  background-color: #1A1A1B;
+  color: #D7DADC;
+  min-height: 200px;
+}
+
+/* Quill Toolbar */
+.ql-toolbar.ql-snow {
+  background-color: #1A1A1B;
+  border: 1px solid #343536;
+}
+
+/* Toolbar button and picker colors */
+.ql-toolbar button,
+.ql-toolbar .ql-picker-label,
+.ql-toolbar .ql-picker-item {
+  color: #D7DADC;
+}
+
+/* Toolbar hover effect */
+.ql-toolbar button:hover,
+.ql-toolbar .ql-picker-label:hover,
+.ql-toolbar .ql-picker-item:hover {
+  background-color: #2b2b2c;
+}
+
+/* The Post button styling in the minimal layout */
+.create-post-container button[type="submit"] {
+  align-self: flex-end;
+}
