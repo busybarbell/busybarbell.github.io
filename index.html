@@ -2,202 +2,493 @@
 <html lang="en">
 
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Busy Barbell - Dark Reddit-Style</title>
-  <!-- Global CSS -->
-  <link rel="stylesheet" href="css/global.css">
-  <!-- Index-specific CSS -->
-  <link rel="stylesheet" href="css/index.css">
-  <!-- Fonts & Prefetch Links -->
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans&display=swap">
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" />
-  <link rel="prefetch" href="index.html">
-  <link rel="prefetch" href="articles.html">
-  <link rel="prefetch" href="classroom.html">
-  <link rel="prefetch" href="supplements.html">
-  <link rel="prefetch" href="gym-rankings.html">
-  <link rel="prefetch" href="supplement-rankings.html">
-  <link rel="prefetch" href="training-philosophy.html">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Spring Rebound Sale | Personal Training</title>
+    <style>
+        /* =========================================
+           GLOBAL STYLES & CSS VARIABLES (Reverted to Blue)
+           ========================================= */
+        :root {
+            /* Light Mode */
+            --background-color: #ffffff;
+            --secondary-background: #f6f7f8;
+            --text-color: #1c1c1c;
+            --secondary-text-color: #878a8c;
+            --border-color: #e0e0e0;
+            --accent-color: #0071e3;
+            --accent-hover: #0077ed;
+            --nav-background: var(--background-color);
+            --button-text: #ffffff;
+            --thumbnail-border: #d0d0d0;
+            --thumbnail-active: var(--accent-color);
+            --highlight-background: rgba(0, 113, 227, 0.1);
+            --highlight-border: rgba(0, 113, 227, 0.2);
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                /* Dark Mode */
+                --background-color: #1a1a1b;
+                --secondary-background: #272729;
+                --text-color: #d7dadc;
+                --secondary-text-color: #878a8c;
+                --border-color: #343536;
+                --accent-color: #0071e3;
+                --accent-hover: #0077ed;
+                --nav-background: var(--background-color);
+                --button-text: #ffffff;
+                --thumbnail-border: #3a3a3b;
+                --thumbnail-active: var(--accent-color);
+                --highlight-background: rgba(0, 113, 227, 0.15);
+                --highlight-border: rgba(0, 113, 227, 0.3);
+            }
+        }
+
+        /* Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background-color: var(--background-color);
+            color: var(--text-color);
+            line-height: 1.5;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        /* =========================================
+           NAVIGATION STYLES (Sticky, Full-Width)
+           ========================================= */
+        .nav-container {
+            position: sticky;
+            top: 0;
+            left: 0;
+            right: 0;
+            background-color: var(--nav-background);
+            border-bottom: 1px solid var(--border-color);
+            z-index: 1000;
+        }
+
+        .navbar {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 600;
+            font-size: 1.2rem;
+        }
+
+        .nav-button {
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            border: none;
+            border-radius: 999px;
+            padding: 0.5rem 1.2rem;
+            font-size: 0.9rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* =========================================
+           MAIN CONTENT STYLES & SPACING (Full-Width)
+           ========================================= */
+        .main-container {
+            min-height: 100vh;
+            background-color: var(--background-color);
+        }
+
+        .video-offer-container {
+            display: flex;
+            width: 100%;
+            gap: 2rem;
+            padding: 2rem;
+        }
+
+        .left-column {
+            flex: 1;
+        }
+
+        .right-column {
+            flex: 0 0 450px;
+        }
+
+        /* Make the offer-box sticky instead of the right column */
+        .offer-box {
+            box-sizing: border-box;
+            background-color: transparent;
+            border-radius: 12px;
+            padding: 1.5rem;
+            top: 20px;
+            border: 1px solid var(--border-color);
+        }
+
+        /* =========================================
+           MEDIA CONTENT STYLES
+           ========================================= */
+        .media-content {}
+
+        .main-media {
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            background-color: var(--secondary-background);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-bottom: 0.5rem;
+        }
+
+        .main-media iframe,
+        .main-media img,
+        .main-media video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnails {
+            display: flex;
+            gap: 0.5rem;
+            justify-content: flex-start;
+            width: 100%;
+        }
+
+        .thumbnail {
+            width: 80px;
+            height: 60px;
+            border-radius: 8px;
+            cursor: pointer;
+            border: 2px solid var(--thumbnail-border);
+            transition: border-color 0.2s ease;
+            overflow: hidden;
+        }
+
+        .thumbnail img,
+        .thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .thumbnail.active {
+            border-color: var(--thumbnail-active);
+        }
+
+        /* =========================================
+           FEATURES SECTION STYLES
+           ========================================= */
+        .features-section {
+            background-color: var(--secondary-background);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .features-section h2 {
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .features-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .feature-item {
+            display: flex;
+            gap: 1rem;
+            align-items: flex-start;
+        }
+
+        .feature-item svg {
+            flex-shrink: 0;
+            color: var(--accent-color);
+        }
+
+        .feature-text {
+            flex-grow: 1;
+        }
+
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        /* =========================================
+           OFFER BUTTON STYLING
+           ========================================= */
+        .cta-button {
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            border: none;
+            border-radius: 30px;
+            padding: 0.8rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            margin-top: 1.5rem;
+            display: block;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        /* =========================================
+           MOBILE CTA BUTTON: Hidden by default
+           ========================================= */
+        .mobile-cta-button {
+            display: none;
+        }
+
+        /* =========================================
+           RESPONSIVE STYLES
+           ========================================= */
+        @media (max-width: 1200px) {
+            .video-offer-container {
+                flex-direction: column;
+                padding: 1rem;
+            }
+            /* Hide the right-column when vertical */
+            .right-column {
+                display: none;
+            }
+            /* Show the mobile CTA button in place of the offer box */
+            .mobile-cta-button {
+                display: block;
+                margin-top: 1.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 0.6rem 1.2rem;
+            }
+            .main-title {
+                font-size: 2rem;
+            }
+            .offer-details {
+                font-size: 1.1rem;
+            }
+        }
+
+        /* Mobile-specific styles: Targeting devices (with no hover capability) */
+        @media (max-width: 480px) and (hover: none) {
+            .nav-button {
+                padding: 0.4rem 1rem;
+                font-size: 0.8rem;
+            }
+            .main-title {
+                font-size: 1.8rem;
+            }
+            .callout {
+                font-size: 1rem;
+            }
+            .offer-details {
+                font-size: 1rem;
+            }
+            .cta-button {
+                padding: 0.7rem 1.5rem;
+                font-size: 1rem;
+            }
+            .thumbnail {
+                width: 60px;
+                height: 45px;
+            }
+            /* Adjust the main video container to break out of the parent's padding */
+            .main-media {
+                aspect-ratio: 16 / 9;
+                width: calc(100% + 2rem);
+                margin-left: -1rem;
+                margin-right: -1rem;
+                margin-top: -1rem; /* Remove top padding on mobile */
+                border-radius: 0;
+            }
+        }
+    </style>
 </head>
 
 <body>
-  <!-- HEADER -->
-  <header>
-    <div class="nav-left">
-      <div class="logo">
-        <img src="https://i.postimg.cc/NfK3ZhTB/busybarbell-logo.png" alt="Long Logo" class="logo-long">
-        <img src="https://i.postimg.cc/C5wP90sM/Reddit-Logo.png" alt="Short Logo" class="logo-short">
-      </div>
+    <!-- Navigation bar (sticky) -->
+    <div class="nav-container">
+        <nav class="navbar">
+            <div class="logo">Personal Trainer</div>
+            <button class="nav-button">Get Started</button>
+        </nav>
     </div>
-    <div class="nav-center">
-      <div class="search-container">
-        <input type="text" class="search-box" placeholder="Search">
-        <button class="btn search-btn" onclick="performSearch()">
-          <span class="material-symbols-outlined">search</span>
-        </button>
-      </div>
-    </div>
-    <div class="nav-right">
-      <button class="btn btn-pill btn-login">Log In</button>
-      <span class="dots-icon">&#8230;</span>
-    </div>
-  </header>
 
-  <!-- MAIN GRID -->
-  <div class="main-grid" id="mainGrid">
-    <!-- LEFT SIDEBAR -->
-    <aside class="sidebar-left" id="sidebarLeft">
-      <div class="sidebar-main">
-        <a class="sidebar-item" href="index.html">
-          <span class="material-symbols-outlined">forum</span>
-          <span>Community</span>
-        </a>
-        <a class="sidebar-item" href="gym-rankings.html">
-          <span class="material-symbols-outlined">exercise</span>
-          <span>Gym Rankings</span>
-        </a>
-        <a class="sidebar-item" href="supplement-rankings.html">
-          <span class="material-symbols-outlined">local_pharmacy</span>
-          <span>Supplement Rankings</span>
-        </a>
-        <a class="sidebar-item" href="training-philosophy.html">
-          <span class="material-symbols-outlined">fitness_center</span>
-          <span>Training Philosophy</span>
-        </a>
-      </div>
-      <hr class="sidebar-divider">
-      <div class="sidebar-recents">
-        <div class="sidebar-section">Recents</div>
-        <div class="recent-item">
-          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
-          <span>Post preview one…</span>
+    <!-- Main content area -->
+    <main class="main-container">
+        <div class="video-offer-container">
+            <!-- Left Column: Video content, thumbnails (tabs), and features -->
+            <div class="left-column">
+                <section class="media-content">
+                    <div class="main-media" id="main-media">
+                        <!-- Default content: Main video player -->
+                        <video autoplay muted id="main-video" controls width="100%">
+                            <source src="video1.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                    <div class="thumbnails">
+                        <!-- Video thumbnails as tabs -->
+                        <div class="thumbnail active" data-type="video" data-url="video1.mp4">
+                            <video muted>
+                                <source src="video1.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <video muted>
+                                <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <video muted>
+                                <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <video muted>
+                                <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <video muted>
+                                <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <video muted>
+                                <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                            </video>
+                        </div>
+                    </div>
+                    <!-- Mobile CTA Button: Appears only in vertical layout -->
+                    <div class="mobile-cta-button">
+                        <button class="cta-button" id="mobile-cta-button">Try 1 month for just $50</button>
+                    </div>
+                </section>
+                <!-- Features section (below video content) -->
+                <section class="features-section">
+                    <div class="features-list">
+                        <div class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
+                                <circle cx="9" cy="7" r="4"></circle>
+                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
+                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
+                            </svg>
+                            <div class="feature-text">
+                                <div class="feature-title">Dedicated 1-on-1 Coaching</div>
+                                <div>Work closely with me to plan and adjust your workouts based on your goals and progress.</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <polyline points="9 11 12 14 22 4"></polyline>
+                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
+                            </svg>
+                            <div class="feature-text">
+                                <div class="feature-title">Customized Workout Plan</div>
+                                <div>Tailored to your schedule, goals, and available equipment, updated as you progress.</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M12 20h9"></path>
+                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                            </svg>
+                            <div class="feature-text">
+                                <div class="feature-title">Ongoing Accountability</div>
+                                <div>Daily or weekly check-ins to keep you motivated and on track.</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
+                                <line x1="8" y1="21" x2="16" y2="21"></line>
+                                <line x1="12" y1="17" x2="12" y2="21"></line>
+                            </svg>
+                            <div class="feature-text">
+                                <div class="feature-title">Tech-Integrated Tracking</div>
+                                <div>Use your phone or watch (e.g., Apple Watch) to monitor performance data in real time.</div>
+                            </div>
+                        </div>
+                        <div class="feature-item">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
+                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+                            </svg>
+                            <div class="feature-text">
+                                <div class="feature-title">24/7 Messaging & Support</div>
+                                <div>Quickly connect with your coach for form checks, modifications, or extra motivation.</div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            <!-- Right Column: Main Offer (hidden on vertical layout) -->
+            <div class="right-column">
+                <div class="offer-box">
+                    <p class="callout" id="callout-text">Spring Rebound Sale</p>
+                    <h1 class="main-title" id="main-title">Your Personal Training Journey Starts Here</h1>
+                    <p class="offer-details" id="offer-details">
+                        Personalized coaching tailored to your goals, schedule, and available equipment. Get in the best shape of your life with expert guidance and support every step of the way.
+                    </p>
+                    <button class="cta-button" id="cta-button">Try 1 month for just $50</button>
+                    <p class="fine-print">$199/month after. Cancel anytime.</p>
+                </div>
+            </div>
         </div>
-        <div class="recent-item">
-          <img class="recent-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
-          <span>Post preview two…</span>
-        </div>
-      </div>
-      <hr class="sidebar-divider">
-      <div class="sidebar-topics">
-        <div class="sidebar-section">Topics</div>
-        <div class="topic-item">Fitness</div>
-        <div class="topic-item">Nutrition</div>
-        <div class="topic-item">Recovery</div>
-        <div class="topic-item">Mindset</div>
-      </div>
-    </aside>
+    </main>
 
-    <!-- RIGHT CONTENT COLUMN -->
-    <div class="content-right">
-      <!-- Banner -->
-      <div class="banner">
-        <img src="https://i.postimg.cc/9FTc92Dz/channels4-banner.jpg" alt="Community Banner">
-      </div>
-      <!-- Community Header -->
-      <div class="community-header">
-        <div class="community-info">
-          <img class="community-profile" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="Community Profile">
-          <h1>Busy Barbell Community</h1>
-        </div>
-        <div class="community-actions">
-          <button class="btn btn-outline" onclick="window.location.href='create_post.html';">
-            <span class="material-symbols-outlined">add</span>
-            Create Post
-          </button>
-          <!-- MODAL BACKDROP -->
-          <div id="modalBackdrop" class="modal-backdrop" style="display: none;"></div>
-          <!-- MODAL CONTAINER -->
-          <div id="createPostModal" class="modal-container" style="display: none;">
-            <div class="modal-content">
-              <div class="modal-header">
-                <h2>Create a Post</h2>
-                <button id="closeModalBtn" class="close-btn">X</button>
-              </div>
-              <div class="modal-body">
-                <form id="addPostForm">
-                  <input type="text" name="title" placeholder="Title" required />
-                  <textarea name="body" rows="5" placeholder="Body text..." required></textarea>
-                  <button type="submit" class="btn btn-pill btn-login">Post</button>
-                </form>
-                <div id="postMessage"></div>
-              </div>
-            </div>
-          </div>
-          <button class="btn btn-pill btn-join">Join</button>
-        </div>
-      </div>
-      <!-- FEED GRID -->
-      <div class="feed-grid">
-        <main class="main-feed">
-          <div class="feed-controls">
-            <div class="toggle-buttons">
-              <button class="btn btn-pill toggle-btn active">Best</button>
-              <button class="btn btn-pill toggle-btn">Hot</button>
-              <button class="btn btn-pill toggle-btn">New</button>
-              <button class="btn btn-pill toggle-btn">Top</button>
-              <button class="btn btn-pill toggle-btn">Rising</button>
-            </div>
-          </div>
-          <div id="feedContainer">
-            <!-- Dynamic posts will be inserted here -->
-          </div>
-          <!-- Feed Posts -->
-          <div class="post-card">
-            <div class="post-content">
-              <div class="post-header">
-                <img class="profile-pic" src="https://i.postimg.cc/6Q6KFGYG/channels4-profile.jpg" alt="User Pic">
-                <a href="#" class="subreddit-link">r/fuomai</a>
-                <span>• Posted by u/someUser 2h ago</span>
-              </div>
-              <div class="post-title">Ethan Klein puts up a hater’s Instagram live on air...</div>
-              <div class="post-body">
-                Possibly insulting fans, sending hate. This is a snippet from your screenshot.
-              </div>
-              <div class="post-media">
-                <video autoplay muted loop playsinline controls poster="https://via.placeholder.com/800x450/000000/ffffff?text=Video+Placeholder">
-                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-              <div class="post-footer">
-                <button class="btn pill-btn vote-pill">
-                  <span class="material-symbols-outlined">thumb_up</span>
-                  <span class="vote-count">1123</span>
-                  <span class="material-symbols-outlined">thumb_down</span>
-                </button>
-                <button class="btn pill-btn">Comments</button>
-                <button class="btn pill-btn">Award</button>
-                <button class="btn pill-btn">Share</button>
-                <button class="btn pill-btn">...</button>
-              </div>
-            </div>
-          </div>
-          <!-- (Additional feed posts as needed) -->
-        </main>
-        <aside class="sidebar-right">
-          <div class="about-community">
-            <h2>About This Community</h2>
-            <p class="community-description">
-              Busy Barbell Community is a place for enthusiasts to discuss training, nutrition, and more.
-            </p>
-            <div class="community-stats">
-              <span>123 Posts</span>
-              <span><span class="online-dot"></span>10 Online</span>
-            </div>
-            <p class="community-created">Created: January 1, 2020</p>
-            <div class="community-type">Public Community</div>
-            <ul class="community-rules">
-              <li>Be respectful to one another.</li>
-              <li>No spam or self-promotion.</li>
-              <li>Keep posts on-topic.</li>
-            </ul>
-          </div>
-        </aside>
-      </div>
-    </div>
-  </div>
-  <script src="js/main.js"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const thumbnails = document.querySelectorAll('.thumbnail');
+            const mainMedia = document.getElementById('main-media');
+
+            function updateMainMedia(thumbnail) {
+                thumbnails.forEach(t => t.classList.remove('active'));
+                thumbnail.classList.add('active');
+                const contentType = thumbnail.getAttribute('data-type');
+                const contentUrl = thumbnail.getAttribute('data-url');
+                if (contentType === 'video') {
+                    mainMedia.innerHTML = `
+            <iframe src="${contentUrl}" 
+                    title="Video Content" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                    allowfullscreen></iframe>
+          `;
+                } else if (contentType === 'image') {
+                    mainMedia.innerHTML = `<img src="${contentUrl}" alt="Featured Image">`;
+                }
+            }
+
+            thumbnails.forEach(thumbnail => {
+                thumbnail.addEventListener('click', function() {
+                    updateMainMedia(this);
+                });
+            });
+        });
+    </script>
 </body>
 
 </html>
