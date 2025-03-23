@@ -90,12 +90,13 @@
             background-color: var(--accent-color);
             color: var(--button-text);
             border: none;
-            border-radius: 999px;
-            padding: 0.5rem 1.2rem;
-            font-size: 0.9rem;
+            border-radius: 30px;
+            padding: .65rem 2rem;
+            font-size: 1.1rem;
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s ease;
+            display: block;
         }
 
         .nav-button:hover {
@@ -165,7 +166,7 @@
         }
 
         .thumbnail {
-            width: 80px;
+            width: 60px;
             height: 60px;
             border-radius: 8px;
             cursor: pointer;
@@ -234,13 +235,14 @@
             color: var(--button-text);
             border: none;
             border-radius: 30px;
-            padding: 0.8rem 2rem;
+            padding: .65rem 2rem;
             font-size: 1.1rem;
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s ease;
             margin-top: 1.5rem;
             display: block;
+            width: 100%;
         }
 
         .cta-button:hover {
@@ -262,10 +264,12 @@
                 flex-direction: column;
                 padding: 1rem;
             }
+
             /* Hide the right-column when vertical */
             .right-column {
                 display: none;
             }
+
             /* Show the mobile CTA button in place of the offer box */
             .mobile-cta-button {
                 display: block;
@@ -277,9 +281,11 @@
             .navbar {
                 padding: 0.6rem 1.2rem;
             }
+
             .main-title {
                 font-size: 2rem;
             }
+
             .offer-details {
                 font-size: 1.1rem;
             }
@@ -291,30 +297,32 @@
                 padding: 0.4rem 1rem;
                 font-size: 0.8rem;
             }
+
             .main-title {
                 font-size: 1.8rem;
             }
+
             .callout {
                 font-size: 1rem;
             }
+
             .offer-details {
                 font-size: 1rem;
             }
+
             .cta-button {
                 padding: 0.7rem 1.5rem;
                 font-size: 1rem;
             }
-            .thumbnail {
-                width: 60px;
-                height: 45px;
-            }
+
             /* Adjust the main video container to break out of the parent's padding */
             .main-media {
                 aspect-ratio: 16 / 9;
                 width: calc(100% + 2rem);
                 margin-left: -1rem;
                 margin-right: -1rem;
-                margin-top: -1rem; /* Remove top padding on mobile */
+                margin-top: -1rem;
+                /* Remove top padding on mobile */
                 border-radius: 0;
             }
         }
@@ -378,70 +386,36 @@
                     </div>
                     <!-- Mobile CTA Button: Appears only in vertical layout -->
                     <div class="mobile-cta-button">
-                        <button class="cta-button" id="mobile-cta-button">Try 1 month for just $50</button>
+                        <button class="cta-button" id="mobile-cta-button">Get Started</button>
                     </div>
                 </section>
                 <!-- Features section (below video content) -->
                 <section class="features-section">
-                    <div class="features-list">
-                        <div class="feature-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path>
-                                <circle cx="9" cy="7" r="4"></circle>
-                                <path d="M23 21v-2a4 4 0 0 0-3-3.87"></path>
-                                <path d="M16 3.13a4 4 0 0 1 0 7.75"></path>
-                            </svg>
-                            <div class="feature-text">
-                                <div class="feature-title">Dedicated 1-on-1 Coaching</div>
-                                <div>Work closely with me to plan and adjust your workouts based on your goals and progress.</div>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <polyline points="9 11 12 14 22 4"></polyline>
-                                <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"></path>
-                            </svg>
-                            <div class="feature-text">
-                                <div class="feature-title">Customized Workout Plan</div>
-                                <div>Tailored to your schedule, goals, and available equipment, updated as you progress.</div>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M12 20h9"></path>
-                                <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
-                            </svg>
-                            <div class="feature-text">
-                                <div class="feature-title">Ongoing Accountability</div>
-                                <div>Daily or weekly check-ins to keep you motivated and on track.</div>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <rect x="2" y="3" width="20" height="14" rx="2" ry="2"></rect>
-                                <line x1="8" y1="21" x2="16" y2="21"></line>
-                                <line x1="12" y1="17" x2="12" y2="21"></line>
-                            </svg>
-                            <div class="feature-text">
-                                <div class="feature-title">Tech-Integrated Tracking</div>
-                                <div>Use your phone or watch (e.g., Apple Watch) to monitor performance data in real time.</div>
-                            </div>
-                        </div>
-                        <div class="feature-item">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 24 24" fill="none"
-                                stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
-                            </svg>
-                            <div class="feature-text">
-                                <div class="feature-title">24/7 Messaging & Support</div>
-                                <div>Quickly connect with your coach for form checks, modifications, or extra motivation.</div>
-                            </div>
-                        </div>
-                    </div>
+                    💥 75% Off First Month!<br><br>
+                    Jumpstart your fitness journey with dedicated 1-on-1 coaching. Get a customized workout and nutrition plan, plus daily accountability—all at a steep discount for your first month.
+
+                    <br><br>❗ No Contracts. 30-Day Money-Back Guarantee. Cancel Anytime.
+
+                    <br><br>🚨 Spots Are Limited: Only 100 Clients.
+
+                    <br><br>Here’s What You Get:<br>
+                    ✅ Customized Fitness & Nutrition Plan (tailored to your schedule and goals)<br>
+                    ✅ Direct Access to Me (ask questions daily)<br>
+                    ✅ Flexible Check-Ins (schedule at your convenience)<br>
+                    ✅ Exclusive Resources (guides, videos, trackers)<br><br>
+
+                    Included Resources:<br>
+                    💰 Body Recomposition Guide ($49.99 value)<br>
+                    💰 Hypertrophy Program ($49.99 value)<br>
+                    💰 Minimalist Program ($49.99 value)<br>
+                    💰 Trainerize Pro Account ($115/month)<br><br>
+
+                    Total Value: $264.97<br><br>
+
+                    **Now Just $50 for Your First Month (≈75% Off)!**<br>
+                    Then **$199/month** if you choose to continue.<br><br>
+
+                    👉 Click “Start Free Trial” to begin now.
                 </section>
             </div>
             <!-- Right Column: Main Offer (hidden on vertical layout) -->
@@ -452,7 +426,7 @@
                     <p class="offer-details" id="offer-details">
                         Personalized coaching tailored to your goals, schedule, and available equipment. Get in the best shape of your life with expert guidance and support every step of the way.
                     </p>
-                    <button class="cta-button" id="cta-button">Try 1 month for just $50</button>
+                    <button class="cta-button" id="cta-button">Get Started</button>
                     <p class="fine-print">$199/month after. Cancel anytime.</p>
                 </div>
             </div>
