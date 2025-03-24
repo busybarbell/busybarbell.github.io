@@ -470,9 +470,9 @@
 
             if (mobileCtaButton) {
                 mobileCtaButton.addEventListener('click', function() {
-                    // URLs for Future Fit app on different platforms
-                    const iosAppStoreUrl = 'https://apps.apple.com/us/app/future-fit/id1299834423';
-                    const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.future.fit';
+                    // URLs for Future Personal Training app on different platforms
+                    const iosAppStoreUrl = 'https://apps.apple.com/us/app/future-personal-training/id1288178982';
+                    const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.future.training';
 
                     // Detect platform and redirect accordingly
                     const userAgent = navigator.userAgent || navigator.vendor || window.opera;
@@ -485,11 +485,11 @@
                         window.location.href = androidPlayStoreUrl;
                     } else {
                         // Fallback for other devices
-                        window.location.href = 'https://www.futurefit.com/download';
+                        window.location.href = 'https://www.future.co';
                     }
                 });
 
-                console.log('Future Fit CTA button initialized'); // For debugging
+                console.log('Future Personal Training CTA button initialized'); // For debugging
             } else {
                 console.error('Mobile CTA button not found'); // For debugging
             }
