@@ -435,56 +435,64 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Thumbnail gallery functionality
             const thumbnails = document.querySelectorAll('.thumbnail');
             const mainMedia = document.getElementById('main-media');
 
-            function updateMainMedia(thumbnail) {
-                thumbnails.forEach(t => t.classList.remove('active'));
-                thumbnail.classList.add('active');
-                const contentType = thumbnail.getAttribute('data-type');
-                const contentUrl = thumbnail.getAttribute('data-url');
-                if (contentType === 'video') {
-                    mainMedia.innerHTML = `
-            <iframe src="${contentUrl}" 
-                    title="Video Content" 
-                    frameborder="0" 
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                    allowfullscreen></iframe>
-          `;
-                } else if (contentType === 'image') {
-                    mainMedia.innerHTML = `<img src="${contentUrl}" alt="Featured Image">`;
+            if (thumbnails.length && mainMedia) {
+                function updateMainMedia(thumbnail) {
+                    thumbnails.forEach(t => t.classList.remove('active'));
+                    thumbnail.classList.add('active');
+                    const contentType = thumbnail.getAttribute('data-type');
+                    const contentUrl = thumbnail.getAttribute('data-url');
+                    if (contentType === 'video') {
+                        mainMedia.innerHTML = `
+                    <iframe src="${contentUrl}" 
+                            title="Video Content" 
+                            frameborder="0" 
+                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                            allowfullscreen></iframe>
+                `;
+                    } else if (contentType === 'image') {
+                        mainMedia.innerHTML = `<img src="${contentUrl}" alt="Featured Image">`;
+                    }
                 }
+
+                thumbnails.forEach(thumbnail => {
+                    thumbnail.addEventListener('click', function() {
+                        updateMainMedia(this);
+                    });
+                });
             }
 
-            thumbnails.forEach(thumbnail => {
-                thumbnail.addEventListener('click', function() {
-                    updateMainMedia(this);
-                });
-            });
-        });
-
-        document.addEventListener('DOMContentLoaded', function() {
+            // CTA button functionality
             const mobileCtaButton = document.getElementById('mobile-cta-button');
 
-            mobileCtaButton.addEventListener('click', function() {
-                // URLs for different platforms
-                const iosAppStoreUrl = 'https://apps.apple.com/us/app/reddit/id1064216828';
-                const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.reddit.frontpage';
+            if (mobileCtaButton) {
+                mobileCtaButton.addEventListener('click', function() {
+                    // URLs for Future Fit app on different platforms
+                    const iosAppStoreUrl = 'https://apps.apple.com/us/app/future-fit/id1299834423';
+                    const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.future.fit';
 
-                // Detect platform and redirect accordingly
-                const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                    // Detect platform and redirect accordingly
+                    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
 
-                if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                    // iOS device
-                    window.location.href = iosAppStoreUrl;
-                } else if (/android/i.test(userAgent)) {
-                    // Android device
-                    window.location.href = androidPlayStoreUrl;
-                } else {
-                    // Fallback for other devices - you can direct to Reddit's website or a landing page
-                    window.location.href = 'https://www.reddit.com/download';
-                }
-            });
+                    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+                        // iOS device
+                        window.location.href = iosAppStoreUrl;
+                    } else if (/android/i.test(userAgent)) {
+                        // Android device
+                        window.location.href = androidPlayStoreUrl;
+                    } else {
+                        // Fallback for other devices
+                        window.location.href = 'https://www.futurefit.com/download';
+                    }
+                });
+
+                console.log('Future Fit CTA button initialized'); // For debugging
+            } else {
+                console.error('Mobile CTA button not found'); // For debugging
+            }
         });
     </script>
 </body>
