@@ -24,6 +24,8 @@
             --thumbnail-active: var(--accent-color);
             --highlight-background: rgba(0, 113, 227, 0.1);
             --highlight-border: rgba(0, 113, 227, 0.2);
+            --youtube-blue: #065fd4;
+            --youtube-blue-hover: #0356c5;
         }
 
         @media (prefers-color-scheme: dark) {
@@ -90,13 +92,12 @@
             background-color: var(--accent-color);
             color: var(--button-text);
             border: none;
-            border-radius: 30px;
-            padding: .65rem 2rem;
-            font-size: 1.1rem;
+            padding: 0.6rem 1.2rem;
+            font-size: 0.95rem;
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s ease;
-            display: block;
+            border-radius: 8px;
         }
 
         .nav-button:hover {
@@ -116,24 +117,102 @@
             width: 100%;
             gap: 2rem;
             padding: 2rem;
+            align-items: flex-start;
         }
 
         .left-column {
             flex: 1;
+            position: relative;
         }
 
         .right-column {
-            flex: 0 0 450px;
+            flex: 0 0 400px;
+            position: sticky;
+            top: 64px; /* Height of the nav bar */
+            height: calc(100vh - 64px); /* Viewport height minus nav bar height */
+            overflow-y: auto;
+            /* Hide scrollbar but keep functionality */
+            scrollbar-width: none; /* Firefox */
+            -ms-overflow-style: none; /* IE and Edge */
         }
 
-        /* Make the offer-box sticky instead of the right column */
+        /* Hide scrollbar for Chrome, Safari and Opera */
+        .right-column::-webkit-scrollbar {
+            display: none;
+        }
+
+        /* Adjust offer box for sticky right column */
         .offer-box {
-            box-sizing: border-box;
             background-color: transparent;
             border-radius: 12px;
-            padding: 1.5rem;
-            top: 20px;
+            padding: 0;
             border: 1px solid var(--border-color);
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+
+        .offer-image {
+            width: 100%;
+            margin: 0;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+        }
+
+        .offer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .offer-content {
+            padding: 1.5rem;
+        }
+
+        .main-title {
+            font-size: 1.75rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            line-height: 1.3;
+        }
+
+        .offer-details {
+            font-size: 1rem;
+            color: var(--secondary-text-color);
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .cta-button {
+            width: 100%;
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            border: none;
+            padding: 0.85rem;
+            font-size: 1rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-radius: 8px;
+        }
+
+        .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5rem;
+            }
+
+            .offer-details {
+                font-size: 0.95rem;
+            }
+
+            .offer-content {
+                padding: 1.25rem;
+            }
         }
 
         /* =========================================
@@ -142,12 +221,12 @@
         .media-content {}
 
         .main-media {
+            position: relative;
             width: 100%;
             aspect-ratio: 16 / 9;
-            background-color: var(--secondary-background);
+            background-color: black;
             border-radius: 12px;
             overflow: hidden;
-            margin-bottom: 0.5rem;
         }
 
         .main-media iframe,
@@ -192,39 +271,141 @@
         .features-section {
             background-color: var(--secondary-background);
             border-radius: 12px;
-            padding: 1.5rem;
+            padding: 2rem;
             margin-top: 2rem;
         }
 
-        .features-section h2 {
-            font-size: 1.5rem;
+        .offer-highlight {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            color: var(--accent-color);
+            font-weight: 600;
+        }
+
+        .offer-value {
+            margin-bottom: 1.5rem;
+        }
+
+        .offer-value h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            line-height: 1.2;
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: var(--secondary-text-color);
+        }
+
+        .offer-guarantee, .offer-scarcity {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
             margin-bottom: 1rem;
+            padding: 0.75rem;
+            background-color: var(--highlight-background);
+            border: 1px solid var(--highlight-border);
+            border-radius: 8px;
+        }
+
+        .offer-features {
+            margin: 2rem 0;
+        }
+
+        .offer-features h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 600;
         }
 
         .features-list {
+            list-style: none;
             display: flex;
             flex-direction: column;
-            gap: 1rem;
+            gap: 1.5rem;
         }
 
         .feature-item {
             display: flex;
             gap: 1rem;
             align-items: flex-start;
+            padding: 0.5rem 0;
+            transition: transform 0.2s ease;
         }
 
-        .feature-item svg {
+        .feature-item:hover {
+            transform: translateX(4px);
+        }
+
+        .feature-icon {
+            font-size: 1.5rem;
             flex-shrink: 0;
-            color: var(--accent-color);
         }
 
-        .feature-text {
+        .feature-content {
             flex-grow: 1;
         }
 
-        .feature-title {
+        .feature-content strong {
+            display: block;
+            font-size: 1.1rem;
+            margin-bottom: 0.25rem;
+            color: var(--text-color);
+        }
+
+        .feature-content p {
+            color: var(--secondary-text-color);
+            font-size: 0.95rem;
+            line-height: 1.5;
+        }
+
+        .offer-pricing {
+            text-align: center;
+            margin: 2rem 0;
+            padding: 1.5rem;
+            background-color: var(--highlight-background);
+            border-radius: 12px;
+        }
+
+        .price-tag {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .original-price {
+            text-decoration: line-through;
+            color: var(--secondary-text-color);
+        }
+
+        .special-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent-color);
+        }
+
+        .discount-badge {
+            background-color: var(--accent-color);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.9rem;
             font-weight: 600;
-            margin-bottom: 0.2rem;
+        }
+
+        .price-note {
+            color: var(--secondary-text-color);
+            font-size: 0.9rem;
+        }
+
+        .offer-cta {
+            text-align: center;
+            margin-top: 2rem;
         }
 
         /* =========================================
@@ -234,15 +415,12 @@
             background-color: var(--accent-color);
             color: var(--button-text);
             border: none;
-            border-radius: 30px;
-            padding: .65rem 2rem;
+            padding: 0.85rem 1.5rem;
             font-size: 1.1rem;
             font-weight: 500;
             cursor: pointer;
             transition: background-color 0.2s ease;
-            margin-top: 1.5rem;
-            display: block;
-            width: 100%;
+            border-radius: 8px;
         }
 
         .cta-button:hover {
@@ -265,65 +443,955 @@
                 padding: 1rem;
             }
 
-            /* Hide the right-column when vertical */
             .right-column {
-                display: none;
-            }
-
-            /* Show the mobile CTA button in place of the offer box */
-            .mobile-cta-button {
-                display: block;
-                margin-top: 1.5rem;
+                position: relative;
+                top: 0;
+                height: auto;
+                overflow-y: visible;
+                width: 100%;
+                flex: none;
+                margin-top: 2rem;
             }
         }
 
         @media (max-width: 768px) {
             .navbar {
                 padding: 0.6rem 1.2rem;
+                justify-content: space-between;
             }
 
-            .main-title {
-                font-size: 2rem;
+            .logo {
+                font-size: 1.4rem;
             }
 
-            .offer-details {
-                font-size: 1.1rem;
-            }
-        }
-
-        /* Mobile-specific styles: Targeting devices (with no hover capability) */
-        @media (max-width: 480px) and (hover: none) {
             .nav-button {
+                display: block;
                 padding: 0.4rem 1rem;
-                font-size: 0.8rem;
+                font-size: 0.9rem;
             }
 
-            .main-title {
+            .video-offer-container {
+                flex-direction: column;
+                padding: 0;
+                gap: 1rem;
+            }
+
+            .right-column {
+                display: none;
+            }
+
+            .left-column {
+                width: 100%;
+            }
+
+            .main-media {
+                border-radius: 0;
+                margin: 0;
+            }
+
+            .features-section {
+                background-color: transparent;
+                border-radius: 0;
+                padding: 1rem;
+                margin-top: 1rem;
+            }
+
+            .offer-highlight {
+                margin-bottom: 1rem;
+            }
+
+            .offer-value {
+                margin-bottom: 1rem;
+            }
+
+            .offer-value h2 {
                 font-size: 1.8rem;
             }
 
-            .callout {
-                font-size: 1rem;
+            .offer-guarantee, .offer-scarcity {
+                margin-bottom: 0.75rem;
+            }
+
+            .offer-features {
+                margin: 1.5rem 0;
+            }
+
+            .offer-features h3 {
+                font-size: 1.2rem;
+                margin-bottom: 1rem;
+            }
+
+            .offer-pricing {
+                margin: 1.5rem 0;
+                padding: 1rem;
+            }
+
+            .offer-cta {
+                display: none;
+            }
+
+            /* Hide video CTA on mobile */
+            .video-cta-overlay {
+                display: none;
+            }
+
+            /* Style tabs for mobile */
+            .thumbnails {
+                display: flex;
+                gap: 0.5rem;
+                padding: 0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+            }
+
+            .thumbnails::-webkit-scrollbar {
+                display: none;
+            }
+
+            .thumbnail {
+                width: 120px;
+                height: 68px;
+                flex-shrink: 0;
+            }
+
+            .related-content {
+                display: none;
+            }
+        }
+
+        /* Additional mobile adjustments */
+        @media (max-width: 480px) {
+            .main-title {
+                font-size: 1.5rem;
             }
 
             .offer-details {
+                font-size: 0.95rem;
+            }
+
+            .offer-content {
+                padding: 1rem;
+            }
+
+            .features-section {
+                padding: 0.75rem;
+            }
+
+            .feature-item {
+                gap: 0.75rem;
+            }
+
+            .feature-content strong {
                 font-size: 1rem;
             }
 
-            .cta-button {
-                padding: 0.7rem 1.5rem;
-                font-size: 1rem;
+            .feature-content p {
+                font-size: 0.9rem;
+            }
+        }
+
+        /* Icon Styles */
+        .icon {
+            color: var(--accent-color);
+            flex-shrink: 0;
+            transition: color 0.2s ease;
+        }
+
+        .feature-item:hover .icon {
+            color: var(--accent-hover);
+        }
+
+        .offer-highlight .icon,
+        .offer-guarantee .icon,
+        .offer-scarcity .icon {
+            color: var(--text-color);
+            opacity: 0.8;
+        }
+
+        .offer-highlight:hover .icon,
+        .offer-guarantee:hover .icon,
+        .offer-scarcity:hover .icon {
+            opacity: 1;
+        }
+
+        /* =========================================
+           RELATED CONTENT STYLES (YouTube-style)
+           ========================================= */
+        .related-content {
+            margin-top: 0;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            padding-bottom: 2rem; /* Add padding at bottom for better scrolling */
+        }
+
+        .related-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--text-color);
+        }
+
+        .related-videos {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+
+        .related-video-item {
+            display: flex;
+            gap: 0.75rem;
+            cursor: pointer;
+            padding: 0.25rem;
+            border-radius: 8px;
+            transition: background-color 0.2s ease;
+        }
+
+        .related-video-item:hover {
+            background-color: var(--highlight-background);
+        }
+
+        .related-video-item.active {
+            background-color: var(--highlight-background);
+            border: 1px solid var(--highlight-border);
+        }
+
+        .related-thumbnail {
+            width: 168px;
+            height: 94px;
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+            background-color: var(--secondary-background);
+            flex-shrink: 0;
+        }
+
+        .related-thumbnail video {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .video-duration {
+            position: absolute;
+            bottom: 4px;
+            right: 4px;
+            background-color: rgba(0, 0, 0, 0.8);
+            color: white;
+            padding: 2px 4px;
+            border-radius: 4px;
+            font-size: 0.8rem;
+        }
+
+        .related-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            min-width: 0; /* Prevents text overflow */
+        }
+
+        .related-info h4 {
+            font-size: 0.95rem;
+            font-weight: 500;
+            margin-bottom: 0.25rem;
+            color: var(--text-color);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+
+        @media (max-width: 768px) {
+            .related-thumbnail {
+                width: 120px;
+                height: 68px;
             }
 
-            /* Adjust the main video container to break out of the parent's padding */
+            .related-info h4 {
+                font-size: 0.9rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .related-thumbnail {
+                width: 100px;
+                height: 56px;
+            }
+
+            .related-info h4 {
+                font-size: 0.85rem;
+            }
+        }
+
+        /* =========================================
+           VIDEO CTA OVERLAY STYLES
+           ========================================= */
+        .video-controls-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(0deg, rgba(0, 0, 0, 0.8) 0%, transparent 100%);
+            height: 98px;
+            opacity: 0;
+            transition: opacity 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 0;
+        }
+
+        .progress-bar-container {
+            position: absolute;
+            bottom: 49px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: height 0.1s ease-in-out;
+        }
+
+        .progress-bar-container:hover {
+            height: 5px;
+        }
+
+        .progress-bar-filled {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: #ff0000;
+            width: 0%;
+        }
+
+        .progress-bar-loaded {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.4);
+            width: 0%;
+        }
+
+        .progress-bar-handle {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: #ff0000;
+            border-radius: 50%;
+            opacity: 1;
+            pointer-events: none;
+            left: var(--progress-position, 0%);
+        }
+
+        .progress-bar-container:hover .progress-bar-handle {
+            opacity: 1;
+        }
+
+        .video-controls {
+            height: 48px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 16px;
+            margin-top: 1px; /* Small gap after progress bar */
+        }
+
+        .left-controls, .right-controls {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .video-controls button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .video-controls button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .video-controls svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* Volume control */
+        .volume-container {
+            display: flex;
+            align-items: center;
+            height: 40px;
+        }
+
+        .volume-slider {
+            width: 0;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: width 0.2s ease, margin 0.2s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .volume-container:hover .volume-slider {
+            width: 64px;
+            margin: 0 8px;
+        }
+
+        .volume-slider:hover {
+            height: 5px;
+        }
+
+        .volume-slider-filled {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            background: white;
+            width: 100%;
+        }
+
+        /* Time display */
+        .time-display {
+            color: #fff;
+            font-size: 13px;
+            font-family: "YouTube Noto", Roboto, Arial, sans-serif;
+            margin-left: 8px;
+            user-select: none;
+        }
+
+        /* Update CTA overlay styles */
+        .video-cta-overlay {
+            position: absolute;
+            bottom: 12px;
+            left: 12px;
+            right: 12px;
+            z-index: 2;
+            transition: transform 0.2s ease;
+            pointer-events: none;
+        }
+
+        /* When controls are visible, move CTA up */
+        .video-controls-overlay[style*="opacity: 1"] + .video-cta-overlay {
+            transform: translateY(-60px);
+        }
+
+        .video-cta-content {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            max-width: 600px;
+            pointer-events: auto;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            position: relative;
+            padding-right: 40px; /* Add space for close button */
+        }
+
+        .video-cta-text {
+            flex: 1;
+            min-width: 0;
+            margin-right: 16px;
+        }
+
+        .video-cta-text h4 {
+            font-size: 14px;
+            font-weight: 500;
+            margin-bottom: 4px;
+            color: #0f0f0f;
+        }
+
+        .video-cta-text p {
+            font-size: 12px;
+            color: #606060;
+            margin: 0;
+        }
+
+        .video-cta-button {
+            background-color: var(--youtube-blue);
+            color: white;
+            border: none;
+            padding: 0 16px;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            border-radius: 18px;
+            height: 36px;
+            white-space: nowrap;
+        }
+
+        .video-cta-button:hover {
+            background-color: var(--youtube-blue-hover);
+        }
+
+        /* Update close button styles */
+        .video-cta-close {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            width: 24px;
+            height: 24px;
+            background: none;
+            border: none;
+            color: var(--secondary-text-color);
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0;
+            transition: color 0.2s ease;
+            z-index: 3;
+        }
+
+        .video-cta-close:hover {
+            color: var(--text-color);
+        }
+
+        .video-cta-close svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        /* Update progress bar styles */
+        .progress-bar-filled {
+            background: #ff0000;
+        }
+
+        .progress-bar-handle {
+            opacity: 1;
+            background: #ff0000;
+        }
+
+        /* Update volume slider styles */
+        .volume-slider-filled {
+            background: white;
+        }
+
+        .volume-handle {
+            position: absolute;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            width: 12px;
+            height: 12px;
+            background: white;
+            border-radius: 50%;
+            opacity: 1;
+            pointer-events: none;
+            left: var(--volume-position, 0%);
+        }
+
+        /* Settings menu styles */
+        .settings-menu {
+            position: absolute;
+            bottom: 48px;
+            right: 16px;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            padding: 8px;
+            display: none;
+            z-index: 4;
+        }
+
+        .settings-menu.show {
+            display: block;
+        }
+
+        .settings-item {
+            display: flex;
+            align-items: center;
+            padding: 8px 16px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .settings-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-item svg {
+            width: 16px;
+            height: 16px;
+            margin-right: 8px;
+        }
+
+        .settings-submenu {
+            position: absolute;
+            left: 100%;
+            top: 0;
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 8px;
+            padding: 8px;
+            display: none;
+            min-width: 150px;
+        }
+
+        .settings-item:hover .settings-submenu {
+            display: block;
+        }
+
+        .settings-option {
+            padding: 8px 16px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .settings-option:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .settings-option.active {
+            color: var(--youtube-blue);
+        }
+
+        /* Autoplay toggle styles */
+        .autoplay-toggle {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            color: white;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .autoplay-toggle:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .autoplay-toggle svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .autoplay-toggle.active svg {
+            color: var(--youtube-blue);
+        }
+
+        /* Mobile adjustments */
+        @media (max-width: 768px) {
+            .video-cta-overlay {
+                bottom: 8px;
+            }
+
+            .video-controls-overlay[style*="opacity: 1"] + .video-cta-overlay {
+                transform: translateY(-50px);
+            }
+
+            .video-cta-content {
+                padding: 8px 12px;
+                padding-right: 36px;
+            }
+
+            .video-cta-text h4 {
+                font-size: 13px;
+            }
+
+            .video-cta-text p {
+                font-size: 11px;
+            }
+
+            .video-cta-button {
+                padding: 0 12px;
+                height: 32px;
+                font-size: 13px;
+            }
+
+            .video-cta-close {
+                right: 8px;
+            }
+        }
+
+        /* Add these styles in the CSS section */
+        .offer-image {
+            width: 100%;
+            margin: 0;
+            position: relative;
+            aspect-ratio: 16/9;
+            overflow: hidden;
+            border-radius: 12px 12px 0 0;
+        }
+
+        .offer-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        @media (max-width: 480px) {
+            .offer-image {
+                margin: 0;
+            }
+        }
+
+        /* Add these styles for the initial play button */
+        .initial-play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 80px;
+            height: 80px;
+            background: rgba(0, 0, 0, 0.7);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            z-index: 3;
+            transition: background-color 0.2s ease;
+        }
+
+        .initial-play-button:hover {
+            background: rgba(0, 0, 0, 0.9);
+        }
+
+        .initial-play-button svg {
+            width: 40px;
+            height: 40px;
+            fill: white;
+        }
+
+        /* Hide controls initially */
+        .video-controls-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .video-cta-overlay {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* Show controls when video is playing */
+        .custom-player.playing .video-controls-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .custom-player.playing .video-cta-overlay {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        /* Add footer styles */
+        .footer {
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--border-color);
+            font-size: 0.9rem;
+            color: var(--secondary-text-color);
+        }
+
+        .footer-links {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .footer-link {
+            color: var(--secondary-text-color);
+            text-decoration: none;
+            transition: color 0.2s ease;
+        }
+
+        .footer-link:hover {
+            color: var(--text-color);
+        }
+
+        .footer-copyright {
+            font-size: 0.85rem;
+            color: var(--secondary-text-color);
+        }
+
+        /* Add class for hidden state */
+        .video-cta-overlay.hidden {
+            display: none;
+        }
+
+        /* Add styles for next/previous buttons */
+        .prev-video-btn,
+        .next-video-btn {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            width: 40px;
+            height: 40px;
+            padding: 8px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+        }
+
+        .prev-video-btn:hover,
+        .next-video-btn:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .prev-video-btn svg,
+        .next-video-btn svg {
+            width: 24px;
+            height: 24px;
+        }
+
+        /* =========================================
+           VIDEO CTA SECTION STYLES
+           ========================================= */
+        .video-cta-section {
+            text-align: center;
+            padding: 1.5rem 1rem;
+            margin: 1rem 0;
+        }
+
+        .video-cta-section .cta-button {
+            width: 100%;
+            max-width: 400px;
+            padding: 1rem 2rem;
+            font-size: 1.1rem;
+            font-weight: 600;
+            background-color: var(--accent-color);
+            color: var(--button-text);
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .video-cta-section .cta-button:hover {
+            background-color: var(--accent-hover);
+        }
+
+        @media (max-width: 768px) {
+            .video-cta-section {
+                padding: 1rem 0.5rem;
+            }
+
+            .video-cta-section .cta-button {
+                padding: 0.85rem 1.5rem;
+                font-size: 1rem;
+            }
+        }
+
+        /* =========================================
+           FEATURES SECTION STYLES
+           ========================================= */
+
+        /* Add these styles for mobile video player */
+        @media (max-width: 768px) {
+            .nav-container {
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 1000;
+                height: 56px;
+            }
+
             .main-media {
-                aspect-ratio: 16 / 9;
-                width: calc(100% + 2rem);
-                margin-left: -1rem;
-                margin-right: -1rem;
-                margin-top: -1rem;
-                /* Remove top padding on mobile */
+                position: fixed;
+                top: 56px; /* Height of nav */
+                left: 0;
+                right: 0;
+                z-index: 999;
                 border-radius: 0;
+                margin: 0;
+                height: calc(100vw * 9/16); /* 16:9 aspect ratio */
+            }
+
+            .mobile-tabs {
+                position: fixed;
+                top: calc(56px + (100vw * 9/16)); /* nav height + video height */
+                left: 0;
+                right: 0;
+                z-index: 998;
+                display: flex;
+                gap: 0.5rem;
+                padding: 0.5rem;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+                scrollbar-width: none;
+                -ms-overflow-style: none;
+                background-color: var(--background-color);
+                border-bottom: 1px solid var(--border-color);
+            }
+
+            .media-content {
+                padding-top: calc(56px + (100vw * 9/16) + 70px); /* nav height + video height + tabs height */
+            }
+
+            /* Show video CTA section on mobile */
+            .video-cta-section {
+                display: block;
+                text-align: center;
+                padding: 1rem;
+                background-color: var(--background-color);
+            }
+
+            .video-cta-section .cta-button {
+                width: 100%;
+                max-width: none;
+                margin: 0;
+            }
+
+            .mobile-tab {
+                width: 60px;
+                height: 60px;
+                flex-shrink: 0;
+                border-radius: 8px;
+                overflow: hidden;
+                position: relative;
+                border: 2px solid var(--thumbnail-border);
+            }
+
+            .mobile-tab.active {
+                border-color: var(--thumbnail-active);
+            }
+
+            .mobile-tab video {
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+
+            /* Hide desktop thumbnails on mobile */
+            .thumbnails {
+                display: none;
+            }
+        }
+
+        /* Hide mobile elements on desktop */
+        @media (min-width: 769px) {
+            .mobile-tabs {
+                display: none;
+            }
+
+            .video-cta-section {
+                display: none;
             }
         }
     </style>
@@ -334,165 +1402,728 @@
     <div class="nav-container">
         <nav class="navbar">
             <div class="logo">Personal Trainer</div>
-            <button class="nav-button">Get App</button>
+            <button class="nav-button" onclick="window.location.href='signup.php'">Get Started</button>
         </nav>
     </div>
 
     <!-- Main content area -->
     <main class="main-container">
         <div class="video-offer-container">
-            <!-- Left Column: Video content, thumbnails (tabs), and features -->
             <div class="left-column">
                 <section class="media-content">
                     <div class="main-media" id="main-media">
-                        <!-- Default content: Main video player -->
-                        <video autoplay muted id="main-video" playsinline controls width="100%">
-                            <source src="video1.mp4" type="video/mp4">
-                            Your browser does not support the video tag.
-                        </video>
+                        <!-- Custom video player container -->
+                        <div class="custom-player">
+                            <video id="main-video" playsinline>
+                                <source src="video1.mp4" type="video/mp4">
+                                Your browser does not support the video tag.
+                            </video>
+                            
+                            <!-- Initial play button -->
+                            <div class="initial-play-button">
+                                <svg viewBox="0 0 24 24">
+                                    <path d="M8 5v14l11-7z"/>
+                                </svg>
+                            </div>
+
+                            <!-- Video controls overlay -->
+                            <div class="video-controls-overlay">
+                                <div class="progress-bar-container">
+                                    <div class="progress-bar-filled"></div>
+                                    <div class="progress-bar-loaded"></div>
+                                    <div class="progress-bar-handle"></div>
+                                </div>
+                                <div class="video-controls">
+                                    <div class="left-controls">
+                                        <button class="prev-video-btn">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="play-pause-btn">
+                                            <svg class="play-icon" viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M8 5v14l11-7z"/>
+                                            </svg>
+                                            <svg class="pause-icon" viewBox="0 0 24 24" style="display: none;">
+                                                <path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/>
+                                            </svg>
+                                        </button>
+                                        <button class="next-video-btn">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/>
+                                            </svg>
+                                        </button>
+                                        <div class="volume-container">
+                                            <button class="volume-btn">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z"/>
+                                                </svg>
+                                            </button>
+                                            <div class="volume-slider">
+                                                <div class="volume-slider-filled"></div>
+                                            </div>
+                                        </div>
+                                        <div class="time-display">
+                                            <span class="current-time">0:00</span>
+                                            <span> / </span>
+                                            <span class="duration">0:00</span>
+                                        </div>
+                                    </div>
+                                    <div class="right-controls">
+                                        <button class="settings-btn">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M19.14 12.94c.04-.3.06-.61.06-.94 0-.32-.02-.64-.07-.94l2.03-1.58c.18-.14.23-.41.12-.61l-1.92-3.32c-.12-.22-.37-.29-.59-.22l-2.39.96c-.5-.38-1.03-.7-1.62-.94l-.36-2.54c-.04-.24-.24-.41-.48-.41h-3.84c-.24 0-.43.17-.47.41l-.36 2.54c-.59.24-1.13.57-1.62.94l-2.39-.96c-.22-.08-.47 0-.59.22L2.74 8.87c-.12.21-.08.47.12.61l2.03 1.58c-.05.3-.09.63-.09.94s.02.64.07.94l-2.03 1.58c-.18.14-.23.41-.12.61l1.92 3.32c.12.22.37.29.59.22l2.39-.96c.5.38 1.03.7 1.62.94l.36 2.54c.05.24.24.41.48.41h3.84c.24 0 .44-.17.47-.41l.36-2.54c.59-.24 1.13-.56 1.62-.94l2.39.96c.22.08.47 0 .59-.22l1.92-3.32c.12-.22.07-.47-.12-.61l-2.01-1.58zM12 15.6c-1.98 0-3.6-1.62-3.6-3.6s1.62-3.6 3.6-3.6 3.6 1.62 3.6 3.6-1.62 3.6-3.6 3.6z"/>
+                                            </svg>
+                                        </button>
+                                        <div class="settings-menu">
+                                            <div class="settings-item">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 14H4V6h16v12zM6 10h12v2H6zm0-3h12v2H6zm0 6h8v2H6z"/>
+                                                </svg>
+                                                Subtitles
+                                                <div class="settings-submenu">
+                                                    <div class="settings-option active">English</div>
+                                                    <div class="settings-option">Spanish</div>
+                                                    <div class="settings-option">French</div>
+                                                    <div class="settings-option">Off</div>
+                                                </div>
+                                            </div>
+                                            <div class="settings-item">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M12 4V2C6.48 2 2 6.48 2 12h2c0-4.41 3.59-8 8-8zm0 14c-4.41 0-8-3.59-8-8H2c0 5.52 4.48 10 10 10v-2zm0-12V4c4.41 0 8 3.59 8 8h2c0-5.52-4.48-10-10-10zm0 10c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2z"/>
+                                                </svg>
+                                                Playback Speed
+                                                <div class="settings-submenu">
+                                                    <div class="settings-option">0.25x</div>
+                                                    <div class="settings-option">0.5x</div>
+                                                    <div class="settings-option">0.75x</div>
+                                                    <div class="settings-option active">Normal</div>
+                                                    <div class="settings-option">1.25x</div>
+                                                    <div class="settings-option">1.5x</div>
+                                                    <div class="settings-option">2x</div>
+                                                </div>
+                                            </div>
+                                            <div class="settings-item">
+                                                <svg viewBox="0 0 24 24">
+                                                    <path fill="currentColor" d="M19 3H5c-1.1 0-2 .9-2 2v14c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V5c0-1.1-.9-2-2-2zm0 16H5V5h14v14z"/>
+                                                </svg>
+                                                Quality
+                                                <div class="settings-submenu">
+                                                    <div class="settings-option">Auto</div>
+                                                    <div class="settings-option active">1080p</div>
+                                                    <div class="settings-option">720p</div>
+                                                    <div class="settings-option">480p</div>
+                                                    <div class="settings-option">360p</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="autoplay-toggle active">
+                                            <svg viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
+                                            </svg>
+                                            Autoplay
+                                        </div>
+                                        <button class="fullscreen-btn">
+                                            <svg class="fullscreen-icon" viewBox="0 0 24 24">
+                                                <path fill="currentColor" d="M7 14H5v5h5v-2H7v-3zm-2-4h2V7h3V5H5v5zm12 7h-3v2h5v-5h-2v3zM14 5v2h3v3h2V5h-5z"/>
+                                            </svg>
+                                            <svg class="exit-fullscreen-icon" viewBox="0 0 24 24" style="display: none;">
+                                                <path fill="currentColor" d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/>
+                                            </svg>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- YouTube-style CTA overlay -->
+                            <div class="video-cta-overlay">
+                                <div class="video-cta-content">
+                                    <button class="video-cta-close">
+                                        <svg viewBox="0 0 24 24">
+                                            <path fill="currentColor" d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/>
+                                        </svg>
+                                    </button>
+                                    <div class="video-cta-text">
+                                        <h4>Start your fitness journey today</h4>
+                                        <p>Join now and save 75% on your first month</p>
+                                    </div>
+                                    <button class="video-cta-button" onclick="window.location.href='signup.php'">Get Started</button>
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                    <div class="thumbnails">
-                        <!-- Video thumbnails as tabs -->
-                        <div class="thumbnail active" data-type="video" data-url="video1.mp4">
+                    <!-- Mobile tabs -->
+                    <div class="mobile-tabs">
+                        <div class="mobile-tab active">
                             <video muted>
                                 <source src="video1.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                        <div class="mobile-tab">
                             <video muted>
                                 <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                        <div class="mobile-tab">
                             <video muted>
                                 <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
                             </video>
                         </div>
-                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
-                            <video muted>
-                                <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
-                            <video muted>
-                                <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
-                            </video>
-                        </div>
-                        <div class="thumbnail" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                        <div class="mobile-tab">
                             <video muted>
                                 <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
                             </video>
                         </div>
                     </div>
-                    <!-- Mobile CTA Button: Appears only in vertical layout -->
-                    <div class="mobile-cta-button">
-                        <button class="cta-button" id="mobile-cta-button">Get The App</button>
+                    <!-- CTA Button between video and features -->
+                    <div class="video-cta-section">
+                        <button class="cta-button" onclick="window.location.href='signup.php'">Get Started</button>
                     </div>
                 </section>
-                <!-- Features section (below video content) -->
+
+                <!-- Features section -->
                 <section class="features-section">
-                    💥 75% Off First Month!<br><br>
-                    Jumpstart your fitness journey with dedicated 1-on-1 coaching. Get a customized workout and nutrition plan, plus daily accountability—all at a steep discount for your first month.
+                    <div class="offer-highlight">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 17L12 22L22 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M2 12L12 17L22 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="highlight-text">Last Day! Save 75%</span>
+                    </div>
 
-                    <br><br>❗ No Contracts. 30-Day Money-Back Guarantee. Cancel Anytime.
+                    <div class="offer-value">
+                        <h2>Personal training for less.</h2>
+                        <p class="subtitle">Join for $50, save 75% on your first month of Future. Risk-free 30-day trial, cancel anytime.</p>
+                    </div>
 
-                    <br><br>🚨 Spots Are Limited: Only 100 Clients.
+                    <div class="offer-guarantee">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M12 22C17.5228 22 22 17.5228 22 12C22 6.47715 17.5228 2 12 2C6.47715 2 2 6.47715 2 12C2 17.5228 6.47715 22 12 22Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="guarantee-text">Risk-free 30-day trial • Cancel anytime</span>
+                    </div>
 
-                    <br><br>Here’s What You Get:<br>
-                    ✅ Customized Fitness & Nutrition Plan (tailored to your schedule and goals)<br>
-                    ✅ Direct Access to Me (ask questions daily)<br>
-                    ✅ Flexible Check-Ins (schedule at your convenience)<br>
-                    ✅ Exclusive Resources (guides, videos, trackers)<br><br>
+                    <div class="offer-scarcity">
+                        <svg class="icon" width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M12 6V12L16 14" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                        <span class="scarcity-text">Limited time offer - Don't miss out</span>
+                    </div>
 
-                    Included Resources:<br>
-                    💰 Body Recomposition Guide ($49.99 value)<br>
-                    💰 Hypertrophy Program ($49.99 value)<br>
-                    💰 Minimalist Program ($49.99 value)<br>
-                    💰 Trainerize Pro Account ($115/month)<br><br>
+                    <div class="offer-features">
+                        <h3>Your Premium Training Experience Includes:</h3>
+                        <ul class="features-list">
+                            <li class="feature-item">
+                                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M20 21V19C20 17.9391 19.5786 16.9217 18.8284 16.1716C18.0783 15.4214 17.0609 15 16 15H8C6.9391 15 5.9217 15.4214 5.1716 16.1716C4.4214 16.9217 4 17.9391 4 19V21" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 11C14.2091 11 16 9.20914 16 7C16 4.79086 14.2091 3 12 3C9.79086 3 8 4.79086 8 7C8 9.20914 9.79086 11 12 11Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="feature-content">
+                                    <strong>Coach of your choice</strong>
+                                    <p>Option to change any time</p>
+                                </div>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M9 5H7C5.89543 5 5 5.89543 5 7V19C5 20.1046 5.89543 21 7 21H17C18.1046 21 19 20.1046 19 19V7C19 5.89543 18.1046 5 17 5H15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 5C9 6.10457 9.89543 7 11 7H13C14.1046 7 15 6.10457 15 5C15 3.89543 14.1046 3 13 3H11C9.89543 3 9 3.89543 9 5Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="feature-content">
+                                    <strong>100% custom fitness plan</strong>
+                                    <p>Handcrafted by your coach with fresh, made-for-you workouts every week</p>
+                                </div>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 15C21 15 19 17 12 17C5 17 3 15 3 15" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M3 8C3 8 5 10 12 10C19 10 21 8 21 8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="feature-content">
+                                    <strong>Daily coach check-ins</strong>
+                                    <p>Monday-Friday support for questions, accountability, and guidance</p>
+                                </div>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M21 12C21 16.9706 16.9706 21 12 21C7.02944 21 3 16.9706 3 12C3 7.02944 7.02944 3 12 3C16.9706 3 21 7.02944 21 12Z" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 12L11 14L15 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="feature-content">
+                                    <strong>Progress tracking</strong>
+                                    <p>Your coach monitors your progress and adjusts your plan for optimal results</p>
+                                </div>
+                            </li>
+                            <li class="feature-item">
+                                <svg class="icon" width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M15 10L18 13L15 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M9 10L6 13L9 16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <path d="M12 7V17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                <div class="feature-content">
+                                    <strong>Video check-ins</strong>
+                                    <p>Regular video calls with your coach to review progress</p>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
 
-                    Total Value: $264.97<br><br>
+                    <div class="offer-pricing">
+                        <div class="price-tag">
+                            <span class="original-price">$199/month</span>
+                            <span class="special-price">$50 First Month</span>
+                            <span class="discount-badge">75% OFF</span>
+                        </div>
+                        <p class="price-note">Regular price applies after first month</p>
+                    </div>
 
-                    **Now Just $50 for Your First Month (≈75% Off)!**<br>
-                    Then **$199/month** if you choose to continue.<br><br>
-
-                    👉 Click “Start Free Trial” to begin now.
+                    <div class="offer-cta">
+                        <button class="cta-button" onclick="window.location.href='signup.php'">Find My Coach</button>
+                    </div>
                 </section>
             </div>
-            <!-- Right Column: Main Offer (hidden on vertical layout) -->
+            <!-- Right Column: Main Offer and Related Videos -->
             <div class="right-column">
                 <div class="offer-box">
-                    <p class="callout" id="callout-text">Spring Rebound Sale</p>
-                    <h1 class="main-title" id="main-title">Your Personal Training Journey Starts Here</h1>
-                    <p class="offer-details" id="offer-details">
-                        Personalized coaching tailored to your goals, schedule, and available equipment. Get in the best shape of your life with expert guidance and support every step of the way.
-                    </p>
-                    <button class="cta-button" id="cta-button">Get The App</button>
-                    <p class="fine-print">$199/month after. Cancel anytime.</p>
+                    <div class="offer-image">
+                        <img src="https://i.postimg.cc/3wZrT83j/6668ddbd71e3a42c69e53654-Detox101-min.webp" alt="Personal Training Offer">
+                    </div>
+                    <div class="offer-content">
+                        <h1 class="main-title" id="main-title">Your Personal Training Journey Starts Here</h1>
+                        <p class="offer-details" id="offer-details">
+                            Personalized coaching tailored to your goals, schedule, and available equipment.
+                        </p>
+                        <button class="cta-button" onclick="window.location.href='signup.php'" id="cta-button">Get Started</button>
+                    </div>
                 </div>
+
+                <!-- Related Content Section (YouTube-style) -->
+                <section class="related-content">
+                    <div class="related-videos">
+                        <div class="related-video-item active" data-type="video" data-url="video1.mp4">
+                            <div class="related-thumbnail">
+                                <video muted>
+                                    <source src="video1.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="related-info">
+                                <h4>Introduction to Personal Training</h4>
+                                <p class="video-duration">2:30</p>
+                            </div>
+                        </div>
+                        <div class="related-video-item" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <div class="related-thumbnail">
+                                <video muted>
+                                    <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="related-info">
+                                <h4>Strength Training Basics</h4>
+                                <p class="video-duration">3:45</p>
+                            </div>
+                        </div>
+                        <div class="related-video-item" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <div class="related-thumbnail">
+                                <video muted>
+                                    <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="related-info">
+                                <h4>Nutrition Fundamentals</h4>
+                                <p class="video-duration">4:15</p>
+                            </div>
+                        </div>
+                        <div class="related-video-item" data-type="video" data-url="The Blueprint To Go From $0 To $1,000,000.mp4">
+                            <div class="related-thumbnail">
+                                <video muted>
+                                    <source src="The Blueprint To Go From $0 To $1,000,000.mp4" type="video/mp4">
+                                </video>
+                            </div>
+                            <div class="related-info">
+                                <h4>Recovery Techniques</h4>
+                                <p class="video-duration">2:15</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Footer -->
+                <footer class="footer">
+                    <div class="footer-links">
+                        <a href="#" class="footer-link">About</a>
+                        <a href="#" class="footer-link">Terms</a>
+                        <a href="#" class="footer-link">Privacy</a>
+                        <a href="#" class="footer-link">Contact</a>
+                    </div>
+                    <div class="footer-copyright">
+                        © 2024 Personal Trainer. All rights reserved.
+                    </div>
+                </footer>
             </div>
         </div>
     </main>
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            // Thumbnail gallery functionality
-            const thumbnails = document.querySelectorAll('.thumbnail');
-            const mainMedia = document.getElementById('main-media');
+            // Custom video player functionality
+            const player = document.querySelector('.custom-player');
+            const video = player.querySelector('video');
+            const initialPlayButton = player.querySelector('.initial-play-button');
+            const playPauseBtn = player.querySelector('.play-pause-btn');
+            const playIcon = playPauseBtn.querySelector('.play-icon');
+            const pauseIcon = playPauseBtn.querySelector('.pause-icon');
+            const volumeBtn = player.querySelector('.volume-btn');
+            const volumeSlider = player.querySelector('.volume-slider');
+            const volumeSliderFilled = player.querySelector('.volume-slider-filled');
+            const progressBar = player.querySelector('.progress-bar-container');
+            const progressBarFilled = player.querySelector('.progress-bar-filled');
+            const progressBarLoaded = player.querySelector('.progress-bar-loaded');
+            const progressBarHandle = player.querySelector('.progress-bar-handle');
+            const currentTime = player.querySelector('.current-time');
+            const duration = player.querySelector('.duration');
+            const fullscreenBtn = player.querySelector('.fullscreen-btn');
+            const fullscreenIcon = fullscreenBtn.querySelector('.fullscreen-icon');
+            const exitFullscreenIcon = fullscreenBtn.querySelector('.exit-fullscreen-icon');
 
-            if (thumbnails.length && mainMedia) {
-                function updateMainMedia(thumbnail) {
-                    thumbnails.forEach(t => t.classList.remove('active'));
-                    thumbnail.classList.add('active');
-                    const contentType = thumbnail.getAttribute('data-type');
-                    const contentUrl = thumbnail.getAttribute('data-url');
-                    if (contentType === 'video') {
-                        mainMedia.innerHTML = `
-                    <iframe src="${contentUrl}" 
-                            title="Video Content" 
-                            frameborder="0" 
-                            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-                            allowfullscreen></iframe>
-                `;
-                    } else if (contentType === 'image') {
-                        mainMedia.innerHTML = `<img src="${contentUrl}" alt="Featured Image">`;
+            // Set initial video state
+            video.muted = true;
+            video.currentTime = 0;
+            video.loop = true;
+            video.play(); // Start playing immediately for the preview
+            
+            // Set up the 5-second preview loop
+            video.addEventListener('timeupdate', function() {
+                if (!player.classList.contains('playing') && video.currentTime >= 5) {
+                    video.currentTime = 0;
+                }
+            });
+
+            // Handle initial play button click
+            initialPlayButton.addEventListener('click', function() {
+                video.muted = false;
+                video.loop = false;
+                video.currentTime = 0;
+                video.play();
+                player.classList.add('playing');
+                initialPlayButton.style.display = 'none';
+                playIcon.style.display = 'none';
+                pauseIcon.style.display = 'block';
+            });
+
+            // Format time in MM:SS
+            function formatTime(seconds) {
+                const minutes = Math.floor(seconds / 60);
+                seconds = Math.floor(seconds % 60);
+                return `${minutes}:${seconds.toString().padStart(2, '0')}`;
+            }
+
+            // Play/Pause
+            function togglePlay() {
+                if (!player.classList.contains('playing')) {
+                    video.muted = false;
+                    video.loop = false;
+                    video.currentTime = 0;
+                    video.play();
+                    player.classList.add('playing');
+                    initialPlayButton.style.display = 'none';
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                } else {
+                    if (video.paused) {
+                        video.play();
+                        playIcon.style.display = 'none';
+                        pauseIcon.style.display = 'block';
+                    } else {
+                        video.pause();
+                        playIcon.style.display = 'block';
+                        pauseIcon.style.display = 'none';
                     }
                 }
-
-                thumbnails.forEach(thumbnail => {
-                    thumbnail.addEventListener('click', function() {
-                        updateMainMedia(this);
-                    });
-                });
             }
 
-            // CTA button functionality
-            const mobileCtaButton = document.getElementById('mobile-cta-button');
+            // Volume
+            function updateVolume(e) {
+                const rect = volumeSlider.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = Math.max(0, Math.min(1, x / rect.width));
+                video.volume = percentage;
+                volumeSliderFilled.style.width = `${percentage * 100}%`;
+            }
 
-            if (mobileCtaButton) {
-                mobileCtaButton.addEventListener('click', function() {
-                    // URLs for Future Personal Training app on different platforms
-                    const iosAppStoreUrl = 'https://apps.apple.com/us/app/future-personal-training/id1288178982';
-                    const androidPlayStoreUrl = 'https://play.google.com/store/apps/details?id=com.future.training';
+            // Progress bar
+            function updateProgress() {
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBarFilled.style.width = `${percentage}%`;
+                progressBarHandle.style.setProperty('--progress-position', `${percentage}%`);
+                currentTime.textContent = formatTime(video.currentTime);
+                duration.textContent = formatTime(video.duration);
 
-                    // Detect platform and redirect accordingly
-                    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+                // Update loaded progress
+                if (video.buffered.length > 0) {
+                    const loadedPercentage = (video.buffered.end(video.buffered.length - 1) / video.duration) * 100;
+                    progressBarLoaded.style.width = `${loadedPercentage}%`;
+                }
+            }
 
-                    if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-                        // iOS device
-                        window.location.href = iosAppStoreUrl;
-                    } else if (/android/i.test(userAgent)) {
-                        // Android device
-                        window.location.href = androidPlayStoreUrl;
-                    } else {
-                        // Fallback for other devices
-                        window.location.href = 'https://www.future.co';
+            function seek(e) {
+                const rect = progressBar.getBoundingClientRect();
+                const x = e.clientX - rect.left;
+                const percentage = Math.max(0, Math.min(1, x / rect.width));
+                video.currentTime = percentage * video.duration;
+                progressBarHandle.style.setProperty('--progress-position', `${percentage * 100}%`);
+            }
+
+            // Fullscreen
+            function toggleFullscreen() {
+                if (!document.fullscreenElement) {
+                    player.requestFullscreen();
+                    fullscreenIcon.style.display = 'none';
+                    exitFullscreenIcon.style.display = 'block';
+                } else {
+                    document.exitFullscreen();
+                    fullscreenIcon.style.display = 'block';
+                    exitFullscreenIcon.style.display = 'none';
+                }
+            }
+
+            // Event listeners
+            playPauseBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                togglePlay();
+            });
+
+            video.addEventListener('click', function(e) {
+                if (e.target === video) {
+                    togglePlay();
+                }
+            });
+
+            video.addEventListener('timeupdate', updateProgress);
+            video.addEventListener('loadedmetadata', () => {
+                duration.textContent = formatTime(video.duration);
+            });
+
+            volumeSlider.addEventListener('click', updateVolume);
+            volumeSlider.addEventListener('mousemove', (e) => {
+                if (e.buttons === 1) updateVolume(e);
+            });
+
+            progressBar.addEventListener('click', seek);
+            progressBar.addEventListener('mousemove', (e) => {
+                if (e.buttons === 1) seek(e);
+            });
+
+            fullscreenBtn.addEventListener('click', toggleFullscreen);
+
+            // Keyboard controls
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'Space') {
+                    e.preventDefault();
+                    togglePlay();
+                }
+                if (e.code === 'ArrowLeft') {
+                    video.currentTime -= 5;
+                }
+                if (e.code === 'ArrowRight') {
+                    video.currentTime += 5;
+                }
+                if (e.code === 'KeyM') {
+                    video.muted = !video.muted;
+                }
+                if (e.code === 'KeyF') {
+                    toggleFullscreen();
+                }
+            });
+
+            // Hide controls when mouse is inactive
+            let timeout;
+            player.addEventListener('mousemove', () => {
+                if (player.classList.contains('playing')) {
+                    const controls = player.querySelector('.video-controls-overlay');
+                    controls.style.opacity = '1';
+                    clearTimeout(timeout);
+                    timeout = setTimeout(() => {
+                        if (!video.paused) {
+                            controls.style.opacity = '0';
+                        }
+                    }, 2000);
+                }
+            });
+
+            // Show handle on progress bar hover
+            progressBar.addEventListener('mousemove', (e) => {
+                const rect = progressBar.getBoundingClientRect();
+                const percentage = Math.max(0, Math.min(1, (e.clientX - rect.left) / rect.width));
+                progressBarHandle.style.setProperty('--progress-position', `${percentage * 100}%`);
+                if (e.buttons === 1) seek(e);
+            });
+
+            progressBar.addEventListener('mouseleave', () => {
+                const percentage = (video.currentTime / video.duration) * 100;
+                progressBarHandle.style.setProperty('--progress-position', `${percentage}%`);
+            });
+
+            // Add close button functionality
+            const ctaCloseBtn = player.querySelector('.video-cta-close');
+            const ctaOverlay = player.querySelector('.video-cta-overlay');
+
+            ctaCloseBtn.addEventListener('click', function() {
+                ctaOverlay.classList.add('hidden');
+            });
+
+            // Show CTA when video starts playing
+            video.addEventListener('play', function() {
+                if (player.classList.contains('playing')) {
+                    ctaOverlay.classList.remove('hidden');
+                }
+            });
+
+            // Add volume handle
+            const volumeHandle = document.createElement('div');
+            volumeHandle.className = 'volume-handle';
+            volumeSlider.appendChild(volumeHandle);
+
+            // Settings menu functionality
+            const settingsBtn = player.querySelector('.settings-btn');
+            const settingsMenu = player.querySelector('.settings-menu');
+            let settingsTimeout;
+
+            settingsBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                settingsMenu.classList.toggle('show');
+                clearTimeout(settingsTimeout);
+            });
+
+            // Close settings menu when clicking outside
+            document.addEventListener('click', function(e) {
+                if (!settingsMenu.contains(e.target) && !settingsBtn.contains(e.target)) {
+                    settingsMenu.classList.remove('show');
+                }
+            });
+
+            // Handle settings options
+            const settingsOptions = settingsMenu.querySelectorAll('.settings-option');
+            settingsOptions.forEach(option => {
+                option.addEventListener('click', function(e) {
+                    e.stopPropagation();
+                    const parent = this.parentElement;
+                    parent.querySelectorAll('.settings-option').forEach(opt => opt.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Handle different settings
+                    if (parent.previousElementSibling.textContent.includes('Speed')) {
+                        const speed = parseFloat(this.textContent);
+                        video.playbackRate = speed;
+                    } else if (parent.previousElementSibling.textContent.includes('Quality')) {
+                        // Handle quality change (implementation depends on your video source)
+                        console.log('Quality changed to:', this.textContent);
+                    } else if (parent.previousElementSibling.textContent.includes('Subtitles')) {
+                        // Handle subtitles (implementation depends on your video source)
+                        console.log('Subtitles changed to:', this.textContent);
                     }
                 });
+            });
 
-                console.log('Future Personal Training CTA button initialized'); // For debugging
-            } else {
-                console.error('Mobile CTA button not found'); // For debugging
+            // Update volume handle position
+            function updateVolumeHandle() {
+                const percentage = video.volume * 100;
+                volumeHandle.style.setProperty('--volume-position', `${percentage}%`);
             }
+
+            // Update volume icon based on volume level
+            function updateVolumeIcon() {
+                const volumeIcon = volumeBtn.querySelector('svg path');
+                if (video.volume === 0) {
+                    volumeIcon.setAttribute('d', 'M16.5 12c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.2.05-.41.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71zM4.27 3L3 4.27 7.73 9H3v6h4l5 5v-6.73l4.25 4.25c-.67.52-1.42.93-2.25 1.18v2.06c1.38-.31 2.63-.95 3.69-1.81L19.73 21 21 19.73l-9-9L4.27 3zM12 4L9.91 6.09 12 8.18V4z');
+                } else if (video.volume < 0.5) {
+                    volumeIcon.setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
+                } else {
+                    volumeIcon.setAttribute('d', 'M3 9v6h4l5 5V4L7 9H3zm13.5 3c0-1.77-1.02-3.29-2.5-4.03v8.05c1.48-.73 2.5-2.25 2.5-4.02zM14 3.23v2.06c2.89.86 5 3.54 5 6.71s-2.11 5.85-5 6.71v2.06c4.01-.91 7-4.49 7-8.77s-2.99-7.86-7-8.77z');
+                }
+            }
+
+            // Autoplay functionality
+            const autoplayToggle = player.querySelector('.autoplay-toggle');
+            let autoplayEnabled = true;
+
+            autoplayToggle.addEventListener('click', function() {
+                autoplayEnabled = !autoplayEnabled;
+                this.classList.toggle('active');
+            });
+
+            // Handle video end for autoplay
+            video.addEventListener('ended', function() {
+                if (autoplayEnabled) {
+                    const nextVideo = document.querySelector('.related-video-item:not(.active)');
+                    if (nextVideo) {
+                        const videoUrl = nextVideo.dataset.url;
+                        video.src = videoUrl;
+                        video.play();
+                        nextVideo.classList.add('active');
+                        document.querySelector('.related-video-item.active').classList.remove('active');
+                    }
+                }
+            });
+
+            // Update volume handle and icon when volume changes
+            video.addEventListener('volumechange', function() {
+                updateVolumeHandle();
+                updateVolumeIcon();
+            });
+
+            // Initialize volume handle position
+            updateVolumeHandle();
+            updateVolumeIcon();
+
+            // Add next/previous video functionality
+            const prevVideoBtn = player.querySelector('.prev-video-btn');
+            const nextVideoBtn = player.querySelector('.next-video-btn');
+
+            function playNextVideo() {
+                const nextVideo = document.querySelector('.related-video-item:not(.active)');
+                if (nextVideo) {
+                    const videoUrl = nextVideo.dataset.url;
+                    video.src = videoUrl;
+                    video.play();
+                    nextVideo.classList.add('active');
+                    document.querySelector('.related-video-item.active').classList.remove('active');
+                }
+            }
+
+            function playPreviousVideo() {
+                const currentVideo = document.querySelector('.related-video-item.active');
+                const prevVideo = currentVideo.previousElementSibling;
+                if (prevVideo && prevVideo.classList.contains('related-video-item')) {
+                    const videoUrl = prevVideo.dataset.url;
+                    video.src = videoUrl;
+                    video.play();
+                    prevVideo.classList.add('active');
+                    currentVideo.classList.remove('active');
+                }
+            }
+
+            // Add event listeners for next/previous buttons
+            nextVideoBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                playNextVideo();
+            });
+
+            prevVideoBtn.addEventListener('click', function(e) {
+                e.stopPropagation();
+                playPreviousVideo();
+            });
+
+            // Add keyboard shortcuts for next/previous
+            document.addEventListener('keydown', (e) => {
+                if (e.code === 'ArrowLeft' && e.ctrlKey) {
+                    playPreviousVideo();
+                }
+                if (e.code === 'ArrowRight' && e.ctrlKey) {
+                    playNextVideo();
+                }
+            });
         });
     </script>
 </body>
