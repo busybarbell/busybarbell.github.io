@@ -1467,6 +1467,7 @@
                 overflow: hidden;
                 position: relative;
                 border: 2px solid var(--thumbnail-border);
+                cursor: pointer;
             }
 
             .mobile-tab.active {
@@ -1477,6 +1478,9 @@
                 width: 100%;
                 height: 100%;
                 object-fit: cover;
+                position: absolute;
+                top: 0;
+                left: 0;
             }
 
             /* Show video CTA section on mobile */
@@ -2262,6 +2266,43 @@
                 if (e.code === 'ArrowRight' && e.ctrlKey) {
                     playNextVideo();
                 }
+            });
+
+            // Handle mobile tab videos
+            const mobileTabs = document.querySelectorAll('.mobile-tab');
+            mobileTabs.forEach(tab => {
+                const video = tab.querySelector('video');
+                video.muted = true;
+                video.loop = true;
+                video.play();
+
+                // Set up the 5-second preview loop for mobile tabs
+                video.addEventListener('timeupdate', function() {
+                    if (video.currentTime >= 5) {
+                        video.currentTime = 0;
+                    }
+                });
+
+                // Handle tab click
+                tab.addEventListener('click', function() {
+                    // Update active state
+                    mobileTabs.forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+
+                    // Update main video source
+                    const mainVideo = document.getElementById('main-video');
+                    mainVideo.src = video.src;
+                    mainVideo.currentTime = 0;
+                    mainVideo.muted = false;
+                    mainVideo.loop = false;
+                    mainVideo.play();
+
+                    // Update player state
+                    player.classList.add('playing');
+                    initialPlayButton.style.display = 'none';
+                    playIcon.style.display = 'none';
+                    pauseIcon.style.display = 'block';
+                });
             });
         });
     </script>
