@@ -1,0 +1,744 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Schedule Your Weight Loss Strategy Session</title>
+    <meta name="description" content="Choose a date and time for your personalized weight loss strategy session.">
+    <meta name="robots" content="index, follow">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #0095F6;
+            --primary-dark: #0081D6;
+            --background: #0F172A;
+            --text: #F8FAFC;
+            --text-light: #94A3B8;
+            --success: #10B981;
+            --success-dark: #059669;
+            --danger: #EF4444;
+            --danger-dark: #DC2626;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        body {
+            background: var(--background);
+            color: var(--text);
+            line-height: 1.5;
+            font-size: 16px;
+        }
+
+        .container {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .content {
+            margin: 0 auto;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            gap: 1.25rem;
+            max-width: 800px;
+            padding: 2rem 1.25rem 2rem;
+        }
+
+        .callout {
+            background: var(--primary);
+            color: var(--text);
+            padding: 0.625rem;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            width: 100%;
+            text-align: center;
+            margin-bottom: 1rem;
+            letter-spacing: 0.02em;
+        }
+
+        .headline {
+            font-size: 2.25rem;
+            font-weight: 700;
+            line-height: 1.2;
+            color: var(--text);
+            margin: 0;
+            max-width: 800px;
+            letter-spacing: -0.01em;
+        }
+
+        .subheadline {
+            font-size: 1.125rem;
+            color: var(--text);
+            line-height: 1.5;
+            max-width: 650px;
+            margin: 0 auto;
+        }
+
+        .section-divider {
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            margin: 1rem 0;
+            width: 100%;
+        }
+
+        .calendar-container {
+            width: 100%;
+            max-width: 800px;
+            margin: 0 auto;
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 4px;
+            padding: 1.5rem;
+        }
+
+        .calendar-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .month-nav {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .month-title {
+            font-size: 1.125rem;
+            font-weight: 600;
+        }
+
+        .nav-button {
+            background: rgba(255, 255, 255, 0.1);
+            border: none;
+            color: var(--text);
+            width: 36px;
+            height: 36px;
+            border-radius: 4px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .nav-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .calendar-day-header {
+            text-align: center;
+            font-size: 0.8125rem;
+            font-weight: 500;
+            color: var(--text-light);
+            padding: 0.5rem 0;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            background: rgba(255, 255, 255, 0.05);
+            position: relative;
+        }
+
+        .calendar-day:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .calendar-day.active {
+            background: var(--primary);
+            color: white;
+        }
+
+        .calendar-day.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .calendar-day.different-month {
+            opacity: 0.3;
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .calendar-day.has-availability::after {
+            content: "";
+            position: absolute;
+            bottom: 4px;
+            width: 4px;
+            height: 4px;
+            background: var(--primary);
+            border-radius: 50%;
+        }
+
+        .calendar-day.active.has-availability::after {
+            background: white;
+        }
+
+        .time-slots-container {
+            display: none;
+            margin-top: 1.5rem;
+        }
+
+        .time-slots-container.visible {
+            display: block;
+        }
+
+        .time-slots-header {
+            text-align: left;
+            margin-bottom: 1rem;
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+        }
+
+        .time-slots-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 0.75rem;
+        }
+
+        .time-slot {
+            padding: 0.75rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 4px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .time-slot:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .time-slot.active {
+            background: var(--primary);
+            border-color: var(--primary-dark);
+        }
+
+        .booking-details {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 4px;
+            text-align: left;
+            display: none; /* Always hidden since we're skipping confirmation */
+        }
+
+        .booking-details.visible {
+            display: none;
+        }
+
+        .booking-details-header {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .booking-details-header i {
+            color: var(--success);
+        }
+
+        .booking-info {
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-info-item {
+            display: flex;
+            margin-bottom: 0.75rem;
+        }
+
+        .booking-info-label {
+            width: 150px;
+            color: var(--text-light);
+            font-size: 0.9375rem;
+        }
+
+        .booking-info-value {
+            flex: 1;
+            font-size: 0.9375rem;
+            font-weight: 500;
+        }
+
+        .confirm-booking-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            background: var(--success);
+            color: var(--text);
+            border: 1px solid var(--success-dark);
+            border-radius: 4px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin: 1rem 0 0;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            width: 100%;
+        }
+
+        .confirm-booking-button:hover {
+            background: var(--success-dark);
+        }
+
+        .booking-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .back-button {
+            flex: 1;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 4px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .back-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .confirm-button {
+            flex: 2;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            background: var(--success);
+            color: var(--text);
+            border: 1px solid var(--success-dark);
+            border-radius: 4px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+        }
+
+        .confirm-button:hover {
+            background: var(--success-dark);
+        }
+        
+        .form-section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            margin-top: 0;
+            text-align: left;
+        }
+
+        .form-section-header span {
+            font-size: 0.75rem;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-right: 1rem;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-section-header::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(148, 163, 184, 0.2);
+        }
+
+        .legal {
+            margin-top: 2.5rem;
+            padding: 1.25rem 0 0;
+            border-top: 1px solid rgba(148, 163, 184, 0.2);
+            font-size: 0.75rem;
+            color: var(--text-light);
+            text-align: center;
+            max-width: 800px;
+            margin: 2.5rem auto 0;
+            line-height: 1.6;
+        }
+
+        .legal p {
+            margin-bottom: 0.5rem;
+        }
+
+        .legal a {
+            color: var(--text-light);
+            text-decoration: none;
+            padding: 0.25rem;
+        }
+
+        .legal a:hover {
+            text-decoration: underline;
+        }
+
+        @media (max-width: 768px) {
+            body {
+                font-size: 15px;
+            }
+            
+            .callout {
+                font-size: 0.8125rem;
+            }
+            
+            .content {
+                gap: 1rem;
+                padding: 1.5rem 1rem;
+            }
+            
+            .headline {
+                font-size: 1.625rem;
+                margin-bottom: 0.25rem;
+            }
+            
+            .subheadline {
+                font-size: 1rem;
+            }
+            
+            .calendar-container {
+                padding: 1rem;
+            }
+            
+            .calendar-grid {
+                gap: 0.25rem;
+            }
+            
+            .calendar-day {
+                font-size: 0.875rem;
+            }
+            
+            .time-slots-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            
+            .booking-buttons {
+                flex-direction: column;
+            }
+            
+            .back-button, .confirm-button {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="callout">BOOK YOUR STRATEGY SESSION</div>
+        <div class="content">
+            <h1 class="headline">Schedule Your Free Strategy Session</h1>
+            <p class="subheadline">Please select a date and time that works for you (at least 48 hours in advance). Your session will be 30 minutes with our weight loss coach.</p>
+            
+            <div class="calendar-container">
+                <div class="form-section-header">
+                    <span>Select Date & Time</span>
+                </div>
+                
+                <div class="calendar-header">
+                    <div class="month-nav">
+                        <button class="nav-button" id="prev-month">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <div class="month-title" id="month-title">June 2024</div>
+                        <button class="nav-button" id="next-month">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="calendar-grid" id="calendar-days">
+                    <!-- Calendar days will be generated by JavaScript -->
+                </div>
+                
+                <div class="time-slots-container" id="time-slots-container">
+                    <div class="time-slots-header">Available Times for <span id="selected-date-display">Thursday, June 13, 2024</span></div>
+                    <div class="time-slots-grid" id="time-slots-grid">
+                        <!-- Time slots will be generated by JavaScript -->
+                    </div>
+                    
+                    <button class="confirm-booking-button" id="confirm-booking-button">
+                        Confirm Booking
+                    </button>
+                </div>
+            </div>
+
+            <div class="legal">
+                <p>This booking system is for scheduling a weight loss strategy session only.</p>
+                <p>By booking a session, you agree to our <a href="#">Terms of Service</a> and <a href="#">Privacy Policy</a>.</p>
+                <p>© 2024 All Rights Reserved</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get user information from localStorage
+            const firstName = localStorage.getItem('firstName') || '';
+            const lastName = localStorage.getItem('lastName') || '';
+            const email = localStorage.getItem('email') || '';
+            const phone = localStorage.getItem('phone') || '';
+            
+            // Calendar functionality
+            const calendarDays = document.getElementById('calendar-days');
+            const monthTitle = document.getElementById('month-title');
+            const prevMonthBtn = document.getElementById('prev-month');
+            const nextMonthBtn = document.getElementById('next-month');
+            const timeSlotsContainer = document.getElementById('time-slots-container');
+            const timeSlotsGrid = document.getElementById('time-slots-grid');
+            const selectedDateDisplay = document.getElementById('selected-date-display');
+            const confirmBookingButton = document.getElementById('confirm-booking-button');
+            
+            let currentDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+            let selectedDate = null;
+            let selectedTimeSlot = null;
+            
+            // Initialize calendar
+            function initCalendar() {
+                generateCalendarDays();
+                
+                // Event listeners for month navigation
+                prevMonthBtn.addEventListener('click', function() {
+                    currentMonth--;
+                    if (currentMonth < 0) {
+                        currentMonth = 11;
+                        currentYear--;
+                    }
+                    generateCalendarDays();
+                    
+                    // If a date was selected, hide time slots
+                    timeSlotsContainer.classList.remove('visible');
+                    selectedDate = null;
+                    selectedTimeSlot = null;
+                });
+                
+                nextMonthBtn.addEventListener('click', function() {
+                    currentMonth++;
+                    if (currentMonth > 11) {
+                        currentMonth = 0;
+                        currentYear++;
+                    }
+                    generateCalendarDays();
+                    
+                    // If a date was selected, hide time slots
+                    timeSlotsContainer.classList.remove('visible');
+                    selectedDate = null;
+                    selectedTimeSlot = null;
+                });
+                
+                // Event listener for confirm booking button
+                confirmBookingButton.addEventListener('click', function() {
+                    if (selectedDate && selectedTimeSlot) {
+                        // Format date for localStorage
+                        const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+                        const formattedDate = selectedDate.toLocaleDateString('en-US', options);
+                        
+                        // Store appointment details in localStorage
+                        localStorage.setItem('appointmentDate', formattedDate);
+                        localStorage.setItem('appointmentTime', selectedTimeSlot + ' (30 minutes)');
+                        
+                        // Get user's timezone
+                        const timeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+                        localStorage.setItem('appointmentTimeZone', timeZone);
+                        
+                        // Get timezone abbreviation
+                        const dateString = new Date().toLocaleString('en-US', { timeZone });
+                        const tzAbbr = new Date(dateString).toLocaleString('en-US', { timeZoneName: 'short' }).split(' ').pop();
+                        localStorage.setItem('appointmentTimeZoneAbbr', tzAbbr);
+                        
+                        // Redirect to thank you page
+                        window.location.href = 'thank-you.html';
+                    }
+                });
+
+                // Auto-select first available date
+                autoSelectFirstAvailableDate();
+            }
+            
+            // Generate calendar days for current month
+            function generateCalendarDays() {
+                calendarDays.innerHTML = '';
+                
+                // Update month title
+                const monthNames = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+                monthTitle.textContent = `${monthNames[currentMonth]} ${currentYear}`;
+                
+                // Add day headers
+                const dayHeaders = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+                dayHeaders.forEach(day => {
+                    const dayHeader = document.createElement('div');
+                    dayHeader.className = 'calendar-day-header';
+                    dayHeader.textContent = day;
+                    calendarDays.appendChild(dayHeader);
+                });
+                
+                // Get first day of month
+                const firstDayOfMonth = new Date(currentYear, currentMonth, 1);
+                const lastDayOfMonth = new Date(currentYear, currentMonth + 1, 0);
+                
+                // Get previous month days to fill in first week
+                const daysFromPrevMonth = firstDayOfMonth.getDay();
+                const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+                
+                // Calculate 48 hours from now for minimum booking time
+                const minBookingDate = new Date();
+                minBookingDate.setHours(minBookingDate.getHours() + 48);
+                
+                // Add previous month days
+                for (let i = daysFromPrevMonth - 1; i >= 0; i--) {
+                    const day = document.createElement('div');
+                    day.className = 'calendar-day different-month disabled';
+                    day.textContent = prevMonthLastDay - i;
+                    calendarDays.appendChild(day);
+                }
+                
+                // Add current month days
+                for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+                    const day = document.createElement('div');
+                    day.className = 'calendar-day';
+                    day.textContent = i;
+                    
+                    // Check if date is in the past or less than 48 hours from now
+                    const currentDateObj = new Date(currentYear, currentMonth, i);
+                    if (currentDateObj < minBookingDate) {
+                        day.classList.add('disabled');
+                    } else {
+                        // Add availability indicator for weekdays (Mon-Fri)
+                        const dayOfWeek = currentDateObj.getDay();
+                        if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                            day.classList.add('has-availability');
+                            
+                            // Add click event to show time slots
+                            day.addEventListener('click', function() {
+                                // Remove active class from all days
+                                document.querySelectorAll('.calendar-day').forEach(day => {
+                                    day.classList.remove('active');
+                                });
+                                
+                                // Add active class to clicked day
+                                day.classList.add('active');
+                                
+                                // Show time slots for selected date
+                                selectedDate = new Date(currentYear, currentMonth, i);
+                                showTimeSlots(selectedDate);
+                            });
+                        } else {
+                            day.classList.add('disabled');
+                        }
+                    }
+                    
+                    calendarDays.appendChild(day);
+                }
+                
+                // Add next month days to fill the remaining grid
+                const daysAdded = daysFromPrevMonth + lastDayOfMonth.getDate();
+                const daysNeeded = Math.ceil(daysAdded / 7) * 7;
+                for (let i = 1; i <= daysNeeded - daysAdded; i++) {
+                    const day = document.createElement('div');
+                    day.className = 'calendar-day different-month disabled';
+                    day.textContent = i;
+                    calendarDays.appendChild(day);
+                }
+            }
+            
+            // Show time slots for selected date
+            function showTimeSlots(date) {
+                // Format date for display
+                const options = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
+                const formattedDate = date.toLocaleDateString('en-US', options);
+                selectedDateDisplay.textContent = formattedDate;
+                
+                // Clear previous time slots
+                timeSlotsGrid.innerHTML = '';
+                
+                // Generate time slots based on day of week
+                const dayOfWeek = date.getDay();
+                let timeSlots = [];
+                
+                // Different time slots for different days
+                if (dayOfWeek >= 1 && dayOfWeek <= 5) {
+                    // Monday to Friday: 9am to 5pm
+                    timeSlots = [
+                        '9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM',
+                        '11:00 AM', '11:30 AM', '12:00 PM', '12:30 PM',
+                        '1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM',
+                        '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'
+                    ];
+                }
+                
+                // Create time slot elements
+                timeSlots.forEach(time => {
+                    const timeSlot = document.createElement('div');
+                    timeSlot.className = 'time-slot';
+                    timeSlot.textContent = time;
+                    
+                    timeSlot.addEventListener('click', function() {
+                        // Remove active class from all time slots
+                        document.querySelectorAll('.time-slot').forEach(slot => {
+                            slot.classList.remove('active');
+                        });
+                        
+                        // Add active class to clicked time slot
+                        timeSlot.classList.add('active');
+                        
+                        // Store selected time slot
+                        selectedTimeSlot = time;
+                    });
+                    
+                    timeSlotsGrid.appendChild(timeSlot);
+                });
+                
+                // Show time slots container
+                timeSlotsContainer.classList.add('visible');
+            }
+
+            // Auto-select the first available date
+            function autoSelectFirstAvailableDate() {
+                setTimeout(() => {
+                    const availableDays = document.querySelectorAll('.calendar-day.has-availability:not(.disabled)');
+                    if (availableDays.length > 0) {
+                        // Trigger click on first available day
+                        availableDays[0].click();
+                    }
+                }, 100);
+            }
+            
+            // Initialize calendar
+            initCalendar();
+        });
+    </script>
+</body>
+</html> 
