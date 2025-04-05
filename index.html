@@ -176,48 +176,171 @@
         .contact-form {
             display: flex;
             flex-direction: column;
-            gap: 1rem;
             width: 100%;
             max-width: 500px;
             margin: 0 auto;
         }
 
-        .form-group {
+        .form-blob {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-section-header {
+            display: flex;
+            align-items: center;
+            margin-bottom: 0.5rem;
+            text-align: left;
+        }
+
+        .form-section-header span {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-right: 1rem;
+            white-space: nowrap;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .form-section-header::after {
+            content: "";
+            flex-grow: 1;
+            height: 1px;
+            background: rgba(148, 163, 184, 0.2);
+        }
+
+        .input-container {
             display: flex;
             flex-direction: column;
-            text-align: left;
-            gap: 0.5rem;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.75rem;
         }
 
-        .form-row {
+        .name-row {
             display: flex;
-            gap: 1rem;
             width: 100%;
         }
 
-        .form-row .form-group {
+        .name-row input {
             flex: 1;
-        }
-
-        .form-group label {
-            font-size: 0.875rem;
-            font-weight: 500;
-            color: var(--text);
-        }
-
-        .form-group input, .form-group select {
-            padding: 0.75rem 1rem;
-            border: 1px solid rgba(148, 163, 184, 0.2);
-            border-radius: 4px;
-            background: rgba(255, 255, 255, 0.05);
+            padding: 0.875rem 1rem;
+            background: transparent;
             color: var(--text);
             font-size: 1rem;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .name-row input:first-child {
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .input-container input[type="email"] {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: transparent;
+            color: var(--text);
+            font-size: 1rem;
+            border: none;
+            border-radius: 0;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+        }
+
+        .phone-row {
+            display: flex;
             width: 100%;
         }
 
-        .form-group input:focus, .form-group select:focus {
+        .phone-row select {
+            flex: 0 0 80px;
+            padding: 0.875rem 0.5rem;
+            background-color: transparent;
+            color: var(--text);
+            font-size: 0.9rem;
+            border: none;
+            border-right: 1px solid rgba(148, 163, 184, 0.1);
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            text-align: center;
+            background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%2394A3B8' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+            background-repeat: no-repeat;
+            background-position: right 0.4rem center;
+            background-size: 0.85rem;
+            padding-right: 1.5rem;
+            border-radius: 0;
+        }
+
+        .phone-row input {
+            flex: 1;
+            padding: 0.875rem 1rem;
+            background: transparent;
+            color: var(--text);
+            font-size: 1rem;
+            border: none;
+            border-radius: 0;
+        }
+
+        input:focus, select:focus {
             outline: none;
-            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.05) !important;
+        }
+
+        .invalid {
+            border-color: #ff4d4d !important;
+            background-color: rgba(255, 77, 77, 0.05) !important;
+        }
+
+        .radio-options {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(148, 163, 184, 0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin-bottom: 1.75rem;
+        }
+
+        .radio-option {
+            display: flex;
+            align-items: center;
+            padding: 0.875rem 1rem;
+            gap: 0.75rem;
+            border-bottom: 1px solid rgba(148, 163, 184, 0.1);
+            width: 100%;
+            cursor: pointer;
+        }
+
+        .radio-option:last-child {
+            border-bottom: none;
+        }
+
+        .radio-option:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .radio-option input[type="radio"] {
+            width: 18px;
+            height: 18px;
+            cursor: pointer;
+            flex: 0 0 auto;
+        }
+
+        .radio-option label {
+            margin-bottom: 0;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: var(--text);
         }
 
         .form-button {
@@ -304,9 +427,13 @@
                 padding: 1rem;
             }
             
-            .form-row {
+            .name-row {
                 flex-direction: column;
-                gap: 1rem;
+            }
+            
+            .name-row input:first-child {
+                border-right: none;
+                border-bottom: 1px solid rgba(148, 163, 184, 0.1);
             }
             
             .form-button {
@@ -318,19 +445,6 @@
                 margin-top: 2rem;
                 padding-top: 1rem;
             }
-        }
-
-        .phone-input-container {
-            display: flex;
-            gap: 0.5rem;
-        }
-        
-        .phone-input-container select {
-            flex: 0 0 100px;
-        }
-        
-        .phone-input-container input {
-            flex: 1;
         }
     </style>
 </head>
@@ -348,60 +462,97 @@
                     <span>Discover How In The Video Below</span>
                 </div>
                 <div class="video-container">
-                    <video id="main-video" preload="metadata" playsinline>
+                    <video id="main-video" preload="metadata">
                         <source src="video1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
                     <div id="video-thumbnail" class="video-thumbnail">
                         <video id="thumbnail-video" autoplay muted loop playsinline>
-                            <source src="video1.mp4" type="video/mp4">
+                            <source src="video1.mp4#t=0,5" type="video/mp4">
                         </video>
                         <div class="play-icon">
                             <i class="fas fa-play"></i>
-    </div>
-  </div>
-    </div>
-  </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
             <div class="section-divider"></div>
             
             <p class="subheadline" style="margin-top: 0.5rem; font-weight: 500;">Book Your Free 30-Minute Strategy Session</p>
             
             <div class="scheduler-container">
-                <form class="contact-form" action="thank-you.php" method="post">
-                    <div class="form-row">
-                        <div class="form-group">
-                            <label for="first_name">First Name</label>
+                <form class="contact-form" action="thank-you.php" method="post" id="qualificationForm">
+                    <!-- Contact Information Section -->
+                    <div class="form-section-header">
+                        <span>Contact Information</span>
+                    </div>
+                    <div class="input-container">
+                        <div class="name-row">
                             <input type="text" id="first_name" name="first_name" placeholder="First Name" required>
-    </div>
-                        <div class="form-group">
-                            <label for="last_name">Last Name</label>
                             <input type="text" id="last_name" name="last_name" placeholder="Last Name" required>
-          </div>
-        </div>
-                    <div class="form-group">
-                        <label for="email">Email Address</label>
+                        </div>
                         <input type="email" id="email" name="email" placeholder="Email Address" required>
-        </div>
-                    <div class="form-group">
-                        <label for="phone">Phone Number</label>
-                        <div class="phone-input-container">
+                        <div class="phone-row">
                             <select id="country_code" name="country_code" required>
-                                <option value="+1" selected>US (+1)</option>
-                                <option value="+44">UK (+44)</option>
-                                <option value="+61">AU (+61)</option>
-                                <option value="+1">CA (+1)</option>
-                                <option value="+64">NZ (+64)</option>
-                                <option value="+353">IE (+353)</option>
-                                <option value="+91">IN (+91)</option>
-                                <option value="+49">DE (+49)</option>
-                                <option value="+33">FR (+33)</option>
-                                <option value="+34">ES (+34)</option>
+                                <option value="+1" selected>US +1</option>
+                                <option value="+44">UK +44</option>
+                                <option value="+61">AU +61</option>
+                                <option value="+1">CA +1</option>
+                                <option value="+64">NZ +64</option>
+                                <option value="+353">IE +353</option>
+                                <option value="+91">IN +91</option>
+                                <option value="+49">DE +49</option>
+                                <option value="+33">FR +33</option>
+                                <option value="+34">ES +34</option>
                             </select>
                             <input type="tel" id="phone" name="phone" required placeholder="Phone Number">
-            </div>
-            </div>
-                    <button type="submit" class="form-button" onclick="window.location.href='thank-you.php'; return false;">Schedule My Strategy Session</button>
+                        </div>
+                    </div>
+
+                    <!-- Timeframe & Commitment Section -->
+                    <div class="form-section-header">
+                        <span>Timeframe & Commitment</span>
+                    </div>
+                    <div class="radio-options">
+                        <div class="radio-option">
+                            <input type="radio" id="qualified_ready" name="timeframe_commitment" value="ready_yes" required>
+                            <label for="qualified_ready">I'm ready to get started now</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="qualified_soon" name="timeframe_commitment" value="soon_maybe">
+                            <label for="qualified_soon">I want to start within 30 days</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="not_qualified" name="timeframe_commitment" value="not_ready">
+                            <label for="not_qualified">I'm researching free options</label>
+                        </div>
+                    </div>
+
+                    <!-- Weight Goal Section -->
+                    <div class="form-section-header">
+                        <span>Weight Loss Goal</span>
+                    </div>
+                    <div class="radio-options">
+                        <div class="radio-option">
+                            <input type="radio" id="weight_less10" name="weight_goal" value="Less than 10 lbs" required>
+                            <label for="weight_less10">Less than 10 pounds</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="weight_10to25" name="weight_goal" value="10-25 lbs">
+                            <label for="weight_10to25">10–25 pounds</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="weight_25to50" name="weight_goal" value="25-50 lbs">
+                            <label for="weight_25to50">25–50 pounds</label>
+                        </div>
+                        <div class="radio-option">
+                            <input type="radio" id="weight_50plus" name="weight_goal" value="50+ lbs">
+                            <label for="weight_50plus">50+ pounds</label>
+                        </div>
+                    </div>
+                    
+                    <button type="submit" class="form-button" id="submitButton">See if I'm a Fit</button>
                 </form>
 
                 <script>
@@ -415,55 +566,73 @@
                             return;
                         }
                         
-                        // Format as (XXX) XXX-XXXX for US/CA numbers
-                        if (document.getElementById('country_code').value === '+1') {
-                            if (value.length > 0) {
-                                value = value.substring(0, 10); // Limit to 10 digits
-                                let formatted = '';
-                                
-                                if (value.length > 0) {
-                                    formatted += '(';
-                                    formatted += value.substring(0, Math.min(3, value.length));
-                                    formatted += ')';
-                                }
-                                
-                                if (value.length > 3) {
-                                    formatted += ' ';
-                                    formatted += value.substring(3, Math.min(6, value.length));
-                                }
-                                
-                                if (value.length > 6) {
-                                    formatted += '-';
-                                    formatted += value.substring(6, 10);
-                                }
-                                
-                                e.target.value = formatted;
+                        // Format phone numbers based on country code
+                        const countryCode = document.getElementById('country_code').value;
+                        
+                        if (countryCode === '+1') {
+                            // US/Canada format: (XXX) XXX-XXXX
+                            value = value.substring(0, 10);
+                            if (value.length > 6) {
+                                e.target.value = value.replace(/(\d{3})(\d{3})(\d{1,4})/, "($1) $2-$3");
+                            } else if (value.length > 3) {
+                                e.target.value = value.replace(/(\d{3})(\d{1,3})/, "($1) $2");
+                            } else if (value.length > 0) {
+                                e.target.value = value.replace(/(\d{1,3})/, "($1");
                             }
                         } else {
-                            // For non-US numbers, just limit to 15 digits with no special formatting
-                            e.target.value = value.substring(0, 15);
+                            // Basic international format with spaces
+                            value = value.substring(0, 15);
+                            e.target.value = value.replace(/(\d{1,3})(?=(\d{3})+(?!\d))/g, "$1 ").trim();
                         }
                     });
                     
-                    // Update placeholder based on country selection
+                    // Update phone formats when changing country code
                     document.getElementById('country_code').addEventListener('change', function(e) {
                         const phoneInput = document.getElementById('phone');
-                        phoneInput.value = '';
                         
-                        if (e.target.value === '+1') {
-                            phoneInput.placeholder = 'Phone Number';
-                        } else if (e.target.value === '+44') {
-                            phoneInput.placeholder = 'Phone Number';
-                        } else if (e.target.value === '+61') {
-                            phoneInput.placeholder = 'Phone Number';
-                        } else {
-                            phoneInput.placeholder = 'Phone Number';
-                        }
+                        // Clear phone input when changing country codes
+                        phoneInput.value = '';
+                        phoneInput.placeholder = 'Phone Number';
                     });
 
                     // Set default placeholder on load
                     document.addEventListener('DOMContentLoaded', function() {
                         document.getElementById('phone').placeholder = 'Phone Number';
+                    });
+
+                    // Add input validation for email
+                    const emailInput = document.getElementById('email');
+                    emailInput.addEventListener('blur', function(e) {
+                        const email = e.target.value;
+                        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                        
+                        if (email && !emailRegex.test(email)) {
+                            e.target.classList.add('invalid');
+                        } else {
+                            e.target.classList.remove('invalid');
+                        }
+                    });
+
+                    // Add qualification logic
+                    document.getElementById('qualificationForm').addEventListener('submit', function(event) {
+                        event.preventDefault();
+                        
+                        // Get qualification answers
+                        const timeframeCommitment = document.querySelector('input[name="timeframe_commitment"]:checked').value;
+                        const weightGoal = document.querySelector('input[name="weight_goal"]:checked').value;
+                        
+                        // Check if qualified
+                        const isQualified = (
+                            (timeframeCommitment === 'ready_yes' || timeframeCommitment === 'soon_maybe') && 
+                            (weightGoal === '10-25 lbs' || weightGoal === '25-50 lbs' || weightGoal === '50+ lbs')
+                        );
+                        
+                        // Redirect based on qualification
+                        if (isQualified) {
+                            window.location.href = 'thank-you.php';
+                        } else {
+                            window.location.href = 'free-download.php';
+                        }
                     });
 
                     // Video thumbnail and play functionality
