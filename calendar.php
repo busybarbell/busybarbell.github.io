@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Schedule Your Weight Loss Strategy Session</title>
-    <meta name="description" content="Choose a date and time for your personalized weight loss strategy session.">
+    <title>Schedule Your Call</title>
+    <meta name="description" content="Choose a date and time for your call.">
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -457,8 +457,8 @@
 <body>
     <div class="container">
         <div class="content">
-            <h1 class="headline">Congrats, You Qualify for a Strategy Session!</h1>
-            <p class="subheadline">Book a call with Asher to secure your spot for your personalized weight loss strategy session.</p>
+            <h1 class="headline">Congrats, You Qualify!</h1>
+            <p class="subheadline">Pick a day and time for your call with Asher.</p>
 
             <div class="calendar-container">
                 <div class="form-section-header">
