@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Sustainable Weight Loss Without Diet Stress</title>
-    <meta name="description" content="Discover how to lose weight without giving up your favorite foods. Join our free strategy session to create a personalized weight loss plan.">
+    <meta name="description" content="Discover how to lose weight without giving up your favorite foods. Join our free call to create a personalized weight loss plan.">
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -54,8 +54,8 @@
             color: var(--text);
             padding: 0.625rem;
             font-weight: 700;
-            font-size: 0.875rem;
-            text-transform: uppercase;
+            font-size: 1rem;
+            text-transform: none;
             width: 100%;
             text-align: center;
             margin-bottom: 1rem;
@@ -67,7 +67,7 @@
             font-weight: 700;
             line-height: 1.2;
             color: var(--text);
-            margin: 0;
+            margin: 0.5rem 0 0;
             max-width: 800px;
             letter-spacing: -0.01em;
         }
@@ -165,7 +165,7 @@
 
         .section-divider {
             border-top: 1px solid rgba(148, 163, 184, 0.2);
-            margin: 1rem 0;
+            margin: 0.5rem 0;
             width: 100%;
         }
 
@@ -175,7 +175,7 @@
             margin: 0 auto;
             background: rgba(255, 255, 255, 0.03);
             border-radius: 4px;
-            padding: 1.5rem;
+            padding: 1rem;
         }
 
         .contact-form {
@@ -372,7 +372,7 @@
 
         .radio-option label {
             display: block;
-            padding: 0.875rem 1rem 0.875rem 2.5rem;
+            padding: 0.875rem 1rem 0.875rem 3rem;
             cursor: pointer;
             transition: background-color 0.2s ease;
             font-size: 0.95rem;
@@ -407,6 +407,32 @@
 
         .form-button:hover {
             background: var(--primary-dark);
+        }
+        
+        /* CTA Button above the fold */
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            padding: 0.875rem 2rem;
+            background: var(--primary);
+            color: var(--text);
+            border: 1px solid #006bbd;
+            border-radius: 4px;
+            font-size: 1.125rem;
+            font-weight: 700;
+            margin: 0.5rem auto;
+            cursor: pointer;
+            transition: background-color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .cta-button:hover {
+            background: var(--primary-dark);
+        }
+        
+        .cta-button i {
+            font-size: 1rem;
         }
 
         .legal {
@@ -447,7 +473,7 @@
             }
             
             .callout {
-                font-size: 0.8125rem;
+                font-size: 0.9375rem;
             }
             
             .content {
@@ -467,6 +493,11 @@
             .video-container {
                 padding-bottom: 56.25%;
                 max-height: 250px;
+            }
+            
+            .cta-button {
+                width: 100%;
+                padding: 0.75rem 1.5rem;
             }
             
             .scheduler-container {
@@ -494,12 +525,11 @@
 </head>
 <body>
     <div class="container">
-        <div class="callout">ATTENTION: Overweight & Frustrated With Diets</div>
+        <div class="callout">Trying to Lose Weight and Failing?</div>
         <div class="content">
-            <p class="subheadline">Tired of Failing at Weight Loss?</p>
-            <h1 class="headline">Discover How To Lose Weight Without Giving Up Your Favorite Foods</h1>
-            <p class="subheadline">Most people struggle with weight loss because they're following outdated advice. Watch this video to see what you're doing wrong and how to fix it.</p>
-
+            <h1 class="headline">How to Lose Weight Without Giving Up Foods</h1>
+            <p class="subheadline">Most people fail at weight loss because they follow old advice.</p>
+            
             <div class="video-section">
                 <div class="video-instruction">
                     <i class="fas fa-play-circle"></i>
@@ -521,11 +551,13 @@
                 </div>
             </div>
 
+            <a href="#booking-form" class="cta-button">See if You're a Fit</a>
+
             <div class="section-divider"></div>
             
             <h2 class="next-steps-header">Book a Call Below to See if You're a Fit</h2>
             
-            <div class="scheduler-container">
+            <div class="scheduler-container" id="booking-form">
                 <form class="contact-form" action="thank-you.php" method="post" id="qualificationForm">
                     <!-- Contact Information Section -->
                     <div class="form-section-header">
@@ -577,7 +609,7 @@
                         </div>
                         <div class="radio-option">
                             <input type="radio" id="not_qualified" name="timeframe_commitment" value="not_ready">
-                            <label for="not_qualified">I'm researching free options</label>
+                            <label for="not_qualified">I'm looking for free options</label>
                         </div>
         </div>
 
@@ -654,6 +686,18 @@
                             e.target.classList.add('invalid');
                         } else {
                             e.target.classList.remove('invalid');
+                        }
+                    });
+                    
+                    // Smooth scroll for CTA button
+                    document.querySelector('.cta-button').addEventListener('click', function(e) {
+                        e.preventDefault();
+                        const target = document.querySelector(this.getAttribute('href'));
+                        if (target) {
+                            window.scrollTo({
+                                top: target.offsetTop - 20,
+                                behavior: 'smooth'
+                            });
                         }
                     });
 
