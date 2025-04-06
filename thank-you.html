@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Booking Confirmed - Your Strategy Session Is Set!</title>
-    <meta name="description" content="Your weight loss strategy session has been confirmed. Here's what to expect next.">
+    <title>Your Call Is Booked!</title>
+    <meta name="description" content="Your call with Asher has been confirmed. Here's what to expect next.">
     <meta name="robots" content="index, follow">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -395,8 +395,8 @@
 <body>
     <div class="container">
         <div class="content">
-            <h1 class="headline">Your Strategy Session is Confirmed!</h1>
-            <p class="subheadline">Thank you for scheduling your free weight loss strategy session. Please make sure you finish the video below.</p>
+            <h1 class="headline">Your Call is Booked!</h1>
+            <p class="subheadline">Thanks for booking your call with Asher. Please make sure you finish the video below.</p>
             
             <div class="video-section">
                 <div class="video-instruction">
@@ -462,15 +462,15 @@
                 <ul class="steps-list">
                     <li class="step-item">
                         <div class="step-title">Check Your Email</div>
-                        <div class="step-description">We've sent a confirmation email with a calendar invite and meeting link. If you don't see it, please check your spam folder.</div>
+                        <div class="step-description">We sent you an email with the call link. If you can't find it, check your spam folder.</div>
                     </li>
                     <li class="step-item">
-                        <div class="step-title">Prepare for Your Call</div>
-                        <div class="step-description">Find a quiet space where you can talk openly about your weight loss journey. Have any relevant health information handy.</div>
+                        <div class="step-title">Get Ready for Your Call</div>
+                        <div class="step-description">Find a quiet place where you can talk about your weight loss goals. Have your health info ready.</div>
                     </li>
                     <li class="step-item">
-                        <div class="step-title">Join Your Session</div>
-                        <div class="step-description">Click the meeting link in your confirmation email 5 minutes before your scheduled time. Our coach will call you if there are any technical issues.</div>
+                        <div class="step-title">Join Your Call</div>
+                        <div class="step-description">Click the link in your email 5 minutes before your call time. We'll call you if there are any tech issues.</div>
                     </li>
                 </ul>
             </div>
@@ -567,7 +567,7 @@
                 return [
                     'BEGIN:VCALENDAR',
                     'VERSION:2.0',
-                    'PRODID:-//Busy Barbell//Weight Loss Strategy Session//EN',
+                    'PRODID:-//Busy Barbell//Call with Asher//EN',
                     'CALSCALE:GREGORIAN',
                     'METHOD:PUBLISH',
                     'BEGIN:VTIMEZONE',
@@ -577,8 +577,8 @@
                     `DTSTART;TZID=${appointmentTimeZone}:${startFormatted}`,
                     `DTEND;TZID=${appointmentTimeZone}:${endFormatted}`,
                     `DTSTAMP:${now}`,
-                    'SUMMARY:Weight Loss Strategy Session',
-                    `DESCRIPTION:Your personalized weight loss strategy session with Asher.\n\nThis appointment is scheduled in your local time zone: ${appointmentTimeZone}`,
+                    'SUMMARY:Call with Asher',
+                    `DESCRIPTION:Your call with Asher.\n\nThis appointment is scheduled in your local time zone: ${appointmentTimeZone}`,
                     'LOCATION:Online Zoom Call (link will be emailed)',
                     'STATUS:CONFIRMED',
                     'SEQUENCE:0',
@@ -606,8 +606,8 @@
                 const endFormatted = formatDate(endDate);
                 
                 // Create Outlook Calendar URL
-                const eventTitle = encodeURIComponent('Weight Loss Strategy Session');
-                const eventDescription = encodeURIComponent(`Your personalized weight loss strategy session with Asher.\n\nThis appointment is scheduled in your local time zone: ${appointmentTimeZone}`);
+                const eventTitle = encodeURIComponent('Call with Asher');
+                const eventDescription = encodeURIComponent(`Your call with Asher.\n\nThis appointment is scheduled in your local time zone: ${appointmentTimeZone}`);
                 const eventLocation = encodeURIComponent('Online Zoom Call (link will be emailed)');
                 
                 return `https://outlook.live.com/calendar/0/deeplink/compose?subject=${eventTitle}&startdt=${startFormatted}&enddt=${endFormatted}&body=${eventDescription}&location=${eventLocation}`;
@@ -636,7 +636,7 @@
                 // Create a download link and trigger it
                 const downloadLink = document.createElement('a');
                 downloadLink.href = url;
-                downloadLink.download = 'weight-loss-strategy-session.ics';
+                downloadLink.download = 'call-with-asher.ics';
                 document.body.appendChild(downloadLink);
                 downloadLink.click();
                 document.body.removeChild(downloadLink);
@@ -664,8 +664,8 @@
                 const endFormatted = formatDate(endDate);
                 
                 // Create Google Calendar URL
-                const eventTitle = encodeURIComponent('Weight Loss Strategy Session');
-                const eventDescription = encodeURIComponent(`Your personalized weight loss strategy session with Asher.\n\nThis appointment is scheduled in your local time zone: ${appointmentTimeZone}`);
+                const eventTitle = encodeURIComponent('Call with Asher');
+                const eventDescription = encodeURIComponent(`Your call with Asher.\n\nThis appointment is scheduled in your local time zone: ${appointmentTimeZone}`);
                 const eventLocation = encodeURIComponent('Online Zoom Call (link will be emailed)');
                 
                 return `https://www.google.com/calendar/render?action=TEMPLATE&text=${eventTitle}&dates=${startFormatted}/${endFormatted}&details=${eventDescription}&location=${eventLocation}&ctz=${appointmentTimeZone.replace('/', '%2F')}`;
