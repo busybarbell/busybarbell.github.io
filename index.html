@@ -738,19 +738,41 @@
                         const thumbnailContainer = document.getElementById('video-thumbnail');
                         const thumbnailVideo = document.getElementById('thumbnail-video');
                         
+                        // Fix for mobile: ensure thumbnail video loads and plays
+                        function initThumbnail() {
+                            // Reset video source with cache-busting parameter
+                            const currentSrc = thumbnailVideo.querySelector('source').src;
+                            const newSrc = currentSrc.split('#')[0] + '#t=0,5?' + new Date().getTime();
+                            thumbnailVideo.querySelector('source').src = newSrc;
+                            
+                            // Force load and play
+                            thumbnailVideo.load();
+                            thumbnailVideo.play().catch(e => {
+                                console.log('Auto-play prevented, using fallback');
+                                // If autoplay fails, use a static thumbnail instead
+                                thumbnailContainer.style.backgroundImage = 'url("video-poster.jpg")';
+                                thumbnailContainer.style.backgroundSize = 'cover';
+                                thumbnailContainer.style.backgroundPosition = 'center';
+                            });
+                        }
+                        
+                        // Initialize thumbnail
+                        initThumbnail();
+                        
                         // When thumbnail is clicked, hide thumbnail and play main video
                         thumbnailContainer.addEventListener('click', function() {
                             thumbnailContainer.classList.add('hidden');
                             mainVideo.controls = true;
-                            mainVideo.play();
+                            mainVideo.play().catch(e => {
+                                console.log('Error playing main video:', e);
+                            });
                         });
                         
                         // If main video ends, show thumbnail again
                         mainVideo.addEventListener('ended', function() {
                             thumbnailContainer.classList.remove('hidden');
                             mainVideo.controls = false;
-                            thumbnailVideo.currentTime = 0;
-                            thumbnailVideo.play();
+                            initThumbnail();
                         });
                     });
                 </script>
