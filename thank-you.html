@@ -6,9 +6,6 @@
     <title>Your Call Is Booked!</title>
     <meta name="description" content="Your call with Asher has been confirmed. Here's what to expect next.">
     <meta name="robots" content="index, follow">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
@@ -25,7 +22,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Montserrat', sans-serif;
+            font-family: system-ui, sans-serif;
         }
 
         body {
@@ -202,12 +199,19 @@
                 padding-top: 1rem;
             }
         }
+
+        .highlight {
+            text-decoration: underline;
+            text-decoration-color: #0095F6;
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="content">
-            <h1 class="headline">Here's Everything You Absolutely Need To Know Before Your Call</h1>
+            <h1 class="headline">Here's <span class="highlight">Everything</span> You Absolutely <em>Need To Know</em> <span class="highlight">Before Your Call</span></h1>
             <p class="subheadline">Please make sure you finish the video below.<br>**Spots are first come first serve**</p>
             
             <div class="video-section">
