@@ -7,678 +7,17 @@
     <title>Sustainable Weight Loss Without Diet Stress</title>
     <meta name="description" content="Discover how to lose weight without giving up your favorite foods. Join our free call to create a personalized weight loss plan.">
     <meta name="robots" content="index, follow">
-    <!-- Critical CSS Inline -->
-    <style>
-        :root {
-            --primary: #0072C6;
-            --primary-dark: #005EA3;
-            --background: #0F172A;
-            --text: #F8FAFC;
-            --text-light: #94A3B8;
-            --red: #DC2626;
-            --red-light: #EF4444;
-            --red-dark: #B91C1C;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: system-ui, sans-serif;
-        }
-
-        body {
-            background: var(--background);
-            color: var(--text);
-            line-height: 1.5;
-            font-size: 16px;
-        }
-
-        .container {
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        .content {
-            margin: 0 auto;
-            text-align: center;
-            display: flex;
-            flex-direction: column;
-            gap: 1.25rem;
-            max-width: 800px;
-            padding: 0 1.25rem 2rem;
-        }
-
-        .headline {
-            font-size: 2.25rem;
-            font-weight: 700;
-            line-height: 1.2;
-            color: var(--text);
-            margin: 0.5rem 0 0;
-            max-width: 800px;
-            letter-spacing: -0.01em;
-        }
-
-        .subheadline {
-            font-size: 1.125rem;
-            color: var(--text);
-            line-height: 1.5;
-            max-width: 650px;
-            margin: 0 auto;
-        }
-
-        .video-section {
-            width: 100%;
-            margin: 0.5rem 0;
-        }
-
-        .video-instruction {
-            background: var(--primary);
-            color: var(--text);
-            padding: 0.625rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 0.75rem;
-            font-weight: 600;
-            font-size: 0.9375rem;
-            max-width: 800px;
-            margin: 0 auto;
-        }
-
-        .video-instruction i {
-            font-size: 1.125rem;
-        }
-
-        .video-container {
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            background: var(--background);
-            margin: 0 auto;
-            max-width: 800px;
-        }
-
-        .video-container video {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .video-thumbnail {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-        }
-
-        .video-thumbnail .play-icon {
-            position: absolute;
-            font-size: 2.5rem;
-            color: #000000;
-            opacity: 0.9;
-            transition: all 0.3s ease;
-            background: #FFFFFF;
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-        }
-
-        .video-thumbnail .play-icon i {
-            margin-left: 5px;
-        }
-
-        .video-thumbnail:hover .play-icon {
-            opacity: 1;
-            transform: scale(1.05);
-        }
-
-        .hidden {
-            display: none !important;
-        }
-
-        .section-divider {
-            border-top: 1px solid rgba(148, 163, 184, 0.2);
-            margin: 0.5rem 0;
-            width: 100%;
-        }
-
-        .scheduler-container {
-            width: 100%;
-            max-width: 800px;
-            margin: 0 auto;
-            background: #FFFFFF;
-            border-radius: 4px;
-            padding: 1rem;
-            color: #1E293B;
-        }
-
-        /* CTA Button above the fold */
-        .cta-button {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.875rem 2rem;
-            background: linear-gradient(to bottom, #EF4444, #DC2626);
-            color: white;
-            border: 1px solid #B91C1C;
-            border-radius: 4px;
-            font-size: 1.125rem;
-            font-weight: 700;
-            margin: 0.5rem auto;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-
-        .cta-button:hover {
-            background: linear-gradient(to bottom, #DC2626, #B91C1C);
-            transform: translateY(-1px);
-        }
-
-        .cta-button i {
-            font-size: 1rem;
-        }
-
-        .legal {
-            margin-top: 2.5rem;
-            padding: 1.25rem 0 0;
-            border-top: 1px solid rgba(148, 163, 184, 0.2);
-            font-size: 0.75rem;
-            color: var(--text-light);
-            text-align: center;
-            max-width: 800px;
-            margin: 2.5rem auto 0;
-            line-height: 1.6;
-        }
-
-        .legal p {
-            margin-bottom: 0.5rem;
-        }
-
-        .legal a {
-            color: var(--text-light);
-            text-decoration: none;
-            padding: 0.25rem;
-        }
-
-        .legal a:hover {
-            text-decoration: underline;
-        }
-
-        .next-steps-header {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-
-        .highlight {
-            text-decoration: underline;
-            text-decoration-color: #0072C6;
-            text-decoration-thickness: 2px;
-            text-underline-offset: 4px;
-        }
-
-        em {
-            font-style: italic;
-            font-weight: inherit;
-        }
-
-        /* Calendar Styles */
-        .calendar-container {
-            width: 100%;
-            max-width: 450px;
-            margin: 0 auto;
-            background: #FFFFFF;
-            border-radius: 8px;
-            border: 1px solid #E5E7EB;
-            color: #111827;
-            padding: 0;
-            position: relative;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            overflow: hidden;
-            font-family: system-ui, sans-serif;
-        }
-
-        .month-calendar {
-            padding: 0 1rem 1rem;
-            margin-bottom: 0;
-            border-bottom: 1px solid #F3F4F6;
-        }
-
-        .calendar-header {
-            padding: 1rem 1rem 0.5rem;
-        }
-
-        .month-nav {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-            color: #111827;
-            width: 100%;
-            justify-content: space-between;
-        }
-
-        .month-title {
-            font-size: 1.125rem;
-            font-weight: 600;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            color: #111827;
-            font-family: system-ui, sans-serif;
-        }
-
-        .nav-button {
-            background: transparent;
-            border: 1px solid #E5E7EB;
-            color: #4B5563;
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: background-color 0.2s ease;
-            flex-shrink: 0;
-        }
-
-        .nav-button:hover {
-            background: #F9FAFB;
-        }
-
-        .weekdays {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            text-align: center;
-            font-weight: 600;
-            color: #6B7280;
-            font-size: 0.75rem;
-            margin-bottom: 0.75rem;
-            border-bottom: 1px solid #E5E7EB;
-            padding-bottom: 0.5rem;
-            font-family: system-ui, sans-serif;
-        }
-
-        .weekday {
-            padding: 0.5rem 0;
-            text-transform: uppercase;
-        }
-
-        .calendar-days {
-            display: grid;
-            grid-template-columns: repeat(7, 1fr);
-            gap: 2px;
-        }
-
-        .calendar-day {
-            height: 40px;
-            width: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9375rem;
-            border-radius: 6px;
-            cursor: pointer;
-            position: relative;
-            color: #111827;
-            margin: 2px auto;
-            transition: background-color 0.2s ease;
-            font-family: system-ui, sans-serif;
-        }
-
-        .calendar-day:hover {
-            background-color: #F3F4F6;
-        }
-
-        .calendar-day.available {
-            background-color: #F3F4F6;
-        }
-
-        .calendar-day.selected {
-            background-color: #EF4444;
-            color: white;
-            font-weight: 500;
-        }
-
-        .calendar-day.other-month {
-            color: #D1D5DB;
-        }
-
-        .calendar-day.today {
-            font-weight: 700;
-            position: relative;
-        }
-
-        .calendar-day.today::after {
-            content: "";
-            position: absolute;
-            bottom: 5px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 4px;
-            height: 4px;
-            background-color: #DC2626;
-            border-radius: 50%;
-        }
-
-        .calendar-day.today.selected::after {
-            background-color: white;
-        }
-
-        .day-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1rem;
-        }
-
-        #selected-day-header {
-            color: #111827;
-            font-size: 1rem;
-            font-weight: 600;
-            margin: 0;
-            font-family: system-ui, sans-serif;
-        }
-
-        .timezone-and-format {
-            display: none;
-        }
-
-        .time-format-toggle {
-            display: none;
-        }
-
-        .format-option {
-            display: none;
-        }
-
-        .time-slots-container {
-            max-height: none;
-            overflow-y: visible;
-            padding: 0.25rem;
-            margin: 0 -0.25rem;
-        }
-
-        .time-slots-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 0.625rem;
-        }
-
-        .time-slot {
-            padding: 0.75rem;
-            background: #FFFFFF;
-            border: 1px solid #D1D5DB;
-            border-radius: 6px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            color: #2D3748;
-            font-weight: 600;
-            font-size: 0.875rem;
-            font-family: system-ui, sans-serif;
-        }
-
-        .time-slot:hover {
-            background: #F9FAFB;
-            border-color: #B91C1C;
-        }
-
-        .time-slot.active, .time-slot.selected {
-            background: linear-gradient(to bottom, #EF4444, #DC2626);
-            color: #FFFFFF;
-            border-color: #B91C1C;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .time-slot.taken {
-            background: #F3F4F6;
-            border-color: #E5E7EB;
-            color: #9CA3AF;
-            cursor: not-allowed;
-            position: relative;
-            text-decoration: line-through;
-        }
-
-        .time-slot.taken::after {
-            content: "Taken";
-            position: absolute;
-            font-size: 0.625rem;
-            bottom: 3px;
-            right: 6px;
-            color: #6B7280;
-        }
-
-        .time-slot.booking {
-            background: linear-gradient(to bottom, #EF4444, #DC2626);
-            color: white;
-            border-color: #B91C1C;
-            pointer-events: none;
-            position: relative;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-        }
-
-        .time-slot.booking::after {
-            content: "";
-            position: absolute;
-            right: 10px;
-            top: 50%;
-            margin-top: -8px;
-            width: 16px;
-            height: 16px;
-            border: 2px solid rgba(255, 255, 255, 0.5);
-            border-top-color: white;
-            border-radius: 50%;
-            animation: spinner 0.6s linear infinite;
-        }
-
-        @keyframes spinner {
-            to {transform: rotate(360deg);}
-        }
-
-        @media (min-width: 769px) {
-            .content {
-                padding-top: 0.5rem;
-            }
-        }
-
-        @media (max-width: 768px) {
-            body {
-                font-size: 15px;
-            }
-
-            .calendar-container {
-                max-width: 100%;
-                box-shadow: none;
-                border-radius: 6px;
-            }
-
-            .callout {
-                font-size: 0.9375rem;
-            }
-
-            .content {
-                gap: 1rem;
-                padding: 0 1rem 1.5rem;
-            }
-
-            .headline {
-                font-size: 1.625rem;
-                margin-bottom: 0.25rem;
-            }
-
-            .subheadline {
-                font-size: 1rem;
-            }
-
-            .video-container {
-                padding-bottom: 56.25%;
-                max-height: 250px;
-            }
-
-            .cta-button {
-                width: 100%;
-                padding: 0.75rem 1.5rem;
-            }
-
-            .time-slots-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .calendar-day {
-                height: 36px;
-                width: 36px;
-                font-size: 0.875rem;
-            }
-
-            .day-view {
-                padding: 0.75rem;
-            }
-
-            .legal {
-                margin-top: 2rem;
-                padding-top: 1rem;
-            }
-        }
-
-        /* Booking Form Styles */
-        .booking-details {
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 8px;
-            padding: 1.5rem;
-            margin: 1.5rem auto;
-            max-width: 800px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-        }
-        
-        .booking-details h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1.5rem;
-            text-align: center;
-            color: var(--text);
-        }
-        
-        .selected-details {
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 6px;
-            padding: 1rem;
-            margin-bottom: 1.5rem;
-        }
-        
-        .detail-row {
-            display: flex;
-            margin-bottom: 0.5rem;
-        }
-        
-        .detail-row:last-child {
-            margin-bottom: 0;
-        }
-        
-        .detail-label {
-            width: 100px;
-            font-weight: 500;
-            color: var(--text-light);
-        }
-        
-        .detail-value {
-            flex: 1;
-            font-weight: 600;
-            color: var(--text);
-        }
-        
-        .booking-form {
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
-        }
-        
-        .form-group {
-            display: flex;
-            flex-direction: column;
-            gap: 0.5rem;
-        }
-        
-        .form-group label {
-            font-size: 0.875rem;
-            color: var(--text-light);
-            font-weight: 500;
-        }
-        
-        .form-group input {
-            padding: 0.75rem;
-            border-radius: 4px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            background: rgba(255, 255, 255, 0.1);
-            color: var(--text);
-            font-size: 1rem;
-        }
-        
-        .form-group input:focus {
-            outline: none;
-            border-color: var(--primary);
-            background: rgba(255, 255, 255, 0.15);
-        }
-        
-        .booking-submit {
-            background: linear-gradient(to bottom, var(--red-light), var(--red));
-            color: white;
-            border: 1px solid var(--red-dark);
-            padding: 0.875rem;
-            border-radius: 4px;
-            font-weight: 700;
-            font-size: 1rem;
-            cursor: pointer;
-            margin-top: 0.5rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-        }
-        
-        .booking-submit:hover {
-            background: linear-gradient(to bottom, var(--red), var(--red-dark));
-            transform: translateY(-1px);
-        }
-        
-        .booking-submit:disabled {
-            opacity: 0.7;
-            cursor: not-allowed;
-            transform: none;
-        }
-        
-        .time-slot.selected {
-            background-color: var(--red);
-            color: white;
-            border-color: var(--red-dark);
-        }
-
-        .day-view {
-            padding: 1rem;
-            background-color: #F9FAFB;
-            border-top: 1px solid #E5E7EB;
-        }
-    </style>
-    <!-- Non-critical CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all'">
+    
+    <!-- Resource hints -->
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    
+    <!-- Critical CSS Inline - Optimized -->
+    <style>:root{--primary:#0072C6;--primary-dark:#005EA3;--background:#0F172A;--text:#F8FAFC;--text-light:#94A3B8;--red:#DC2626;--red-light:#EF4444;--red-dark:#B91C1C}*{margin:0;padding:0;box-sizing:border-box;font-family:system-ui,sans-serif}body{background:var(--background);color:var(--text);line-height:1.5;font-size:16px}body.noscroll{overflow:hidden}.container{min-height:100vh;display:flex;flex-direction:column}.content{margin:0 auto;text-align:center;display:flex;flex-direction:column;gap:1.25rem;max-width:800px;padding:0 1.25rem 2rem}.headline{font-size:2.25rem;font-weight:700;line-height:1.2;color:var(--text);margin:.5rem 0 0;max-width:800px;letter-spacing:-.01em}.subheadline{font-size:1.125rem;color:var(--text);line-height:1.5;max-width:650px;margin:0 auto}.hidden{display:none!important}.calendar-container{width:100%;max-width:450px;margin:0 auto;background:#FFF;border-radius:8px;border:1px solid #E5E7EB;color:#111827;padding:0;position:relative;box-shadow:0 4px 12px rgba(0,0,0,.08);overflow:hidden;font-family:system-ui,sans-serif}@media(min-width:769px){.content{padding-top:.5rem}}@media(max-width:768px){body{font-size:15px}.headline{font-size:1.625rem;margin-bottom:.25rem}.subheadline{font-size:1rem}.calendar-container{max-width:100%;box-shadow:none;border-radius:6px}}</style>
+    <!-- Non-critical CSS - Load asynchronously -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" media="print" onload="this.media='all';this.onload=null">
     <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css"></noscript>
-    <style>
-        /* All remaining CSS moved here */
+    <style id="deferred-styles">
         .callout{background:var(--primary);color:var(--text);padding:.625rem;font-weight:700;font-size:1rem;text-transform:none;width:100%;text-align:center;margin-bottom:1rem;letter-spacing:.02em}
         .video-section{width:100%;margin:.5rem 0}
         .video-instruction{background:var(--primary);color:var(--text);padding:.625rem;display:flex;align-items:center;justify-content:center;gap:.75rem;font-weight:600;font-size:.9375rem;max-width:800px;margin:0 auto}
@@ -728,14 +67,12 @@
         .day-view{padding:1rem;background-color:#F9FAFB;border-top:1px solid #E5E7EB}
         .time-slots-container{max-height:none;overflow-y:visible;padding:.25rem;margin:0 -.25rem}
         .time-slots-grid{display:grid;grid-template-columns:1fr;gap:.625rem}
-        .time-slot{padding:.75rem;background:#FFF;border:1px solid #D1D5DB;border-radius:6px;text-align:center;cursor:pointer;transition:all .2s ease;color:#2D3748;font-weight:600;font-size:.875rem}
-        .time-slot:hover{background:#F9FAFB;border-color:#B91C1C}
-        .time-slot.active,.time-slot.selected{background:linear-gradient(to bottom,#EF4444,#DC2626);color:#FFF;border-color:#B91C1C;text-shadow:0 1px 2px rgba(0,0,0,.1)}
+        .time-slot{padding:.75rem;background:#FFF;border:1px solid #D1D5DB;border-radius:6px;text-align:center;cursor:pointer;color:#2D3748;font-weight:600;font-size:.875rem}
+        .time-slot:hover{background:#F9FAFB}
+        .time-slot.active,.time-slot.selected,.time-slot.booking,.time-slot.booking::after{display:none}
         .time-slot.taken{background:#F3F4F6;border-color:#E5E7EB;color:#9CA3AF;cursor:not-allowed;position:relative;text-decoration:line-through}
         .time-slot.taken::after{content:"Taken";position:absolute;font-size:.625rem;bottom:3px;right:6px;color:#6B7280}
-        .time-slot.booking{background:linear-gradient(to bottom,#EF4444,#DC2626);color:#fff;border-color:#B91C1C;pointer-events:none;position:relative;text-shadow:0 1px 2px rgba(0,0,0,.1)}
-        .time-slot.booking::after{content:"";position:absolute;right:10px;top:50%;margin-top:-8px;width:16px;height:16px;border:2px solid rgba(255,255,255,.5);border-top-color:#fff;border-radius:50%;animation:spinner .6s linear infinite}
-        @keyframes spinner{to{transform:rotate(360deg)}}
+        @media(max-width:768px){.callout{font-size:.9375rem}.content{gap:1rem}.video-container{max-height:250px}.cta-button{width:100%;padding:.75rem 1.5rem}.calendar-day{height:36px;width:36px;font-size:.875rem}.day-view{padding:.75rem}.legal{margin-top:2rem;padding-top:1rem}}
     </style>
 </head>
 
@@ -743,7 +80,7 @@
     <div class="container">
         <div class="callout">For People Committed to Losing 25+ Pounds</div>
         <div class="content">
-            <h1 class="headline">Congratulations! Your <span class="highlight">Last Step</span> is to Book Your Call</h1>
+            <h1 class="headline">Congratulations<span id="visitor-name" style="font-style: italic;"></span>! Your <span class="highlight">Last Step</span> is to Book Your Call</h1>
             <p class="subheadline">Select a time below to speak with Asher and create your personalized transformation plan.</p>
 
             <div class="video-section">
@@ -824,458 +161,477 @@
     </div>
 
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Store URL parameters in localStorage
-            const urlParams = new URLSearchParams(window.location.search);
-            if (urlParams.has('firstName')) localStorage.setItem('firstName', urlParams.get('firstName'));
-            if (urlParams.has('lastName')) localStorage.setItem('lastName', urlParams.get('lastName'));
-            if (urlParams.has('email')) localStorage.setItem('email', urlParams.get('email'));
-            if (urlParams.has('smsReminderNumber')) localStorage.setItem('phone', urlParams.get('smsReminderNumber'));
-            
-            // Video thumbnail and play functionality
-            const mainVideo = document.getElementById('main-video');
-            const thumbnailContainer = document.getElementById('video-thumbnail');
-            const thumbnailVideo = document.getElementById('thumbnail-video');
-            
-            // Fix for mobile: ensure thumbnail video loads and plays
-            function initThumbnail() {
-                // Reset video source with cache-busting parameter
-                const currentSrc = thumbnailVideo.querySelector('source').src;
-                const newSrc = currentSrc.split('#')[0] + '#t=0,5?' + new Date().getTime();
-                thumbnailVideo.querySelector('source').src = newSrc;
-                
-                // Force load and play
-                thumbnailVideo.load();
-                thumbnailVideo.play().catch(e => {
-                    console.log('Auto-play prevented, using fallback');
-                    // If autoplay fails, use a static thumbnail instead
-                    thumbnailContainer.style.backgroundImage = 'url("thumbnail.png")';
-                    thumbnailContainer.style.backgroundSize = 'cover';
-                    thumbnailContainer.style.backgroundPosition = 'center';
-                });
-            }
-            
-            // Initialize thumbnail
-            initThumbnail();
-            
-            // When thumbnail is clicked, hide thumbnail and play main video
-            thumbnailContainer.addEventListener('click', function() {
-                thumbnailContainer.classList.add('hidden');
-                mainVideo.controls = true;
-                mainVideo.play().catch(e => {
-                    console.log('Error playing main video:', e);
-                });
-            });
-            
-            // If main video ends, show thumbnail again
-            mainVideo.addEventListener('ended', function() {
-                thumbnailContainer.classList.remove('hidden');
-                mainVideo.controls = false;
-                initThumbnail();
-            });
-            
-            // Detect user's timezone
-            const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-            const userTimeZoneAbbr = getUserTimeZoneAbbreviation(userTimeZone);
-            
-            // Time format (fixed to 12h)
-            const timeFormat = '12';
-            
-            // Function to get timezone abbreviation
-            function getUserTimeZoneAbbreviation(timeZone) {
-                try {
-                    const options = {
-                        timeZoneName: 'short'
-                    };
-                    const timeZoneAbbr = new Intl.DateTimeFormat('en-US', options)
-                        .formatToParts(new Date())
-                        .find(part => part.type === 'timeZoneName').value;
-                    return timeZoneAbbr;
-                } catch (e) {
-                    const offset = new Date().getTimezoneOffset();
-                    const hours = Math.abs(Math.floor(offset / 60));
-                    const minutes = Math.abs(offset % 60);
-                    const sign = offset < 0 ? '+' : '-';
-                    return `GMT${sign}${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
-                }
-            }
-            
-            // Initialize current date and selected date
-            const currentDate = new Date();
-            let selectedDate = new Date();
-            let currentMonth = currentDate.getMonth();
-            let currentYear = currentDate.getFullYear();
-            
-            // Format date for display
-            function formatDateDisplay(date) {
-                const options = {
-                    weekday: 'long',
-                    month: 'long',
-                    day: 'numeric'
-                };
-                return date.toLocaleDateString('en-US', options);
-            }
-            
-            // Update month calendar display
-            function updateMonthCalendar() {
-                // Update month/year header
-                const monthYearStr = new Date(currentYear, currentMonth).toLocaleDateString('en-US', { 
-                    month: 'long', 
-                    year: 'numeric' 
-                });
-                document.getElementById('current-month-year').textContent = monthYearStr;
-                
-                // Generate calendar days
-                generateCalendarDays();
-            }
-            
-            // Create day element for calendar
-            function createDayElement(day, isOtherMonth) {
-                const dayElement = document.createElement('div');
-                dayElement.className = 'calendar-day';
-                dayElement.textContent = day;
-                
-                if (isOtherMonth) {
-                    dayElement.classList.add('other-month');
-                }
-                
-                return dayElement;
-            }
-            
-            // Generate calendar days for current month
-            function generateCalendarDays() {
-                const calendarDays = document.getElementById('calendar-days');
-                calendarDays.innerHTML = '';
-                
-                // Get first day of month and last day
-                const firstDay = new Date(currentYear, currentMonth, 1);
-                const lastDay = new Date(currentYear, currentMonth + 1, 0);
-                
-                // Get day of week of first day (0 = Sunday, 6 = Saturday)
-                const firstDayOfWeek = firstDay.getDay();
-                
-                // Get total days in current month
-                const totalDays = lastDay.getDate();
-                
-                // Get total days from previous month to display
-                const prevMonthDays = firstDayOfWeek;
-                
-                // Get last day of previous month
-                const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
-                
-                // Add days from previous month
-                for (let i = 0; i < prevMonthDays; i++) {
-                    const dayElement = createDayElement(prevMonthLastDay - prevMonthDays + i + 1, true);
-                    dayElement.classList.add('other-month');
-                    calendarDays.appendChild(dayElement);
-                }
-                
-                // Create tomorrow's date for comparison
-                const today = new Date();
-                today.setHours(0, 0, 0, 0);
-                const tomorrow = new Date(today);
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                
-                // Add days from current month
-                for (let i = 1; i <= totalDays; i++) {
-                    const dayElement = createDayElement(i, false);
-                    
-                    // Check if day is today
-                    const currentDayDate = new Date(currentYear, currentMonth, i);
-                    currentDayDate.setHours(0, 0, 0, 0);
-                    
-                    const isToday = 
-                        currentDayDate.getTime() === today.getTime();
-                    
-                    if (isToday) {
-                        dayElement.classList.add('today');
-                    }
-                    
-                    // Check if day is selected
-                    const isSelected = 
-                        i === selectedDate.getDate() && 
-                        currentMonth === selectedDate.getMonth() && 
-                        currentYear === selectedDate.getFullYear();
-                        
-                    if (isSelected) {
-                        dayElement.classList.add('selected');
-                    }
-                    
-                    // Only allow booking for today and tomorrow
-                    if (currentDayDate.getTime() === today.getTime() || 
-                        currentDayDate.getTime() === tomorrow.getTime()) {
-                        
-                        dayElement.classList.add('available');
-                        
-                        // Add click handler for valid dates
-                        dayElement.addEventListener('click', function() {
-                            selectedDate = new Date(currentYear, currentMonth, i);
-                            showDayView(selectedDate);
-                        });
-                    } else {
-                        dayElement.classList.add('unavailable');
-                    }
-                    
-                    calendarDays.appendChild(dayElement);
-                }
-                
-                // Fill remaining grid with next month's days
-                const totalCalendarCells = 42; // 6 rows of 7 days
-                const remainingCells = totalCalendarCells - (prevMonthDays + totalDays);
-                
-                for (let i = 1; i <= remainingCells; i++) {
-                    const dayElement = createDayElement(i, true);
-                    dayElement.classList.add('other-month');
-                    calendarDays.appendChild(dayElement);
-                }
-            }
-            
-            // Show day view with time slots
-            function showDayView(date) {
-                // Update selected day in calendar
-                document.querySelectorAll('.calendar-day').forEach(day => {
-                    day.classList.remove('selected');
-                    
-                    // Find the day element that matches the selected date
-                    if (!day.classList.contains('other-month') && 
-                        parseInt(day.textContent) === date.getDate()) {
-                        day.classList.add('selected');
-                    }
-                });
-                
-                // Update day header
-                document.getElementById('selected-day-header').textContent = formatDateDisplay(date);
-                
-                // Show time slots for selected date
-                showTimeSlots(date);
-            }
-            
-            // Add navigation event listeners
-            document.getElementById('prev-month').addEventListener('click', function() {
-                currentMonth--;
-                if (currentMonth < 0) {
-                    currentMonth = 11;
-                    currentYear--;
-                }
-                updateMonthCalendar();
-            });
+    // Optimize JavaScript loading
+    document.addEventListener('DOMContentLoaded', function() {
+        // Store URL parameters in localStorage - critical action
+        const urlParams = new URLSearchParams(window.location.search);
+        if (urlParams.has('firstName')) localStorage.setItem('firstName', urlParams.get('firstName'));
+        if (urlParams.has('lastName')) localStorage.setItem('lastName', urlParams.get('lastName'));
+        if (urlParams.has('email')) localStorage.setItem('email', urlParams.get('email'));
+        if (urlParams.has('smsReminderNumber')) localStorage.setItem('phone', urlParams.get('smsReminderNumber'));
+        
+        // Display visitor name if provided in URL
+        const visitorNameElement = document.getElementById('visitor-name');
+        if (urlParams.has('firstName')) {
+            const firstName = urlParams.get('firstName');
+            visitorNameElement.textContent = `, ${firstName}`;
+        }
+        
+        // Initialize calendar - critical for page functionality
+        initCalendar();
+        
+        // Initialize video with requestIdleCallback or setTimeout for non-critical operations
+        if ('requestIdleCallback' in window) {
+            requestIdleCallback(initVideo);
+        } else {
+            setTimeout(initVideo, 100);
+        }
+    });
 
-            document.getElementById('next-month').addEventListener('click', function() {
-                currentMonth++;
-                if (currentMonth > 11) {
-                    currentMonth = 0;
-                    currentYear++;
-                }
-                updateMonthCalendar();
-            });
+    // Video initialization - non-critical function
+    function initVideo() {
+        const mainVideo = document.getElementById('main-video');
+        const thumbnailContainer = document.getElementById('video-thumbnail');
+        const thumbnailVideo = document.getElementById('thumbnail-video');
+        
+        // Fix for mobile: ensure thumbnail video loads and plays
+        function initThumbnail() {
+            // Reset video source with cache-busting parameter
+            const currentSrc = thumbnailVideo.querySelector('source').src;
+            const newSrc = currentSrc.split('#')[0] + '#t=0,5?' + new Date().getTime();
+            thumbnailVideo.querySelector('source').src = newSrc;
             
-            // Function to show time slots for a selected date
-            function showTimeSlots(date) {
-                const timeSlotGrid = document.getElementById('time-slots-grid');
-                timeSlotGrid.innerHTML = '';
-                
-                // Generate time slots
-                const timeSlots = generateTimeSlots(date);
-                
-                // Determine some slots to be marked as taken (for scarcity effect)
-                const totalSlots = timeSlots.length;
-                const numberOfTakenSlots = Math.floor(totalSlots * 0.3); // Mark about 30% as taken
-                const takenSlotIndices = new Set();
-                
-                // Generate random indices for taken slots
-                while (takenSlotIndices.size < numberOfTakenSlots) {
-                    const randomIndex = Math.floor(Math.random() * totalSlots);
-                    takenSlotIndices.add(randomIndex);
-                }
-                
-                timeSlots.forEach((slot, index) => {
-                    const timeElement = document.createElement('div');
-                    timeElement.className = 'time-slot';
-                    timeElement.textContent = slot;
-                    
-                    // Mark some slots as taken to create scarcity
-                    if (takenSlotIndices.has(index)) {
-                        timeElement.classList.add('taken');
-                    } else {
-                        timeElement.addEventListener('click', function() {
-                            // Clear any previously selected times
-                            document.querySelectorAll('.time-slot.active').forEach(el => {
-                                el.classList.remove('active');
-                            });
-                            
-                            // Mark this time as selected and show loading state
-                            timeElement.classList.add('active', 'booking');
-                            
-                            // Store the selected time and date in localStorage
-                            const fullDateOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
-                            const formattedDate = date.toLocaleDateString('en-US', fullDateOptions);
-                            
-                            localStorage.setItem('appointmentDate', formattedDate);
-                            localStorage.setItem('appointmentTime', `${slot} (30 minutes)`);
-                            localStorage.setItem('appointmentTimeZone', userTimeZone);
-                            localStorage.setItem('appointmentTimeZoneAbbr', userTimeZoneAbbr);
-                            
-                            // Pre-fill form with URL parameters if available
-                            const firstName = localStorage.getItem('firstName') || 'Guest';
-                            const lastName = localStorage.getItem('lastName') || '';
-                            const email = localStorage.getItem('email') || '';
-                            const phone = localStorage.getItem('phone') || '';
-                            
-                            // Send booking data to server
-                            setTimeout(() => {
-                                fetch('process-booking.php', {
-                                    method: 'POST',
-                                    headers: {
-                                        'Content-Type': 'application/json'
-                                    },
-                                    body: JSON.stringify({
-                                        date: formattedDate,
-                                        time: `${slot} (30 minutes)`,
-                                        timezone: userTimeZone,
-                                        timezoneAbbr: userTimeZoneAbbr,
-                                        firstName: firstName,
-                                        lastName: lastName,
-                                        email: email,
-                                        phone: phone
-                                    })
-                                })
-                                .then(response => response.json())
-                                .then(data => {
-                                    // Redirect to thank-you page
-                                    window.location.href = 'thank-you.php';
-                                })
-                                .catch(error => {
-                                    console.error('Error:', error);
-                                    // Fallback to original behavior if fetch fails
-                                    window.location.href = 'thank-you.php';
-                                });
-                            }, 500); // Small delay to show the spinner
-                        });
-                    }
-                    
-                    timeSlotGrid.appendChild(timeElement);
-                });
+            // Force load and play
+            thumbnailVideo.load();
+            thumbnailVideo.play().catch(e => {
+                console.log('Auto-play prevented, using fallback');
+                // If autoplay fails, use a static thumbnail instead
+                thumbnailContainer.style.backgroundImage = 'url("thumbnail.png")';
+                thumbnailContainer.style.backgroundSize = 'cover';
+                thumbnailContainer.style.backgroundPosition = 'center';
+            });
+        }
+        
+        // Initialize thumbnail
+        initThumbnail();
+        
+        // When thumbnail is clicked, hide thumbnail and play main video
+        thumbnailContainer.addEventListener('click', function() {
+            thumbnailContainer.classList.add('hidden');
+            mainVideo.controls = true;
+            mainVideo.play().catch(e => {
+                console.log('Error playing main video:', e);
+            });
+        });
+        
+        // If main video ends, show thumbnail again
+        mainVideo.addEventListener('ended', function() {
+            thumbnailContainer.classList.remove('hidden');
+            mainVideo.controls = false;
+            initThumbnail();
+        });
+    }
+
+    // Calendar initialization - critical for page functionality
+    function initCalendar() {
+        // Detect user's timezone - perform once and cache
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const userTimeZoneAbbr = getUserTimeZoneAbbreviation(userTimeZone);
+        
+        // Time format (fixed to 12h)
+        const timeFormat = '12';
+        
+        // Initialize current date and selected date
+        const currentDate = new Date();
+        let selectedDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        
+        // Function to get timezone abbreviation
+        function getUserTimeZoneAbbreviation(timeZone) {
+            try {
+                const options = {
+                    timeZoneName: 'short'
+                };
+                const timeZoneAbbr = new Intl.DateTimeFormat('en-US', options)
+                    .formatToParts(new Date())
+                    .find(part => part.type === 'timeZoneName').value;
+                return timeZoneAbbr;
+            } catch (e) {
+                const offset = new Date().getTimezoneOffset();
+                const hours = Math.abs(Math.floor(offset / 60));
+                const minutes = Math.abs(offset % 60);
+                const sign = offset < 0 ? '+' : '-';
+                return `GMT${sign}${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
+            }
+        }
+        
+        // Format date for display
+        function formatDateDisplay(date) {
+            const options = {
+                weekday: 'long',
+                month: 'long',
+                day: 'numeric'
+            };
+            return date.toLocaleDateString('en-US', options);
+        }
+        
+        // Update month calendar display
+        function updateMonthCalendar() {
+            // Update month/year header
+            const monthYearStr = new Date(currentYear, currentMonth).toLocaleDateString('en-US', { 
+                month: 'long', 
+                year: 'numeric' 
+            });
+            document.getElementById('current-month-year').textContent = monthYearStr;
+            
+            // Generate calendar days
+            generateCalendarDays();
+        }
+        
+        // Create day element for calendar
+        function createDayElement(day, isOtherMonth) {
+            const dayElement = document.createElement('div');
+            dayElement.className = 'calendar-day';
+            dayElement.textContent = day;
+            
+            if (isOtherMonth) {
+                dayElement.classList.add('other-month');
             }
             
-            // Function to generate time slots
-            function generateTimeSlots(date) {
-                const slots = [];
-                const userTimezoneOffset = new Date().getTimezoneOffset();
+            return dayElement;
+        }
+        
+        // Generate calendar days for current month
+        function generateCalendarDays() {
+            const calendarDays = document.getElementById('calendar-days');
+            calendarDays.innerHTML = '';
+            
+            // Get first day of month and last day
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            
+            // Get day of week of first day (0 = Sunday, 6 = Saturday)
+            const firstDayOfWeek = firstDay.getDay();
+            
+            // Get total days in current month
+            const totalDays = lastDay.getDate();
+            
+            // Get total days from previous month to display
+            const prevMonthDays = firstDayOfWeek;
+            
+            // Get last day of previous month
+            const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+            
+            // Create document fragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            // Add days from previous month
+            for (let i = 0; i < prevMonthDays; i++) {
+                const dayElement = createDayElement(prevMonthLastDay - prevMonthDays + i + 1, true);
+                dayElement.classList.add('other-month');
+                fragment.appendChild(dayElement);
+            }
+            
+            // Create tomorrow's date for comparison
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            const tomorrow = new Date(today);
+            tomorrow.setDate(tomorrow.getDate() + 1);
+            
+            // Add days from current month
+            for (let i = 1; i <= totalDays; i++) {
+                const dayElement = createDayElement(i, false);
                 
-                // Eastern Time offset (in minutes)
-                const now = new Date();
-                const jan = new Date(now.getFullYear(), 0, 1);
-                const jul = new Date(now.getFullYear(), 6, 1);
-                const isDST = now.getTimezoneOffset() < Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
-                const easternOffset = isDST ? 240 : 300;
+                // Check if day is today
+                const currentDayDate = new Date(currentYear, currentMonth, i);
+                currentDayDate.setHours(0, 0, 0, 0);
                 
-                const timezoneDiff = userTimezoneOffset - easternOffset;
-                let startHour = 14 - (timezoneDiff / 60);
-                let endHour = 20 - (timezoneDiff / 60);
+                const isToday = 
+                    currentDayDate.getTime() === today.getTime();
                 
-                for (let hour = Math.floor(startHour); hour <= Math.ceil(endHour); hour++) {
-                    for (let minute = 0; minute < 60; minute += 15) {
-                        const localTime = hour + (minute / 60);
-                        if (localTime < startHour) continue;
-                        if (localTime > endHour) continue;
-                        
-                        const slot = formatTimeSlot(hour, minute);
-                        slots.push(slot);
-                    }
+                if (isToday) {
+                    dayElement.classList.add('today');
                 }
                 
-                // Filter out past time slots if the selected date is today
-                const now2 = new Date();
-                if (date.getDate() === now2.getDate() &&
-                    date.getMonth() === now2.getMonth() &&
-                    date.getFullYear() === now2.getFullYear()) {
+                // Check if day is selected
+                const isSelected = 
+                    i === selectedDate.getDate() && 
+                    currentMonth === selectedDate.getMonth() && 
+                    currentYear === selectedDate.getFullYear();
                     
-                    return slots.filter(slot => {
-                        return isTimeSlotInFuture(slot, now2);
+                if (isSelected) {
+                    dayElement.classList.add('selected');
+                }
+                
+                // Only allow booking for today and tomorrow
+                if (currentDayDate.getTime() === today.getTime() || 
+                    currentDayDate.getTime() === tomorrow.getTime()) {
+                    
+                    dayElement.classList.add('available');
+                    
+                    // Add click handler for valid dates
+                    dayElement.addEventListener('click', function() {
+                        selectedDate = new Date(currentYear, currentMonth, i);
+                        showDayView(selectedDate);
+                    });
+                } else {
+                    dayElement.classList.add('unavailable');
+                }
+                
+                fragment.appendChild(dayElement);
+            }
+            
+            // Fill remaining grid with next month's days
+            const totalCalendarCells = 42; // 6 rows of 7 days
+            const remainingCells = totalCalendarCells - (prevMonthDays + totalDays);
+            
+            for (let i = 1; i <= remainingCells; i++) {
+                const dayElement = createDayElement(i, true);
+                dayElement.classList.add('other-month');
+                fragment.appendChild(dayElement);
+            }
+            
+            // Append all days at once for better performance
+            calendarDays.appendChild(fragment);
+        }
+        
+        // Show day view with time slots
+        function showDayView(date) {
+            // Update selected day in calendar
+            document.querySelectorAll('.calendar-day').forEach(day => {
+                day.classList.remove('selected');
+                
+                // Find the day element that matches the selected date
+                if (!day.classList.contains('other-month') && 
+                    parseInt(day.textContent) === date.getDate()) {
+                    day.classList.add('selected');
+                }
+            });
+            
+            // Update day header
+            document.getElementById('selected-day-header').textContent = formatDateDisplay(date);
+            
+            // Show time slots for selected date
+            showTimeSlots(date);
+        }
+        
+        // Add navigation event listeners
+        document.getElementById('prev-month').addEventListener('click', function() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            updateMonthCalendar();
+        });
+
+        document.getElementById('next-month').addEventListener('click', function() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            updateMonthCalendar();
+        });
+        
+        // Function to show time slots for a selected date
+        function showTimeSlots(date) {
+            const timeSlotGrid = document.getElementById('time-slots-grid');
+            timeSlotGrid.innerHTML = '';
+            
+            // Generate time slots
+            const timeSlots = generateTimeSlots(date);
+            
+            // Determine some slots to be marked as taken (for scarcity effect)
+            const totalSlots = timeSlots.length;
+            const numberOfTakenSlots = Math.floor(totalSlots * 0.3); // Mark about 30% as taken
+            
+            // Use a more deterministic approach for "randomness" based on date for faster execution
+            const dateString = date.toISOString().split('T')[0];
+            let seed = 0;
+            for (let i = 0; i < dateString.length; i++) {
+                seed += dateString.charCodeAt(i);
+            }
+            
+            // Create document fragment for better performance
+            const fragment = document.createDocumentFragment();
+            
+            timeSlots.forEach((slot, index) => {
+                const timeElement = document.createElement('div');
+                timeElement.className = 'time-slot';
+                timeElement.textContent = slot;
+                
+                // Mark some slots as taken using deterministic approach
+                const isTaken = (index * seed) % totalSlots < numberOfTakenSlots;
+                
+                if (isTaken) {
+                    timeElement.classList.add('taken');
+                } else {
+                    // Optimized click handler with event delegation
+                    timeElement.addEventListener('click', function(event) {
+                        // Prevent default behavior to avoid any browser delay
+                        event.preventDefault();
+                        
+                        // Store minimal data in localStorage - only what's absolutely necessary
+                        const formattedDate = date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' });
+                        localStorage.setItem('appointmentDate', formattedDate);
+                        localStorage.setItem('appointmentTime', `${slot} (30 minutes)`);
+                        localStorage.setItem('appointmentTimeZone', userTimeZone);
+                        
+                        // McMaster-style approach: Redirect immediately, handle data asynchronously
+                        window.location.href = 'thank-you.php';
+                        
+                        // Send booking data to server in the background
+                        // This runs after redirect begins but browser will complete the request
+                        navigator.sendBeacon('process-booking.php', JSON.stringify({
+                            date: formattedDate,
+                            time: `${slot} (30 minutes)`,
+                            timezone: userTimeZone,
+                            timezoneAbbr: userTimeZoneAbbr,
+                            firstName: localStorage.getItem('firstName') || 'Guest',
+                            lastName: localStorage.getItem('lastName') || '',
+                            email: localStorage.getItem('email') || '',
+                            phone: localStorage.getItem('phone') || ''
+                        }));
                     });
                 }
                 
-                return slots;
-            }
+                fragment.appendChild(timeElement);
+            });
             
-            // Format time slot based on current time format
-            function formatTimeSlot(hour, minute) {
-                const minuteStr = minute === 0 ? '00' : minute.toString();
-                
-                if (timeFormat === '24h') {
-                    // 24 hour format
-                    const hourStr = hour < 10 ? '0' + hour : hour.toString();
-                    return `${hourStr}:${minuteStr}`;
-                } else {
-                    // 12 hour format
-                    let displayHour = hour;
-                    let period = 'am';
+            // Append all time slots at once for better performance
+            timeSlotGrid.appendChild(fragment);
+        }
+        
+        // Function to generate time slots
+        function generateTimeSlots(date) {
+            const slots = [];
+            const userTimezoneOffset = new Date().getTimezoneOffset();
+            
+            // Eastern Time offset (in minutes)
+            const now = new Date();
+            const jan = new Date(now.getFullYear(), 0, 1);
+            const jul = new Date(now.getFullYear(), 6, 1);
+            const isDST = now.getTimezoneOffset() < Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
+            const easternOffset = isDST ? 240 : 300;
+            
+            const timezoneDiff = userTimezoneOffset - easternOffset;
+            let startHour = 14 - (timezoneDiff / 60);
+            let endHour = 20 - (timezoneDiff / 60);
+            
+            // Pre-allocate capacity for performance
+            const capacity = Math.ceil((Math.ceil(endHour) - Math.floor(startHour)) * 4);
+            slots.length = capacity;
+            let slotIndex = 0;
+            
+            for (let hour = Math.floor(startHour); hour <= Math.ceil(endHour); hour++) {
+                for (let minute = 0; minute < 60; minute += 15) {
+                    const localTime = hour + (minute / 60);
+                    if (localTime < startHour || localTime > endHour) continue;
                     
-                    if (displayHour >= 12) {
-                        period = 'pm';
-                        if (displayHour > 12) {
-                            displayHour -= 12;
-                        }
-                    }
-                    if (displayHour === 0) {
-                        displayHour = 12;
-                    }
-                    
-                    return `${displayHour}:${minuteStr} ${period}`;
+                    slots[slotIndex++] = formatTimeSlot(hour, minute);
                 }
             }
             
-            // Check if a time slot is in the future
-            function isTimeSlotInFuture(slot, currentDate) {
-                let hours, minutes;
+            // Trim to actual size
+            slots.length = slotIndex;
+            
+            // Filter out past time slots if the selected date is today
+            const now2 = new Date();
+            if (date.getDate() === now2.getDate() &&
+                date.getMonth() === now2.getMonth() &&
+                date.getFullYear() === now2.getFullYear()) {
                 
-                if (timeFormat === '24h') {
-                    // Parse 24h format
-                    [hours, minutes] = slot.split(':').map(n => parseInt(n));
-                } else {
-                    // Parse 12h format
-                    const [time, period] = slot.split(' ');
-                    [hours, minutes] = time.split(':').map(n => parseInt(n));
-                    
-                    const periodLower = period.toLowerCase();
-                    if (periodLower === 'pm' && hours < 12) {
-                        hours += 12;
-                    } else if (periodLower === 'am' && hours === 12) {
-                        hours = 0;
-                    }
-                }
-                
-                const slotTime = new Date();
-                slotTime.setHours(hours, minutes, 0, 0);
-                
-                const bufferTime = new Date();
-                bufferTime.setMinutes(bufferTime.getMinutes() + 30);
-                
-                return slotTime > bufferTime;
+                return slots.filter(slot => isTimeSlotInFuture(slot, now2));
             }
             
-            // Initialize month calendar
-            updateMonthCalendar();
+            return slots;
+        }
+        
+        // Format time slot based on current time format
+        function formatTimeSlot(hour, minute) {
+            const minuteStr = minute === 0 ? '00' : minute.toString();
             
-            // Always initialize with a default date selection
-            // Pick today or first available date
-            const today = new Date();
-            selectedDate = today;
-            showDayView(selectedDate);
+            if (timeFormat === '24h') {
+                // 24 hour format
+                const hourStr = hour < 10 ? '0' + hour : hour.toString();
+                return `${hourStr}:${minuteStr}`;
+            } else {
+                // 12 hour format
+                let displayHour = hour;
+                let period = 'am';
+                
+                if (displayHour >= 12) {
+                    period = 'pm';
+                    if (displayHour > 12) {
+                        displayHour -= 12;
+                    }
+                }
+                if (displayHour === 0) {
+                    displayHour = 12;
+                }
+                
+                return `${displayHour}:${minuteStr} ${period}`;
+            }
+        }
+        
+        // Check if a time slot is in the future
+        function isTimeSlotInFuture(slot, currentDate) {
+            let hours, minutes;
+            
+            if (timeFormat === '24h') {
+                // Parse 24h format
+                [hours, minutes] = slot.split(':').map(n => parseInt(n));
+            } else {
+                // Parse 12h format
+                const [time, period] = slot.split(' ');
+                [hours, minutes] = time.split(':').map(n => parseInt(n));
+                
+                const periodLower = period.toLowerCase();
+                if (periodLower === 'pm' && hours < 12) {
+                    hours += 12;
+                } else if (periodLower === 'am' && hours === 12) {
+                    hours = 0;
+                }
+            }
+            
+            const slotTime = new Date();
+            slotTime.setHours(hours, minutes, 0, 0);
+            
+            const bufferTime = new Date();
+            bufferTime.setMinutes(bufferTime.getMinutes() + 30);
+            
+            return slotTime > bufferTime;
+        }
+        
+        // Initialize month calendar
+        updateMonthCalendar();
+        
+        // Always initialize with a default date selection
+        // Pick today or first available date
+        const today = new Date();
+        selectedDate = today;
+        showDayView(selectedDate);
 
-            // If a date was previously selected, use that instead
-            const savedDate = localStorage.getItem('appointmentDate');
-            if (savedDate) {
-                const dateObj = new Date(savedDate);
-                if (!isNaN(dateObj.getTime())) {
-                    selectedDate = dateObj;
-                    currentMonth = selectedDate.getMonth();
-                    currentYear = selectedDate.getFullYear();
-                    updateMonthCalendar();
-                    showDayView(selectedDate);
-                }
+        // If a date was previously selected, use that instead
+        const savedDate = localStorage.getItem('appointmentDate');
+        if (savedDate) {
+            const dateObj = new Date(savedDate);
+            if (!isNaN(dateObj.getTime())) {
+                selectedDate = dateObj;
+                currentMonth = selectedDate.getMonth();
+                currentYear = selectedDate.getFullYear();
+                updateMonthCalendar();
+                showDayView(selectedDate);
             }
-        });
+        }
+    }
+
+    // Load non-critical CSS after page load
+    window.addEventListener('load', function() {
+        document.getElementById('deferred-styles').disabled = false;
+    });
     </script>
 </body>
 
