@@ -18,6 +18,9 @@
             --background: #0F172A;
             --text: #F8FAFC;
             --text-light: #94A3B8;
+            --red: #DC2626;
+            --red-light: #EF4444;
+            --red-dark: #B91C1C;
         }
 
         * {
@@ -256,43 +259,34 @@
         /* Calendar Styles */
         .calendar-container {
             width: 100%;
-            max-width: 800px;
-            margin: 0.5rem auto;
+            max-width: 450px;
+            margin: 0 auto;
             background: #FFFFFF;
-            border-radius: 4px;
-            border: 1px solid #CBD5E1;
-            color: #1E293B;
+            border-radius: 8px;
+            border: 1px solid #E5E7EB;
+            color: #111827;
+            padding: 0;
             position: relative;
-            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .calendar-instruction {
-            display: block;
-            text-align: center;
-            background: linear-gradient(to bottom, #EF4444, #DC2626);
-            color: white;
-            font-weight: 700;
-            padding: 0.875rem;
-            margin: -1.5rem -1.5rem 1.5rem -1.5rem;
-            border-radius: 4px 4px 0 0;
-            font-size: 1.125rem;
-            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-            border-bottom: 1px solid #B91C1C;
+        .month-calendar {
+            padding: 0 1rem 1rem;
+            margin-bottom: 0;
+            border-bottom: 1px solid #F3F4F6;
         }
 
         .calendar-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 1.5rem;
-            width: 100%;
+            padding: 1rem 1rem 0.5rem;
         }
 
         .month-nav {
             display: flex;
             align-items: center;
             gap: 1rem;
-            color: #1E293B;
+            color: #111827;
             width: 100%;
             justify-content: space-between;
         }
@@ -303,25 +297,18 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 0.25rem;
-            flex: 1;
             text-align: center;
-            color: #1E293B;
-        }
-
-        .date-display {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: #1E293B;
+            color: #111827;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .nav-button {
-            background: #E2E8F0;
-            border: 1px solid #CBD5E1;
-            color: #1E293B;
-            width: 36px;
-            height: 36px;
-            border-radius: 4px;
+            background: transparent;
+            border: 1px solid #E5E7EB;
+            color: #4B5563;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -331,58 +318,158 @@
         }
 
         .nav-button:hover {
-            background: #CBD5E1;
+            background: #F9FAFB;
         }
 
-        .nav-button i {
+        .weekdays {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            text-align: center;
+            font-weight: 600;
+            color: #6B7280;
+            font-size: 0.75rem;
+            margin-bottom: 0.75rem;
+            border-bottom: 1px solid #E5E7EB;
+            padding-bottom: 0.5rem;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .weekday {
+            padding: 0.5rem 0;
+            text-transform: uppercase;
+        }
+
+        .calendar-days {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 2px;
+        }
+
+        .calendar-day {
+            height: 40px;
+            width: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9375rem;
+            border-radius: 6px;
+            cursor: pointer;
+            position: relative;
+            color: #111827;
+            margin: 2px auto;
+            transition: background-color 0.2s ease;
+            font-family: 'Montserrat', sans-serif;
+        }
+
+        .calendar-day:hover {
+            background-color: #F3F4F6;
+        }
+
+        .calendar-day.available {
+            background-color: #F3F4F6;
+        }
+
+        .calendar-day.selected {
+            background-color: #EF4444;
+            color: white;
+            font-weight: 500;
+        }
+
+        .calendar-day.other-month {
+            color: #D1D5DB;
+        }
+
+        .calendar-day.today {
+            font-weight: 700;
+            position: relative;
+        }
+
+        .calendar-day.today::after {
+            content: "";
+            position: absolute;
+            bottom: 5px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 4px;
+            height: 4px;
+            background-color: #DC2626;
+            border-radius: 50%;
+        }
+
+        .calendar-day.today.selected::after {
+            background-color: white;
+        }
+
+        .day-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1rem;
+        }
+
+        #selected-day-header {
+            color: #111827;
             font-size: 1rem;
-            color: #1E293B;
+            font-weight: 600;
+            margin: 0;
+            font-family: 'Montserrat', sans-serif;
         }
 
-        .nav-button.disabled {
-            opacity: 0.5;
-            cursor: not-allowed;
-            background: #F1F5F9;
+        .timezone-and-format {
+            display: none;
+        }
+
+        .time-format-toggle {
+            display: none;
+        }
+
+        .format-option {
+            display: none;
         }
 
         .time-slots-container {
-            display: block;
-            margin-top: 1.5rem;
-            color: #1E293B;
+            max-height: none;
+            overflow-y: visible;
+            padding: 0.25rem;
+            margin: 0 -0.25rem;
         }
 
         .time-slots-grid {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 0.75rem;
+            grid-template-columns: 1fr;
+            gap: 0.625rem;
         }
 
         .time-slot {
             padding: 0.75rem;
             background: #FFFFFF;
-            border: 1px solid var(--primary);
-            border-radius: 4px;
+            border: 1px solid #D1D5DB;
+            border-radius: 6px;
             text-align: center;
             cursor: pointer;
             transition: all 0.2s ease;
-            color: var(--primary);
+            color: #2D3748;
             font-weight: 600;
+            font-size: 0.875rem;
+            font-family: 'Montserrat', sans-serif;
         }
 
         .time-slot:hover {
-            background: #F1F5F9;
-            border-color: var(--primary-dark);
+            background: #F9FAFB;
+            border-color: #B91C1C;
         }
 
-        .time-slot.active {
-            background: var(--primary);
+        .time-slot.active, .time-slot.selected {
+            background: linear-gradient(to bottom, #EF4444, #DC2626);
             color: #FFFFFF;
+            border-color: #B91C1C;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
         .time-slot.taken {
-            background: #E2E8F0;
-            border-color: #CBD5E1;
-            color: #94A3B8;
+            background: #F3F4F6;
+            border-color: #E5E7EB;
+            color: #9CA3AF;
             cursor: not-allowed;
             position: relative;
             text-decoration: line-through;
@@ -391,44 +478,37 @@
         .time-slot.taken::after {
             content: "Taken";
             position: absolute;
-            font-size: 0.6rem;
-            bottom: 2px;
-            right: 4px;
-            color: #64748B;
+            font-size: 0.625rem;
+            bottom: 3px;
+            right: 6px;
+            color: #6B7280;
         }
 
-        .time-slot.taken:hover {
-            background: #E2E8F0;
-            border-color: #CBD5E1;
+        .time-slot.booking {
+            background: linear-gradient(to bottom, #EF4444, #DC2626);
+            color: white;
+            border-color: #B91C1C;
+            pointer-events: none;
+            position: relative;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
         }
 
-        .timezone-select {
-            margin-bottom: 1rem;
-            width: 100%;
+        .time-slot.booking::after {
+            content: "";
+            position: absolute;
+            right: 10px;
+            top: 50%;
+            margin-top: -8px;
+            width: 16px;
+            height: 16px;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spinner 0.6s linear infinite;
         }
 
-        .timezone-select select {
-            width: 100%;
-            padding: 0.875rem 1rem;
-            border: 1px solid #CBD5E1;
-            border-radius: 4px;
-            background-color: #FFFFFF;
-            color: #1E293B;
-            font-size: 0.875rem;
-            appearance: none;
-            -webkit-appearance: none;
-            -moz-appearance: none;
-            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748B' d='M6 8L2 4h8z'/%3E%3C/svg%3E");
-            background-repeat: no-repeat;
-            background-position: right 0.75rem center;
-            background-size: 0.85rem;
-            padding-right: 2rem;
-            cursor: pointer;
-        }
-
-        .timezone-select select:focus {
-            outline: none;
-            border-color: var(--primary);
+        @keyframes spinner {
+            to {transform: rotate(360deg);}
         }
 
         @media (min-width: 769px) {
@@ -440,6 +520,12 @@
         @media (max-width: 768px) {
             body {
                 font-size: 15px;
+            }
+
+            .calendar-container {
+                max-width: 100%;
+                box-shadow: none;
+                border-radius: 6px;
             }
 
             .callout {
@@ -470,18 +556,138 @@
                 padding: 0.75rem 1.5rem;
             }
 
-            .scheduler-container {
-                padding: 1rem;
+            .time-slots-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .calendar-day {
+                height: 36px;
+                width: 36px;
+                font-size: 0.875rem;
             }
 
-            .time-slots-grid {
-                grid-template-columns: repeat(2, 1fr);
+            .day-view {
+                padding: 0.75rem;
             }
 
             .legal {
                 margin-top: 2rem;
                 padding-top: 1rem;
             }
+        }
+
+        /* Booking Form Styles */
+        .booking-details {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
+            padding: 1.5rem;
+            margin: 1.5rem auto;
+            max-width: 800px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+        
+        .booking-details h3 {
+            font-size: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            color: var(--text);
+        }
+        
+        .selected-details {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 6px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .detail-row {
+            display: flex;
+            margin-bottom: 0.5rem;
+        }
+        
+        .detail-row:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-label {
+            width: 100px;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        
+        .detail-value {
+            flex: 1;
+            font-weight: 600;
+            color: var(--text);
+        }
+        
+        .booking-form {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+        
+        .form-group label {
+            font-size: 0.875rem;
+            color: var(--text-light);
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            padding: 0.75rem;
+            border-radius: 4px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
+            color: var(--text);
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(255, 255, 255, 0.15);
+        }
+        
+        .booking-submit {
+            background: linear-gradient(to bottom, var(--red-light), var(--red));
+            color: white;
+            border: 1px solid var(--red-dark);
+            padding: 0.875rem;
+            border-radius: 4px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 0.5rem;
+            text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+        }
+        
+        .booking-submit:hover {
+            background: linear-gradient(to bottom, var(--red), var(--red-dark));
+            transform: translateY(-1px);
+        }
+        
+        .booking-submit:disabled {
+            opacity: 0.7;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .time-slot.selected {
+            background-color: var(--red);
+            color: white;
+            border-color: var(--red-dark);
+        }
+
+        .day-view {
+            padding: 1rem;
+            background-color: #F9FAFB;
+            border-top: 1px solid #E5E7EB;
         }
     </style>
 </head>
@@ -490,7 +696,7 @@
     <div class="container">
         <div class="callout">For People Committed to Losing 25+ Pounds</div>
         <div class="content">
-            <h1 class="headline">Congratulations! Your <span class="highlight">Next Step</span> is to Book Your Call</h1>
+            <h1 class="headline">Congratulations! Your <span class="highlight">Last Step</span> is to Book Your Call</h1>
             <p class="subheadline">Select a time below to speak with Asher and create your personalized transformation plan.</p>
 
             <div class="video-section">
@@ -511,75 +717,55 @@
                 </div>
             </div>
 
-            <div style="position: relative; width: 100%; max-width: 800px; margin: 0 auto;">
-                <div style="position: relative; background: #DC2626; color: white; font-weight: 600; padding: 0.625rem 0.625rem 1.5rem; border-radius: 4px 4px 0 0; font-size: 0.9375rem; text-align: center; display: flex; align-items: center; justify-content: center; gap: 0.75rem; border: 1px solid #B91C1C; border-bottom: none;">
+            <div style="position: relative; width: 100%; max-width: 450px; margin: 0 auto;">
+                <div style="position: relative; background: linear-gradient(to bottom, #EF4444, #DC2626); color: white; font-weight: 700; padding: 0.75rem; border-radius: 8px 8px 0 0; font-size: 1rem; text-align: center; border: 1px solid #B91C1C; border-bottom: none; font-family: 'Montserrat', sans-serif; text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);">
                     Select a Time Below
                 </div>
-                <div id="calendar-container" class="calendar-container" style="position: relative; z-index: 2; margin-top: -1rem; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15); border: 1px solid #CBD5E1; border-radius: 4px; background: #FFFFFF;">
-                    <!-- Cal inline embed code begins -->
-                    <div style="width:100%;height:100%;overflow:scroll" id="my-cal-inline"></div>
-                    <script type="text/javascript">
-                        (function(C, A, L) {
-                            let p = function(a, ar) {
-                                a.q.push(ar);
-                            };
-                            let d = C.document;
-                            C.Cal = C.Cal || function() {
-                                let cal = C.Cal;
-                                let ar = arguments;
-                                if (!cal.loaded) {
-                                    cal.ns = {};
-                                    cal.q = cal.q || [];
-                                    d.head.appendChild(d.createElement("script")).src = A;
-                                    cal.loaded = true;
-                                }
-                                if (ar[0] === L) {
-                                    const api = function() {
-                                        p(api, arguments);
-                                    };
-                                    const namespace = ar[1];
-                                    api.q = api.q || [];
-                                    if (typeof namespace === "string") {
-                                        cal.ns[namespace] = cal.ns[namespace] || api;
-                                        p(cal.ns[namespace], ar);
-                                        p(cal, ["initNamespace", namespace]);
-                                    } else p(cal, ar);
-                                    return;
-                                }
-                                p(cal, ar);
-                            };
-                        })(window, "https://app.cal.com/embed/embed.js", "init");
-                        Cal("init", "30min", {
-                            origin: "https://cal.com"
-                        });
-
-                        Cal.ns["30min"]("inline", {
-                            elementOrSelector: "#my-cal-inline",
-                            config: {
-                                "layout": "month_view",
-                                "theme": "light"
-                            },
-                            calLink: "busy-barbell/30min",
-                        });
-
-                        Cal.ns["30min"]("ui", {
-                            "theme": "light",
-                            "cssVarsPerTheme": {
-                                "light": {
-                                    "cal-brand": "#DC2626"
-                                },
-                                "dark": {
-                                    "cal-brand": "#DC2626"
-                                }
-                            },
-                            "hideEventTypeDetails": true,
-                            "layout": "month_view"
-                        });
-                    </script>
-                    <!-- Cal inline embed code ends -->
+                <div id="calendar-container" class="calendar-container" style="border-radius: 0 0 8px 8px; margin-top: -1px;">
+                    <!-- Calendar Section -->
+                    <div class="calendar-header">
+                        <div class="month-nav">
+                            <button class="nav-button" id="prev-month">
+                                <i class="fas fa-chevron-left"></i>
+                            </button>
+                            <div class="month-title">
+                                <span id="current-month-year"></span>
+                            </div>
+                            <button class="nav-button" id="next-month">
+                                <i class="fas fa-chevron-right"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="month-calendar">
+                        <div class="weekdays">
+                            <div class="weekday">SUN</div>
+                            <div class="weekday">MON</div>
+                            <div class="weekday">TUE</div>
+                            <div class="weekday">WED</div>
+                            <div class="weekday">THU</div>
+                            <div class="weekday">FRI</div>
+                            <div class="weekday">SAT</div>
+                        </div>
+                        <div class="calendar-days" id="calendar-days">
+                            <!-- Days will be populated with JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <div class="day-view" id="day-view">
+                        <div class="day-header">
+                            <h3 id="selected-day-header"></h3>
+                        </div>
+                        
+                        <div id="time-slots" class="time-slots-container">
+                            <div class="time-slots-grid" id="time-slots-grid"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
-
+            
+            <!-- Booking form section removed for one-click booking -->
+            
             <div class="legal">
                 <p>This site is not a part of the Facebook website or Facebook Inc. Additionally, this site is NOT endorsed by Facebook in any way. FACEBOOK is a trademark of FACEBOOK, Inc.</p>
                 <p>Individual results may vary. The testimonials and examples used are exceptional results, which do not apply to the average purchaser, and are not intended to represent or guarantee that anyone will achieve the same or similar results.</p>
@@ -592,32 +778,39 @@
 
     <script>
         document.addEventListener('DOMContentLoaded', function() {
+            // Store URL parameters in localStorage
+            const urlParams = new URLSearchParams(window.location.search);
+            if (urlParams.has('firstName')) localStorage.setItem('firstName', urlParams.get('firstName'));
+            if (urlParams.has('lastName')) localStorage.setItem('lastName', urlParams.get('lastName'));
+            if (urlParams.has('email')) localStorage.setItem('email', urlParams.get('email'));
+            if (urlParams.has('smsReminderNumber')) localStorage.setItem('phone', urlParams.get('smsReminderNumber'));
+            
             // Video thumbnail and play functionality
             const mainVideo = document.getElementById('main-video');
             const thumbnailContainer = document.getElementById('video-thumbnail');
             const thumbnailVideo = document.getElementById('thumbnail-video');
-
+            
             // Fix for mobile: ensure thumbnail video loads and plays
             function initThumbnail() {
                 // Reset video source with cache-busting parameter
                 const currentSrc = thumbnailVideo.querySelector('source').src;
                 const newSrc = currentSrc.split('#')[0] + '#t=0,5?' + new Date().getTime();
                 thumbnailVideo.querySelector('source').src = newSrc;
-
+                
                 // Force load and play
                 thumbnailVideo.load();
                 thumbnailVideo.play().catch(e => {
                     console.log('Auto-play prevented, using fallback');
                     // If autoplay fails, use a static thumbnail instead
-                    thumbnailContainer.style.backgroundImage = 'url("https://i.postimg.cc/W3ssCwhw/anycript-thumbnail-1.webp")';
+                    thumbnailContainer.style.backgroundImage = 'url("thumbnail.png")';
                     thumbnailContainer.style.backgroundSize = 'cover';
                     thumbnailContainer.style.backgroundPosition = 'center';
                 });
             }
-
+            
             // Initialize thumbnail
             initThumbnail();
-
+            
             // When thumbnail is clicked, hide thumbnail and play main video
             thumbnailContainer.addEventListener('click', function() {
                 thumbnailContainer.classList.add('hidden');
@@ -626,18 +819,21 @@
                     console.log('Error playing main video:', e);
                 });
             });
-
+            
             // If main video ends, show thumbnail again
             mainVideo.addEventListener('ended', function() {
                 thumbnailContainer.classList.remove('hidden');
                 mainVideo.controls = false;
                 initThumbnail();
             });
-
+            
             // Detect user's timezone
             const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
             const userTimeZoneAbbr = getUserTimeZoneAbbreviation(userTimeZone);
-
+            
+            // Time format (fixed to 12h)
+            const timeFormat = '12';
+            
             // Function to get timezone abbreviation
             function getUserTimeZoneAbbreviation(timeZone) {
                 try {
@@ -656,14 +852,13 @@
                     return `GMT${sign}${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}`;
                 }
             }
-
-            // Set up today and tomorrow dates
-            const today = new Date();
-            const tomorrow = new Date();
-            tomorrow.setDate(tomorrow.getDate() + 1);
-
-            let selectedDate = today;
-
+            
+            // Initialize current date and selected date
+            const currentDate = new Date();
+            let selectedDate = new Date();
+            let currentMonth = currentDate.getMonth();
+            let currentYear = currentDate.getFullYear();
+            
             // Format date for display
             function formatDateDisplay(date) {
                 const options = {
@@ -673,123 +868,222 @@
                 };
                 return date.toLocaleDateString('en-US', options);
             }
-
-            // Update the date display
-            function updateDateDisplay() {
-                document.getElementById('current-date').textContent = formatDateDisplay(selectedDate);
-
-                // Update navigation buttons
-                const prevButton = document.getElementById('prev-day');
-                const nextButton = document.getElementById('next-day');
-
-                // Disable previous button if we're on today
-                const now = new Date();
-                if (selectedDate.getDate() === now.getDate() &&
-                    selectedDate.getMonth() === now.getMonth() &&
-                    selectedDate.getFullYear() === now.getFullYear()) {
-                    prevButton.classList.add('disabled');
-                    prevButton.disabled = true;
-                } else {
-                    prevButton.classList.remove('disabled');
-                    prevButton.disabled = false;
-                }
-
-                // Disable next button if we're on tomorrow
-                const tomorrow = new Date();
-                tomorrow.setDate(tomorrow.getDate() + 1);
-                if (selectedDate.getDate() === tomorrow.getDate() &&
-                    selectedDate.getMonth() === tomorrow.getMonth() &&
-                    selectedDate.getFullYear() === tomorrow.getFullYear()) {
-                    nextButton.classList.add('disabled');
-                    nextButton.disabled = true;
-                } else {
-                    nextButton.classList.remove('disabled');
-                    nextButton.disabled = false;
-                }
-
-                // Show time slots for the selected date
-                showTimeSlots(selectedDate);
+            
+            // Update month calendar display
+            function updateMonthCalendar() {
+                // Update month/year header
+                const monthYearStr = new Date(currentYear, currentMonth).toLocaleDateString('en-US', { 
+                    month: 'long', 
+                    year: 'numeric' 
+                });
+                document.getElementById('current-month-year').textContent = monthYearStr;
+                
+                // Generate calendar days
+                generateCalendarDays();
             }
-
-            // Add click handlers for navigation buttons
-            document.getElementById('prev-day').addEventListener('click', function() {
-                if (!this.disabled) {
-                    selectedDate = new Date(selectedDate);
-                    selectedDate.setDate(selectedDate.getDate() - 1);
-                    updateDateDisplay();
+            
+            // Create day element for calendar
+            function createDayElement(day, isOtherMonth) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'calendar-day';
+                dayElement.textContent = day;
+                
+                if (isOtherMonth) {
+                    dayElement.classList.add('other-month');
                 }
+                
+                return dayElement;
+            }
+            
+            // Generate calendar days for current month
+            function generateCalendarDays() {
+                const calendarDays = document.getElementById('calendar-days');
+                calendarDays.innerHTML = '';
+                
+                // Get first day of month and last day
+                const firstDay = new Date(currentYear, currentMonth, 1);
+                const lastDay = new Date(currentYear, currentMonth + 1, 0);
+                
+                // Get day of week of first day (0 = Sunday, 6 = Saturday)
+                const firstDayOfWeek = firstDay.getDay();
+                
+                // Get total days in current month
+                const totalDays = lastDay.getDate();
+                
+                // Get total days from previous month to display
+                const prevMonthDays = firstDayOfWeek;
+                
+                // Get last day of previous month
+                const prevMonthLastDay = new Date(currentYear, currentMonth, 0).getDate();
+                
+                // Add days from previous month
+                for (let i = 0; i < prevMonthDays; i++) {
+                    const dayElement = createDayElement(prevMonthLastDay - prevMonthDays + i + 1, true);
+                    dayElement.classList.add('other-month');
+                    calendarDays.appendChild(dayElement);
+                }
+                
+                // Create tomorrow's date for comparison
+                const today = new Date();
+                today.setHours(0, 0, 0, 0);
+                const tomorrow = new Date(today);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                
+                // Add days from current month
+                for (let i = 1; i <= totalDays; i++) {
+                    const dayElement = createDayElement(i, false);
+                    
+                    // Check if day is today
+                    const currentDayDate = new Date(currentYear, currentMonth, i);
+                    currentDayDate.setHours(0, 0, 0, 0);
+                    
+                    const isToday = 
+                        currentDayDate.getTime() === today.getTime();
+                    
+                    if (isToday) {
+                        dayElement.classList.add('today');
+                    }
+                    
+                    // Check if day is selected
+                    const isSelected = 
+                        i === selectedDate.getDate() && 
+                        currentMonth === selectedDate.getMonth() && 
+                        currentYear === selectedDate.getFullYear();
+                        
+                    if (isSelected) {
+                        dayElement.classList.add('selected');
+                    }
+                    
+                    // Only allow booking for today and tomorrow
+                    if (currentDayDate.getTime() === today.getTime() || 
+                        currentDayDate.getTime() === tomorrow.getTime()) {
+                        
+                        dayElement.classList.add('available');
+                        
+                        // Add click handler for valid dates
+                        dayElement.addEventListener('click', function() {
+                            selectedDate = new Date(currentYear, currentMonth, i);
+                            showDayView(selectedDate);
+                        });
+                    } else {
+                        dayElement.classList.add('unavailable');
+                    }
+                    
+                    calendarDays.appendChild(dayElement);
+                }
+                
+                // Fill remaining grid with next month's days
+                const totalCalendarCells = 42; // 6 rows of 7 days
+                const remainingCells = totalCalendarCells - (prevMonthDays + totalDays);
+                
+                for (let i = 1; i <= remainingCells; i++) {
+                    const dayElement = createDayElement(i, true);
+                    dayElement.classList.add('other-month');
+                    calendarDays.appendChild(dayElement);
+                }
+            }
+            
+            // Show day view with time slots
+            function showDayView(date) {
+                // Update selected day in calendar
+                document.querySelectorAll('.calendar-day').forEach(day => {
+                    day.classList.remove('selected');
+                    
+                    // Find the day element that matches the selected date
+                    if (!day.classList.contains('other-month') && 
+                        parseInt(day.textContent) === date.getDate()) {
+                        day.classList.add('selected');
+                    }
+                });
+                
+                // Update day header
+                document.getElementById('selected-day-header').textContent = formatDateDisplay(date);
+                
+                // Show time slots for selected date
+                showTimeSlots(date);
+            }
+            
+            // Add navigation event listeners
+            document.getElementById('prev-month').addEventListener('click', function() {
+                currentMonth--;
+                if (currentMonth < 0) {
+                    currentMonth = 11;
+                    currentYear--;
+                }
+                updateMonthCalendar();
             });
 
-            document.getElementById('next-day').addEventListener('click', function() {
-                if (!this.disabled) {
-                    selectedDate = new Date(selectedDate);
-                    selectedDate.setDate(selectedDate.getDate() + 1);
-                    updateDateDisplay();
+            document.getElementById('next-month').addEventListener('click', function() {
+                currentMonth++;
+                if (currentMonth > 11) {
+                    currentMonth = 0;
+                    currentYear++;
                 }
+                updateMonthCalendar();
             });
-
-            // Initialize with today's date
-            updateDateDisplay();
-
+            
             // Function to show time slots for a selected date
             function showTimeSlots(date) {
                 const timeSlotGrid = document.getElementById('time-slots-grid');
                 timeSlotGrid.innerHTML = '';
-
+                
                 // Generate time slots
                 const timeSlots = generateTimeSlots(date);
-
+                
                 // Determine some slots to be marked as taken (for scarcity effect)
                 const totalSlots = timeSlots.length;
-                const numberOfTakenSlots = Math.floor(totalSlots * 0.4); // Mark about 40% as taken
+                const numberOfTakenSlots = Math.floor(totalSlots * 0.3); // Mark about 30% as taken
                 const takenSlotIndices = new Set();
-
+                
                 // Generate random indices for taken slots
                 while (takenSlotIndices.size < numberOfTakenSlots) {
                     const randomIndex = Math.floor(Math.random() * totalSlots);
                     takenSlotIndices.add(randomIndex);
                 }
-
+                
                 timeSlots.forEach((slot, index) => {
                     const timeElement = document.createElement('div');
                     timeElement.className = 'time-slot';
                     timeElement.textContent = slot;
-
+                    
                     // Mark some slots as taken to create scarcity
                     if (takenSlotIndices.has(index)) {
                         timeElement.classList.add('taken');
                     } else {
                         timeElement.addEventListener('click', function() {
+                            // Clear any previously selected times
+                            document.querySelectorAll('.time-slot.active').forEach(el => {
+                                el.classList.remove('active');
+                            });
+                            
+                            // Mark this time as selected and show loading state
+                            timeElement.classList.add('active', 'booking');
+                            
                             // Store the selected time and date in localStorage
-                            const fullDateOptions = {
-                                weekday: 'long',
-                                month: 'long',
-                                day: 'numeric',
-                                year: 'numeric'
-                            };
+                            const fullDateOptions = { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' };
                             const formattedDate = date.toLocaleDateString('en-US', fullDateOptions);
-
+                            
                             localStorage.setItem('appointmentDate', formattedDate);
                             localStorage.setItem('appointmentTime', `${slot} (30 minutes)`);
                             localStorage.setItem('appointmentTimeZone', userTimeZone);
                             localStorage.setItem('appointmentTimeZoneAbbr', userTimeZoneAbbr);
-
-                            // Get user data from URL parameters or localStorage
-                            const urlParams = new URLSearchParams(window.location.search);
-                            const firstName = urlParams.get('firstName') || localStorage.getItem('firstName') || '';
-                            const lastName = urlParams.get('lastName') || localStorage.getItem('lastName') || '';
-                            const email = urlParams.get('email') || localStorage.getItem('email') || '';
-                            const phone = urlParams.get('phone') || localStorage.getItem('phone') || '';
-
-                            // Submit booking data to server
-                            fetch('process-booking.php', {
+                            
+                            // Pre-fill form with URL parameters if available
+                            const firstName = localStorage.getItem('firstName') || 'Guest';
+                            const lastName = localStorage.getItem('lastName') || '';
+                            const email = localStorage.getItem('email') || '';
+                            const phone = localStorage.getItem('phone') || '';
+                            
+                            // Send booking data to server
+                            setTimeout(() => {
+                                fetch('process-booking.php', {
                                     method: 'POST',
                                     headers: {
                                         'Content-Type': 'application/json'
                                     },
                                     body: JSON.stringify({
                                         date: formattedDate,
-                                        time: slot,
+                                        time: `${slot} (30 minutes)`,
                                         timezone: userTimeZone,
                                         timezoneAbbr: userTimeZoneAbbr,
                                         firstName: firstName,
@@ -800,183 +1094,140 @@
                                 })
                                 .then(response => response.json())
                                 .then(data => {
-                                    if (data.success) {
-                                        // Redirect to thank-you page
-                                        window.location.href = 'thank-you.php';
-                                    } else {
-                                        alert('Booking failed: ' + data.message);
-                                    }
+                                    // Redirect to thank-you page
+                                    window.location.href = 'thank-you.php';
                                 })
                                 .catch(error => {
                                     console.error('Error:', error);
                                     // Fallback to original behavior if fetch fails
                                     window.location.href = 'thank-you.php';
                                 });
+                            }, 500); // Small delay to show the spinner
                         });
                     }
-
+                    
                     timeSlotGrid.appendChild(timeElement);
                 });
             }
-
+            
             // Function to generate time slots
             function generateTimeSlots(date) {
                 const slots = [];
                 const userTimezoneOffset = new Date().getTimezoneOffset();
-
+                
                 // Eastern Time offset (in minutes)
                 const now = new Date();
                 const jan = new Date(now.getFullYear(), 0, 1);
                 const jul = new Date(now.getFullYear(), 6, 1);
                 const isDST = now.getTimezoneOffset() < Math.max(jan.getTimezoneOffset(), jul.getTimezoneOffset());
                 const easternOffset = isDST ? 240 : 300;
-
+                
                 const timezoneDiff = userTimezoneOffset - easternOffset;
                 let startHour = 14 - (timezoneDiff / 60);
                 let endHour = 20 - (timezoneDiff / 60);
-
+                
                 for (let hour = Math.floor(startHour); hour <= Math.ceil(endHour); hour++) {
                     for (let minute = 0; minute < 60; minute += 15) {
                         const localTime = hour + (minute / 60);
                         if (localTime < startHour) continue;
                         if (localTime > endHour) continue;
-
-                        let displayHour = hour;
-                        let period = 'AM';
-
-                        if (displayHour >= 12) {
-                            period = 'PM';
-                            if (displayHour > 12) {
-                                displayHour -= 12;
-                            }
-                        }
-                        if (displayHour === 0) {
-                            displayHour = 12;
-                        }
-
-                        const minuteStr = minute === 0 ? '00' : minute.toString();
-                        const slot = `${displayHour}:${minuteStr} ${period}`;
+                        
+                        const slot = formatTimeSlot(hour, minute);
                         slots.push(slot);
                     }
                 }
-
+                
                 // Filter out past time slots if the selected date is today
                 const now2 = new Date();
                 if (date.getDate() === now2.getDate() &&
                     date.getMonth() === now2.getMonth() &&
                     date.getFullYear() === now2.getFullYear()) {
-
+                    
                     return slots.filter(slot => {
-                        const [time, period] = slot.split(' ');
-                        let [hours, minutes] = time.split(':');
-                        hours = parseInt(hours);
-                        minutes = parseInt(minutes);
-
-                        if (period === 'PM' && hours < 12) {
-                            hours += 12;
-                        } else if (period === 'AM' && hours === 12) {
-                            hours = 0;
-                        }
-
-                        const slotTime = new Date();
-                        slotTime.setHours(hours, minutes, 0, 0);
-
-                        const bufferTime = new Date();
-                        bufferTime.setMinutes(bufferTime.getMinutes() + 30);
-
-                        return slotTime > bufferTime;
+                        return isTimeSlotInFuture(slot, now2);
                     });
                 }
-
+                
                 return slots;
             }
-
-            // Populate timezone dropdown
-            function populateTimezoneDropdown() {
-                const timezoneSelector = document.getElementById('timezone-selector');
-                const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-
-                // Common timezones with standard names and abbreviations
-                const timezones = [{
-                        zone: 'America/New_York',
-                        name: 'Eastern Time',
-                        abbr: 'EST'
-                    },
-                    {
-                        zone: 'America/Chicago',
-                        name: 'Central Time',
-                        abbr: 'CST'
-                    },
-                    {
-                        zone: 'America/Denver',
-                        name: 'Mountain Time',
-                        abbr: 'MST'
-                    },
-                    {
-                        zone: 'America/Los_Angeles',
-                        name: 'Pacific Time',
-                        abbr: 'PST'
-                    },
-                    {
-                        zone: 'America/Phoenix',
-                        name: 'Mountain Time - AZ',
-                        abbr: 'MST'
-                    },
-                    {
-                        zone: 'America/Anchorage',
-                        name: 'Alaska Time',
-                        abbr: 'AKST'
-                    },
-                    {
-                        zone: 'Pacific/Honolulu',
-                        name: 'Hawaii Time',
-                        abbr: 'HST'
-                    },
-                    {
-                        zone: 'Europe/London',
-                        name: 'UK Time',
-                        abbr: 'GMT'
-                    },
-                    {
-                        zone: 'Europe/Paris',
-                        name: 'Central European Time',
-                        abbr: 'CET'
-                    },
-                    {
-                        zone: 'Australia/Sydney',
-                        name: 'Australian Eastern Time',
-                        abbr: 'AEST'
-                    },
-                    {
-                        zone: 'Asia/Tokyo',
-                        name: 'Japan Time',
-                        abbr: 'JST'
+            
+            // Format time slot based on current time format
+            function formatTimeSlot(hour, minute) {
+                const minuteStr = minute === 0 ? '00' : minute.toString();
+                
+                if (timeFormat === '24h') {
+                    // 24 hour format
+                    const hourStr = hour < 10 ? '0' + hour : hour.toString();
+                    return `${hourStr}:${minuteStr}`;
+                } else {
+                    // 12 hour format
+                    let displayHour = hour;
+                    let period = 'am';
+                    
+                    if (displayHour >= 12) {
+                        period = 'pm';
+                        if (displayHour > 12) {
+                            displayHour -= 12;
+                        }
                     }
-                ];
-
-                timezones.forEach(({
-                    zone,
-                    name,
-                    abbr
-                }) => {
-                    const option = document.createElement('option');
-                    option.value = zone;
-                    option.text = `${name} (${abbr})`;
-
-                    if (zone === userTimeZone) {
-                        option.selected = true;
+                    if (displayHour === 0) {
+                        displayHour = 12;
                     }
-                    timezoneSelector.appendChild(option);
-                });
-
-                // Add event listener for timezone changes
-                timezoneSelector.addEventListener('change', function() {
-                    showTimeSlots(selectedDate);
-                });
+                    
+                    return `${displayHour}:${minuteStr} ${period}`;
+                }
             }
+            
+            // Check if a time slot is in the future
+            function isTimeSlotInFuture(slot, currentDate) {
+                let hours, minutes;
+                
+                if (timeFormat === '24h') {
+                    // Parse 24h format
+                    [hours, minutes] = slot.split(':').map(n => parseInt(n));
+                } else {
+                    // Parse 12h format
+                    const [time, period] = slot.split(' ');
+                    [hours, minutes] = time.split(':').map(n => parseInt(n));
+                    
+                    const periodLower = period.toLowerCase();
+                    if (periodLower === 'pm' && hours < 12) {
+                        hours += 12;
+                    } else if (periodLower === 'am' && hours === 12) {
+                        hours = 0;
+                    }
+                }
+                
+                const slotTime = new Date();
+                slotTime.setHours(hours, minutes, 0, 0);
+                
+                const bufferTime = new Date();
+                bufferTime.setMinutes(bufferTime.getMinutes() + 30);
+                
+                return slotTime > bufferTime;
+            }
+            
+            // Initialize month calendar
+            updateMonthCalendar();
+            
+            // Always initialize with a default date selection
+            // Pick today or first available date
+            const today = new Date();
+            selectedDate = today;
+            showDayView(selectedDate);
 
-            // Initialize timezone dropdown
-            populateTimezoneDropdown();
+            // If a date was previously selected, use that instead
+            const savedDate = localStorage.getItem('appointmentDate');
+            if (savedDate) {
+                const dateObj = new Date(savedDate);
+                if (!isNaN(dateObj.getTime())) {
+                    selectedDate = dateObj;
+                    currentMonth = selectedDate.getMonth();
+                    currentYear = selectedDate.getFullYear();
+                    updateMonthCalendar();
+                    showDayView(selectedDate);
+                }
+            }
         });
     </script>
 </body>
